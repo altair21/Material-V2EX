@@ -1,0 +1,17 @@
+PODS:
+  - AMScrollingNavbar (3.0.0)
+  - Material (2.3.16):
+    - Material/Core (= 2.3.16)
+  - Material/Core (2.3.16)
+
+DEPENDENCIES:
+  - AMScrollingNavbar
+  - Material
+
+SPEC CHECKSUMS:
+  AMScrollingNavbar: aa894c559c80ffa917d0fdc40d8b42be7c6efe15
+  Material: db663ff81d7c72a8f7454fc297d147dcba8bb869
+
+PODFILE CHECKSUM: 8fa5ee6ad301c9559531eff84ab6123d12ea5d3a
+
+COCOAPODS: 1.1.1

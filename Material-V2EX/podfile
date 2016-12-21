@@ -1,0 +1,7 @@
+target 'Material-V2EX' do
+use_frameworks!
+
+pod 'Material'
+pod 'AMScrollingNavbar'
+
+end
