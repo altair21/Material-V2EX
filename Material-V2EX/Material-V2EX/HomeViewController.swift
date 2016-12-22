@@ -10,35 +10,31 @@ import UIKit
 import Material
 import AMScrollingNavbar
 
-class ViewController: UIViewController {
+class HomeViewController: UIViewController {
     @IBOutlet weak var postBtn: FabButton!
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var menuBtn: FabButton!
     @IBOutlet weak var moreBtn: FabButton!
-
+    var menuView: MenuView!
+    var leftEdgeView: UIView!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
         if let navigationController = navigationController as? ScrollingNavigationController {
-            navigationController.followScrollView(tableView, delay: 40.0)
-            navigationController.navigationBar.topItem!.title = "111"
-            let leftButton = IconButton(image: Icon.cm.menu)
-            navigationItem.title = "test"
-            navigationController.navigationBar.topItem!.leftViews = [leftButton]
+            navigationController.followScrollView(tableView, delay: 50.0)
         }
+        
+        menuView = Bundle.main.loadNibNamed(Global.menuView, owner: self, options: nil)?.first as! MenuView
+        menuView.frame = CGRect(x: 0, y: 0, width: Global.screenWidth, height: Global.screenHeight)
+        
         prepareMaterial()
+        setupGesture()
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        
-        
-    }
-    
-    override func viewDidLayoutSubviews() {
-        if let navigationController = navigationController as? ScrollingNavigationController {
-            navigationController.followScrollView(tableView, delay: 40.0)
-        }
+
     }
 
     override func didReceiveMemoryWarning() {
@@ -50,30 +46,53 @@ class ViewController: UIViewController {
         postBtn.image = Icon.add
         menuBtn.image = Icon.cm.menu
         moreBtn.image = Icon.cm.moreHorizontal
-//        menuBtn.backgroundColor = UIColor.clear
         
     }
     
+    func setupGesture() {
+        leftEdgeView = UIView(frame: CGRect(x: 0, y: 0, width: Global.edgePanGestureThreshold, height: Global.screenHeight))
+        view.addSubview(leftEdgeView)
+        let swipeRight = UIPanGestureRecognizer(target: self, action: #selector(handleSwipeRight(sender:)))
+        leftEdgeView.addGestureRecognizer(swipeRight)
+    }
+    
+    func handleSwipeRight(sender: UIPanGestureRecognizer) {
+        if sender.state == .began {
+            leftEdgeView.frame.size.width = Global.screenWidth
+            if let navigationController = navigationController as? ScrollingNavigationController {
+                navigationController.stopFollowingScrollView()
+            }
+        } else if sender.state == .ended || sender.state == .cancelled || sender.state == .failed {
+            leftEdgeView.frame.size.width = Global.edgePanGestureThreshold
+            if let navigationController = navigationController as? ScrollingNavigationController {
+                navigationController.followScrollView(tableView, delay: 50.0)
+            }
+        }
+        handleMenu(menuView, recognizer: sender)
+    }
+    
     @IBAction func menuTapped(_ sender: FabButton) {
+        showMenu(menuView)
     }
     
     @IBAction func moreTapped(_ sender: FabButton) {
     }
     
+    
 }
 
-extension ViewController: UITableViewDelegate, UITableViewDataSource {
+extension HomeViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return 50
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "postOverviewCell")!
+        let cell = tableView.dequeueReusableCell(withIdentifier: Global.postOverviewCell)!
         return cell
     }
 }
 
-extension ViewController: ScrollingNavigationControllerDelegate {
+extension HomeViewController: ScrollingNavigationControllerDelegate {
     func scrollViewShouldScrollToTop(_ scrollView: UIScrollView) -> Bool {
         if let navigationController = navigationController as? ScrollingNavigationController {
             navigationController.showNavbar(animated: true)
@@ -90,4 +109,6 @@ extension ViewController: ScrollingNavigationControllerDelegate {
         }
     }
 }
+
+
 

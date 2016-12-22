@@ -1,0 +1,40 @@
+//
+//  menuView.swift
+//  Material-V2EX
+//
+//  Created by altair21 on 16/12/21.
+//  Copyright © 2016年 altair21. All rights reserved.
+//
+
+import UIKit
+
+class MenuView: UIView {
+    @IBOutlet weak var panelView: UIView!
+    @IBOutlet weak var bgView: UIView!
+
+    override func awakeFromNib() {
+        super.awakeFromNib()
+        
+        setupGesture()
+    }
+    
+    func setupGesture() {
+        let tap = UITapGestureRecognizer(target: self, action: #selector(backHome(sender:)))
+        bgView.addGestureRecognizer(tap)
+        
+        let swipeLeft = UIPanGestureRecognizer(target: self, action: #selector(handlePanel(sender:)))
+        self.addGestureRecognizer(swipeLeft)
+    }
+    
+    func backHome(sender: UITapGestureRecognizer) {
+        hideMenu(self)
+    }
+    
+    func handlePanel(sender: UIPanGestureRecognizer) {
+        handleMenu(self, recognizer: sender)
+    }
+    
+    
+    
+
+}
