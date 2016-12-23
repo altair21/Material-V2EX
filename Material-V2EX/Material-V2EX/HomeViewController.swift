@@ -40,7 +40,7 @@ class HomeViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
 
-        NetworkManager.sharedInstance.getHotTopics(success: { res in
+        NetworkManager.sharedInstance.getLatestTopics(success: { res in
             for (_, item) in res {
                 self.topicOverviewArray.append(TopicOverviewModel(data: item))
             }

@@ -12,21 +12,8 @@ import SwiftyJSON
 class NetworkManager: NSObject {
     static let sharedInstance = NetworkManager()
     
-    func getLatestTopics() {
-        Alamofire.request(V2EX.API.latestTopics).responseJSON { (response) in
-            print(response.request)  // original URL request
-            print(response.response) // HTTP URL response
-            print(response.data)     // server data
-            print(response.result)   // result of response serialization
-            
-            if let JSON = response.result.value {
-                print("JSON: \(JSON)")
-            }
-        }
-    }
-    
-    func getHotTopics(success: @escaping (JSON)->Void, failure: @escaping (String)->Void) {
-        Alamofire.request(V2EX.API.hotTopics).responseData { (response) in
+    private func commonRequest(api: String, success: @escaping (JSON)->Void, failure: @escaping (String)->Void) {
+        Alamofire.request(api).responseData { (response) in
             switch response.result {
             case .success:
                 if let data = response.result.value {
@@ -38,5 +25,13 @@ class NetworkManager: NSObject {
                 failure(response.result.error?.localizedDescription ?? "网络错误")
             }
         }
+    }
+    
+    func getLatestTopics(success: @escaping (JSON)->Void, failure: @escaping (String)->Void) {
+        commonRequest(api: V2EX.API.latestTopics, success: success, failure: failure)
+    }
+    
+    func getHotTopics(success: @escaping (JSON)->Void, failure: @escaping (String)->Void) {
+        commonRequest(api: V2EX.API.hotTopics, success: success, failure: failure)
     }
 }
