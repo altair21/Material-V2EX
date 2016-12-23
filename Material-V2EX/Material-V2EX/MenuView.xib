@@ -17,11 +17,11 @@
             <subviews>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="K2X-mp-Get">
                     <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
-                    <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.30013469827586209" colorSpace="calibratedRGB"/>
+                    <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.40000000000000002" colorSpace="calibratedRGB"/>
                 </view>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="iQ8-Ni-d8L">
                     <rect key="frame" x="0.0" y="0.0" width="255" height="667"/>
-                    <color key="backgroundColor" red="0.31423028520000001" green="0.93152265099999998" blue="0.49627726509999998" alpha="1" colorSpace="calibratedRGB"/>
+                    <color key="backgroundColor" red="0.20392156862745098" green="0.6588235294117647" blue="0.32549019607843138" alpha="1" colorSpace="calibratedRGB"/>
                     <constraints>
                         <constraint firstAttribute="width" constant="255" id="DpH-bH-D3M"/>
                     </constraints>

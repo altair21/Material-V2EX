@@ -15,7 +15,11 @@ class HomeViewController: UIViewController {
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var menuBtn: FabButton!
     @IBOutlet weak var moreBtn: FabButton!
-    var menuView: MenuView!
+    var menuView: MenuView! {
+        didSet {
+            menuView.frame = CGRect(x: 0, y: 0, width: Global.screenWidth, height: Global.screenHeight)
+        }
+    }
     var leftEdgeView: UIView!
     
     override func viewDidLoad() {
@@ -26,7 +30,9 @@ class HomeViewController: UIViewController {
         }
         
         menuView = Bundle.main.loadNibNamed(Global.menuView, owner: self, options: nil)?.first as! MenuView
-        menuView.frame = CGRect(x: 0, y: 0, width: Global.screenWidth, height: Global.screenHeight)
+        let fpsLabel = V2FPSLabel(frame: CGRect(x: 0, y: Global.screenHeight - 40, width: 80, height: 40))
+        view.addSubview(fpsLabel)
+        tableView.contentInset = UIEdgeInsets(top: 10, left: 0, bottom: 0, right: 0)
         
         prepareMaterial()
         setupGesture()
@@ -57,16 +63,19 @@ class HomeViewController: UIViewController {
     }
     
     func handleSwipeRight(sender: UIPanGestureRecognizer) {
-        if sender.state == .began {
+        switch sender.state {
+        case .began:
             leftEdgeView.frame.size.width = Global.screenWidth
             if let navigationController = navigationController as? ScrollingNavigationController {
                 navigationController.stopFollowingScrollView()
             }
-        } else if sender.state == .ended || sender.state == .cancelled || sender.state == .failed {
+        case .ended, .cancelled, .failed:
             leftEdgeView.frame.size.width = Global.edgePanGestureThreshold
             if let navigationController = navigationController as? ScrollingNavigationController {
                 navigationController.followScrollView(tableView, delay: 50.0)
             }
+        default:
+            break
         }
         handleMenu(menuView, recognizer: sender)
     }
