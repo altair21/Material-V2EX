@@ -11,12 +11,16 @@ import Material
 import AMScrollingNavbar
 
 class HomeViewController: UIViewController {
+    // UI
     @IBOutlet weak var postBtn: FabButton!
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var menuBtn: FabButton!
     @IBOutlet weak var moreBtn: FabButton!
     var menuView: MenuView = MenuView.sharedInstance
     var leftEdgeView: UIView!
+    
+    // Data
+    var topicOverviewArray = Array<TopicOverviewModel>()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -28,7 +32,6 @@ class HomeViewController: UIViewController {
         let fpsLabel = V2FPSLabel(frame: CGRect(x: 0, y: Global.screenHeight - 40, width: 80, height: 40))
         view.addSubview(fpsLabel)
         tableView.contentInset = UIEdgeInsets(top: 10, left: 0, bottom: 0, right: 0)
-
         
         prepareMaterial()
         setupGesture()
@@ -37,6 +40,14 @@ class HomeViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
 
+        NetworkManager.sharedInstance.getHotTopics(success: { res in
+            for (_, item) in res {
+                self.topicOverviewArray.append(TopicOverviewModel(data: item))
+            }
+            self.tableView.reloadData()
+        }, failure: { error in
+            
+        })
     }
 
     override func didReceiveMemoryWarning() {
@@ -88,11 +99,12 @@ class HomeViewController: UIViewController {
 
 extension HomeViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 50
+        return topicOverviewArray.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: Global.postOverviewCell)!
+        let cell = tableView.dequeueReusableCell(withIdentifier: Global.topicOverviewCell)! as! TopicOverviewTableViewCell
+        cell.setData(data: topicOverviewArray[indexPath.row])
         return cell
     }
 }

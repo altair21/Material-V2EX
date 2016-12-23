@@ -16,7 +16,7 @@ class Global: NSObject {
     static let menuView = "MenuView"
     
     // Cells
-    static let postOverviewCell = "postOverviewCell"
+    static let topicOverviewCell = "topicOverviewCell"
     
     
     // Constant

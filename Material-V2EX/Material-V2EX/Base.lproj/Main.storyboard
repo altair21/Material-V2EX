@@ -13,7 +13,7 @@
         <scene sceneID="umU-dU-Xc7">
             <objects>
                 <navigationController id="Krz-wJ-J0a" customClass="ScrollingNavigationController" customModule="AMScrollingNavbar" sceneMemberID="viewController">
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="r7d-3Z-bgQ">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="r7d-3Z-bgQ">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <color key="barTintColor" red="0.18238146551724138" green="0.5356242604310345" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -54,7 +54,7 @@
                                 <color key="backgroundColor" red="0.93725490570000003" green="0.93725490570000003" blue="0.95686274770000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <color key="sectionIndexBackgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <prototypes>
-                                    <tableViewCell opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="postOverviewCell" rowHeight="100" id="grQ-Te-8ao" customClass="PostOverviewTableViewCell" customModule="Material_V2EX" customModuleProvider="target">
+                                    <tableViewCell opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="topicOverviewCell" rowHeight="100" id="grQ-Te-8ao" customClass="TopicOverviewTableViewCell" customModule="Material_V2EX" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="28" width="375" height="100"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="grQ-Te-8ao" id="LPw-D7-Iz1">
@@ -150,6 +150,14 @@
                                             </constraints>
                                         </tableViewCellContentView>
                                         <color key="backgroundColor" red="0.93725490570000003" green="0.93725490570000003" blue="0.95686274770000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <connections>
+                                            <outlet property="avatarView" destination="aaS-gV-pB0" id="x26-9Z-mEk"/>
+                                            <outlet property="dateLabel" destination="f8Q-Bv-oWA" id="zGJ-Gh-LBX"/>
+                                            <outlet property="nicknameLabel" destination="MZw-yB-b65" id="Rgx-6H-ZFi"/>
+                                            <outlet property="nodeLabel" destination="wiS-xe-Bom" id="XZj-o2-5sB"/>
+                                            <outlet property="repliesLabel" destination="2wT-4k-rbp" id="qLk-eW-wN1"/>
+                                            <outlet property="titleLabel" destination="EgG-nJ-bWS" id="NKP-j0-cQr"/>
+                                        </connections>
                                     </tableViewCell>
                                 </prototypes>
                                 <connections>
@@ -199,7 +207,7 @@
                     <navigationItem key="navigationItem" title="V2EX" id="79p-oL-1Un">
                         <barButtonItem key="leftBarButtonItem" id="NXb-7N-DLT">
                             <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="Ubb-qK-l1K" customClass="FabButton" customModule="Material">
-                                <rect key="frame" x="16" y="10" width="35" height="24"/>
+                                <rect key="frame" x="16" y="7" width="35" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <state key="normal">
