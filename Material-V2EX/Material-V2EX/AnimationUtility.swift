@@ -78,12 +78,14 @@ func handleMenu(_ menuView: MenuView, recognizer: UIPanGestureRecognizer) {
             menuViewDisplayed = false
         }
         if menuViewDisplayed {
-            UIView.animate(withDuration: animationDuration, animations: { 
+            let restDuration = Double(menuView.panelView.frame.origin.x / menuView.panelView.frame.size.width) * animationDuration
+            UIView.animate(withDuration: restDuration, animations: {
                 menuView.panelView.frame.origin.x = 0
                 menuView.bgView.alpha = 1.0
             }, completion: nil)
         } else {
-            UIView.animate(withDuration: animationDuration, animations: { 
+            let restDuration = Double((menuView.panelView.frame.origin.x + menuView.panelView.frame.size.width) / menuView.panelView.frame.size.width) * 0.3
+            UIView.animate(withDuration: restDuration, animations: {
                 menuView.panelView.frame.origin.x = -menuView.panelView.frame.size.width
                 menuView.bgView.alpha = 0.0
             }, completion: { _ in
