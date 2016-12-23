@@ -15,11 +15,7 @@ class HomeViewController: UIViewController {
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var menuBtn: FabButton!
     @IBOutlet weak var moreBtn: FabButton!
-    var menuView: MenuView! {
-        didSet {
-            menuView.frame = CGRect(x: 0, y: 0, width: Global.screenWidth, height: Global.screenHeight)
-        }
-    }
+    var menuView: MenuView = MenuView.sharedInstance
     var leftEdgeView: UIView!
     
     override func viewDidLoad() {
@@ -29,10 +25,10 @@ class HomeViewController: UIViewController {
             navigationController.followScrollView(tableView, delay: 50.0)
         }
         
-        menuView = Bundle.main.loadNibNamed(Global.menuView, owner: self, options: nil)?.first as! MenuView
         let fpsLabel = V2FPSLabel(frame: CGRect(x: 0, y: Global.screenHeight - 40, width: 80, height: 40))
         view.addSubview(fpsLabel)
         tableView.contentInset = UIEdgeInsets(top: 10, left: 0, bottom: 0, right: 0)
+
         
         prepareMaterial()
         setupGesture()
