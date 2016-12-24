@@ -6,6 +6,7 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11757"/>
+        <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -64,16 +65,21 @@
                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="2uH-x4-bGN">
                                                     <rect key="frame" x="8" y="5" width="359" height="90"/>
                                                     <subviews>
-                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="abcde 这是昵称" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="MZw-yB-b65">
-                                                            <rect key="frame" x="69" y="0.0" width="101" height="17"/>
-                                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="252" verticalHuggingPriority="251" text="abcde 这是昵称" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="MZw-yB-b65">
+                                                            <rect key="frame" x="63" y="8" width="101" height="17"/>
+                                                            <constraints>
+                                                                <constraint firstAttribute="height" constant="17" id="RPg-M2-l3E"/>
+                                                            </constraints>
                                                             <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                             <nil key="textColor"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
-                                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="aaS-gV-pB0">
-                                                            <rect key="frame" x="8" y="1" width="40" height="40"/>
-                                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="aaS-gV-pB0">
+                                                            <rect key="frame" x="8" y="8" width="40" height="40"/>
+                                                            <constraints>
+                                                                <constraint firstAttribute="width" secondItem="aaS-gV-pB0" secondAttribute="height" multiplier="1:1" id="H7c-P6-vwJ"/>
+                                                                <constraint firstAttribute="width" constant="40" id="hH6-ZY-KeX"/>
+                                                            </constraints>
                                                             <userDefinedRuntimeAttributes>
                                                                 <userDefinedRuntimeAttribute type="boolean" keyPath="layer.masksToBounds" value="YES"/>
                                                                 <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
@@ -81,31 +87,35 @@
                                                                 </userDefinedRuntimeAttribute>
                                                             </userDefinedRuntimeAttributes>
                                                         </imageView>
-                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="sldfjlsadjflksjdflkjssadfasdfasfsadf" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="EgG-nJ-bWS">
-                                                            <rect key="frame" x="8" y="57" width="343" height="25"/>
-                                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="751" text="sldfjlsadjflksjdflkjssadfasdfasfsadf" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="EgG-nJ-bWS">
+                                                            <rect key="frame" x="10" y="55" width="339" height="27"/>
                                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                             <nil key="textColor"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
-                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="节点名" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wiS-xe-Bom">
-                                                            <rect key="frame" x="260" y="8" width="42" height="20"/>
-                                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="节点名" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wiS-xe-Bom" customClass="PaddingLabel" customModule="Material_V2EX" customModuleProvider="target">
+                                                            <rect key="frame" x="266" y="8" width="37" height="20"/>
                                                             <color key="backgroundColor" red="0.88627450980392153" green="0.88627450980392153" blue="0.88627450980392153" alpha="1" colorSpace="calibratedRGB"/>
-                                                            <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                                                            <constraints>
+                                                                <constraint firstAttribute="height" constant="20" id="y72-le-Osb"/>
+                                                            </constraints>
+                                                            <fontDescription key="fontDescription" name=".PingFangSC-Regular" family=".PingFang SC" pointSize="12"/>
                                                             <color key="textColor" red="0.46666666666666667" green="0.46666666666666667" blue="0.46666666666666667" alpha="1" colorSpace="calibratedRGB"/>
                                                             <nil key="highlightedColor"/>
                                                             <userDefinedRuntimeAttributes>
                                                                 <userDefinedRuntimeAttribute type="number" keyPath="layer.borderRadius">
-                                                                    <integer key="value" value="1"/>
+                                                                    <real key="value" value="2.5"/>
                                                                 </userDefinedRuntimeAttribute>
                                                                 <userDefinedRuntimeAttribute type="boolean" keyPath="layer.masksToBounds" value="YES"/>
                                                             </userDefinedRuntimeAttributes>
                                                         </label>
-                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="117" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2wT-4k-rbp">
-                                                            <rect key="frame" x="310" y="8" width="38" height="20"/>
-                                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="117" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2wT-4k-rbp">
+                                                            <rect key="frame" x="311" y="8" width="38" height="20"/>
                                                             <color key="backgroundColor" red="0.58823529411764708" green="0.61176470588235299" blue="0.69411764705882351" alpha="1" colorSpace="calibratedRGB"/>
+                                                            <constraints>
+                                                                <constraint firstAttribute="width" constant="38" id="dYF-Kj-dyP"/>
+                                                                <constraint firstAttribute="height" constant="20" id="f96-gA-jMx"/>
+                                                            </constraints>
                                                             <fontDescription key="fontDescription" type="boldSystem" pointSize="12"/>
                                                             <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                             <nil key="highlightedColor"/>
@@ -116,15 +126,35 @@
                                                                 <userDefinedRuntimeAttribute type="boolean" keyPath="layer.masksToBounds" value="YES"/>
                                                             </userDefinedRuntimeAttributes>
                                                         </label>
-                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="1 分钟前" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="f8Q-Bv-oWA">
-                                                            <rect key="frame" x="69" y="25" width="75" height="15"/>
-                                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="1 分钟前" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="f8Q-Bv-oWA">
+                                                            <rect key="frame" x="63" y="30" width="286" height="15"/>
+                                                            <constraints>
+                                                                <constraint firstAttribute="height" constant="15" id="tSA-Fc-pkm"/>
+                                                            </constraints>
                                                             <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                                             <color key="textColor" red="0.66666666666666663" green="0.66666666666666663" blue="0.66666666666666663" alpha="1" colorSpace="calibratedRGB"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
                                                     </subviews>
                                                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                    <constraints>
+                                                        <constraint firstItem="EgG-nJ-bWS" firstAttribute="top" secondItem="f8Q-Bv-oWA" secondAttribute="bottom" constant="10" id="2wJ-cy-zin"/>
+                                                        <constraint firstAttribute="trailing" secondItem="EgG-nJ-bWS" secondAttribute="trailing" constant="10" id="71A-YW-eFM"/>
+                                                        <constraint firstItem="wiS-xe-Bom" firstAttribute="top" secondItem="2uH-x4-bGN" secondAttribute="top" constant="8" id="Njy-EB-4jA"/>
+                                                        <constraint firstItem="MZw-yB-b65" firstAttribute="top" secondItem="2uH-x4-bGN" secondAttribute="top" constant="8" id="P5T-6x-wRg"/>
+                                                        <constraint firstItem="EgG-nJ-bWS" firstAttribute="leading" secondItem="2uH-x4-bGN" secondAttribute="leading" constant="10" id="PSx-t6-AAo"/>
+                                                        <constraint firstItem="aaS-gV-pB0" firstAttribute="leading" secondItem="2uH-x4-bGN" secondAttribute="leading" constant="8" id="XzW-1l-kZa"/>
+                                                        <constraint firstItem="f8Q-Bv-oWA" firstAttribute="leading" secondItem="aaS-gV-pB0" secondAttribute="trailing" constant="15" id="aZj-Yn-IRe"/>
+                                                        <constraint firstItem="MZw-yB-b65" firstAttribute="leading" secondItem="aaS-gV-pB0" secondAttribute="trailing" constant="15" id="eqz-NR-uni"/>
+                                                        <constraint firstAttribute="trailing" secondItem="2wT-4k-rbp" secondAttribute="trailing" constant="10" id="fav-aA-WLN"/>
+                                                        <constraint firstItem="2wT-4k-rbp" firstAttribute="top" secondItem="2uH-x4-bGN" secondAttribute="top" constant="8" id="iDh-c2-DyQ"/>
+                                                        <constraint firstItem="2wT-4k-rbp" firstAttribute="leading" secondItem="wiS-xe-Bom" secondAttribute="trailing" constant="8" id="oTr-Ze-wZZ"/>
+                                                        <constraint firstAttribute="bottom" secondItem="EgG-nJ-bWS" secondAttribute="bottom" constant="8" id="thy-pj-MuW"/>
+                                                        <constraint firstItem="wiS-xe-Bom" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="MZw-yB-b65" secondAttribute="trailing" constant="10" id="vxA-tc-aTm"/>
+                                                        <constraint firstItem="f8Q-Bv-oWA" firstAttribute="top" secondItem="MZw-yB-b65" secondAttribute="bottom" constant="5" id="wTe-8n-30x"/>
+                                                        <constraint firstAttribute="trailing" secondItem="f8Q-Bv-oWA" secondAttribute="trailing" constant="10" id="wgl-Hi-ZdK"/>
+                                                        <constraint firstItem="aaS-gV-pB0" firstAttribute="top" secondItem="2uH-x4-bGN" secondAttribute="top" constant="8" id="x7C-AF-fLT"/>
+                                                    </constraints>
                                                     <userDefinedRuntimeAttributes>
                                                         <userDefinedRuntimeAttribute type="number" keyPath="layer.shadowRadius">
                                                             <real key="value" value="0.75"/>

@@ -16,6 +16,6 @@ class MemberModel: NSObject {
     init(data: JSON) {
         id = data["id"].intValue
         username = data["username"].stringValue
-        avatarURL = data["avatar_normal"].stringValue
+        avatarURL = "https:" + data["avatar_normal"].stringValue
     }
 }

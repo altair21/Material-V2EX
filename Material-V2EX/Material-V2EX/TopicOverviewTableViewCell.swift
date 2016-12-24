@@ -40,12 +40,24 @@ class TopicOverviewTableViewCell: UITableViewCell {
         nicknameLabel.text = data.member?.username
 //        dateLabel
         nodeLabel.text = data.node?.title
-        nodeLabel.sizeToFit()
         repliesLabel.text = "\(data.replies)"
-//        avatarView
+        avatarView.setImageWith(string: (data.member?.avatarURL)!)
         titleLabel.text = data.title
-        let size = titleLabel.text!.size(attributes: [NSFontAttributeName: titleLabel.font])
-        print(size)
+        
+        animatedUI()
+    }
+    
+    func animatedUI() {
+        if (data?.isAnimated)! {
+            return
+        }
+        data?.isAnimated = true
+        
+        let origX = bgView.frame.origin.x
+        bgView.frame.origin.x = Global.screenWidth + 10
+        UIView.animate(withDuration: 0.5, delay: 0.0, usingSpringWithDamping: 0.8, initialSpringVelocity: 2, options: [], animations: {
+            self.bgView.frame.origin.x = origX
+        }, completion: nil)
     }
 
 }

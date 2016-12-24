@@ -17,6 +17,7 @@ class TopicOverviewModel: NSObject {
     var last_modified = 0
     var member: MemberModel?
     var node: NodeModel?
+    var isAnimated = false
     
     init(data: JSON) {
         id = data["id"].intValue

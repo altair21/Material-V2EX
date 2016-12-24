@@ -32,6 +32,8 @@ class HomeViewController: UIViewController {
         let fpsLabel = V2FPSLabel(frame: CGRect(x: 0, y: Global.screenHeight - 40, width: 80, height: 40))
         view.addSubview(fpsLabel)
         tableView.contentInset = UIEdgeInsets(top: 10, left: 0, bottom: 0, right: 0)
+        tableView.estimatedRowHeight = 100
+        tableView.rowHeight = UITableViewAutomaticDimension
         
         prepareMaterial()
         setupGesture()
@@ -97,7 +99,7 @@ extension HomeViewController: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: Global.topicOverviewCell)! as! TopicOverviewTableViewCell
+        let cell = tableView.dequeueReusableCell(withIdentifier: Global.topicOverviewCell, for: indexPath) as! TopicOverviewTableViewCell
         cell.setData(data: topicOverviewArray[indexPath.row])
         return cell
     }

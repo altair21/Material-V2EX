@@ -24,6 +24,9 @@
 		507F4EF51E0944EA0033A10B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 507F4EF41E0944EA0033A10B /* Assets.xcassets */; };
 		507F4EF81E0944EA0033A10B /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 507F4EF61E0944EA0033A10B /* LaunchScreen.storyboard */; };
 		507F4F001E094FDD0033A10B /* Material.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 507F4EFF1E094FDD0033A10B /* Material.framework */; };
+		50E8C0791E0E7A3800FAC85B /* PaddingLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50E8C0781E0E7A3800FAC85B /* PaddingLabel.swift */; };
+		50E8C07B1E0E838C00FAC85B /* UIImageView+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50E8C07A1E0E838C00FAC85B /* UIImageView+Extension.swift */; };
+		50E8C07D1E0E854400FAC85B /* Kingfisher.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 50E8C07C1E0E854400FAC85B /* Kingfisher.framework */; };
 		E80AE0F3475E5636E0667E32 /* Pods_Material_V2EX.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C23F512E3159AF0F91B87629 /* Pods_Material_V2EX.framework */; };
 /* End PBXBuildFile section */
 
@@ -49,6 +52,9 @@
 		507F4EF71E0944EA0033A10B /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		507F4EF91E0944EA0033A10B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		507F4EFF1E094FDD0033A10B /* Material.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Material.framework; path = "../../../../../../Library/Developer/Xcode/DerivedData/Material-V2EX-ggvhqkoortazbjhkiqzzdvoaqujd/Build/Products/Debug-iphoneos/Material/Material.framework"; sourceTree = "<group>"; };
+		50E8C0781E0E7A3800FAC85B /* PaddingLabel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PaddingLabel.swift; sourceTree = "<group>"; };
+		50E8C07A1E0E838C00FAC85B /* UIImageView+Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIImageView+Extension.swift"; sourceTree = "<group>"; };
+		50E8C07C1E0E854400FAC85B /* Kingfisher.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Kingfisher.framework; path = "../../../../../../Library/Developer/Xcode/DerivedData/Material-V2EX-ggvhqkoortazbjhkiqzzdvoaqujd/Build/Products/Debug-iphoneos/Kingfisher/Kingfisher.framework"; sourceTree = "<group>"; };
 		C23F512E3159AF0F91B87629 /* Pods_Material_V2EX.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Material_V2EX.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -57,6 +63,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				50E8C07D1E0E854400FAC85B /* Kingfisher.framework in Frameworks */,
 				507F4F001E094FDD0033A10B /* Material.framework in Frameworks */,
 				E80AE0F3475E5636E0667E32 /* Pods_Material_V2EX.framework in Frameworks */,
 			);
@@ -68,6 +75,7 @@
 		4FD4F3547EEF4EDCB204C2E1 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				50E8C07C1E0E854400FAC85B /* Kingfisher.framework */,
 				507F4EFF1E094FDD0033A10B /* Material.framework */,
 				C23F512E3159AF0F91B87629 /* Pods_Material_V2EX.framework */,
 			);
@@ -79,6 +87,7 @@
 			children = (
 				5067E20A1E0A9F0B0016F924 /* MenuView.xib */,
 				5067E20C1E0AA0D20016F924 /* MenuView.swift */,
+				50E8C0781E0E7A3800FAC85B /* PaddingLabel.swift */,
 			);
 			name = Views;
 			sourceTree = "<group>";
@@ -113,6 +122,7 @@
 		5065F6DF1E0A888B00B5A9FD /* Helpers */ = {
 			isa = PBXGroup;
 			children = (
+				50E8C0751E0E797600FAC85B /* Extensions */,
 				5065F6E01E0A88B100B5A9FD /* Global.swift */,
 				504667A31E0CF5F5008B6953 /* fps.swift */,
 			);
@@ -178,6 +188,14 @@
 				50360EB81E0B7BE700B082DD /* AnimationUtility.swift */,
 			);
 			name = Animations;
+			sourceTree = "<group>";
+		};
+		50E8C0751E0E797600FAC85B /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				50E8C07A1E0E838C00FAC85B /* UIImageView+Extension.swift */,
+			);
+			name = Extensions;
 			sourceTree = "<group>";
 		};
 		B5B2FCC6A8ECE586D13477FB /* Pods */ = {
@@ -338,8 +356,10 @@
 				5067E20D1E0AA0D20016F924 /* MenuView.swift in Sources */,
 				504667A41E0CF5F5008B6953 /* fps.swift in Sources */,
 				5065F6E11E0A88B100B5A9FD /* Global.swift in Sources */,
+				50E8C0791E0E7A3800FAC85B /* PaddingLabel.swift in Sources */,
 				504667A81E0D09EA008B6953 /* V2EX.swift in Sources */,
 				504667AE1E0D3034008B6953 /* MemberModel.swift in Sources */,
+				50E8C07B1E0E838C00FAC85B /* UIImageView+Extension.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
