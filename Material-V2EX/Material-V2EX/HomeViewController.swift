@@ -73,14 +73,8 @@ class HomeViewController: UIViewController {
         switch sender.state {
         case .began:
             leftEdgeView.frame.size.width = Global.screenWidth
-            if let navigationController = navigationController as? ScrollingNavigationController {
-                navigationController.stopFollowingScrollView()
-            }
         case .ended, .cancelled, .failed:
             leftEdgeView.frame.size.width = Global.edgePanGestureThreshold
-            if let navigationController = navigationController as? ScrollingNavigationController {
-                navigationController.followScrollView(tableView, delay: 50.0)
-            }
         default:
             break
         }
