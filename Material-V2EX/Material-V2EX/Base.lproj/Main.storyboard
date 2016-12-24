@@ -13,7 +13,7 @@
         <scene sceneID="umU-dU-Xc7">
             <objects>
                 <navigationController id="Krz-wJ-J0a" customClass="ScrollingNavigationController" customModule="AMScrollingNavbar" sceneMemberID="viewController">
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="r7d-3Z-bgQ">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="r7d-3Z-bgQ">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <color key="barTintColor" red="0.18238146551724138" green="0.5356242604310345" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -152,6 +152,7 @@
                                         <color key="backgroundColor" red="0.93725490570000003" green="0.93725490570000003" blue="0.95686274770000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <connections>
                                             <outlet property="avatarView" destination="aaS-gV-pB0" id="x26-9Z-mEk"/>
+                                            <outlet property="bgView" destination="2uH-x4-bGN" id="D5l-IF-vQR"/>
                                             <outlet property="dateLabel" destination="f8Q-Bv-oWA" id="zGJ-Gh-LBX"/>
                                             <outlet property="nicknameLabel" destination="MZw-yB-b65" id="Rgx-6H-ZFi"/>
                                             <outlet property="nodeLabel" destination="wiS-xe-Bom" id="XZj-o2-5sB"/>

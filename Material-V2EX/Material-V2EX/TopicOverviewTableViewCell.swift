@@ -10,6 +10,7 @@ import UIKit
 
 class TopicOverviewTableViewCell: UITableViewCell {
     // UI
+    @IBOutlet weak var bgView: UIView!
     @IBOutlet weak var nicknameLabel: UILabel!
     @IBOutlet weak var dateLabel: UILabel!
     @IBOutlet weak var nodeLabel: UILabel!
@@ -22,7 +23,9 @@ class TopicOverviewTableViewCell: UITableViewCell {
     
     override func awakeFromNib() {
         super.awakeFromNib()
-        // Initialization code
+        
+        bgView.layer.shouldRasterize = true
+        bgView.layer.rasterizationScale = UIScreen.main.scale
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {
