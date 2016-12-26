@@ -8,19 +8,31 @@
 
 import UIKit
 
+func delay(seconds: Double, completion: @escaping ()-> Void) {
+    DispatchQueue.main.asyncAfter(deadline: .now() + seconds, execute: completion)
+}
+
 class Global: NSObject {
     // ViewControllers
-    static let menuViewController = "MenuViewController"
+    struct ViewControllers {
+        static let menuView = "MenuViewController"
+        static let topicDetail = "TopicDetailViewController"
+    }
     
     // Views
-    static let menuView = "MenuView"
+    struct Views {
+        static let menuView = "MenuView"
+    }
     
     // Cells
-    static let topicOverviewCell = "topicOverviewCell"
-    
+    struct Cells {
+        static let topicOverview = "topicOverviewCell"
+    }
     
     // Constant
-    static let screenWidth = UIScreen.main.bounds.width
-    static let screenHeight = UIScreen.main.bounds.height
-    static let edgePanGestureThreshold: CGFloat = 64
+    struct Constants {
+        static let screenWidth = UIScreen.main.bounds.width
+        static let screenHeight = UIScreen.main.bounds.height
+        static let edgePanGestureThreshold: CGFloat = 64
+    }
 }

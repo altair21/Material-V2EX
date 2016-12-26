@@ -18,18 +18,21 @@ class HomeViewController: UIViewController {
     @IBOutlet weak var moreBtn: FabButton!
     var menuView: MenuView = MenuView.sharedInstance
     var leftEdgeView: UIView!
+    var navController: ScrollingNavigationController!
     
     // Data
     var topicOverviewArray = Array<TopicOverviewModel>()
+    var selectedIndexPath: IndexPath?
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
         if let navigationController = navigationController as? ScrollingNavigationController {
+            navController = navigationController
             navigationController.followScrollView(tableView, delay: 50.0)
         }
         
-        let fpsLabel = V2FPSLabel(frame: CGRect(x: 0, y: Global.screenHeight - 40, width: 80, height: 40))
+        let fpsLabel = V2FPSLabel(frame: CGRect(x: 0, y: Global.Constants.screenHeight - 40, width: 80, height: 40))
         view.addSubview(fpsLabel)
         tableView.contentInset = UIEdgeInsets(top: 10, left: 0, bottom: 0, right: 0)
         tableView.estimatedRowHeight = 100
@@ -37,11 +40,7 @@ class HomeViewController: UIViewController {
         
         prepareMaterial()
         setupGesture()
-    }
-    
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-
+        
         NetworkManager.sharedInstance.getLatestTopics(success: { res in
             for (_, item) in res {
                 self.topicOverviewArray.append(TopicOverviewModel(data: item))
@@ -61,22 +60,27 @@ class HomeViewController: UIViewController {
         postBtn.image = Icon.add
         menuBtn.image = Icon.cm.menu
         moreBtn.image = Icon.cm.moreHorizontal
-        
     }
+    @IBOutlet weak var leftBarItem: UIBarButtonItem!
     
     func setupGesture() {
-        leftEdgeView = UIView(frame: CGRect(x: 0, y: 0, width: Global.edgePanGestureThreshold, height: Global.screenHeight))
+        leftEdgeView = UIView(frame: CGRect(x: 0, y: 0, width: Global.Constants.edgePanGestureThreshold, height: Global.Constants.screenHeight))
         view.addSubview(leftEdgeView)
         let swipeRight = UIPanGestureRecognizer(target: self, action: #selector(handleSwipeRight(sender:)))
         leftEdgeView.addGestureRecognizer(swipeRight)
+        
+        let menuTapped = UITapGestureRecognizer(target: self, action: #selector(menuTapped(_:)))
+        menuBtn.addGestureRecognizer(menuTapped)
+        let moreTapped = UITapGestureRecognizer(target: self, action: #selector(moreTapped(_:)))
+        moreBtn.addGestureRecognizer(moreTapped)
     }
     
     func handleSwipeRight(sender: UIPanGestureRecognizer) {
         switch sender.state {
         case .began:
-            leftEdgeView.frame.size.width = Global.screenWidth
+            leftEdgeView.frame.size.width = Global.Constants.screenWidth
         case .ended, .cancelled, .failed:
-            leftEdgeView.frame.size.width = Global.edgePanGestureThreshold
+            leftEdgeView.frame.size.width = Global.Constants.edgePanGestureThreshold
         default:
             break
         }
@@ -88,37 +92,53 @@ class HomeViewController: UIViewController {
     }
     
     @IBAction func moreTapped(_ sender: FabButton) {
+        print("more tapped")
     }
-    
     
 }
 
+// MARK: UITableViewDelegate & UITableViewDataSource
 extension HomeViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return topicOverviewArray.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: Global.topicOverviewCell, for: indexPath) as! TopicOverviewTableViewCell
+        let cell = tableView.dequeueReusableCell(withIdentifier: Global.Cells.topicOverview, for: indexPath) as! TopicOverviewTableViewCell
         cell.setData(data: topicOverviewArray[indexPath.row])
         return cell
     }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        selectedIndexPath = indexPath
+        
+        let topicDetailViewController = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: Global.ViewControllers.topicDetail) as! TopicDetailViewController
+        present(topicDetailViewController, animated: true, completion: nil)
+    }
 }
 
+// MARK: ScrollingNavigationControllerDelegate
 extension HomeViewController: ScrollingNavigationControllerDelegate {
     func scrollViewShouldScrollToTop(_ scrollView: UIScrollView) -> Bool {
-        if let navigationController = navigationController as? ScrollingNavigationController {
-            navigationController.showNavbar(animated: true)
-        }
+        navController!.showNavbar(animated: true)
         return true
     }
     
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
-        if let navigationController = navigationController {
-            let oldY = tableView.frame.origin.y
-            let newY = navigationController.navigationBar.frame.height + navigationController.navigationBar.frame.origin.y
-            tableView.frame.origin.y = newY
-            tableView.frame.size.height += oldY - newY
+        let oldY = tableView.frame.origin.y
+        let newY = navController!.navigationBar.frame.height + navController!.navigationBar.frame.origin.y
+        tableView.frame.origin.y = newY
+        tableView.frame.size.height += oldY - newY
+    }
+}
+
+// MARK: ExpandingTransitionPresentingViewController
+extension HomeViewController: ExpandingTransitionPresentingViewController {
+    func expandingTransitionTargetView(forTransition transition: ExpandingCellTransition) -> UIView! {
+        if let indexPath = selectedIndexPath {
+            return tableView.cellForRow(at: indexPath)
+        } else {
+            return nil
         }
     }
 }

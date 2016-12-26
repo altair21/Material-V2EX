@@ -13,7 +13,7 @@ extension UIImageView {
 
     func setImageWith(string: String) {
         let url = URL(string: string)
-        self.kf.setImage(with: url)
+        self.kf.setImage(with: url, options: [.transition(.fade(0.3))])
     }
 
 }

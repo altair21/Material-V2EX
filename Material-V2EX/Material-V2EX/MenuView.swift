@@ -11,12 +11,12 @@ import UIKit
 class MenuView: UIView {
     @IBOutlet weak var panelView: UIView!
     @IBOutlet weak var bgView: UIView!
-    static let sharedInstance = Bundle.main.loadNibNamed(Global.menuView, owner: nil, options: nil)?.first as! MenuView
+    static let sharedInstance = Bundle.main.loadNibNamed(Global.Views.menuView, owner: nil, options: nil)?.first as! MenuView
     
     override func awakeFromNib() {
         super.awakeFromNib()
         
-        self.frame = CGRect(x: 0, y: 0, width: Global.screenWidth, height: Global.screenHeight)
+        self.frame = CGRect(x: 0, y: 0, width: Global.Constants.screenWidth, height: Global.Constants.screenHeight)
         setupGesture()
     }
     

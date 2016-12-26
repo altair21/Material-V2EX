@@ -53,11 +53,14 @@ class TopicOverviewTableViewCell: UITableViewCell {
         }
         data?.isAnimated = true
         
-        let origX = bgView.frame.origin.x
-        bgView.frame.origin.x = Global.screenWidth + 10
-        UIView.animate(withDuration: 0.5, delay: 0.0, usingSpringWithDamping: 0.8, initialSpringVelocity: 2, options: [], animations: {
-            self.bgView.frame.origin.x = origX
-        }, completion: nil)
+        let animation = CABasicAnimation(keyPath: "transform.scale")
+        animation.duration = 0.3
+        animation.fillMode = kCAFillModeBoth
+        animation.fromValue = 0.0
+        animation.toValue = 1.0
+        animation.beginTime = CACurrentMediaTime()
+        bgView.layer.add(animation, forKey: nil)
+        
     }
 
 }
