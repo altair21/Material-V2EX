@@ -26,6 +26,8 @@
 		507F4EF51E0944EA0033A10B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 507F4EF41E0944EA0033A10B /* Assets.xcassets */; };
 		507F4EF81E0944EA0033A10B /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 507F4EF61E0944EA0033A10B /* LaunchScreen.storyboard */; };
 		507F4F001E094FDD0033A10B /* Material.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 507F4EFF1E094FDD0033A10B /* Material.framework */; };
+		50B1D8641E1270CD00BCE4FF /* NSDate+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50B1D8631E1270CD00BCE4FF /* NSDate+Extension.swift */; };
+		50B1D8661E1273BC00BCE4FF /* NSDateTimeAgo.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 50B1D8651E1273BC00BCE4FF /* NSDateTimeAgo.bundle */; };
 		50E8C0791E0E7A3800FAC85B /* PaddingLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50E8C0781E0E7A3800FAC85B /* PaddingLabel.swift */; };
 		50E8C07B1E0E838C00FAC85B /* UIImageView+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50E8C07A1E0E838C00FAC85B /* UIImageView+Extension.swift */; };
 		50E8C07D1E0E854400FAC85B /* Kingfisher.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 50E8C07C1E0E854400FAC85B /* Kingfisher.framework */; };
@@ -57,6 +59,10 @@
 		507F4EF91E0944EA0033A10B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		507F4EFF1E094FDD0033A10B /* Material.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Material.framework; path = "../../../../../../Library/Developer/Xcode/DerivedData/Material-V2EX-ggvhqkoortazbjhkiqzzdvoaqujd/Build/Products/Debug-iphoneos/Material/Material.framework"; sourceTree = "<group>"; };
 		50B1D8621E126AAD00BCE4FF /* Material-V2EX-Bridging-Hedaer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Material-V2EX-Bridging-Hedaer.h"; sourceTree = "<group>"; };
+		50B1D8631E1270CD00BCE4FF /* NSDate+Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "NSDate+Extension.swift"; sourceTree = "<group>"; };
+		50B1D8651E1273BC00BCE4FF /* NSDateTimeAgo.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = NSDateTimeAgo.bundle; sourceTree = "<group>"; };
+		50B1D8671E12778700BCE4FF /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/Main.strings"; sourceTree = "<group>"; };
+		50B1D8681E12778700BCE4FF /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/LaunchScreen.strings"; sourceTree = "<group>"; };
 		50E8C0781E0E7A3800FAC85B /* PaddingLabel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PaddingLabel.swift; sourceTree = "<group>"; };
 		50E8C07A1E0E838C00FAC85B /* UIImageView+Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIImageView+Extension.swift"; sourceTree = "<group>"; };
 		50E8C07C1E0E854400FAC85B /* Kingfisher.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Kingfisher.framework; path = "../../../../../../Library/Developer/Xcode/DerivedData/Material-V2EX-ggvhqkoortazbjhkiqzzdvoaqujd/Build/Products/Debug-iphoneos/Kingfisher/Kingfisher.framework"; sourceTree = "<group>"; };
@@ -202,6 +208,8 @@
 			isa = PBXGroup;
 			children = (
 				50E8C07A1E0E838C00FAC85B /* UIImageView+Extension.swift */,
+				50B1D8631E1270CD00BCE4FF /* NSDate+Extension.swift */,
+				50B1D8651E1273BC00BCE4FF /* NSDateTimeAgo.bundle */,
 			);
 			name = Extensions;
 			sourceTree = "<group>";
@@ -280,6 +288,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				507F4EF81E0944EA0033A10B /* LaunchScreen.storyboard in Resources */,
+				50B1D8661E1273BC00BCE4FF /* NSDateTimeAgo.bundle in Resources */,
 				5067E20B1E0A9F0B0016F924 /* MenuView.xib in Resources */,
 				507F4EF51E0944EA0033A10B /* Assets.xcassets in Resources */,
 				507F4EF31E0944EA0033A10B /* Main.storyboard in Resources */,
@@ -366,6 +375,7 @@
 				504667A41E0CF5F5008B6953 /* fps.swift in Sources */,
 				5065F6E11E0A88B100B5A9FD /* Global.swift in Sources */,
 				50E8C0791E0E7A3800FAC85B /* PaddingLabel.swift in Sources */,
+				50B1D8641E1270CD00BCE4FF /* NSDate+Extension.swift in Sources */,
 				504667A81E0D09EA008B6953 /* V2EX.swift in Sources */,
 				504667AE1E0D3034008B6953 /* MemberModel.swift in Sources */,
 				50459A9C1E10F83D00E4F6DD /* TopicDetailViewController.swift in Sources */,
@@ -380,6 +390,7 @@
 			isa = PBXVariantGroup;
 			children = (
 				507F4EF21E0944EA0033A10B /* Base */,
+				50B1D8671E12778700BCE4FF /* zh-Hans */,
 			);
 			name = Main.storyboard;
 			sourceTree = "<group>";
@@ -388,6 +399,7 @@
 			isa = PBXVariantGroup;
 			children = (
 				507F4EF71E0944EA0033A10B /* Base */,
+				50B1D8681E12778700BCE4FF /* zh-Hans */,
 			);
 			name = LaunchScreen.storyboard;
 			sourceTree = "<group>";
@@ -399,6 +411,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
 				CLANG_CXX_LIBRARY = "libc++";
@@ -449,6 +462,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
 				CLANG_CXX_LIBRARY = "libc++";

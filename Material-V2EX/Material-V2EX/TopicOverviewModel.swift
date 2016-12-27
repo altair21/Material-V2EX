@@ -13,7 +13,7 @@ class TopicOverviewModel: NSObject {
     var title = ""
     var content = ""
     var replies = 0
-    var created = 0
+    var created: TimeInterval = 0
     var last_modified = 0
     var member: MemberModel?
     var node: NodeModel?
@@ -24,7 +24,7 @@ class TopicOverviewModel: NSObject {
         title = data["title"].stringValue
         content = data["content"].stringValue
         replies = data["replies"].intValue
-        created = data["created"].intValue
+        created = TimeInterval(data["created"].doubleValue)
         last_modified = data["last_modified"].intValue
         member = MemberModel(data: data["member"])
         node = NodeModel(data: data["node"])

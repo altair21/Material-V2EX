@@ -38,7 +38,7 @@ class TopicOverviewTableViewCell: UITableViewCell {
         self.data = data
         
         nicknameLabel.text = data.member?.username
-//        dateLabel
+        dateLabel.text = Date(timeIntervalSince1970: data.created).timeAgo
         nodeLabel.text = data.node?.title
         repliesLabel.text = "\(data.replies)"
         avatarView.setImageWith(string: (data.member?.avatarURL)!)
