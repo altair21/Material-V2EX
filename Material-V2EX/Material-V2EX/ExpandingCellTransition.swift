@@ -7,7 +7,6 @@
 //
 
 import UIKit
-import AMScrollingNavbar
 
 private let animationDuration = 0.6
 
@@ -62,7 +61,7 @@ class ExpandingCellTransition: NSObject, UIViewControllerAnimatedTransitioning {
         
         // get target view
         var targetViewController = backgroundViewController
-        if let navController = targetViewController as? ScrollingNavigationController {
+        if let navController = targetViewController as? UINavigationController {
             targetViewController = navController.topViewController!
         }
         let targetViewMaybe = (targetViewController as? ExpandingTransitionPresentingViewController)?.expandingTransitionTargetView(forTransition: self)
@@ -137,7 +136,7 @@ class ExpandingCellTransition: NSObject, UIViewControllerAnimatedTransitioning {
         targetContainer.clipsToBounds = true
         targetContainer.addSubview(targetSnapshot)
         
-        if let navController = backgroundViewController as? ScrollingNavigationController {
+        if let navController = backgroundViewController as? UINavigationController {
             let barHeight = navController.navigationBar.frame.maxY
             
             UIGraphicsBeginImageContextWithOptions(CGSize(width: width, height: barHeight), false, UIScreen.main.scale)
@@ -174,7 +173,7 @@ extension ExpandingCellTransition: UIViewControllerTransitioningDelegate {
     
     func animationController(forPresented presented: UIViewController, presenting: UIViewController, source: UIViewController) -> UIViewControllerAnimatedTransitioning? {
         presentingController = presenting
-        if let navController = presentingController as? ScrollingNavigationController {
+        if let navController = presentingController as? UINavigationController {
             presentingController = navController.topViewController
         }
         
