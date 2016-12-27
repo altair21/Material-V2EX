@@ -112,10 +112,16 @@ extension HomeViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         selectedIndexPath = indexPath
         
-        navController.showNavbar(animated: true, duration: 0.3)
-        delay(seconds: 0.3) { 
+        let presentBlock = {
             let topicDetailViewController = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: Global.ViewControllers.topicDetail) as! TopicDetailViewController
             self.present(topicDetailViewController, animated: true, completion: nil)
+        }
+        switch navController.state {
+        case .collapsed:
+            navController.showNavbar(animated: true, duration: 0.3)
+            delay(seconds: 0.3, completion: presentBlock)
+        default:
+            presentBlock()
         }
     }
 }
