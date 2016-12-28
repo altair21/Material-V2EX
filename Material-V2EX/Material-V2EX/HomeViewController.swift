@@ -19,6 +19,7 @@ class HomeViewController: UIViewController {
     var menuView: MenuView = MenuView.sharedInstance
     var leftEdgeView: UIView!
     var navController: ScrollingNavigationController!
+    let indicator = ARIndicator(firstColor: UIColor.fromHex(string: "#1B9AAA"), secondColor: UIColor.fromHex(string: "#06D6A0"), thirdColor: UIColor.fromHex(string: "#E84855"))
     
     // Data
     var topicOverviewArray = Array<TopicOverviewModel>()
@@ -38,17 +39,25 @@ class HomeViewController: UIViewController {
         tableView.estimatedRowHeight = 100
         tableView.rowHeight = UITableViewAutomaticDimension
         
-        prepareMaterial()
+        setupUI()
         setupGesture()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
         
-        NetworkManager.sharedInstance.getLatestTopics(success: { res in
-            for (_, item) in res {
-                self.topicOverviewArray.append(TopicOverviewModel(data: item))
-            }
-            self.tableView.reloadData()
-        }, failure: { error in
-            
-        })
+        if topicOverviewArray.isEmpty {
+            indicator.state = .running
+            NetworkManager.sharedInstance.getLatestTopics(success: { res in
+                for (_, item) in res {
+                    self.topicOverviewArray.append(TopicOverviewModel(data: item))
+                }
+                self.indicator.state = .stopping
+                self.tableView.reloadData()
+            }, failure: { error in
+                self.indicator.state = .stopping
+            })
+        }
     }
 
     override func didReceiveMemoryWarning() {
@@ -56,10 +65,12 @@ class HomeViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
 
-    func prepareMaterial() {
+    func setupUI() {
         postBtn.image = Icon.add
         menuBtn.image = Icon.cm.menu
         moreBtn.image = Icon.cm.moreHorizontal
+        indicator.center = CGPoint(x: Global.Constants.screenWidth / 2, y: Global.Constants.screenHeight / 2)
+        view.addSubview(indicator)
     }
     @IBOutlet weak var leftBarItem: UIBarButtonItem!
     
