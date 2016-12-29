@@ -67,11 +67,9 @@ class ARIndicator: UIView {
     private func setupCircle() {
         state = .stopping
         
-        if let sublayers = self.layer.sublayers {
-            for sublayer in sublayers {
-                sublayer.removeFromSuperlayer()
-            }
-        }
+        smallCircle.removeFromSuperlayer()
+        mediumCircle.removeFromSuperlayer()
+        largeCircle.removeFromSuperlayer()
         
         let smallRadius = self.frame.size.width / 2 * 0.3
         let mediumRadius = self.frame.size.width / 2 * 0.5
