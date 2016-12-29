@@ -19,6 +19,9 @@ class ARIndicator: UIView {
     var thirdColor = UIColor(red: 0.917647059, green: 0.262745098, blue: 0.207843137, alpha: 1.0)
     var state = ARIndicatorState.stopping {
         didSet {
+            if state == oldValue {
+                return
+            }
             switch state {
             case .stopping:
                 self.isHidden = true

@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		501FB7BA1E13C7FD009B94BA /* UIColor+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 501FB7B91E13C7FD009B94BA /* UIColor+Extensions.swift */; };
+		501FB7BF1E13D6E5009B94BA /* PullToRefresh.swift in Sources */ = {isa = PBXBuildFile; fileRef = 501FB7BE1E13D6E5009B94BA /* PullToRefresh.swift */; };
 		50360EB91E0B7BE700B082DD /* AnimationUtility.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50360EB81E0B7BE700B082DD /* AnimationUtility.swift */; };
 		50459A9C1E10F83D00E4F6DD /* TopicDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50459A9B1E10F83D00E4F6DD /* TopicDetailViewController.swift */; };
 		50459A9E1E11020A00E4F6DD /* ExpandingCellTransition.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50459A9D1E11020A00E4F6DD /* ExpandingCellTransition.swift */; };
@@ -40,6 +41,7 @@
 		129AD5DE7B3A87FB58203427 /* Pods-Material-V2EX.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Material-V2EX.release.xcconfig"; path = "Pods/Target Support Files/Pods-Material-V2EX/Pods-Material-V2EX.release.xcconfig"; sourceTree = "<group>"; };
 		29B58BBFCC35172E2E415A05 /* Pods-Material-V2EX.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Material-V2EX.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Material-V2EX/Pods-Material-V2EX.debug.xcconfig"; sourceTree = "<group>"; };
 		501FB7B91E13C7FD009B94BA /* UIColor+Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIColor+Extensions.swift"; sourceTree = "<group>"; };
+		501FB7BE1E13D6E5009B94BA /* PullToRefresh.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PullToRefresh.swift; sourceTree = "<group>"; };
 		50360EB81E0B7BE700B082DD /* AnimationUtility.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AnimationUtility.swift; sourceTree = "<group>"; };
 		50459A9B1E10F83D00E4F6DD /* TopicDetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TopicDetailViewController.swift; sourceTree = "<group>"; };
 		50459A9D1E11020A00E4F6DD /* ExpandingCellTransition.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExpandingCellTransition.swift; sourceTree = "<group>"; };
@@ -229,6 +231,7 @@
 			children = (
 				50360EB81E0B7BE700B082DD /* AnimationUtility.swift */,
 				50459A9D1E11020A00E4F6DD /* ExpandingCellTransition.swift */,
+				501FB7BE1E13D6E5009B94BA /* PullToRefresh.swift */,
 			);
 			name = Animations;
 			sourceTree = "<group>";
@@ -406,6 +409,7 @@
 				501FB7BA1E13C7FD009B94BA /* UIColor+Extensions.swift in Sources */,
 				504667A41E0CF5F5008B6953 /* fps.swift in Sources */,
 				5065F6E11E0A88B100B5A9FD /* Global.swift in Sources */,
+				501FB7BF1E13D6E5009B94BA /* PullToRefresh.swift in Sources */,
 				50E8C0791E0E7A3800FAC85B /* PaddingLabel.swift in Sources */,
 				50B1D8641E1270CD00BCE4FF /* NSDate+Extension.swift in Sources */,
 				504667A81E0D09EA008B6953 /* V2EX.swift in Sources */,

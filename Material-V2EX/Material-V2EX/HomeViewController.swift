@@ -13,7 +13,7 @@ import AMScrollingNavbar
 class HomeViewController: UIViewController {
     // UI
     @IBOutlet weak var postBtn: FabButton!
-    @IBOutlet weak var tableView: UITableView!
+    @IBOutlet weak var tableView: PullToRefresh!
     @IBOutlet weak var menuBtn: FabButton!
     @IBOutlet weak var moreBtn: FabButton!
     var menuView: MenuView = MenuView.sharedInstance
@@ -32,6 +32,7 @@ class HomeViewController: UIViewController {
             navController = navigationController
             navigationController.followScrollView(tableView, delay: 50.0)
         }
+        self.tableView.pullToRefreshDelegate = self
         
         let fpsLabel = V2FPSLabel(frame: CGRect(x: 0, y: Global.Constants.screenHeight - 40, width: 80, height: 40))
         view.addSubview(fpsLabel)
@@ -71,6 +72,10 @@ class HomeViewController: UIViewController {
         moreBtn.image = Icon.cm.moreHorizontal
         indicator.center = CGPoint(x: Global.Constants.screenWidth / 2, y: Global.Constants.screenHeight / 2)
         view.addSubview(indicator)
+        
+        self.tableView.headerFirstColor = UIColor.fromHex(string: "#1B9AAA")
+        self.tableView.headerSecondColor = UIColor.fromHex(string: "#06D6A0")
+        self.tableView.headerThirdColor = UIColor.fromHex(string: "#E84855")
     }
     @IBOutlet weak var leftBarItem: UIBarButtonItem!
     
@@ -149,6 +154,11 @@ extension HomeViewController: ScrollingNavigationControllerDelegate {
         let newY = navController!.navigationBar.frame.height + navController!.navigationBar.frame.origin.y
         tableView.frame.origin.y = newY
         tableView.frame.size.height += oldY - newY
+        tableView.scrollViewDidScroll(scrollView)
+    }
+    
+    func scrollViewWillEndDragging(_ scrollView: UIScrollView, withVelocity velocity: CGPoint, targetContentOffset: UnsafeMutablePointer<CGPoint>) {
+        tableView.scrollViewWillEndDragging(scrollView, withVelocity: velocity, targetContentOffset: targetContentOffset)
     }
 }
 
@@ -160,6 +170,27 @@ extension HomeViewController: ExpandingTransitionPresentingViewController {
         } else {
             return nil
         }
+    }
+}
+
+// MARK: PullToRefreshDelegate
+extension HomeViewController: PullToRefreshDelegate {
+    func pullToRefreshDidRefresh(_ refreshView: PullToRefresh) {
+        NetworkManager.sharedInstance.getLatestTopics(success: { res in
+            self.topicOverviewArray.removeAll()
+            for (_, item) in res {
+                self.topicOverviewArray.append(TopicOverviewModel(data: item))
+            }
+            delay(seconds: 1.0, completion: {
+                print(self.tableView.contentOffset)
+            })
+            delay(seconds: 3.0, completion: { 
+                self.tableView.isRefreshing = false
+                self.tableView.reloadData()
+            })
+        }, failure: { error in
+            self.tableView.isRefreshing = false
+        })
     }
 }
 
