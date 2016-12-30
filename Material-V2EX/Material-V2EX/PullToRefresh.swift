@@ -49,6 +49,7 @@ class PullToRefresh: UITableView {
         }
     }
     private var progress: CGFloat = 0.0
+    private var startAnimationTime: Date!
     
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
@@ -74,8 +75,7 @@ class PullToRefresh: UITableView {
         smallCircle.fillColor = UIColor.clear.cgColor
         smallCircle.lineWidth = 2.0
         let smallLinePath = UIBezierPath()
-        smallLinePath.move(to: CGPoint(x: self.frame.size.width / 2 + smallRadius, y: -10))
-        smallLinePath.addLine(to: CGPoint(x: self.frame.size.width / 2 + smallRadius, y: -25))
+        smallLinePath.move(to: CGPoint(x: self.frame.size.width / 2 + smallRadius, y: -5))
         smallLinePath.addLine(to: CGPoint(x: self.frame.size.width / 2 + smallRadius, y: -30))
         smallLinePath.addArc(withCenter: circleCenter, radius: smallRadius, startAngle: .pi * 2, endAngle: 0.0, clockwise: false)
         smallCirclePath = UIBezierPath(ovalIn: CGRect(x: self.frame.size.width / 2 - smallRadius,
@@ -91,11 +91,9 @@ class PullToRefresh: UITableView {
         mediumCircle.fillColor = UIColor.clear.cgColor
         mediumCircle.lineWidth = 2.0
         let mediumLinePath = UIBezierPath()
-        mediumLinePath.move(to: CGPoint(x: self.frame.size.width / 2 + mediumRadius, y: -10))
-        mediumLinePath.addLine(to: CGPoint(x: self.frame.size.width / 2 + mediumRadius, y: -33))
-        mediumLinePath.addQuadCurve(to: CGPoint(x: circleCenter.x, y: circleCenter.y - mediumRadius),
-                                    controlPoint: CGPoint(x: circleCenter.x + mediumRadius, y: circleCenter.y - mediumRadius))
-        mediumLinePath.addArc(withCenter: circleCenter, radius: mediumRadius, startAngle: .pi * 1.5, endAngle: -.pi * 0.5, clockwise: false)
+        mediumLinePath.move(to: CGPoint(x: self.frame.size.width / 2 + mediumRadius, y: -5))
+        mediumLinePath.addLine(to: CGPoint(x: self.frame.size.width / 2 + mediumRadius, y: -30))
+        mediumLinePath.addArc(withCenter: circleCenter, radius: mediumRadius, startAngle: .pi * 2, endAngle: 0.0, clockwise: false)
         mediumCirclePath = UIBezierPath(ovalIn: CGRect(x: self.frame.size.width / 2 - mediumRadius,
                                                       y: -refreshThresholdHeight / 2 - mediumRadius,
                                                       width: 2 * mediumRadius,
@@ -109,11 +107,9 @@ class PullToRefresh: UITableView {
         largeCircle.fillColor = UIColor.clear.cgColor
         largeCircle.lineWidth = 2.0
         let largeLinePath = UIBezierPath()
-        largeLinePath.move(to: CGPoint(x: self.frame.size.width / 2 + largeRadius, y: -10))
-        largeLinePath.addLine(to: CGPoint(x: self.frame.size.width / 2 + largeRadius, y: -41))
-        largeLinePath.addQuadCurve(to: CGPoint(x: circleCenter.x, y: circleCenter.y - largeRadius),
-                                   controlPoint: CGPoint(x: circleCenter.x + largeRadius, y: circleCenter.y - largeRadius))
-        largeLinePath.addArc(withCenter: circleCenter, radius: largeRadius, startAngle: .pi * 1.5, endAngle: -.pi * 0.5, clockwise: false)
+        largeLinePath.move(to: CGPoint(x: self.frame.size.width / 2 + largeRadius, y: -5))
+        largeLinePath.addLine(to: CGPoint(x: self.frame.size.width / 2 + largeRadius, y: -30))
+        largeLinePath.addArc(withCenter: circleCenter, radius: largeRadius, startAngle: .pi * 2, endAngle: 0.0, clockwise: false)
         largeCirclePath = UIBezierPath(ovalIn: CGRect(x: self.frame.size.width / 2 - largeRadius,
                                                           y: -refreshThresholdHeight / 2 - largeRadius,
                                                           width: 2 * largeRadius,
@@ -127,7 +123,7 @@ class PullToRefresh: UITableView {
     
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
         let offsetY = max(-(scrollView.contentOffset.y + scrollView.contentInset.top), 0.0)
-        progress = min(max(offsetY / (refreshThresholdHeight + 5), 0.0), 1.0)
+        progress = max(offsetY / (refreshThresholdHeight + 5), 0.0)
         if !isRefreshing {
             redrawFrom(progress: progress)
         }
@@ -149,32 +145,18 @@ class PullToRefresh: UITableView {
             self.contentOffset = contentOffset
         })
         
-        addCAAnimationTo(layer: smallCircle, strokeDuration: 0.5, strokeStart: 0.45, rotationDuration: 0.9)
-        addCAAnimationTo(layer: mediumCircle, strokeDuration: 0.7, strokeStart: 0.45, rotationDuration: 1.05)
-        addCAAnimationTo(layer: largeCircle, strokeDuration: 0.9, strokeStart: 0.5, rotationDuration: 1.2)
+        addCAAnimationTo(layer: smallCircle, rotationDuration: 0.9)
+        addCAAnimationTo(layer: mediumCircle, rotationDuration: 1.3)
+        addCAAnimationTo(layer: largeCircle, rotationDuration: 1.6)
     }
     
-    private func addCAAnimationTo(layer: CAShapeLayer, strokeDuration: CFTimeInterval, strokeStart: CGFloat, rotationDuration: CFTimeInterval) {
-        let preDuration = strokeDuration
-        
-        let strokeStartAnimation = CABasicAnimation(keyPath: "strokeStart")
-        strokeStartAnimation.fromValue = 0.0
-        strokeStartAnimation.toValue = strokeStart
-        strokeStartAnimation.duration = preDuration
-        let strokeEndAnimation = CABasicAnimation(keyPath: "strokeEnd")
-        strokeEndAnimation.fromValue = 0.3
-        strokeEndAnimation.toValue = 1.0
-        strokeEndAnimation.duration = preDuration
+    private func addCAAnimationTo(layer: CAShapeLayer, rotationDuration: CFTimeInterval) {
+
         let rotationAnimation = CABasicAnimation(keyPath: "transform.rotation")
         rotationAnimation.duration = rotationDuration
         rotationAnimation.repeatCount = .infinity
         rotationAnimation.fromValue = Float.pi * 2
         rotationAnimation.toValue = 0.0
-        rotationAnimation.beginTime = CACurrentMediaTime() + preDuration
-        layer.strokeStart = strokeStart
-        layer.strokeEnd = 1.0
-        layer.add(strokeStartAnimation, forKey: nil)
-        layer.add(strokeEndAnimation, forKey: nil)
         layer.add(rotationAnimation, forKey: nil)
     }
     
@@ -182,25 +164,34 @@ class PullToRefresh: UITableView {
         smallCircle.removeAllAnimations()
         mediumCircle.removeAllAnimations()
         largeCircle.removeAllAnimations()
+        smallCircle.removeFromSuperlayer()
+        mediumCircle.removeFromSuperlayer()
+        largeCircle.removeFromSuperlayer()
         
         UIView.animate(withDuration: 0.2, delay: 0.0, options: .curveEaseOut, animations: {
             var newInsets = self.contentInset
             newInsets.top -= self.refreshThresholdHeight
             self.contentInset = newInsets
-        }) { (_) in
-            self.smallCircle.strokeStart = 0.0
-            self.mediumCircle.strokeStart = 0.0
-            self.largeCircle.strokeStart = 0.0
+        }) { _ in
+            self.layer.addSublayer(self.smallCircle)
+            self.layer.addSublayer(self.mediumCircle)
+            self.layer.addSublayer(self.largeCircle)
         }
     }
     
     private func redrawFrom(progress: CGFloat) {
-        smallCircle.strokeEnd = progress * 0.3
-        smallCircle.opacity = Float(progress)
-        mediumCircle.strokeEnd = progress * 0.23
-        mediumCircle.opacity = Float(progress)
-        largeCircle.strokeEnd = progress * 0.23
-        largeCircle.opacity = Float(progress)
+        let smallProgress = min(progress / 0.8, 1.0)
+        let mediumProgress = min(progress / 0.9, 1.0)
+        let largeProgress = min(progress, 1.0)
+        smallCircle.strokeStart = smallProgress * 0.5
+        smallCircle.strokeEnd = smallProgress
+        smallCircle.opacity = Float(smallProgress)
+        mediumCircle.strokeStart = mediumProgress * 0.4
+        mediumCircle.strokeEnd = mediumProgress
+        mediumCircle.opacity = Float(mediumProgress)
+        largeCircle.strokeStart = largeProgress * 0.4
+        largeCircle.strokeEnd = largeProgress
+        largeCircle.opacity = Float(largeProgress)
     }
 
 }
