@@ -12,8 +12,8 @@ import SwiftyJSON
 class NetworkManager: NSObject {
     static let sharedInstance = NetworkManager()
     
-    private func commonRequest(api: String, success: @escaping (JSON)->Void, failure: @escaping (String)->Void) {
-        Alamofire.request(api).responseData { (response) in
+    private func commonRequest(api: String, parameters: Dictionary<String, Any> , success: @escaping (JSON)->Void, failure: @escaping (String)->Void) {
+        Alamofire.request(api, parameters: parameters).responseData { (response) in
             switch response.result {
             case .success:
                 if let data = response.result.value {
@@ -28,10 +28,15 @@ class NetworkManager: NSObject {
     }
     
     func getLatestTopics(success: @escaping (JSON)->Void, failure: @escaping (String)->Void) {
-        commonRequest(api: V2EX.API.latestTopics, success: success, failure: failure)
+        commonRequest(api: V2EX.API.latestTopics, parameters: [:], success: success, failure: failure)
     }
     
     func getHotTopics(success: @escaping (JSON)->Void, failure: @escaping (String)->Void) {
-        commonRequest(api: V2EX.API.hotTopics, success: success, failure: failure)
+        commonRequest(api: V2EX.API.hotTopics, parameters: [:], success: success, failure: failure)
+    }
+    
+    
+    func getTopicReplies(topicId: Int, success: @escaping (JSON)->Void, failure: @escaping (String)->Void) {
+        commonRequest(api: V2EX.API.topicReplies, parameters: ["topic_id": topicId, "page": "", "page_size": ""], success: success, failure: failure)
     }
 }

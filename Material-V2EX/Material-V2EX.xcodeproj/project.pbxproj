@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		501FB7BA1E13C7FD009B94BA /* UIColor+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 501FB7B91E13C7FD009B94BA /* UIColor+Extensions.swift */; };
 		501FB7BF1E13D6E5009B94BA /* PullToRefresh.swift in Sources */ = {isa = PBXBuildFile; fileRef = 501FB7BE1E13D6E5009B94BA /* PullToRefresh.swift */; };
+		50280C9F1E165C2700996FDA /* TopicRepliesModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50280C9E1E165C2700996FDA /* TopicRepliesModel.swift */; };
 		50360EB91E0B7BE700B082DD /* AnimationUtility.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50360EB81E0B7BE700B082DD /* AnimationUtility.swift */; };
 		50459A9C1E10F83D00E4F6DD /* TopicDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50459A9B1E10F83D00E4F6DD /* TopicDetailViewController.swift */; };
 		50459A9E1E11020A00E4F6DD /* ExpandingCellTransition.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50459A9D1E11020A00E4F6DD /* ExpandingCellTransition.swift */; };
@@ -42,6 +43,7 @@
 		29B58BBFCC35172E2E415A05 /* Pods-Material-V2EX.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Material-V2EX.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Material-V2EX/Pods-Material-V2EX.debug.xcconfig"; sourceTree = "<group>"; };
 		501FB7B91E13C7FD009B94BA /* UIColor+Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIColor+Extensions.swift"; sourceTree = "<group>"; };
 		501FB7BE1E13D6E5009B94BA /* PullToRefresh.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PullToRefresh.swift; sourceTree = "<group>"; };
+		50280C9E1E165C2700996FDA /* TopicRepliesModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TopicRepliesModel.swift; sourceTree = "<group>"; };
 		50360EB81E0B7BE700B082DD /* AnimationUtility.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AnimationUtility.swift; sourceTree = "<group>"; };
 		50459A9B1E10F83D00E4F6DD /* TopicDetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TopicDetailViewController.swift; sourceTree = "<group>"; };
 		50459A9D1E11020A00E4F6DD /* ExpandingCellTransition.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExpandingCellTransition.swift; sourceTree = "<group>"; };
@@ -139,6 +141,7 @@
 				504667AB1E0D2798008B6953 /* TopicOverviewModel.swift */,
 				504667AD1E0D3034008B6953 /* MemberModel.swift */,
 				504667AF1E0D3B2B008B6953 /* NodeModel.swift */,
+				50280C9E1E165C2700996FDA /* TopicRepliesModel.swift */,
 			);
 			name = Models;
 			sourceTree = "<group>";
@@ -399,6 +402,7 @@
 				504667AA1E0D1014008B6953 /* NetworkManager.swift in Sources */,
 				50459A9E1E11020A00E4F6DD /* ExpandingCellTransition.swift in Sources */,
 				504667A21E0CC954008B6953 /* TopicOverviewTableViewCell.swift in Sources */,
+				50280C9F1E165C2700996FDA /* TopicRepliesModel.swift in Sources */,
 				50360EB91E0B7BE700B082DD /* AnimationUtility.swift in Sources */,
 				507F4EF01E0944EA0033A10B /* HomeViewController.swift in Sources */,
 				504667AC1E0D2798008B6953 /* TopicOverviewModel.swift in Sources */,
