@@ -177,14 +177,22 @@ extension HomeViewController: ExpandingTransitionPresentingViewController {
 extension HomeViewController: PullToRefreshDelegate {
     func pullToRefreshDidRefresh(_ refreshView: PullToRefresh) {
         NetworkManager.sharedInstance.getLatestTopics(success: { res in
-            self.topicOverviewArray.removeAll()
+            var newItems = Array<TopicOverviewModel>()
+            var newIndexPaths = Array<IndexPath>()
+            var index = 0
             for (_, item) in res {
-                self.topicOverviewArray.append(TopicOverviewModel(data: item))
+                let newItem = TopicOverviewModel(data: item)
+                if newItem.id != self.topicOverviewArray[0].id {
+                    newItems.append(newItem)
+                    newIndexPaths.append(IndexPath(row: index, section: 0))
+                    index += 1
+                } else {
+                    break
+                }
             }
-            delay(seconds: 1.0, completion: {
-                print(self.tableView.contentOffset)
-            })
-            delay(seconds: 3.0, completion: { 
+            self.topicOverviewArray.insert(contentsOf: newItems, at: 0)
+            
+            delay(seconds: 1.0, completion: { 
                 self.tableView.isRefreshing = false
                 self.tableView.reloadData()
             })
