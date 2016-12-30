@@ -15,7 +15,7 @@
         <scene sceneID="umU-dU-Xc7">
             <objects>
                 <navigationController id="Krz-wJ-J0a" customClass="ScrollingNavigationController" customModule="AMScrollingNavbar" sceneMemberID="viewController">
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="r7d-3Z-bgQ">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="r7d-3Z-bgQ">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <color key="barTintColor" red="0.10588235294117647" green="0.60392156862745094" blue="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -197,7 +197,7 @@
                                     <outlet property="delegate" destination="BYZ-38-t0r" id="cFf-0q-bDg"/>
                                 </connections>
                             </tableView>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="KLB-0i-hRl" customClass="FabButton" customModule="Material">
+                            <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="KLB-0i-hRl" customClass="FabButton" customModule="Material">
                                 <rect key="frame" x="295" y="587" width="60" height="60"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="60" id="IcO-fy-Yrf"/>
@@ -316,10 +316,19 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <navigationBar contentMode="scaleToFill" fixedFrame="YES" translucent="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bqp-DB-IJo">
-                                <rect key="frame" x="0.0" y="20" width="375" height="44"/>
-                                <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="PEj-IO-FRa">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="20"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="20" id="2YG-E0-puR"/>
+                                </constraints>
+                            </view>
+                            <navigationBar contentMode="scaleToFill" translucent="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bqp-DB-IJo">
+                                <rect key="frame" x="0.0" y="20" width="375" height="44"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="44" id="CYb-xB-eCB"/>
+                                </constraints>
                                 <items>
                                     <navigationItem id="xoW-xk-fjO">
                                         <barButtonItem key="leftBarButtonItem" style="plain" id="TE1-Ep-XLQ">
@@ -335,27 +344,50 @@
                                     </navigationItem>
                                 </items>
                             </navigationBar>
-                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="JFz-UZ-3hK">
-                                <rect key="frame" x="0.0" y="65" width="375" height="48"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="rNl-fe-cDj">
+                                <rect key="frame" x="8" y="74" width="359" height="588"/>
                                 <subviews>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="orj-WH-LKZ">
-                                        <rect key="frame" x="14" y="14" width="29" height="21"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                        <nil key="textColor"/>
-                                        <nil key="highlightedColor"/>
-                                    </label>
+                                    <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="YaK-vt-a9V">
+                                        <rect key="frame" x="0.0" y="0.0" width="359" height="588"/>
+                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                    </tableView>
                                 </subviews>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstItem="YaK-vt-a9V" firstAttribute="leading" secondItem="rNl-fe-cDj" secondAttribute="leading" id="Hde-AQ-YVx"/>
+                                    <constraint firstItem="YaK-vt-a9V" firstAttribute="top" secondItem="rNl-fe-cDj" secondAttribute="top" id="jBq-2y-K8h"/>
+                                    <constraint firstAttribute="trailing" secondItem="YaK-vt-a9V" secondAttribute="trailing" id="rba-Sn-y3b"/>
+                                    <constraint firstAttribute="bottom" secondItem="YaK-vt-a9V" secondAttribute="bottom" id="x94-QQ-bom"/>
+                                </constraints>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="layer.shadowRadius">
+                                        <real key="value" value="0.75"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="layer.shadowOpacity">
+                                        <real key="value" value="0.40000000000000002"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="size" keyPath="layer.shadowOffset">
+                                        <size key="value" width="0.0" height="0.5"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                        <integer key="value" value="2"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
                             </view>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="YaK-vt-a9V">
-                                <rect key="frame" x="0.0" y="65" width="375" height="602"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                            </tableView>
                         </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <color key="backgroundColor" red="0.93725490196078431" green="0.93725490196078431" blue="0.95686274509803915" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <constraints>
+                            <constraint firstItem="BKu-Ja-kxt" firstAttribute="top" secondItem="rNl-fe-cDj" secondAttribute="bottom" constant="5" id="7EL-yU-XS2"/>
+                            <constraint firstItem="bqp-DB-IJo" firstAttribute="leading" secondItem="yfa-te-h2q" secondAttribute="leading" id="Df0-WW-bar"/>
+                            <constraint firstAttribute="trailing" secondItem="PEj-IO-FRa" secondAttribute="trailing" id="LHb-bi-reb"/>
+                            <constraint firstItem="bqp-DB-IJo" firstAttribute="top" secondItem="PEj-IO-FRa" secondAttribute="bottom" id="Mlg-Tw-pLN"/>
+                            <constraint firstAttribute="trailing" secondItem="rNl-fe-cDj" secondAttribute="trailing" constant="8" id="PG0-oV-oJW"/>
+                            <constraint firstItem="PEj-IO-FRa" firstAttribute="leading" secondItem="yfa-te-h2q" secondAttribute="leading" id="hNo-oF-nHG"/>
+                            <constraint firstItem="PEj-IO-FRa" firstAttribute="top" secondItem="yfa-te-h2q" secondAttribute="top" id="jaM-ox-Y4H"/>
+                            <constraint firstAttribute="trailing" secondItem="bqp-DB-IJo" secondAttribute="trailing" id="kN2-dR-yLN"/>
+                            <constraint firstItem="rNl-fe-cDj" firstAttribute="top" secondItem="bqp-DB-IJo" secondAttribute="bottom" constant="10" id="naJ-hf-VOd"/>
+                            <constraint firstItem="rNl-fe-cDj" firstAttribute="leading" secondItem="yfa-te-h2q" secondAttribute="leading" constant="8" id="wpf-rd-RXf"/>
+                        </constraints>
                     </view>
                     <connections>
                         <outlet property="tableView" destination="YaK-vt-a9V" id="p6l-KI-RhY"/>

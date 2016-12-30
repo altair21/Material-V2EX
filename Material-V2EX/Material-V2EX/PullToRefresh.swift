@@ -17,17 +17,23 @@ class PullToRefresh: UITableView {
     
     var headerFirstColor = UIColor(red: 0.984313725, green: 0.737254902, blue: 0.019607843, alpha: 1.0) {
         didSet {
-            setupUI()
+            if headerFirstColor != oldValue {
+                setupUI()
+            }
         }
     }
     var headerSecondColor = UIColor(red: 0.258823529, green: 0.521568627, blue: 0.956862745, alpha: 1.0) {
         didSet {
-            setupUI()
+            if headerSecondColor != oldValue {
+                setupUI()
+            }
         }
     }
     var headerThirdColor = UIColor(red: 0.917647059, green: 0.262745098, blue: 0.207843137, alpha: 1.0) {
         didSet {
-            setupUI()
+            if headerThirdColor != oldValue {
+                setupUI()
+            }
         }
     }
     

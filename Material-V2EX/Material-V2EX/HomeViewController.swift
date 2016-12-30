@@ -49,16 +49,28 @@ class HomeViewController: UIViewController {
         
         if topicOverviewArray.isEmpty {
             indicator.state = .running
+            self.tableView.isHidden = true
             NetworkManager.sharedInstance.getLatestTopics(success: { res in
                 for (_, item) in res {
                     self.topicOverviewArray.append(TopicOverviewModel(data: item))
                 }
                 self.indicator.state = .stopping
+                self.tableView.isHidden = false
                 self.tableView.reloadData()
             }, failure: { error in
                 self.indicator.state = .stopping
+                self.tableView.isHidden = false
             })
         }
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        
+        // 在此处初始化color，触发PullToRefresh的setupUI事件，确保自动布局已完成
+        self.tableView.headerFirstColor = UIColor.fromHex(string: "#1B9AAA")
+        self.tableView.headerSecondColor = UIColor.fromHex(string: "#06D6A0")
+        self.tableView.headerThirdColor = UIColor.fromHex(string: "#E84855")
     }
 
     override func didReceiveMemoryWarning() {
@@ -72,10 +84,6 @@ class HomeViewController: UIViewController {
         moreBtn.image = Icon.cm.moreHorizontal
         indicator.center = CGPoint(x: Global.Constants.screenWidth / 2, y: Global.Constants.screenHeight / 2)
         view.addSubview(indicator)
-        
-        self.tableView.headerFirstColor = UIColor.fromHex(string: "#1B9AAA")
-        self.tableView.headerSecondColor = UIColor.fromHex(string: "#06D6A0")
-        self.tableView.headerThirdColor = UIColor.fromHex(string: "#E84855")
     }
     @IBOutlet weak var leftBarItem: UIBarButtonItem!
     
@@ -126,6 +134,9 @@ extension HomeViewController: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        if self.tableView.isRefreshing {
+            return
+        }
         selectedIndexPath = indexPath
         
         let presentBlock = {
@@ -178,14 +189,10 @@ extension HomeViewController: PullToRefreshDelegate {
     func pullToRefreshDidRefresh(_ refreshView: PullToRefresh) {
         NetworkManager.sharedInstance.getLatestTopics(success: { res in
             var newItems = Array<TopicOverviewModel>()
-            var newIndexPaths = Array<IndexPath>()
-            var index = 0
             for (_, item) in res {
                 let newItem = TopicOverviewModel(data: item)
                 if newItem.id != self.topicOverviewArray[0].id {
                     newItems.append(newItem)
-                    newIndexPaths.append(IndexPath(row: index, section: 0))
-                    index += 1
                 } else {
                     break
                 }

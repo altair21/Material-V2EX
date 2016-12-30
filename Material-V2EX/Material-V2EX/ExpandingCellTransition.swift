@@ -115,6 +115,7 @@ class ExpandingCellTransition: NSObject, UIViewControllerAnimatedTransitioning {
             self.bottomRegionSnapshot.removeFromSuperview()
             self.navigationBarSnapshot.removeFromSuperview()
             
+            foregroundViewController.view.frame.size.height = height
             containerView.addSubview(foregroundViewController.view)
             backgroundViewController.view.isHidden = false
             transitionContext.completeTransition(!transitionContext.transitionWasCancelled)
