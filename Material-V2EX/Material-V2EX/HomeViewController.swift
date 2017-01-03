@@ -16,7 +16,7 @@ class HomeViewController: UIViewController {
     @IBOutlet weak var tableView: PullToRefresh!
     @IBOutlet weak var menuBtn: FabButton!
     @IBOutlet weak var moreBtn: FabButton!
-    var menuView: MenuView = MenuView.sharedInstance
+    var menuView: MenuView = MenuView.shared
     var leftEdgeView: UIView!
     var navController: ScrollingNavigationController!
     let indicator = ARIndicator(firstColor: UIColor.fromHex(string: "#1B9AAA"), secondColor: UIColor.fromHex(string: "#06D6A0"), thirdColor: UIColor.fromHex(string: "#E84855"))
@@ -50,7 +50,7 @@ class HomeViewController: UIViewController {
         if topicOverviewArray.isEmpty {
             indicator.state = .running
             self.tableView.isHidden = true
-            NetworkManager.sharedInstance.getLatestTopics(success: { res in
+            NetworkManager.shared.getLatestTopics(success: { res in
                 for (_, item) in res {
                     self.topicOverviewArray.append(TopicOverviewModel(data: item))
                 }
@@ -143,7 +143,7 @@ extension HomeViewController: UITableViewDelegate, UITableViewDataSource {
             let topicDetailViewController = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: Global.ViewControllers.topicDetail) as! TopicDetailViewController
             topicDetailViewController.overviewData = self.topicOverviewArray[indexPath.row]
             
-            NetworkManager.sharedInstance.getTopicReplies(topicId: self.topicOverviewArray[indexPath.row].id, success: { (res) in
+            NetworkManager.shared.getTopicReplies(topicId: self.topicOverviewArray[indexPath.row].id, success: { (res) in
                 var array = Array<TopicReplyModel>()
                 for (_, item) in res {
                     array.append(TopicReplyModel(data: item))
@@ -201,7 +201,7 @@ extension HomeViewController: ExpandingTransitionPresentingViewController {
 // MARK: PullToRefreshDelegate
 extension HomeViewController: PullToRefreshDelegate {
     func pullToRefreshDidRefresh(_ refreshView: PullToRefresh) {
-        NetworkManager.sharedInstance.getLatestTopics(success: { res in
+        NetworkManager.shared.getLatestTopics(success: { res in
             var newItems = Array<TopicOverviewModel>()
             for (_, item) in res {
                 let newItem = TopicOverviewModel(data: item)

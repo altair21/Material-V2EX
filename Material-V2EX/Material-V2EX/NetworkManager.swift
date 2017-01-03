@@ -10,7 +10,7 @@ import Alamofire
 import SwiftyJSON
 
 class NetworkManager: NSObject {
-    static let sharedInstance = NetworkManager()
+    static let shared = NetworkManager()
     
     private func commonRequest(api: String, parameters: Dictionary<String, Any> , success: @escaping (JSON)->Void, failure: @escaping (String)->Void) {
         Alamofire.request(api, parameters: parameters).responseData { (response) in
