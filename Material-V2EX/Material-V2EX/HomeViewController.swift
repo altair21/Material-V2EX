@@ -35,7 +35,7 @@ class HomeViewController: UIViewController {
         self.tableView.pullToRefreshDelegate = self
         
         let fpsLabel = V2FPSLabel(frame: CGRect(x: 0, y: Global.Constants.screenHeight - 40, width: 80, height: 40))
-        view.addSubview(fpsLabel)
+        UIApplication.shared.keyWindow?.addSubview(fpsLabel)
         tableView.contentInset = UIEdgeInsets(top: 10, left: 0, bottom: 0, right: 0)
         tableView.estimatedRowHeight = 100
         tableView.rowHeight = UITableViewAutomaticDimension
@@ -141,6 +141,20 @@ extension HomeViewController: UITableViewDelegate, UITableViewDataSource {
         
         let presentBlock = {
             let topicDetailViewController = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: Global.ViewControllers.topicDetail) as! TopicDetailViewController
+            topicDetailViewController.overviewData = self.topicOverviewArray[indexPath.row]
+            
+            NetworkManager.sharedInstance.getTopicReplies(topicId: self.topicOverviewArray[indexPath.row].id, success: { (res) in
+                var array = Array<TopicReplyModel>()
+                for (_, item) in res {
+                    array.append(TopicReplyModel(data: item))
+                }
+                delay(seconds: 1.0, completion: { 
+                    topicDetailViewController.repliesData = array
+                })
+            }, failure: { (err) in
+                print(err)
+            })
+            
             self.present(topicDetailViewController, animated: true, completion: nil)
         }
         switch navController.state {

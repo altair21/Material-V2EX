@@ -1,5 +1,5 @@
 //
-//  TopicRepliesModel.swift
+//  TopicReplyModel.swift
 //  Material-V2EX
 //
 //  Created by altair21 on 16/12/30.
@@ -8,7 +8,7 @@
 
 import SwiftyJSON
 
-class TopicRepliesModel: NSObject {
+class TopicReplyModel: NSObject {
     var id = 0
     var thanks = 0
     var content = ""

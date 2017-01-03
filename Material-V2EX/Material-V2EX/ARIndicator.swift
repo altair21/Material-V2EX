@@ -14,9 +14,21 @@ class ARIndicator: UIView {
         case stopping
     }
     
-    var firstColor = UIColor(red: 0.984313725, green: 0.737254902, blue: 0.019607843, alpha: 1.0)
-    var secondColor = UIColor(red: 0.258823529, green: 0.521568627, blue: 0.956862745, alpha: 1.0)
-    var thirdColor = UIColor(red: 0.917647059, green: 0.262745098, blue: 0.207843137, alpha: 1.0)
+    var firstColor = UIColor(red: 0.984313725, green: 0.737254902, blue: 0.019607843, alpha: 1.0) {
+        didSet {
+            setupCircle()
+        }
+    }
+    var secondColor = UIColor(red: 0.258823529, green: 0.521568627, blue: 0.956862745, alpha: 1.0) {
+        didSet {
+            setupCircle()
+        }
+    }
+    var thirdColor = UIColor(red: 0.917647059, green: 0.262745098, blue: 0.207843137, alpha: 1.0) {
+        didSet {
+            setupCircle()
+        }
+    }
     var state = ARIndicatorState.stopping {
         didSet {
             if state == oldValue {
@@ -64,7 +76,9 @@ class ARIndicator: UIView {
     }
     
     required init?(coder aDecoder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
+        super.init(coder: aDecoder)
+        
+        setupCircle()
     }
     
     private func setupCircle() {

@@ -14,5 +14,7 @@ class V2EX: NSObject {
     struct API {
         static let latestTopics = V2EX.APIbasicURL + "/topics/latest.json"
         static let hotTopics = V2EX.APIbasicURL + "/topics/hot.json"
+        
+        static let topicReplies = V2EX.APIbasicURL + "/replies/show.json"
     }
 }

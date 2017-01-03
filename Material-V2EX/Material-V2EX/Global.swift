@@ -27,6 +27,11 @@ class Global: NSObject {
     // Cells
     struct Cells {
         static let topicOverview = "topicOverviewCell"
+        static let topicAuthorCell = "topicAuthorCell"
+        static let topicReplyCell = "topicReplyCell"
+        static let topicBlankCell = "topicBlankCell"
+        static let topicHeaderCell = "topicHeaderCell"
+        static let topicFooterCell = "topicFooterCell"
     }
     
     // Constant
