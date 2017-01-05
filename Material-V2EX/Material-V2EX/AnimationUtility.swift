@@ -52,19 +52,14 @@ func handleMenu(_ menuView: MenuView, recognizer: UIPanGestureRecognizer) {
     switch recognizer.state {
     case .began:
         if menuView.superview != nil {
-            menuViewPanelOriginX = menuView.panelView.frame.origin.x
-            menuViewBGOriginAlpha = menuView.bgView.alpha
+            menuViewPanelOriginX = 0
+            menuViewBGOriginAlpha = 1.0
             menuViewDisplayed = true
             return
         }
         menuViewPanelOriginX = -menuView.panelView.frame.size.width
         menuViewBGOriginAlpha = 0.0
         menuViewDisplayed = false
-        DispatchQueue.main.async {
-            menuView.panelView.frame.origin.x = menuViewPanelOriginX
-            menuView.bgView.alpha = menuViewBGOriginAlpha
-        }
-        
         let keyWindow = UIApplication.shared.keyWindow
         keyWindow?.windowLevel = UIWindowLevelStatusBar + 1
         keyWindow?.addSubview(menuView)

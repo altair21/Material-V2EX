@@ -20,7 +20,7 @@
                     <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.40000000000000002" colorSpace="calibratedRGB"/>
                 </view>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="iQ8-Ni-d8L">
-                    <rect key="frame" x="0.0" y="0.0" width="255" height="667"/>
+                    <rect key="frame" x="-255" y="0.0" width="255" height="667"/>
                     <color key="backgroundColor" red="0.20392156862745098" green="0.6588235294117647" blue="0.32549019607843138" alpha="1" colorSpace="calibratedRGB"/>
                     <constraints>
                         <constraint firstAttribute="width" constant="255" id="DpH-bH-D3M"/>
@@ -45,7 +45,7 @@
                 <constraint firstAttribute="bottom" secondItem="K2X-mp-Get" secondAttribute="bottom" id="GrH-Ge-T0v"/>
                 <constraint firstAttribute="trailing" secondItem="K2X-mp-Get" secondAttribute="trailing" id="Q4x-en-eTO"/>
                 <constraint firstItem="K2X-mp-Get" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="VdN-ij-EWH"/>
-                <constraint firstItem="iQ8-Ni-d8L" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="cAv-x6-wiv"/>
+                <constraint firstItem="iQ8-Ni-d8L" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="-255" id="cAv-x6-wiv"/>
                 <constraint firstItem="K2X-mp-Get" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="ef6-sw-ZbN"/>
             </constraints>
             <connections>
