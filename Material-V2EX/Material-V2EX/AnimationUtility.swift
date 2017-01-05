@@ -14,7 +14,7 @@ fileprivate var menuViewPanelOriginX: CGFloat = 0
 fileprivate var menuViewBGOriginAlpha: CGFloat = 0
 fileprivate var menuViewDisplayed = false
 func showMenu(_ menuView: MenuView) {
-    menuView.bgView.alpha = 0.0
+    menuView.panelViewLeadingConstraint.constant = 0
     menuView.panelView.frame.origin.x = -menuView.panelView.frame.size.width
     
     let keyWindow = UIApplication.shared.keyWindow
@@ -29,6 +29,7 @@ func showMenu(_ menuView: MenuView) {
 
 func hideMenu(_ menuView: MenuView) {
     UIApplication.shared.isStatusBarHidden = false
+    menuView.panelViewLeadingConstraint.constant = -menuView.panelView.frame.size.width
     
     UIView.animate(withDuration: animationDuration, delay: 0.0, options: [], animations: { 
         menuView.bgView.alpha = 0.0
@@ -77,7 +78,9 @@ func handleMenu(_ menuView: MenuView, recognizer: UIPanGestureRecognizer) {
             UIView.animate(withDuration: restDuration, animations: {
                 menuView.panelView.frame.origin.x = 0
                 menuView.bgView.alpha = 1.0
-            }, completion: nil)
+            }, completion: { _ in
+                menuView.panelViewLeadingConstraint.constant = 0
+            })
         } else {
             let restDuration = Double((menuView.panelView.frame.origin.x + menuView.panelView.frame.size.width) / menuView.panelView.frame.size.width) * 0.3
             UIView.animate(withDuration: restDuration, animations: {
@@ -85,6 +88,7 @@ func handleMenu(_ menuView: MenuView, recognizer: UIPanGestureRecognizer) {
                 menuView.bgView.alpha = 0.0
             }, completion: { _ in
                 UIApplication.shared.keyWindow?.windowLevel = UIWindowLevelNormal
+                menuView.panelViewLeadingConstraint.constant = -menuView.panelView.frame.size.width
                 menuView.removeFromSuperview()
             })
         }

@@ -15,7 +15,7 @@
             <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="K2X-mp-Get">
+                <view alpha="0.0" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="K2X-mp-Get">
                     <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                     <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.40000000000000002" colorSpace="calibratedRGB"/>
                 </view>
@@ -51,6 +51,7 @@
             <connections>
                 <outlet property="bgView" destination="K2X-mp-Get" id="Bld-NE-VeW"/>
                 <outlet property="panelView" destination="iQ8-Ni-d8L" id="QoS-jo-9ka"/>
+                <outlet property="panelViewLeadingConstraint" destination="cAv-x6-wiv" id="kmA-FJ-mMG"/>
             </connections>
         </view>
     </objects>

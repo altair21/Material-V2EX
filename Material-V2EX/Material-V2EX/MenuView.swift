@@ -11,6 +11,7 @@ import UIKit
 class MenuView: UIView {
     @IBOutlet weak var panelView: UIView!
     @IBOutlet weak var bgView: UIView!
+    @IBOutlet weak var panelViewLeadingConstraint: NSLayoutConstraint!
     static let shared = Bundle.main.loadNibNamed(Global.Views.menuView, owner: nil, options: nil)?.first as! MenuView
     
     override func awakeFromNib() {
