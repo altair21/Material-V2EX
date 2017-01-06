@@ -284,7 +284,8 @@
                                     </userDefinedRuntimeAttributes>
                                 </button>
                             </barButtonItem>
-                            <barButtonItem style="plain" id="ztL-L2-gIZ">
+                            <barButtonItem width="6" style="plain" id="ztL-L2-gIZ">
+                                <inset key="imageInsets" minX="0.0" minY="-1" maxX="0.0" maxY="0.0"/>
                                 <view key="customView" contentMode="scaleToFill" id="E3W-l6-3RX">
                                     <rect key="frame" x="228" y="5" width="83" height="33"/>
                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -567,7 +568,7 @@
                                                             <nil key="highlightedColor"/>
                                                         </label>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="感谢" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="HFa-D7-dmo">
-                                                            <rect key="frame" x="318" y="16" width="25" height="15"/>
+                                                            <rect key="frame" x="329" y="14" width="25" height="15"/>
                                                             <constraints>
                                                                 <constraint firstAttribute="width" constant="25" id="5sp-tE-85D"/>
                                                                 <constraint firstAttribute="height" constant="15" id="MOu-2S-XsB"/>
@@ -584,19 +585,19 @@
                                                             </constraints>
                                                         </view>
                                                         <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="YeG-HP-je0">
-                                                            <rect key="frame" x="300" y="16" width="16" height="16"/>
+                                                            <rect key="frame" x="312" y="16" width="13" height="13"/>
                                                             <color key="tintColor" red="0.46666666670000001" green="0.46666666670000001" blue="0.46666666670000001" alpha="1" colorSpace="calibratedRGB"/>
                                                             <constraints>
-                                                                <constraint firstAttribute="height" constant="16" id="WMX-Yi-bHW"/>
-                                                                <constraint firstAttribute="width" constant="16" id="uLF-eH-ucI"/>
+                                                                <constraint firstAttribute="height" constant="13" id="WMX-Yi-bHW"/>
+                                                                <constraint firstAttribute="width" constant="13" id="uLF-eH-ucI"/>
                                                             </constraints>
                                                         </imageView>
                                                     </subviews>
                                                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                     <constraints>
-                                                        <constraint firstAttribute="trailing" secondItem="HFa-D7-dmo" secondAttribute="trailing" constant="16" id="34a-PQ-LiT"/>
+                                                        <constraint firstAttribute="trailing" secondItem="HFa-D7-dmo" secondAttribute="trailing" constant="5" id="34a-PQ-LiT"/>
                                                         <constraint firstItem="caa-TD-qHw" firstAttribute="top" secondItem="4gy-Td-OQA" secondAttribute="bottom" constant="5" id="85G-5T-QCo"/>
-                                                        <constraint firstItem="HFa-D7-dmo" firstAttribute="leading" secondItem="YeG-HP-je0" secondAttribute="trailing" constant="2" id="EtC-5g-YDK"/>
+                                                        <constraint firstItem="HFa-D7-dmo" firstAttribute="leading" secondItem="YeG-HP-je0" secondAttribute="trailing" constant="4" id="EtC-5g-YDK"/>
                                                         <constraint firstItem="caa-TD-qHw" firstAttribute="leading" secondItem="hC2-Y5-vVQ" secondAttribute="trailing" constant="15" id="Hi3-Jv-AYO"/>
                                                         <constraint firstItem="hC2-Y5-vVQ" firstAttribute="top" secondItem="UZc-E3-y8Z" secondAttribute="top" constant="8" id="JO1-oO-IXI"/>
                                                         <constraint firstAttribute="trailing" secondItem="caa-TD-qHw" secondAttribute="trailing" constant="10" id="Tul-XQ-DYP"/>
@@ -609,7 +610,7 @@
                                                         <constraint firstItem="YeG-HP-je0" firstAttribute="top" secondItem="tEK-TQ-vdg" secondAttribute="bottom" constant="14" id="lK1-p0-jIe"/>
                                                         <constraint firstAttribute="bottom" secondItem="f96-wO-9p1" secondAttribute="bottom" constant="8" id="lrh-3j-eZJ"/>
                                                         <constraint firstAttribute="trailing" secondItem="tEK-TQ-vdg" secondAttribute="trailing" constant="5" id="qXr-cZ-kjr"/>
-                                                        <constraint firstItem="HFa-D7-dmo" firstAttribute="top" secondItem="tEK-TQ-vdg" secondAttribute="bottom" constant="14" id="uPc-46-QU6"/>
+                                                        <constraint firstItem="HFa-D7-dmo" firstAttribute="top" secondItem="tEK-TQ-vdg" secondAttribute="bottom" constant="12" id="uPc-46-QU6"/>
                                                         <constraint firstItem="4gy-Td-OQA" firstAttribute="top" secondItem="UZc-E3-y8Z" secondAttribute="top" constant="8" id="xV4-ij-rV5"/>
                                                         <constraint firstItem="f96-wO-9p1" firstAttribute="top" secondItem="caa-TD-qHw" secondAttribute="bottom" constant="10" id="xr0-DZ-QC8"/>
                                                     </constraints>

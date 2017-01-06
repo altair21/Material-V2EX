@@ -36,6 +36,8 @@ class TopicReplyTableViewCell: UITableViewCell {
         dateLabel.text = Date(timeIntervalSince1970: data.created).timeAgo
         contentLabel.text = data.content
         thanksLabel.text = "\(data.thanks)"
+        thanksLabel.isHidden = data.thanks == 0
+        thanksImageView.isHidden = data.thanks == 0
     }
 
 }

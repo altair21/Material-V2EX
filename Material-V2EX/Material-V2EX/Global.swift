@@ -22,6 +22,8 @@ class Global: NSObject {
     // Views
     struct Views {
         static let menuView = "MenuView"
+        static let nodeListView = "NodeListView"
+        static let nodeListTableViewCell = "NodeListTableViewCell"
     }
     
     // Cells
@@ -32,6 +34,7 @@ class Global: NSObject {
         static let topicBlankCell = "topicBlankCell"
         static let topicHeaderCell = "topicHeaderCell"
         static let topicFooterCell = "topicFooterCell"
+        static let nodeListCell = "nodeListCell"
     }
     
     // Constant
@@ -39,5 +42,10 @@ class Global: NSObject {
         static let screenWidth = UIScreen.main.bounds.width
         static let screenHeight = UIScreen.main.bounds.height
         static let edgePanGestureThreshold: CGFloat = 64
+    }
+    
+    // Notifications
+    struct Notifications {
+        
     }
 }

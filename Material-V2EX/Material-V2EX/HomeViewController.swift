@@ -9,6 +9,7 @@
 import UIKit
 import Material
 import AMScrollingNavbar
+import SwiftyJSON
 
 class HomeViewController: UIViewController {
     // UI
@@ -17,13 +18,16 @@ class HomeViewController: UIViewController {
     @IBOutlet weak var menuBtn: FabButton!
     @IBOutlet weak var moreBtn: FabButton!
     var menuView: MenuView = MenuView.shared
+    var nodeListView: NodeListView = NodeListView.shared
     var leftEdgeView: UIView!
+    var rightEdgeView: UIView!
     var navController: ScrollingNavigationController!
     let indicator = ARIndicator(firstColor: UIColor.fromHex(string: "#1B9AAA"), secondColor: UIColor.fromHex(string: "#06D6A0"), thirdColor: UIColor.fromHex(string: "#E84855"))
     
     // Data
     var topicOverviewArray = Array<TopicOverviewModel>()
     var selectedIndexPath: IndexPath?
+    var category: String = "最新"
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -33,6 +37,7 @@ class HomeViewController: UIViewController {
             navigationController.followScrollView(tableView, delay: 50.0)
         }
         self.tableView.pullToRefreshDelegate = self
+        self.nodeListView.delegate = self
         
         let fpsLabel = V2FPSLabel(frame: CGRect(x: 0, y: Global.Constants.screenHeight - 40, width: 80, height: 40))
         UIApplication.shared.keyWindow?.addSubview(fpsLabel)
@@ -60,6 +65,7 @@ class HomeViewController: UIViewController {
             }, failure: { error in
                 self.indicator.state = .stopping
                 self.tableView.isHidden = false
+                // TODO: failure toast
             })
         }
     }
@@ -88,10 +94,17 @@ class HomeViewController: UIViewController {
     @IBOutlet weak var leftBarItem: UIBarButtonItem!
     
     func setupGesture() {
+        // 添加右滑手势
         leftEdgeView = UIView(frame: CGRect(x: 0, y: 0, width: Global.Constants.edgePanGestureThreshold, height: Global.Constants.screenHeight))
         view.addSubview(leftEdgeView)
         let swipeRight = UIPanGestureRecognizer(target: self, action: #selector(handleSwipeRight(sender:)))
         leftEdgeView.addGestureRecognizer(swipeRight)
+        
+        // 添加左滑手势
+        rightEdgeView = UIView(frame: CGRect(x: Global.Constants.screenWidth - Global.Constants.edgePanGestureThreshold, y: 0, width: Global.Constants.edgePanGestureThreshold, height: Global.Constants.screenHeight))
+        view.addSubview(rightEdgeView)
+        let swipeLeft = UIPanGestureRecognizer(target: self, action: #selector(handleSwipeLeft(sender:)))
+        rightEdgeView.addGestureRecognizer(swipeLeft)
         
         let menuTapped = UITapGestureRecognizer(target: self, action: #selector(menuTapped(_:)))
         menuBtn.addGestureRecognizer(menuTapped)
@@ -111,12 +124,24 @@ class HomeViewController: UIViewController {
         handleMenu(menuView, recognizer: sender)
     }
     
+    func handleSwipeLeft(sender: UIPanGestureRecognizer) {
+        switch sender.state {
+        case .began:
+            rightEdgeView.frame.size.width = Global.Constants.screenWidth
+        case .ended, .cancelled, .failed:
+            rightEdgeView.frame.size.width = Global.Constants.edgePanGestureThreshold
+        default:
+            break
+        }
+        handleNodeList(nodeListView, recognizer: sender)
+    }
+    
     @IBAction func menuTapped(_ sender: FabButton) {
         showMenu(menuView)
     }
     
     @IBAction func moreTapped(_ sender: FabButton) {
-        print("more tapped")
+        showNodeList(nodeListView)
     }
     
 }
@@ -148,11 +173,12 @@ extension HomeViewController: UITableViewDelegate, UITableViewDataSource {
                 for (_, item) in res {
                     array.append(TopicReplyModel(data: item))
                 }
-                delay(seconds: 1.0, completion: { 
+                delay(seconds: 0.4, completion: {
                     topicDetailViewController.repliesData = array
                 })
             }, failure: { (err) in
                 print(err)
+                // TODO: failure toast
             })
             
             self.present(topicDetailViewController, animated: true, completion: nil)
@@ -201,7 +227,7 @@ extension HomeViewController: ExpandingTransitionPresentingViewController {
 // MARK: PullToRefreshDelegate
 extension HomeViewController: PullToRefreshDelegate {
     func pullToRefreshDidRefresh(_ refreshView: PullToRefresh) {
-        NetworkManager.shared.getLatestTopics(success: { res in
+        let successBlock: (JSON) -> Void = { res in
             var newItems = Array<TopicOverviewModel>()
             for (_, item) in res {
                 let newItem = TopicOverviewModel(data: item)
@@ -213,15 +239,77 @@ extension HomeViewController: PullToRefreshDelegate {
             }
             self.topicOverviewArray.insert(contentsOf: newItems, at: 0)
             
-            delay(seconds: 1.0, completion: { 
+            delay(seconds: 1.0, completion: {
                 self.tableView.isRefreshing = false
                 self.tableView.reloadData()
             })
-        }, failure: { error in
+        }
+        
+        let failureBlock: (String) -> Void = { error in
             self.tableView.isRefreshing = false
-        })
+            // TODO: failure toast
+        }
+        
+        if self.category == "最新" {
+            NetworkManager.shared.getLatestTopics(success: { res in
+                successBlock(res)
+            }, failure: { error in
+                failureBlock(error)
+            })
+        } else if self.category == "最热" {
+            NetworkManager.shared.getHotTopics(success: { (res) in
+                successBlock(res)
+            }, failure: { (error) in
+                failureBlock(error)
+            })
+        }
     }
 }
 
-
+// MARK: SelectNodeDelegate
+extension HomeViewController: SelectNodeDelegate {
+    func didSelectNode(title: String, code: Int) {
+        if self.category == title {
+            return
+        }
+        
+        let successBlock: (JSON) -> Void = { res in
+            self.topicOverviewArray = []
+            for (_, item) in res {
+                self.topicOverviewArray.append(TopicOverviewModel(data: item))
+            }
+            self.indicator.state = .stopping
+            self.tableView.isHidden = false
+            self.tableView.reloadData()
+        }
+        let failureBlock: (String) -> Void = { error in
+            self.indicator.state = .stopping
+            self.tableView.isHidden = false
+            // TODO: failure toast
+        }
+        if title == "最新" {
+            NetworkManager.shared.getLatestTopics(success: { (res) in
+                successBlock(res)
+            }, failure: { (error) in
+                failureBlock(error)
+            })
+        } else if title == "最热" {
+            NetworkManager.shared.getHotTopics(success: { (res) in
+                successBlock(res)
+            }, failure: { (error) in
+                failureBlock(error)
+            })
+        } else {
+            NetworkManager.shared.getTopicsInNodes(id: code, success: { (res) in
+                successBlock(res)
+                print(res)
+            }, failure: { (error) in
+                failureBlock(error)
+            })
+        }
+        
+        self.title = title
+        self.category = title
+    }
+}
 

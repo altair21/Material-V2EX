@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="11762" systemVersion="15F34" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11762"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="iN0-l3-epB" customClass="NodeListView" customModule="Material_V2EX" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <view alpha="0.0" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="guU-5M-eOu">
+                    <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                    <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.40000000000000002" colorSpace="calibratedRGB"/>
+                </view>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="z4L-MV-qgf">
+                    <rect key="frame" x="375" y="0.0" width="100" height="667"/>
+                    <color key="backgroundColor" red="1" green="0.60784313729999995" blue="0.4431372549" alpha="1" colorSpace="calibratedRGB"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="100" id="mcL-n5-dgo"/>
+                    </constraints>
+                    <userDefinedRuntimeAttributes>
+                        <userDefinedRuntimeAttribute type="size" keyPath="layer.shadowOffset">
+                            <size key="value" width="0.0" height="0.0"/>
+                        </userDefinedRuntimeAttribute>
+                        <userDefinedRuntimeAttribute type="number" keyPath="layer.shadowRadius">
+                            <integer key="value" value="4"/>
+                        </userDefinedRuntimeAttribute>
+                        <userDefinedRuntimeAttribute type="number" keyPath="layer.shadowOpacity">
+                            <real key="value" value="0.59999999999999998"/>
+                        </userDefinedRuntimeAttribute>
+                    </userDefinedRuntimeAttributes>
+                </view>
+            </subviews>
+            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+            <constraints>
+                <constraint firstItem="guU-5M-eOu" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="Cwv-HW-5Xs"/>
+                <constraint firstAttribute="bottom" secondItem="guU-5M-eOu" secondAttribute="bottom" id="TnG-Nr-Emc"/>
+                <constraint firstAttribute="trailing" secondItem="guU-5M-eOu" secondAttribute="trailing" id="eVH-bP-bgn"/>
+                <constraint firstItem="guU-5M-eOu" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="tMJ-gQ-T21"/>
+                <constraint firstAttribute="trailing" secondItem="z4L-MV-qgf" secondAttribute="trailing" constant="-100" id="yN7-bB-8g0"/>
+                <constraint firstItem="z4L-MV-qgf" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="yS4-dJ-Xtu"/>
+                <constraint firstAttribute="bottom" secondItem="z4L-MV-qgf" secondAttribute="bottom" id="yjv-0b-qyV"/>
+            </constraints>
+            <connections>
+                <outlet property="bgView" destination="guU-5M-eOu" id="LCs-6f-otu"/>
+                <outlet property="panelView" destination="z4L-MV-qgf" id="aMj-do-AWO"/>
+                <outlet property="panelViewTrailingConstraint" destination="yN7-bB-8g0" id="kdT-5P-Bgo"/>
+            </connections>
+        </view>
+    </objects>
+</document>

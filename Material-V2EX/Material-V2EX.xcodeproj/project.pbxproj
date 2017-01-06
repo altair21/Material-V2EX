@@ -37,6 +37,10 @@
 		50B1D8641E1270CD00BCE4FF /* NSDate+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50B1D8631E1270CD00BCE4FF /* NSDate+Extension.swift */; };
 		50B1D8661E1273BC00BCE4FF /* NSDateTimeAgo.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 50B1D8651E1273BC00BCE4FF /* NSDateTimeAgo.bundle */; };
 		50B1D86C1E127D1C00BCE4FF /* ARIndicator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50B1D86B1E127D1C00BCE4FF /* ARIndicator.swift */; };
+		50CBCBDA1E1D0F0C009F6960 /* NodeListTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50CBCBD81E1D0F0C009F6960 /* NodeListTableViewCell.swift */; };
+		50CBCBDB1E1D0F0C009F6960 /* NodeListTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 50CBCBD91E1D0F0C009F6960 /* NodeListTableViewCell.xib */; };
+		50DE426B1E1DF55400A53BFF /* NodeListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50DE426A1E1DF55400A53BFF /* NodeListView.swift */; };
+		50DE426D1E1DF57B00A53BFF /* NodeListView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 50DE426C1E1DF57B00A53BFF /* NodeListView.xib */; };
 		50E8C0791E0E7A3800FAC85B /* PaddingLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50E8C0781E0E7A3800FAC85B /* PaddingLabel.swift */; };
 		50E8C07B1E0E838C00FAC85B /* UIImageView+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50E8C07A1E0E838C00FAC85B /* UIImageView+Extension.swift */; };
 		50E8C07D1E0E854400FAC85B /* Kingfisher.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 50E8C07C1E0E854400FAC85B /* Kingfisher.framework */; };
@@ -82,6 +86,10 @@
 		50B1D8671E12778700BCE4FF /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/Main.strings"; sourceTree = "<group>"; };
 		50B1D8681E12778700BCE4FF /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/LaunchScreen.strings"; sourceTree = "<group>"; };
 		50B1D86B1E127D1C00BCE4FF /* ARIndicator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ARIndicator.swift; sourceTree = "<group>"; };
+		50CBCBD81E1D0F0C009F6960 /* NodeListTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NodeListTableViewCell.swift; sourceTree = "<group>"; };
+		50CBCBD91E1D0F0C009F6960 /* NodeListTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = NodeListTableViewCell.xib; sourceTree = "<group>"; };
+		50DE426A1E1DF55400A53BFF /* NodeListView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NodeListView.swift; sourceTree = "<group>"; };
+		50DE426C1E1DF57B00A53BFF /* NodeListView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = NodeListView.xib; sourceTree = "<group>"; };
 		50E8C0781E0E7A3800FAC85B /* PaddingLabel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PaddingLabel.swift; sourceTree = "<group>"; };
 		50E8C07A1E0E838C00FAC85B /* UIImageView+Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIImageView+Extension.swift"; sourceTree = "<group>"; };
 		50E8C07C1E0E854400FAC85B /* Kingfisher.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Kingfisher.framework; path = "../../../../../../Library/Developer/Xcode/DerivedData/Material-V2EX-ggvhqkoortazbjhkiqzzdvoaqujd/Build/Products/Debug-iphoneos/Kingfisher/Kingfisher.framework"; sourceTree = "<group>"; };
@@ -124,8 +132,10 @@
 		50360EBA1E0BAF9500B082DD /* Views */ = {
 			isa = PBXGroup;
 			children = (
-				5067E20A1E0A9F0B0016F924 /* MenuView.xib */,
 				5067E20C1E0AA0D20016F924 /* MenuView.swift */,
+				5067E20A1E0A9F0B0016F924 /* MenuView.xib */,
+				50DE426A1E1DF55400A53BFF /* NodeListView.swift */,
+				50DE426C1E1DF57B00A53BFF /* NodeListView.xib */,
 			);
 			name = Views;
 			sourceTree = "<group>";
@@ -139,6 +149,8 @@
 				501370F31E1BA00A0076977B /* TopicBlankTableViewCell.swift */,
 				501370F71E1BB12E0076977B /* TopicHeaderTableViewCell.swift */,
 				501370F91E1BB1390076977B /* TopicFooterTableViewCell.swift */,
+				50CBCBD81E1D0F0C009F6960 /* NodeListTableViewCell.swift */,
+				50CBCBD91E1D0F0C009F6960 /* NodeListTableViewCell.xib */,
 			);
 			name = Cells;
 			sourceTree = "<group>";
@@ -340,11 +352,13 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				50DE426D1E1DF57B00A53BFF /* NodeListView.xib in Resources */,
 				507F4EF81E0944EA0033A10B /* LaunchScreen.storyboard in Resources */,
 				50B1D8661E1273BC00BCE4FF /* NSDateTimeAgo.bundle in Resources */,
 				5067E20B1E0A9F0B0016F924 /* MenuView.xib in Resources */,
 				507F4EF51E0944EA0033A10B /* Assets.xcassets in Resources */,
 				507F4EF31E0944EA0033A10B /* Main.storyboard in Resources */,
+				50CBCBDB1E1D0F0C009F6960 /* NodeListTableViewCell.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -438,9 +452,11 @@
 				50E8C0791E0E7A3800FAC85B /* PaddingLabel.swift in Sources */,
 				501370F01E1B4F6B0076977B /* TopicAuthorTableViewCell.swift in Sources */,
 				50B1D8641E1270CD00BCE4FF /* NSDate+Extension.swift in Sources */,
+				50CBCBDA1E1D0F0C009F6960 /* NodeListTableViewCell.swift in Sources */,
 				504667A81E0D09EA008B6953 /* V2EX.swift in Sources */,
 				504667AE1E0D3034008B6953 /* MemberModel.swift in Sources */,
 				50459A9C1E10F83D00E4F6DD /* TopicDetailViewController.swift in Sources */,
+				50DE426B1E1DF55400A53BFF /* NodeListView.swift in Sources */,
 				50E8C07B1E0E838C00FAC85B /* UIImageView+Extension.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

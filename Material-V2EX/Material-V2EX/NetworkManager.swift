@@ -35,6 +35,10 @@ class NetworkManager: NSObject {
         commonRequest(api: V2EX.API.hotTopics, parameters: [:], success: success, failure: failure)
     }
     
+    func getTopicsInNodes(id: Int, success: @escaping (JSON)->Void, failure: @escaping (String)->Void) {
+        commonRequest(api: V2EX.API.topicsInNode, parameters: ["id": id, "name": ""], success: success, failure: failure)
+    }
+    
     
     func getTopicReplies(topicId: Int, success: @escaping (JSON)->Void, failure: @escaping (String)->Void) {
         commonRequest(api: V2EX.API.topicReplies, parameters: ["topic_id": topicId, "page": "", "page_size": ""], success: success, failure: failure)
