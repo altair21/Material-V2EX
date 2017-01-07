@@ -41,7 +41,7 @@ class Global: NSObject {
     struct Constants {
         static let screenWidth = UIScreen.main.bounds.width
         static let screenHeight = UIScreen.main.bounds.height
-        static let edgePanGestureThreshold: CGFloat = 64
+        static let edgePanGestureThreshold: CGFloat = 15
     }
     
     // Notifications

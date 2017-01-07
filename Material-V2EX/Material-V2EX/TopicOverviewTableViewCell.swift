@@ -21,6 +21,11 @@ class TopicOverviewTableViewCell: UITableViewCell {
     // Data
     var data: TopicOverviewModel? = nil
     
+    enum TopicReadState {
+        case read
+        case unread
+    }
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         
@@ -42,6 +47,7 @@ class TopicOverviewTableViewCell: UITableViewCell {
     }
     
     func animatedUI() {
+        configureReadState(state: (data?.markRead)! ? .read : .unread)
         if (data?.isAnimated)! {
             return
         }
@@ -54,7 +60,15 @@ class TopicOverviewTableViewCell: UITableViewCell {
         animation.toValue = 1.0
         animation.beginTime = CACurrentMediaTime()
         bgView.layer.add(animation, forKey: nil)
-        
+    }
+    
+    func configureReadState(state: TopicReadState) {
+        switch state {
+        case .read:
+            bgView.layer.shadowRadius = 0.75
+        case .unread:
+            bgView.layer.shadowRadius = 2.75
+        }
     }
 
 }

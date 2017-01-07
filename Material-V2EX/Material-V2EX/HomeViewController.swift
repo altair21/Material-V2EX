@@ -28,6 +28,8 @@ class HomeViewController: UIViewController {
     var topicOverviewArray = Array<TopicOverviewModel>()
     var selectedIndexPath: IndexPath?
     var category: String = "最新"
+    let navigationBarMaxShadowRadius: CGFloat = 8.0
+    let cellMarkReadShadowRadius: CGFloat = 0.75
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -91,7 +93,6 @@ class HomeViewController: UIViewController {
         indicator.center = CGPoint(x: Global.Constants.screenWidth / 2, y: Global.Constants.screenHeight / 2)
         view.addSubview(indicator)
     }
-    @IBOutlet weak var leftBarItem: UIBarButtonItem!
     
     func setupGesture() {
         // 添加右滑手势
@@ -165,6 +166,10 @@ extension HomeViewController: UITableViewDelegate, UITableViewDataSource {
         selectedIndexPath = indexPath
         
         let presentBlock = {
+            let cell = tableView.cellForRow(at: indexPath) as! TopicOverviewTableViewCell
+            cell.data?.markRead = true
+            cell.configureReadState(state: .read)
+            
             let topicDetailViewController = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: Global.ViewControllers.topicDetail) as! TopicDetailViewController
             topicDetailViewController.overviewData = self.topicOverviewArray[indexPath.row]
             
@@ -206,6 +211,10 @@ extension HomeViewController: ScrollingNavigationControllerDelegate {
         tableView.frame.origin.y = newY
         tableView.frame.size.height += oldY - newY
         tableView.scrollViewDidScroll(scrollView)
+        
+        // 根据 offset 改变 navigationBar 阴影
+        let newRadius = min(1, max(tableView.contentOffset.y / 80, 0)) * navigationBarMaxShadowRadius
+        navController.navigationBar.layer.shadowRadius = newRadius
     }
     
     func scrollViewWillEndDragging(_ scrollView: UIScrollView, withVelocity velocity: CGPoint, targetContentOffset: UnsafeMutablePointer<CGPoint>) {

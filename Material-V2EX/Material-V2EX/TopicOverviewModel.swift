@@ -18,6 +18,7 @@ class TopicOverviewModel: NSObject {
     var member: MemberModel?
     var node: NodeModel?
     var isAnimated = false
+    var markRead = false
     
     init(data: JSON) {
         id = data["id"].intValue

@@ -43,6 +43,7 @@ class NodeListView: UIView {
         tableView.layer.rasterizationScale = UIScreen.main.scale
         
         DispatchQueue.main.async {
+            self.tableView.separatorStyle = .none
             self.tableView.backgroundColor = UIColor.fromHex(string: "#FF9B71")
             footerView.backgroundColor = UIColor.fromHex(string: "#FF9B71")
         }
@@ -97,18 +98,18 @@ extension NodeListView: UITableViewDelegate, UITableViewDataSource {
         hideNodeList(self)
     }
     
-    func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
-        // removing seperator inset
-        if cell.responds(to: #selector(setter: UITableViewCell.separatorInset)) {
-            cell.separatorInset = UIEdgeInsets.zero
-        }
-        // prevent the cell from inheriting the tableView's margin settings
-        if cell.responds(to: #selector(setter: UIView.preservesSuperviewLayoutMargins)) {
-            cell.preservesSuperviewLayoutMargins = false
-        }
-        // explicitly setting cell's layout margins
-        if cell.responds(to: #selector(setter: UITableViewCell.layoutMargins)) {
-            cell.layoutMargins = UIEdgeInsets.zero
-        }
-    }
+//    func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+//        // removing seperator inset
+//        if cell.responds(to: #selector(setter: UITableViewCell.separatorInset)) {
+//            cell.separatorInset = UIEdgeInsets.zero
+//        }
+//        // prevent the cell from inheriting the tableView's margin settings
+//        if cell.responds(to: #selector(setter: UIView.preservesSuperviewLayoutMargins)) {
+//            cell.preservesSuperviewLayoutMargins = false
+//        }
+//        // explicitly setting cell's layout margins
+//        if cell.responds(to: #selector(setter: UITableViewCell.layoutMargins)) {
+//            cell.layoutMargins = UIEdgeInsets.zero
+//        }
+//    }
 }
