@@ -58,9 +58,7 @@ class HomeViewController: UIViewController {
             indicator.state = .running
             self.tableView.isHidden = true
             NetworkManager.shared.getLatestTopics(success: { res in
-                for (_, item) in res {
-                    self.topicOverviewArray.append(TopicOverviewModel(data: item))
-                }
+                self.topicOverviewArray = res
                 self.indicator.state = .stopping
                 self.tableView.isHidden = false
                 self.tableView.reloadData()
@@ -236,16 +234,16 @@ extension HomeViewController: ExpandingTransitionPresentingViewController {
 // MARK: PullToRefreshDelegate
 extension HomeViewController: PullToRefreshDelegate {
     func pullToRefreshDidRefresh(_ refreshView: PullToRefresh) {
-        let successBlock: (JSON) -> Void = { res in
+        let successBlock: (Array<TopicOverviewModel>) -> Void = { res in
             var newItems = Array<TopicOverviewModel>()
-            for (_, item) in res {
-                let newItem = TopicOverviewModel(data: item)
-                if newItem.id != self.topicOverviewArray[0].id {
-                    newItems.append(newItem)
-                } else {
-                    break
-                }
-            }
+//            for (_, item) in res {
+//                let newItem = TopicOverviewModel(data: item)
+//                if newItem.id != self.topicOverviewArray[0].id {
+//                    newItems.append(newItem)
+//                } else {
+//                    break
+//                }
+//            }
             self.topicOverviewArray.insert(contentsOf: newItems, at: 0)
             
             delay(seconds: 1.0, completion: {
@@ -282,14 +280,14 @@ extension HomeViewController: SelectNodeDelegate {
             return
         }
         
-        let successBlock: (JSON) -> Void = { res in
-            self.topicOverviewArray = []
-            for (_, item) in res {
-                self.topicOverviewArray.append(TopicOverviewModel(data: item))
-            }
-            self.indicator.state = .stopping
-            self.tableView.isHidden = false
-            self.tableView.reloadData()
+        let successBlock: (Array<TopicOverviewModel>) -> Void = { res in
+//            self.topicOverviewArray = []
+//            for (_, item) in res {
+//                self.topicOverviewArray.append(TopicOverviewModel(data: item))
+//            }
+//            self.indicator.state = .stopping
+//            self.tableView.isHidden = false
+//            self.tableView.reloadData()
         }
         let failureBlock: (String) -> Void = { error in
             self.indicator.state = .stopping

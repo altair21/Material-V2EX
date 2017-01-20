@@ -36,11 +36,11 @@ class TopicOverviewTableViewCell: UITableViewCell {
     func setData(data: TopicOverviewModel) {
         self.data = data
         
-        nicknameLabel.text = data.member?.username
-        dateLabel.text = Date(timeIntervalSince1970: data.created).timeAgo
-        nodeLabel.text = data.node?.title
+        nicknameLabel.text = data.authorName
+        dateLabel.text = data.last_modified != 0 ? Date(timeIntervalSince1970: data.last_modified).timeAgo : data.last_modifiedText
+        nodeLabel.text = data.nodeTitle
         repliesLabel.text = "\(data.replies)"
-        avatarView.setImageWith(string: (data.member?.avatarURL)!)
+        avatarView.setImageWith(string: (data.authorAvatar))
         titleLabel.text = data.title
         
         animatedUI()
@@ -65,9 +65,9 @@ class TopicOverviewTableViewCell: UITableViewCell {
     func configureReadState(state: TopicReadState) {
         switch state {
         case .read:
-            bgView.layer.shadowRadius = 0.75
+            bgView.layer.shadowRadius = 3.25
         case .unread:
-            bgView.layer.shadowRadius = 2.75
+            bgView.layer.shadowRadius = 0.75
         }
     }
 

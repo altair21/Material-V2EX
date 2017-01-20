@@ -9,8 +9,8 @@
 import UIKit
 
 
-fileprivate let animationDuration = 0.3
-fileprivate let quickAnimationDuration = animationDuration * 0.5
+fileprivate let animationDuration = 0.2
+fileprivate let quickAnimationDuration = animationDuration * 0.75
 func showMenu(_ menuView: MenuView) {
     menuView.panelViewLeadingConstraint.constant = 0
     menuView.panelView.frame.origin.x = -menuView.panelView.frame.size.width
@@ -19,7 +19,7 @@ func showMenu(_ menuView: MenuView) {
     keyWindow?.windowLevel = UIWindowLevelStatusBar + 1
     keyWindow?.addSubview(menuView)
     
-    UIView.animate(withDuration: animationDuration, delay: 0.0, options: [], animations: { 
+    UIView.animate(withDuration: animationDuration, delay: 0.0, options: .curveEaseOut, animations: {
         menuView.bgView.alpha = 1.0
         menuView.panelView.frame.origin.x = 0
     }, completion: nil)
@@ -28,7 +28,7 @@ func showMenu(_ menuView: MenuView) {
 func hideMenu(_ menuView: MenuView) {
     menuView.panelViewLeadingConstraint.constant = -menuView.panelView.frame.size.width
     
-    UIView.animate(withDuration: animationDuration, delay: 0.0, options: [], animations: { 
+    UIView.animate(withDuration: animationDuration, delay: 0.0, options: .curveEaseIn, animations: {
         menuView.bgView.alpha = 0.0
         menuView.panelView.frame.origin.x = -menuView.panelView.frame.size.width
     }, completion: { _ in

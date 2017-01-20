@@ -9,12 +9,11 @@
 import SwiftyJSON
 
 class NodeModel: NSObject {
-    var id = 0
-    var name = ""
-    var title = ""
+    var name = ""           // 用户拼接URL
+    var href = ""           
+    var title = ""          // 用于显示
     
     init(data: JSON) {
-        id = data["id"].intValue
         name = data["name"].stringValue
         title = data["title"].stringValue
     }

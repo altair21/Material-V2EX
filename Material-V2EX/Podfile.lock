@@ -1,6 +1,11 @@
 PODS:
   - Alamofire (4.2.0)
   - AMScrollingNavbar (3.1.0)
+  - Ji (2.0.1):
+    - Ji/Ji (= 2.0.1)
+  - Ji/Ji (2.0.1):
+    - Ji/Ji-libxml
+  - Ji/Ji-libxml (2.0.1)
   - Kingfisher (3.2.3)
   - Material (2.3.16):
     - Material/Core (= 2.3.16)
@@ -10,6 +15,7 @@ PODS:
 DEPENDENCIES:
   - Alamofire
   - AMScrollingNavbar (~> 3.1.0)
+  - Ji
   - Kingfisher
   - Material
   - SwiftyJSON
@@ -17,10 +23,11 @@ DEPENDENCIES:
 SPEC CHECKSUMS:
   Alamofire: aa2e09d871c9160ac53c90e83c68064a94e3dfbe
   AMScrollingNavbar: 40c1e2571a11187ef6b753e8925e8f523788062e
+  Ji: 6bb602a28dd08b804158f64990e6051ed5de0110
   Kingfisher: 0e789b4069e20da071d6eec59a9cfb4cee67a1cb
   Material: db663ff81d7c72a8f7454fc297d147dcba8bb869
   SwiftyJSON: 38a8ea2006779c0fc4c310cb2ee8195327740faf
 
-PODFILE CHECKSUM: 32ef7d5c7b00aa68a95b878d4bef307bfb7e238e
+PODFILE CHECKSUM: e5a290c5d648a90c34d791bbcb8497db0707430a
 
 COCOAPODS: 1.1.1

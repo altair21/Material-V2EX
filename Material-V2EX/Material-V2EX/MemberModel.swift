@@ -9,15 +9,11 @@
 import SwiftyJSON
 
 class MemberModel: NSObject {
-    var id = 0
     var username = ""
-    var tagLine = ""
     var avatarURL = ""
     
     init(data: JSON) {
-        id = data["id"].intValue
         username = data["username"].stringValue
-        tagLine = data["tagLine"].stringValue
         avatarURL = "https:" + data["avatar_normal"].stringValue
     }
 }

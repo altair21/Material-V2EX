@@ -9,6 +9,7 @@
 import UIKit
 
 class V2EX: NSObject {
+    static let indexURL = "https://www.v2ex.com"
     private static let APIbasicURL = "https://www.v2ex.com/api"
     
     struct API {

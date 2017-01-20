@@ -12,6 +12,8 @@ func delay(seconds: Double, completion: @escaping ()-> Void) {
     DispatchQueue.main.asyncAfter(deadline: .now() + seconds, execute: completion)
 }
 
+fileprivate let userAgent = "Mozilla/5.0 (iPhone; CPU iPhone OS 6_0 like Mac OS X) AppleWebKit/536.26 (KHTML, like Gecko) Version/6.0 Mobile/10A5376e Safari/8536.25"
+
 class Global: NSObject {
     // ViewControllers
     struct ViewControllers {
@@ -42,6 +44,7 @@ class Global: NSObject {
         static let screenWidth = UIScreen.main.bounds.width
         static let screenHeight = UIScreen.main.bounds.height
         static let edgePanGestureThreshold: CGFloat = 15
+        static let requestHeader = ["user-agent": userAgent]
     }
     
     // Notifications
