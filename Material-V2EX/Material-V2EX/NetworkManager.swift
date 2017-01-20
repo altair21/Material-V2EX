@@ -13,12 +13,16 @@ import Ji
 class NetworkManager: NSObject {
     static let shared = NetworkManager()
     
-    private func commonRequest(api: String, parameters: Dictionary<String, Any> , success: @escaping (JSON)->Void, failure: @escaping (String)->Void) {
+    private func commonRequest(api: String, parameters: Dictionary<String, Any> , success: @escaping (Array<TopicOverviewModel>)->Void, failure: @escaping (String)->Void) {
         Alamofire.request(api, parameters: parameters).responseData { (response) in
             switch response.result {
             case .success:
                 if let data = response.result.value {
-                    success(JSON(data: data))
+                    var res = Array<TopicOverviewModel>()
+                    for (_, item) in JSON(data: data) {
+                        res.append(TopicOverviewModel(data: item))
+                    }
+                    success(res)
                 } else {
                     failure("数据解析失败！")
                 }
@@ -28,8 +32,8 @@ class NetworkManager: NSObject {
         }
     }
     
-    private func commonGetTopicList(success: @escaping (Array<TopicOverviewModel>)->Void, failure: @escaping (String)->Void) {
-        Alamofire.request("https://www.v2ex.com/?tab=tech", headers: Global.Constants.requestHeader).responseString { (response) in
+    private func commonGetTopicList(url: String, success: @escaping (Array<TopicOverviewModel>)->Void, failure: @escaping (String)->Void) {
+        Alamofire.request(url, headers: Global.Config.requestHeader).responseString { (response) in
             switch response.result {
             case .success:
                 let jiDoc = Ji(htmlString: response.result.value!)!
@@ -48,20 +52,15 @@ class NetworkManager: NSObject {
         }
     }
     
-    func getLatestTopics(success: @escaping (Array<TopicOverviewModel>)->Void, failure: @escaping (String)->Void) {
-        commonGetTopicList(success: success, failure: failure)
-//        commonRequest(api: V2EX.API.latestTopics, parameters: [:], success: success, failure: failure)
-    }
-    
     func getHotTopics(success: @escaping (Array<TopicOverviewModel>)->Void, failure: @escaping (String)->Void) {
-//        commonRequest(api: V2EX.API.hotTopics, parameters: [:], success: success, failure: failure)
+        commonRequest(api: V2EX.API.hotTopics, parameters: [:], success: success, failure: failure)
     }
     
-    func getTopicsInNodes(id: Int, success: @escaping (Array<TopicOverviewModel>)->Void, failure: @escaping (String)->Void) {
-//        commonRequest(api: V2EX.API.topicsInNode, parameters: ["id": id, "name": ""], success: success, failure: failure)
+    func getTopicsInNodes(code: String, success: @escaping (Array<TopicOverviewModel>)->Void, failure: @escaping (String)->Void) {
+        commonGetTopicList(url: V2EX.categoryBasicURL + code, success: success, failure: failure)
     }
     
     func getTopicReplies(topicId: Int, success: @escaping (JSON)->Void, failure: @escaping (String)->Void) {
-        commonRequest(api: V2EX.API.topicReplies, parameters: ["topic_id": topicId, "page": "", "page_size": ""], success: success, failure: failure)
+//        commonRequest(api: V2EX.API.topicReplies, parameters: ["topic_id": topicId, "page": "", "page_size": ""], success: success, failure: failure)
     }
 }

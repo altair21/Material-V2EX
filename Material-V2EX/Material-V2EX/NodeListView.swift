@@ -9,7 +9,7 @@
 import UIKit
 
 protocol SelectNodeDelegate: class {
-    func didSelectNode(title: String, code: Int)
+    func didSelectNode(title: String, code: String)
 }
 
 class NodeListView: UIView {
@@ -20,8 +20,7 @@ class NodeListView: UIView {
     
     static let shared = Bundle.main.loadNibNamed(Global.Views.nodeListView, owner: nil, options: nil)?.first as! NodeListView
     weak var delegate: SelectNodeDelegate? = nil
-    var nodesTitle = [("最新", 0), ("最热", 0), ("程序员", 300), ("宽带症候群", 108), ("iDev", 13), ("分享创造", 17), ("设计", 215), ("奇思妙想", 519), ("分享发现", 16), ("问与答", 705)]
-    var selectedIndexPath = IndexPath(row: 0, section: 0) // 初始选中“最新”
+    var selectedIndexPath = IndexPath(row: V2EX.basicCategory.index {$0 == Global.Config.startNode} ?? 0, section: 0) // 初始选中配置中的初始节点，没有设置则选中第一条
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -71,12 +70,12 @@ class NodeListView: UIView {
 
 extension NodeListView: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return nodesTitle.count
+        return V2EX.basicCategory.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: Global.Cells.nodeListCell, for: indexPath) as! NodeListTableViewCell
-        cell.nodeButton.title = nodesTitle[indexPath.row].0
+        cell.nodeButton.title = V2EX.basicCategory[indexPath.row].0
         cell.indexPath = indexPath
         cell.tableView = tableView
         if indexPath == selectedIndexPath {
@@ -88,12 +87,10 @@ extension NodeListView: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        if indexPath.row < 2 {  // 解析HTML之前，只能看最新和最热
-            delegate?.didSelectNode(title: nodesTitle[indexPath.row].0, code: nodesTitle[indexPath.row].1)
-            (tableView.cellForRow(at: selectedIndexPath) as! NodeListTableViewCell).configureState(.unselected)
-            (tableView.cellForRow(at: indexPath) as! NodeListTableViewCell).configureState(.selected)
-            self.selectedIndexPath = indexPath
-        }
+        delegate?.didSelectNode(title: V2EX.basicCategory[indexPath.row].0, code: V2EX.basicCategory[indexPath.row].1)
+        (tableView.cellForRow(at: selectedIndexPath) as! NodeListTableViewCell).configureState(.unselected)
+        (tableView.cellForRow(at: indexPath) as! NodeListTableViewCell).configureState(.selected)
+        self.selectedIndexPath = indexPath
         
         hideNodeList(self)
     }

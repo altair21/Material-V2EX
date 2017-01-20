@@ -43,8 +43,14 @@ class Global: NSObject {
     struct Constants {
         static let screenWidth = UIScreen.main.bounds.width
         static let screenHeight = UIScreen.main.bounds.height
+    }
+    
+    // Config
+    struct Config {
         static let edgePanGestureThreshold: CGFloat = 15
         static let requestHeader = ["user-agent": userAgent]
+        static let kTodayHottestCode = "k今日热议"
+        static let startNode = V2EX.basicCategory[1]   // 初始话题 - 技术
     }
     
     // Notifications
