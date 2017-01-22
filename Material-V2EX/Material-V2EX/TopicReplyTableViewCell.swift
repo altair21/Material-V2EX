@@ -16,7 +16,7 @@ class TopicReplyTableViewCell: UITableViewCell {
     @IBOutlet weak var nameLabel: UILabel!
     @IBOutlet weak var dateLabel: UILabel!
     @IBOutlet weak var thanksLabel: UILabel!
-    @IBOutlet weak var contentLabel: UILabel!
+    @IBOutlet weak var contentTextView: UITextView!
     
     // Data
     var data: TopicReplyModel?
@@ -32,8 +32,22 @@ class TopicReplyTableViewCell: UITableViewCell {
         avatarView.setImageWith(string: (data.author.avatarURL))
         nameLabel.text = data.author.username
         dateLabel.text = data.date
-        contentLabel.text = data.content
         thanksLabel.text = data.thanks
+        
+        let htmlData = data.content.data(using: .unicode)!
+        let attributedString = try? NSMutableAttributedString(data: htmlData, options: [NSDocumentTypeDocumentAttribute: NSHTMLTextDocumentType], documentAttributes: nil)
+        attributedString?.enumerateAttribute(NSFontAttributeName, in: NSRange(location: 0, length: (attributedString?.length)!), options: .longestEffectiveRangeNotRequired, using: { (value, range, _) in
+            let font = value as! UIFont
+            let newFont = UIFont(name: contentTextView.font!.fontName, size: font.pointSize + 2)!
+            attributedString?.addAttributes([NSFontAttributeName: newFont], range: range)
+        })
+        attributedString?.enumerateAttribute(NSLinkAttributeName, in: NSRange(location: 0, length: (attributedString?.length)!), options: .longestEffectiveRangeNotRequired, using: { (value, range, _) in
+            print(value)
+        })
+        attributedString?.replaceCharacters(in: NSRange(location: (attributedString?.length)! - 1, length: 1), with: NSAttributedString(string: ""))    // 删除最后的换行符
+        contentTextView.layer.shouldRasterize = true
+        contentTextView.layer.rasterizationScale = UIScreen.main.scale
+        contentTextView.attributedText = attributedString
     }
 
 }

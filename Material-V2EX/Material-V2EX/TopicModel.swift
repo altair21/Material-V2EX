@@ -32,7 +32,7 @@ class TopicModel: NSObject {
         author = MemberModel(username: authorName, avatarURL: authorAvatarURL, href: authorHref)
         nodeTitle = headerNode?.xPath("a[2]").first?.content ?? "节点获取失败！"
         title = headerNode?.xPath("h1").first?.content ?? "标题获取失败"
-        content = data.xPath("div[1]/div[@class='cell']/div").first?.rawContent ?? "内容获取失败！"
+        content = data.xPath("div[1]/div[@class='cell']/div").first?.rawContent ?? ""   // 无正文内容
         totalReplies = data.xPath("div[3]/div/span/text()[1]").first?.content ?? "0 回复"
         dateAndClickCount = headerNode?.xPath("small/text()[2]").first?.content ?? "创建时间获取失败"
         

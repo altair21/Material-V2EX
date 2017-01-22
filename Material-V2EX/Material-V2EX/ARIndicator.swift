@@ -44,10 +44,10 @@ class ARIndicator: UIView {
             }
         }
     }
-    var size: CGSize = CGSize(width: 40, height: 40) {
+    var ar_size: CGSize = CGSize(width: 40, height: 40) {
         didSet {
             stopAnimation()
-            self.frame.size = size
+            self.frame.size = ar_size
             setupCircle()
         }
     }
