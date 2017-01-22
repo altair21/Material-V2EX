@@ -17,15 +17,18 @@ class TopicDetailViewController: UIViewController {
     var navigationBarHeight: CGFloat = 0
     
     // new model
-    var topicModel: TopicModel? = nil
-    
-    // old model
-    var overviewData: TopicOverviewModel!
-    var repliesData: Array<TopicReplyModel>? {
+    var topicModel: TopicModel? = nil {
         didSet {
+            if let model = topicModel {
+                let index = overviewData.href.index(before: overviewData.href.endIndex)
+                model.basicHref = overviewData.href.substring(to: index)
+            }
             self.tableView.reloadData()
         }
     }
+    
+    // old model
+    var overviewData: TopicOverviewModel!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -63,14 +66,14 @@ extension TopicDetailViewController: ExpandingTransitionPresentedViewController 
 // MARK: UITableViewDataSource & UITableViewDelegate
 extension TopicDetailViewController: UITableViewDataSource, UITableViewDelegate {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-//        if let replies = repliesData {
-//            if replies.count > 0 {
-//                return replies.count + 3
-//            } else {
-//                return 4
-//            }
-//        }
-        return 3
+        if let model = topicModel {
+            if model.replies.count > 0 {
+                return model.replies.count + model.subtleContent.count + 4  // 标题、正文、回复数cell、底部空白
+            } else {
+                return model.subtleContent.count + 4    // 标题、正文、BlankCell、底部空白
+            }
+        }
+        return 3    // 标题、转菊、底部空白
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -79,54 +82,51 @@ extension TopicDetailViewController: UITableViewDataSource, UITableViewDelegate 
             let cell = tableView.dequeueReusableCell(withIdentifier: Global.Cells.topicHeaderCell, for: indexPath) as! TopicHeaderTableViewCell
             cell.titleLabel.text = overviewData.title
             return cell
-        } else {
-            if let topicModel = self.topicModel {  // 已有数据
-                return UITableViewCell()
-            } else {    // 正在请求数据
-                if indexPath.row == 1 { // 第二行是 BlankCell
-                    let cell = tableView.dequeueReusableCell(withIdentifier: Global.Cells.topicBlankCell, for: indexPath) as! TopicBlankTableViewCell
-                    cell.state = .refreshing
+        }
+        
+        if let topicModel = self.topicModel {  // 已有数据
+            if indexPath.row == 1 { // 有数据时第二行始终是正文
+                let cell = tableView.dequeueReusableCell(withIdentifier: Global.Cells.topicAuthorCell, for: indexPath) as! TopicAuthorTableViewCell
+                cell.setData(overview: overviewData, content: topicModel.content, date: topicModel.dateAndClickCount)
+                return cell
+            } else if indexPath.row < topicModel.subtleContent.count + 2 {  // 有数据时始终是追加内容
+                let cell = tableView.dequeueReusableCell(withIdentifier: Global.Cells.topicSubtleCell, for: indexPath) as! TopicSubtleTableViewCell
+                cell.setData(data: topicModel.subtleContent[indexPath.row - 2])
+                return cell
+            }
+            if topicModel.replies.count > 0 {   // 有回复
+                if indexPath.row == topicModel.subtleContent.count + topicModel.replies.count + 3 {  // FooterCell
+                    let cell = tableView.dequeueReusableCell(withIdentifier: Global.Cells.topicFooterCell, for: indexPath)
                     return cell
-                } else {    // 最后一行是 FooterCell
+                } else if indexPath.row == topicModel.subtleContent.count + 2 { // 回复数cell
+                    let cell = tableView.dequeueReusableCell(withIdentifier: Global.Cells.topicReplyCountCell, for: indexPath) as! TopicReplyCountTableViewCell
+                    cell.replyCountLabel.text = topicModel.totalReplies
+                    return cell
+                } else {    // 回复cell
+                    let cell = tableView.dequeueReusableCell(withIdentifier: Global.Cells.topicReplyCell, for: indexPath) as! TopicReplyTableViewCell
+                    cell.setData(data: topicModel.replies[indexPath.row - topicModel.subtleContent.count - 3])
+                    return cell
+                }
+            } else {    // 无回复
+                if indexPath.row == topicModel.subtleContent.count + 2 {    // BlankCell
+                    let cell = tableView.dequeueReusableCell(withIdentifier: Global.Cells.topicBlankCell, for: indexPath) as! TopicBlankTableViewCell
+                    cell.state = .finish
+                    return cell
+                } else {    // FooterCell
                     let cell = tableView.dequeueReusableCell(withIdentifier: Global.Cells.topicFooterCell, for: indexPath)
                     return cell
                 }
             }
+        } else {    // 正在请求数据
+            if indexPath.row == 1 { // 第二行是 BlankCell
+                let cell = tableView.dequeueReusableCell(withIdentifier: Global.Cells.topicBlankCell, for: indexPath) as! TopicBlankTableViewCell
+                cell.state = .refreshing
+                return cell
+            } else {    // 最后一行是 FooterCell
+                let cell = tableView.dequeueReusableCell(withIdentifier: Global.Cells.topicFooterCell, for: indexPath)
+                return cell
+            }
         }
         
-//        if indexPath.row == 0 { // 首行始终是标题
-//            let cell = tableView.dequeueReusableCell(withIdentifier: Global.Cells.topicHeaderCell, for: indexPath) as! TopicHeaderTableViewCell
-//            cell.titleLabel.text = overviewData.title
-//            return cell
-//        } else if indexPath.row == 1 {  // 第二行始终是作者
-//            let cell = tableView.dequeueReusableCell(withIdentifier: Global.Cells.topicAuthorCell, for: indexPath) as! TopicAuthorTableViewCell
-//            cell.setData(data: overviewData)
-//            return cell
-//        } else {
-//            if let replies = repliesData {  // 已有数据
-//                let footerIndex = (replies.count == 0 ? 3 : replies.count + 2)
-//                if indexPath.row == footerIndex {  // 最后一行是 FooterCell
-//                    let cell = tableView.dequeueReusableCell(withIdentifier: Global.Cells.topicFooterCell, for: indexPath)
-//                    return cell
-//                } else if replies.count == 0 { // 数据为空（没有回复）
-//                    let cell = tableView.dequeueReusableCell(withIdentifier: Global.Cells.topicBlankCell, for: indexPath) as! TopicBlankTableViewCell
-//                    cell.state = .finish
-//                    return cell
-//                } else {    // 数据不为空
-//                    let cell = tableView.dequeueReusableCell(withIdentifier: Global.Cells.topicReplyCell, for: indexPath) as! TopicReplyTableViewCell
-//                    cell.setData(data: replies[indexPath.row - 2])
-//                    return cell
-//                }
-//            } else {    // 正在请求数据
-//                if indexPath.row == 2 { // 第三行是 BlankCell
-//                    let cell = tableView.dequeueReusableCell(withIdentifier: Global.Cells.topicBlankCell, for: indexPath) as! TopicBlankTableViewCell
-//                    cell.state = .refreshing
-//                    return cell
-//                } else {    // 最后一行是 FooterCell
-//                    let cell = tableView.dequeueReusableCell(withIdentifier: Global.Cells.topicFooterCell, for: indexPath)
-//                    return cell
-//                }
-//            }
-//        }
     }
 }

@@ -11,6 +11,7 @@ import UIKit
 class TopicBlankTableViewCell: UITableViewCell {
     @IBOutlet weak var indicator: ARIndicator!
     @IBOutlet weak var placeholder: UILabel!
+    @IBOutlet weak var baseLine: UIView!
     
     enum BlankCellState {
         case refreshing
@@ -23,9 +24,11 @@ class TopicBlankTableViewCell: UITableViewCell {
             case .refreshing:
                 placeholder.isHidden = true
                 indicator.isHidden = false
+                baseLine.isHidden = true
             case .finish:
                 placeholder.isHidden = false
                 indicator.isHidden = true
+                baseLine.isHidden = false
             }
         }
     }

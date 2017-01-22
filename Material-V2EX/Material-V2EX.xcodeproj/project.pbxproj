@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		500002FB1E349A76000057F2 /* TopicSubtleTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 500002FA1E349A76000057F2 /* TopicSubtleTableViewCell.swift */; };
+		500002FD1E349E58000057F2 /* TopicReplyCountTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 500002FC1E349E58000057F2 /* TopicReplyCountTableViewCell.swift */; };
 		501370F01E1B4F6B0076977B /* TopicAuthorTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 501370EF1E1B4F6B0076977B /* TopicAuthorTableViewCell.swift */; };
 		501370F21E1B4F770076977B /* TopicReplyTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 501370F11E1B4F770076977B /* TopicReplyTableViewCell.swift */; };
 		501370F41E1BA00A0076977B /* TopicBlankTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 501370F31E1BA00A0076977B /* TopicBlankTableViewCell.swift */; };
@@ -51,6 +53,8 @@
 /* Begin PBXFileReference section */
 		129AD5DE7B3A87FB58203427 /* Pods-Material-V2EX.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Material-V2EX.release.xcconfig"; path = "Pods/Target Support Files/Pods-Material-V2EX/Pods-Material-V2EX.release.xcconfig"; sourceTree = "<group>"; };
 		29B58BBFCC35172E2E415A05 /* Pods-Material-V2EX.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Material-V2EX.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Material-V2EX/Pods-Material-V2EX.debug.xcconfig"; sourceTree = "<group>"; };
+		500002FA1E349A76000057F2 /* TopicSubtleTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TopicSubtleTableViewCell.swift; sourceTree = "<group>"; };
+		500002FC1E349E58000057F2 /* TopicReplyCountTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TopicReplyCountTableViewCell.swift; sourceTree = "<group>"; };
 		501370E81E1B47C50076977B /* UITableView_FDTemplateLayoutCell.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UITableView_FDTemplateLayoutCell.framework; path = "../../../../../../Library/Developer/Xcode/DerivedData/Material-V2EX-ggvhqkoortazbjhkiqzzdvoaqujd/Build/Products/Debug-iphonesimulator/UITableView+FDTemplateLayoutCell/UITableView_FDTemplateLayoutCell.framework"; sourceTree = "<group>"; };
 		501370EF1E1B4F6B0076977B /* TopicAuthorTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TopicAuthorTableViewCell.swift; sourceTree = "<group>"; };
 		501370F11E1B4F770076977B /* TopicReplyTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TopicReplyTableViewCell.swift; sourceTree = "<group>"; };
@@ -153,6 +157,8 @@
 				501370F91E1BB1390076977B /* TopicFooterTableViewCell.swift */,
 				50CBCBD81E1D0F0C009F6960 /* NodeListTableViewCell.swift */,
 				50CBCBD91E1D0F0C009F6960 /* NodeListTableViewCell.xib */,
+				500002FA1E349A76000057F2 /* TopicSubtleTableViewCell.swift */,
+				500002FC1E349E58000057F2 /* TopicReplyCountTableViewCell.swift */,
 			);
 			name = Cells;
 			sourceTree = "<group>";
@@ -440,6 +446,7 @@
 				50280C9F1E165C2700996FDA /* TopicReplyModel.swift in Sources */,
 				50360EB91E0B7BE700B082DD /* AnimationUtility.swift in Sources */,
 				501370FA1E1BB1390076977B /* TopicFooterTableViewCell.swift in Sources */,
+				500002FD1E349E58000057F2 /* TopicReplyCountTableViewCell.swift in Sources */,
 				501370F81E1BB12E0076977B /* TopicHeaderTableViewCell.swift in Sources */,
 				507F4EF01E0944EA0033A10B /* HomeViewController.swift in Sources */,
 				504667AC1E0D2798008B6953 /* TopicOverviewModel.swift in Sources */,
@@ -457,6 +464,7 @@
 				501370F01E1B4F6B0076977B /* TopicAuthorTableViewCell.swift in Sources */,
 				50B1D8641E1270CD00BCE4FF /* NSDate+Extension.swift in Sources */,
 				50CBCBDA1E1D0F0C009F6960 /* NodeListTableViewCell.swift in Sources */,
+				500002FB1E349A76000057F2 /* TopicSubtleTableViewCell.swift in Sources */,
 				504667A81E0D09EA008B6953 /* V2EX.swift in Sources */,
 				504667AE1E0D3034008B6953 /* MemberModel.swift in Sources */,
 				50459A9C1E10F83D00E4F6DD /* TopicDetailViewController.swift in Sources */,

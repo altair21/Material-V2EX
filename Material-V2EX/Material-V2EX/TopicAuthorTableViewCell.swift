@@ -16,7 +16,6 @@ class TopicAuthorTableViewCell: UITableViewCell {
     @IBOutlet weak var dateLabel: UILabel!
     @IBOutlet weak var nodeLabel: PaddingLabel!
     @IBOutlet weak var contentLabel: UILabel!
-    @IBOutlet weak var editTimeLabel: UILabel!
     
     // Data
     var data: TopicOverviewModel?
@@ -25,15 +24,14 @@ class TopicAuthorTableViewCell: UITableViewCell {
         super.awakeFromNib()
     }
     
-    func setData(data: TopicOverviewModel) {
+    func setData(overview data: TopicOverviewModel, content: String, date: String) {
         self.data = data
         
         nameLabel.text = data.author.username
         avatarView.setImageWith(string: (data.author.avatarURL))
-        dateLabel.text = Date(timeIntervalSince1970: data.created).timeAgo
+        dateLabel.text = date
         nodeLabel.text = data.nodeTitle
-        contentLabel.text = "马上做"
-        editTimeLabel.text = "\(Date(timeIntervalSince1970: data.last_modified))    \(data.replies)条回复"
+        contentLabel.text = content
     }
 
 }

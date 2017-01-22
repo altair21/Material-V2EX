@@ -179,19 +179,6 @@ extension HomeViewController: UITableViewDelegate, UITableViewDataSource {
                 // TODO: failure toast
             })
             
-//            NetworkManager.shared.getTopicReplies(topicId: self.topicOverviewArray[indexPath.row].id, success: { (res) in
-//                var array = Array<TopicReplyModel>()
-//                for (_, item) in res {
-//                    array.append(TopicReplyModel(data: item))
-//                }
-//                delay(seconds: 0.4, completion: {
-//                    topicDetailViewController.repliesData = array
-//                })
-//            }, failure: { (err) in
-//                print(err)
-//                // TODO: failure toast
-//            })
-            
             self.present(topicDetailViewController, animated: true, completion: nil)
         }
         switch navController.state {

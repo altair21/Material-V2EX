@@ -14,9 +14,9 @@ class TopicModel: NSObject {
     var nodeTitle = ""
     var title = ""
     var content = ""
-    var repliesCount = ""                           // 回复数
+    var totalReplies = ""                           // 回复数
     var dateAndClickCount = ""                      // 创建时间和点击次数
-    var appendContent = Array<(content: String, date: String)>()   // 内容, 时间
+    var subtleContent = Array<(content: String, date: String)>()   // 内容, 时间
     var replies = Array<TopicReplyModel>()          // 回复
     var basicHref = ""                              // 不带页码的href
     var page = 1                                    // 当前页码
@@ -33,14 +33,14 @@ class TopicModel: NSObject {
         nodeTitle = headerNode?.xPath("a[2]").first?.content ?? "节点获取失败！"
         title = headerNode?.xPath("h1").first?.content ?? "标题获取失败"
         content = data.xPath("div[1]/div[@class='cell']/div").first?.rawContent ?? "内容获取失败！"
-        repliesCount = data.xPath("div[3]/div/span/text()[1]").first?.content ?? "0 回复"
+        totalReplies = data.xPath("div[3]/div/span/text()[1]").first?.content ?? "0 回复"
         dateAndClickCount = headerNode?.xPath("small/text()[2]").first?.content ?? "创建时间获取失败"
         
         let subtles = data.xPath("div[1]/div[@class='subtle']")
         for subtle in subtles {
             let date = subtle.xPath("span").first?.content ?? "时间获取失败！"
             let content = subtle.xPath("div[@class='topic_content']").first?.content ?? "内容获取失败！"
-            appendContent.append((content: content, date: date))
+            subtleContent.append((content: content, date: date))
         }
         
         let repliesNode = data.xPath("div[3]/div[@id]")
