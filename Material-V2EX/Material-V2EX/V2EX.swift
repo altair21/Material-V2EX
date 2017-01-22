@@ -12,7 +12,8 @@ class V2EX: NSObject {
     static let indexURL = "https://www.v2ex.com"
     static let categoryBasicURL = "https://www.v2ex.com/?tab="
     private static let APIbasicURL = "https://www.v2ex.com/api"
-    static let basicCategory = [("今日热议", Global.Config.kTodayHottestCode),
+    static let basicCategory: Array<(title: String, code: String)> =
+                                [("今日热议", Global.Config.kTodayHottestCode),
                                 ("技术", "tech"),
                                 ("创意", "creative"),
                                 ("好玩", "play"),

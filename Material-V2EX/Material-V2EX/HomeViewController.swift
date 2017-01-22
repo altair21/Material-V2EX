@@ -170,18 +170,27 @@ extension HomeViewController: UITableViewDelegate, UITableViewDataSource {
             let topicDetailViewController = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: Global.ViewControllers.topicDetail) as! TopicDetailViewController
             topicDetailViewController.overviewData = self.topicOverviewArray[indexPath.row]
             
-            NetworkManager.shared.getTopicReplies(topicId: self.topicOverviewArray[indexPath.row].id, success: { (res) in
-                var array = Array<TopicReplyModel>()
-                for (_, item) in res {
-                    array.append(TopicReplyModel(data: item))
-                }
-                delay(seconds: 0.4, completion: {
-                    topicDetailViewController.repliesData = array
+            NetworkManager.shared.getTopicDetail(url: self.topicOverviewArray[indexPath.row].href, success: { (topicModel) in
+                delay(seconds: 0.4, completion: { 
+                    topicDetailViewController.topicModel = topicModel
                 })
-            }, failure: { (err) in
-                print(err)
+            }, failure: { (error) in
+                print(error)
                 // TODO: failure toast
             })
+            
+//            NetworkManager.shared.getTopicReplies(topicId: self.topicOverviewArray[indexPath.row].id, success: { (res) in
+//                var array = Array<TopicReplyModel>()
+//                for (_, item) in res {
+//                    array.append(TopicReplyModel(data: item))
+//                }
+//                delay(seconds: 0.4, completion: {
+//                    topicDetailViewController.repliesData = array
+//                })
+//            }, failure: { (err) in
+//                print(err)
+//                // TODO: failure toast
+//            })
             
             self.present(topicDetailViewController, animated: true, completion: nil)
         }
@@ -284,7 +293,7 @@ extension HomeViewController: SelectNodeDelegate {
             self.tableView.isHidden = false
             self.navController.showNavbar(animated: false)
             DispatchQueue.main.async {
-                self.tableView.setContentOffset(CGPoint(x: 0, y: 0), animated: false)
+                self.tableView.setContentOffset(CGPoint(x: 0, y: 0 - self.tableView.contentInset.top), animated: false)
             }
             delay(seconds: 0.05, completion: {
                 self.tableView.reloadData()

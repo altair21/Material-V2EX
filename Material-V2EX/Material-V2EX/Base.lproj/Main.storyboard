@@ -15,7 +15,7 @@
         <scene sceneID="umU-dU-Xc7">
             <objects>
                 <navigationController id="Krz-wJ-J0a" customClass="ScrollingNavigationController" customModule="AMScrollingNavbar" sceneMemberID="viewController">
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="r7d-3Z-bgQ">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="r7d-3Z-bgQ">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <color key="barTintColor" red="0.10588235294117647" green="0.60392156862745094" blue="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -584,20 +584,11 @@
                                                                 <constraint firstAttribute="height" constant="2" id="341-Cd-M2T"/>
                                                             </constraints>
                                                         </view>
-                                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="YeG-HP-je0">
-                                                            <rect key="frame" x="312" y="16" width="13" height="13"/>
-                                                            <color key="tintColor" red="0.46666666670000001" green="0.46666666670000001" blue="0.46666666670000001" alpha="1" colorSpace="calibratedRGB"/>
-                                                            <constraints>
-                                                                <constraint firstAttribute="height" constant="13" id="WMX-Yi-bHW"/>
-                                                                <constraint firstAttribute="width" constant="13" id="uLF-eH-ucI"/>
-                                                            </constraints>
-                                                        </imageView>
                                                     </subviews>
                                                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                     <constraints>
                                                         <constraint firstAttribute="trailing" secondItem="HFa-D7-dmo" secondAttribute="trailing" constant="5" id="34a-PQ-LiT"/>
                                                         <constraint firstItem="caa-TD-qHw" firstAttribute="top" secondItem="4gy-Td-OQA" secondAttribute="bottom" constant="5" id="85G-5T-QCo"/>
-                                                        <constraint firstItem="HFa-D7-dmo" firstAttribute="leading" secondItem="YeG-HP-je0" secondAttribute="trailing" constant="4" id="EtC-5g-YDK"/>
                                                         <constraint firstItem="caa-TD-qHw" firstAttribute="leading" secondItem="hC2-Y5-vVQ" secondAttribute="trailing" constant="15" id="Hi3-Jv-AYO"/>
                                                         <constraint firstItem="hC2-Y5-vVQ" firstAttribute="top" secondItem="UZc-E3-y8Z" secondAttribute="top" constant="8" id="JO1-oO-IXI"/>
                                                         <constraint firstAttribute="trailing" secondItem="caa-TD-qHw" secondAttribute="trailing" constant="10" id="Tul-XQ-DYP"/>
@@ -607,7 +598,6 @@
                                                         <constraint firstItem="hC2-Y5-vVQ" firstAttribute="leading" secondItem="UZc-E3-y8Z" secondAttribute="leading" constant="8" id="fnI-Qp-WYG"/>
                                                         <constraint firstItem="f96-wO-9p1" firstAttribute="leading" secondItem="UZc-E3-y8Z" secondAttribute="leading" constant="10" id="gyd-8x-u72"/>
                                                         <constraint firstItem="tEK-TQ-vdg" firstAttribute="top" secondItem="UZc-E3-y8Z" secondAttribute="top" id="hcV-iA-9de"/>
-                                                        <constraint firstItem="YeG-HP-je0" firstAttribute="top" secondItem="tEK-TQ-vdg" secondAttribute="bottom" constant="14" id="lK1-p0-jIe"/>
                                                         <constraint firstAttribute="bottom" secondItem="f96-wO-9p1" secondAttribute="bottom" constant="8" id="lrh-3j-eZJ"/>
                                                         <constraint firstAttribute="trailing" secondItem="tEK-TQ-vdg" secondAttribute="trailing" constant="5" id="qXr-cZ-kjr"/>
                                                         <constraint firstItem="HFa-D7-dmo" firstAttribute="top" secondItem="tEK-TQ-vdg" secondAttribute="bottom" constant="12" id="uPc-46-QU6"/>
@@ -641,7 +631,6 @@
                                             <outlet property="contentLabel" destination="f96-wO-9p1" id="UMR-KL-bL1"/>
                                             <outlet property="dateLabel" destination="caa-TD-qHw" id="D3i-GK-bht"/>
                                             <outlet property="nameLabel" destination="4gy-Td-OQA" id="rYD-1R-NCI"/>
-                                            <outlet property="thanksImageView" destination="YeG-HP-je0" id="Qpb-4x-2QC"/>
                                             <outlet property="thanksLabel" destination="HFa-D7-dmo" id="p3L-QR-1t0"/>
                                         </connections>
                                     </tableViewCell>

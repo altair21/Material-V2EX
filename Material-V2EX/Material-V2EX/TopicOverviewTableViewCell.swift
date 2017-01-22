@@ -36,11 +36,11 @@ class TopicOverviewTableViewCell: UITableViewCell {
     func setData(data: TopicOverviewModel) {
         self.data = data
         
-        nicknameLabel.text = data.authorName
+        nicknameLabel.text = data.author.username
         dateLabel.text = data.last_modified != 0 ? Date(timeIntervalSince1970: data.last_modified).timeAgo : data.last_modifiedText
         nodeLabel.text = data.nodeTitle
         repliesLabel.text = "\(data.replies)"
-        avatarView.setImageWith(string: (data.authorAvatar))
+        avatarView.setImageWith(string: (data.author.avatarURL))
         titleLabel.text = data.title
         
         animatedUI()

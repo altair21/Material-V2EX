@@ -14,6 +14,7 @@ class NodeModel: NSObject {
     var title = ""          // 用于显示
     
     init(data: JSON) {
+        super.init()
         name = data["name"].stringValue
         title = data["title"].stringValue
     }

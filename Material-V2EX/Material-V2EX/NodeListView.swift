@@ -75,7 +75,7 @@ extension NodeListView: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: Global.Cells.nodeListCell, for: indexPath) as! NodeListTableViewCell
-        cell.nodeButton.title = V2EX.basicCategory[indexPath.row].0
+        cell.nodeButton.title = V2EX.basicCategory[indexPath.row].title
         cell.indexPath = indexPath
         cell.tableView = tableView
         if indexPath == selectedIndexPath {
@@ -87,7 +87,7 @@ extension NodeListView: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        delegate?.didSelectNode(title: V2EX.basicCategory[indexPath.row].0, code: V2EX.basicCategory[indexPath.row].1)
+        delegate?.didSelectNode(title: V2EX.basicCategory[indexPath.row].title, code: V2EX.basicCategory[indexPath.row].code)
         (tableView.cellForRow(at: selectedIndexPath) as! NodeListTableViewCell).configureState(.unselected)
         (tableView.cellForRow(at: indexPath) as! NodeListTableViewCell).configureState(.selected)
         self.selectedIndexPath = indexPath

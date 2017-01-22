@@ -28,8 +28,8 @@ class TopicAuthorTableViewCell: UITableViewCell {
     func setData(data: TopicOverviewModel) {
         self.data = data
         
-        nameLabel.text = data.authorName
-        avatarView.setImageWith(string: (data.authorAvatar))
+        nameLabel.text = data.author.username
+        avatarView.setImageWith(string: (data.author.avatarURL))
         dateLabel.text = Date(timeIntervalSince1970: data.created).timeAgo
         nodeLabel.text = data.nodeTitle
         contentLabel.text = "马上做"

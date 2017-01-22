@@ -16,7 +16,6 @@ class TopicReplyTableViewCell: UITableViewCell {
     @IBOutlet weak var nameLabel: UILabel!
     @IBOutlet weak var dateLabel: UILabel!
     @IBOutlet weak var thanksLabel: UILabel!
-    @IBOutlet weak var thanksImageView: UIImageView!
     @IBOutlet weak var contentLabel: UILabel!
     
     // Data
@@ -25,19 +24,16 @@ class TopicReplyTableViewCell: UITableViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
         
-        thanksImageView.image = Icon.favorite
     }
     
     func setData(data: TopicReplyModel) {
         self.data = data
         
-        avatarView.setImageWith(string: (data.member?.avatarURL)!)
-        nameLabel.text = data.member?.username
-        dateLabel.text = Date(timeIntervalSince1970: data.created).timeAgo
+        avatarView.setImageWith(string: (data.author.avatarURL))
+        nameLabel.text = data.author.username
+        dateLabel.text = data.date
         contentLabel.text = data.content
-        thanksLabel.text = "\(data.thanks)"
-        thanksLabel.isHidden = data.thanks == 0
-        thanksImageView.isHidden = data.thanks == 0
+        thanksLabel.text = data.thanks
     }
 
 }

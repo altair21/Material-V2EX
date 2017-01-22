@@ -60,6 +60,21 @@ class NetworkManager: NSObject {
         commonGetTopicList(url: V2EX.categoryBasicURL + code, success: success, failure: failure)
     }
     
+    func getTopicDetail(url: String, success: @escaping (TopicModel)->Void, failure: @escaping (String)->Void ) {
+        Alamofire.request(url, headers: Global.Config.requestHeader).responseString { (response) in
+            switch response.result {
+            case .success:
+                let jiDoc = Ji(htmlString: response.result.value!)!
+                if let contentNode = jiDoc.xPath("//body/div[@id='Wrapper']/div[@class='content']")?.first {
+                    let res = TopicModel(data: contentNode)
+                    success(res)
+                }
+            case .failure:
+                failure(response.result.error?.localizedDescription ?? "网络错误")
+            }
+        }
+    }
+    
     func getTopicReplies(topicId: Int, success: @escaping (JSON)->Void, failure: @escaping (String)->Void) {
 //        commonRequest(api: V2EX.API.topicReplies, parameters: ["topic_id": topicId, "page": "", "page_size": ""], success: success, failure: failure)
     }
