@@ -63,11 +63,21 @@ class TopicOverviewTableViewCell: UITableViewCell {
     }
     
     func configureReadState(state: TopicReadState) {
+        let animateDuration = 0.3
         switch state {
         case .read:
             bgView.layer.shadowRadius = 3.25
+            let shadowAnim = CABasicAnimation(keyPath: "layer.shadowRadius")
+            shadowAnim.fillMode = kCAFillModeBoth
+            shadowAnim.fromValue = 0.75
+            shadowAnim.toValue = 3.25
+            shadowAnim.duration = animateDuration
+            UIView.animate(withDuration: animateDuration, animations: {
+                self.repliesLabel.backgroundColor = UIColor.fromHex(string: "#E5E5E5")
+            })
         case .unread:
             bgView.layer.shadowRadius = 0.75
+            repliesLabel.backgroundColor = UIColor.fromHex(string: "#969CB1")
         }
     }
 
