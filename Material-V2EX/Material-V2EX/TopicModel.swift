@@ -39,7 +39,7 @@ class TopicModel: NSObject {
         let subtles = data.xPath("div[1]/div[@class='subtle']")
         for subtle in subtles {
             let date = subtle.xPath("span").first?.content ?? "时间获取失败！"
-            let content = subtle.xPath("div[@class='topic_content']").first?.content ?? "内容获取失败！"
+            let content = subtle.xPath("div[@class='topic_content']").first?.rawContent ?? "内容获取失败！"
             subtleContent.append((content: content, date: date))
         }
         

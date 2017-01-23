@@ -152,12 +152,12 @@
 				504667A11E0CC954008B6953 /* TopicOverviewTableViewCell.swift */,
 				501370EF1E1B4F6B0076977B /* TopicAuthorTableViewCell.swift */,
 				501370F11E1B4F770076977B /* TopicReplyTableViewCell.swift */,
+				500002FA1E349A76000057F2 /* TopicSubtleTableViewCell.swift */,
 				501370F31E1BA00A0076977B /* TopicBlankTableViewCell.swift */,
 				501370F71E1BB12E0076977B /* TopicHeaderTableViewCell.swift */,
 				501370F91E1BB1390076977B /* TopicFooterTableViewCell.swift */,
 				50CBCBD81E1D0F0C009F6960 /* NodeListTableViewCell.swift */,
 				50CBCBD91E1D0F0C009F6960 /* NodeListTableViewCell.xib */,
-				500002FA1E349A76000057F2 /* TopicSubtleTableViewCell.swift */,
 				500002FC1E349E58000057F2 /* TopicReplyCountTableViewCell.swift */,
 			);
 			name = Cells;

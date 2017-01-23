@@ -25,7 +25,20 @@ class TopicSubtleTableViewCell: UITableViewCell {
     
     func setData(data: (content: String, date: String)) {
         dateLabel.text = data.date
-        contentLabel.text = data.content
+        
+        let htmlData = data.content.data(using: .unicode)!
+        let attributedString = try? NSMutableAttributedString(data: htmlData, options: [NSDocumentTypeDocumentAttribute: NSHTMLTextDocumentType], documentAttributes: nil)
+        attributedString?.enumerateAttribute(NSFontAttributeName, in: NSRange(location: 0, length: (attributedString?.length)!), options: .longestEffectiveRangeNotRequired, using: { (value, range, _) in
+            let font = value as! UIFont
+            let newFont = UIFont(name: contentLabel.font!.fontName, size: font.pointSize + 2)!
+            attributedString?.addAttributes([NSFontAttributeName: newFont], range: range)
+        })
+        if (attributedString?.mutableString.length)! > 0 {
+            attributedString?.replaceCharacters(in: NSRange(location: (attributedString?.length)! - 1, length: 1), with: NSAttributedString(string: ""))    // 删除最后的换行符
+        }
+        contentLabel.layer.shouldRasterize = true
+        contentLabel.layer.rasterizationScale = UIScreen.main.scale
+        contentLabel.attributedText = attributedString
     }
 
 }
