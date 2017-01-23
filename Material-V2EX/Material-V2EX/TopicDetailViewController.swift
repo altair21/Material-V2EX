@@ -68,7 +68,11 @@ extension TopicDetailViewController: UITableViewDataSource, UITableViewDelegate 
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if let model = topicModel {
             if model.replies.count > 0 {
-                return model.replies.count + model.subtleContent.count + 4  // 标题、正文、回复数cell、底部空白
+                var cnt = 4 // 标题、正文、回复数cell、底部空白
+                if model.totalPages > model.page {
+                    cnt += 1    // BlankCell（转菊）
+                }
+                return model.replies.count + model.subtleContent.count + cnt
             } else {
                 return model.subtleContent.count + 4    // 标题、正文、BlankCell、底部空白
             }
@@ -95,7 +99,25 @@ extension TopicDetailViewController: UITableViewDataSource, UITableViewDelegate 
                 return cell
             }
             if topicModel.replies.count > 0 {   // 有回复
-                if indexPath.row == topicModel.subtleContent.count + topicModel.replies.count + 3 {  // FooterCell
+                var cnt = 3 // 标题、正文、回复数cell
+                if topicModel.totalPages > topicModel.page {
+                    cnt += 1
+                    if indexPath.row == topicModel.subtleContent.count + topicModel.replies.count + 3 { // BlankCell
+                        let cell = tableView.dequeueReusableCell(withIdentifier: Global.Cells.topicBlankCell, for: indexPath) as! TopicBlankTableViewCell
+                        cell.state = .refreshing
+                        NetworkManager.shared.getTopicDetailComments(url: topicModel.basicHref + "\(topicModel.page + 1)", success: { (res) in
+                            topicModel.replies += res
+                            topicModel.page += 1
+                            self.tableView.reloadData()
+                        }, failure: { (error) in
+                            print(error)
+                            
+                            // TODO: failure toast
+                        })
+                        return cell
+                    }
+                }
+                if indexPath.row == topicModel.subtleContent.count + topicModel.replies.count + cnt {  // FooterCell
                     let cell = tableView.dequeueReusableCell(withIdentifier: Global.Cells.topicFooterCell, for: indexPath)
                     return cell
                 } else if indexPath.row == topicModel.subtleContent.count + 2 { // 回复数cell

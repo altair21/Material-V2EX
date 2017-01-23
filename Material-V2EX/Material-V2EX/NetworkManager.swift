@@ -68,6 +68,29 @@ class NetworkManager: NSObject {
                 if let contentNode = jiDoc.xPath("//body/div[@id='Wrapper']/div[@class='content']")?.first {
                     let res = TopicModel(data: contentNode)
                     success(res)
+                } else {
+                    failure("数据解析失败！")
+                }
+            case .failure:
+                failure(response.result.error?.localizedDescription ?? "网络错误")
+            }
+        }
+    }
+    
+    func getTopicDetailComments(url: String, success: @escaping (Array<TopicReplyModel>)->Void, failure: @escaping (String)->Void ) {
+        print(url)
+        Alamofire.request(url, headers: Global.Config.requestHeader).responseString { (response) in
+            switch response.result {
+            case .success:
+                let jiDoc = Ji(htmlString: response.result.value!)!
+                if let repliesNode = jiDoc.xPath("//body/div[@id='Wrapper']/div[@class='content']/div[3]/div[@id]") {
+                    var res = Array<TopicReplyModel>()
+                    for reply in repliesNode {
+                        res.append(TopicReplyModel(data: reply))
+                    }
+                    success(res)
+                } else {
+                    failure("数据解析失败")
                 }
             case .failure:
                 failure(response.result.error?.localizedDescription ?? "网络错误")
