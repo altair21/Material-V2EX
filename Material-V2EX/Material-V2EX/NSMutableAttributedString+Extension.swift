@@ -15,18 +15,23 @@ extension NSMutableAttributedString {
         let attributedString = try? NSMutableAttributedString(data: htmlData, options: [NSDocumentTypeDocumentAttribute: NSHTMLTextDocumentType], documentAttributes: nil)
         let totalRange = NSRange(location: 0, length: (attributedString?.length)!)
         
-        attributedString?.enumerateAttribute(NSFontAttributeName, in: totalRange, options: .longestEffectiveRangeNotRequired, using: { (value, range, _) in
+        attributedString?.enumerateAttribute(NSFontAttributeName, in: totalRange, options: .longestEffectiveRangeNotRequired, using: { (value, range, _) in // 调整字号
             let font = value as! UIFont
             let newFont = UIFont(name: fontName, size: font.pointSize + 2)!
             attributedString?.addAttributes([NSFontAttributeName: newFont], range: range)
         })
-        attributedString?.enumerateAttribute(NSAttachmentAttributeName, in: totalRange, options: .init(rawValue: 0), using: { (value, range, _) in
-            if let attachment = value as? NSTextAttachment {
-                let image = attachment.image(forBounds: attachment.bounds, textContainer: NSTextContainer(), characterIndex: range.location)
-                if (image?.size.width)! > widthConstraint {
-                    let newImage = image?.resize(toWidth: widthConstraint - 2 / (image?.size.width)!)
+        attributedString?.enumerateAttribute(NSAttachmentAttributeName, in: totalRange, options: .init(rawValue: 0), using: { (value, range, _) in  // 调整图片尺寸、压缩图片
+            if let attachment = value as? NSTextAttachment, let image = attachment.image(forBounds: attachment.bounds, textContainer: NSTextContainer(), characterIndex: range.location) {
+                var newImage: UIImage? = nil
+                if let imageData = UIImageJPEGRepresentation(image, 0.5) {
+                    newImage = UIImage(data: imageData)
+                }
+                if image.size.width > widthConstraint {
+                    newImage = newImage?.resize(toWidth: widthConstraint - 2 / image.size.width) ?? image.resize(toWidth: widthConstraint - 2 / image.size.width)
+                }
+                if let resultImage = newImage {
                     let newAttribute = NSTextAttachment()
-                    newAttribute.image = newImage
+                    newAttribute.image = resultImage
                     attributedString?.addAttribute(NSAttachmentAttributeName, value: newAttribute, range: range)
                 }
             }
