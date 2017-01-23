@@ -14,7 +14,8 @@
 		501370F41E1BA00A0076977B /* TopicBlankTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 501370F31E1BA00A0076977B /* TopicBlankTableViewCell.swift */; };
 		501370F81E1BB12E0076977B /* TopicHeaderTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 501370F71E1BB12E0076977B /* TopicHeaderTableViewCell.swift */; };
 		501370FA1E1BB1390076977B /* TopicFooterTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 501370F91E1BB1390076977B /* TopicFooterTableViewCell.swift */; };
-		501FB7BA1E13C7FD009B94BA /* UIColor+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 501FB7B91E13C7FD009B94BA /* UIColor+Extensions.swift */; };
+		5018A7131E361511005FAC81 /* NSMutableAttributedString+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5018A7121E361511005FAC81 /* NSMutableAttributedString+Extension.swift */; };
+		501FB7BA1E13C7FD009B94BA /* UIColor+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 501FB7B91E13C7FD009B94BA /* UIColor+Extension.swift */; };
 		501FB7BF1E13D6E5009B94BA /* PullToRefresh.swift in Sources */ = {isa = PBXBuildFile; fileRef = 501FB7BE1E13D6E5009B94BA /* PullToRefresh.swift */; };
 		50280C9F1E165C2700996FDA /* TopicReplyModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50280C9E1E165C2700996FDA /* TopicReplyModel.swift */; };
 		50360EB91E0B7BE700B082DD /* AnimationUtility.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50360EB81E0B7BE700B082DD /* AnimationUtility.swift */; };
@@ -61,7 +62,8 @@
 		501370F31E1BA00A0076977B /* TopicBlankTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TopicBlankTableViewCell.swift; sourceTree = "<group>"; };
 		501370F71E1BB12E0076977B /* TopicHeaderTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TopicHeaderTableViewCell.swift; sourceTree = "<group>"; };
 		501370F91E1BB1390076977B /* TopicFooterTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TopicFooterTableViewCell.swift; sourceTree = "<group>"; };
-		501FB7B91E13C7FD009B94BA /* UIColor+Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIColor+Extensions.swift"; sourceTree = "<group>"; };
+		5018A7121E361511005FAC81 /* NSMutableAttributedString+Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "NSMutableAttributedString+Extension.swift"; sourceTree = "<group>"; };
+		501FB7B91E13C7FD009B94BA /* UIColor+Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIColor+Extension.swift"; sourceTree = "<group>"; };
 		501FB7BE1E13D6E5009B94BA /* PullToRefresh.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PullToRefresh.swift; sourceTree = "<group>"; };
 		50280C9E1E165C2700996FDA /* TopicReplyModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TopicReplyModel.swift; sourceTree = "<group>"; };
 		50360EB81E0B7BE700B082DD /* AnimationUtility.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AnimationUtility.swift; sourceTree = "<group>"; };
@@ -281,9 +283,10 @@
 			isa = PBXGroup;
 			children = (
 				50E8C07A1E0E838C00FAC85B /* UIImageView+Extension.swift */,
-				501FB7B91E13C7FD009B94BA /* UIColor+Extensions.swift */,
+				501FB7B91E13C7FD009B94BA /* UIColor+Extension.swift */,
 				50B1D8631E1270CD00BCE4FF /* NSDate+Extension.swift */,
 				50B1D8651E1273BC00BCE4FF /* NSDateTimeAgo.bundle */,
+				5018A7121E361511005FAC81 /* NSMutableAttributedString+Extension.swift */,
 			);
 			name = Extensions;
 			sourceTree = "<group>";
@@ -455,7 +458,8 @@
 				50B1D86C1E127D1C00BCE4FF /* ARIndicator.swift in Sources */,
 				501370F41E1BA00A0076977B /* TopicBlankTableViewCell.swift in Sources */,
 				5067E20D1E0AA0D20016F924 /* MenuView.swift in Sources */,
-				501FB7BA1E13C7FD009B94BA /* UIColor+Extensions.swift in Sources */,
+				5018A7131E361511005FAC81 /* NSMutableAttributedString+Extension.swift in Sources */,
+				501FB7BA1E13C7FD009B94BA /* UIColor+Extension.swift in Sources */,
 				504667A41E0CF5F5008B6953 /* fps.swift in Sources */,
 				501370F21E1B4F770076977B /* TopicReplyTableViewCell.swift in Sources */,
 				5065F6E11E0A88B100B5A9FD /* Global.swift in Sources */,

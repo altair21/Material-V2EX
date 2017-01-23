@@ -1,5 +1,5 @@
 //
-//  UIColor+Extensions.swift
+//  UIColor+Extension.swift
 //  Material-V2EX
 //
 //  Created by altair21 on 16/12/28.

@@ -78,7 +78,6 @@ class NetworkManager: NSObject {
     }
     
     func getTopicDetailComments(url: String, success: @escaping (Array<TopicReplyModel>)->Void, failure: @escaping (String)->Void ) {
-        print(url)
         Alamofire.request(url, headers: Global.Config.requestHeader).responseString { (response) in
             switch response.result {
             case .success:

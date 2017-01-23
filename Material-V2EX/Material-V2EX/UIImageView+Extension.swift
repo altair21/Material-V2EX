@@ -1,5 +1,5 @@
 //
-//  UIImageView+Cache.swift
+//  UIImageView+Extension.swift
 //  Material-V2EX
 //
 //  Created by altair21 on 16/12/24.

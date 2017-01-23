@@ -34,22 +34,9 @@ class TopicReplyTableViewCell: UITableViewCell {
         dateLabel.text = data.date
         thanksLabel.text = data.thanks
         
-        let htmlData = data.content.data(using: .unicode)!
-        let attributedString = try? NSMutableAttributedString(data: htmlData, options: [NSDocumentTypeDocumentAttribute: NSHTMLTextDocumentType], documentAttributes: nil)
-        attributedString?.enumerateAttribute(NSFontAttributeName, in: NSRange(location: 0, length: (attributedString?.length)!), options: .longestEffectiveRangeNotRequired, using: { (value, range, _) in
-            let font = value as! UIFont
-            let newFont = UIFont(name: contentTextView.font!.fontName, size: font.pointSize + 2)!
-            attributedString?.addAttributes([NSFontAttributeName: newFont], range: range)
-        })
-        attributedString?.enumerateAttribute(NSLinkAttributeName, in: NSRange(location: 0, length: (attributedString?.length)!), options: .longestEffectiveRangeNotRequired, using: { (value, range, _) in
-//            print(value)
-        })
-        if (attributedString?.mutableString.length)! > 0 {
-            attributedString?.replaceCharacters(in: NSRange(location: (attributedString?.length)! - 1, length: 1), with: NSAttributedString(string: ""))    // 删除最后的换行符
-        }
+        contentTextView.attributedText = NSMutableAttributedString.contentFromHTMLString(data.content, fontName: contentTextView.font!.fontName, widthConstraint: Global.Constants.screenWidth - 34)
         contentTextView.layer.shouldRasterize = true
         contentTextView.layer.rasterizationScale = UIScreen.main.scale
-        contentTextView.attributedText = attributedString
     }
 
 }
