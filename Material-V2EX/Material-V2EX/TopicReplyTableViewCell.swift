@@ -42,9 +42,11 @@ class TopicReplyTableViewCell: UITableViewCell {
             attributedString?.addAttributes([NSFontAttributeName: newFont], range: range)
         })
         attributedString?.enumerateAttribute(NSLinkAttributeName, in: NSRange(location: 0, length: (attributedString?.length)!), options: .longestEffectiveRangeNotRequired, using: { (value, range, _) in
-            print(value)
+//            print(value)
         })
-        attributedString?.replaceCharacters(in: NSRange(location: (attributedString?.length)! - 1, length: 1), with: NSAttributedString(string: ""))    // 删除最后的换行符
+        if (attributedString?.mutableString.length)! > 0 {
+            attributedString?.replaceCharacters(in: NSRange(location: (attributedString?.length)! - 1, length: 1), with: NSAttributedString(string: ""))    // 删除最后的换行符
+        }
         contentTextView.layer.shouldRasterize = true
         contentTextView.layer.rasterizationScale = UIScreen.main.scale
         contentTextView.attributedText = attributedString
