@@ -5,7 +5,7 @@
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11762"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11757"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
@@ -20,7 +20,38 @@
                     <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.40000000000000002" colorSpace="calibratedRGB"/>
                 </view>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="iQ8-Ni-d8L">
-                    <rect key="frame" x="-255" y="0.0" width="255" height="667"/>
+                    <rect key="frame" x="0.0" y="0.0" width="255" height="667"/>
+                    <subviews>
+                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="default_avatar" translatesAutoresizingMaskIntoConstraints="NO" id="VP4-eZ-xoG">
+                            <rect key="frame" x="32" y="32" width="90" height="90"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <userDefinedRuntimeAttributes>
+                                <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                    <integer key="value" value="45"/>
+                                </userDefinedRuntimeAttribute>
+                                <userDefinedRuntimeAttribute type="number" keyPath="layer.borderWidth">
+                                    <integer key="value" value="1"/>
+                                </userDefinedRuntimeAttribute>
+                                <userDefinedRuntimeAttribute type="boolean" keyPath="clipsToBounds" value="YES"/>
+                            </userDefinedRuntimeAttributes>
+                        </imageView>
+                        <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9ee-Il-cJD" customClass="RaisedButton" customModule="Material">
+                            <rect key="frame" x="149" y="58" width="71" height="39"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <color key="backgroundColor" red="1" green="0.60784313729999995" blue="0.4431372549" alpha="1" colorSpace="calibratedRGB"/>
+                            <state key="normal" title="登录">
+                                <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            </state>
+                            <userDefinedRuntimeAttributes>
+                                <userDefinedRuntimeAttribute type="color" keyPath="backgroundColor">
+                                    <color key="value" red="1" green="0.60784313729999995" blue="0.4431372549" alpha="1" colorSpace="calibratedRGB"/>
+                                </userDefinedRuntimeAttribute>
+                                <userDefinedRuntimeAttribute type="color" keyPath="pulseColor">
+                                    <color key="value" red="0.8862745098" green="0.8862745098" blue="0.8862745098" alpha="1" colorSpace="calibratedRGB"/>
+                                </userDefinedRuntimeAttribute>
+                            </userDefinedRuntimeAttributes>
+                        </button>
+                    </subviews>
                     <color key="backgroundColor" red="0.20392156862745098" green="0.6588235294117647" blue="0.32549019607843138" alpha="1" colorSpace="calibratedRGB"/>
                     <constraints>
                         <constraint firstAttribute="width" constant="255" id="DpH-bH-D3M"/>
@@ -43,16 +74,22 @@
                 <constraint firstItem="iQ8-Ni-d8L" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="2Gs-YW-VkP"/>
                 <constraint firstAttribute="bottom" secondItem="iQ8-Ni-d8L" secondAttribute="bottom" id="4lL-1o-EGm"/>
                 <constraint firstAttribute="bottom" secondItem="K2X-mp-Get" secondAttribute="bottom" id="GrH-Ge-T0v"/>
+                <constraint firstItem="iQ8-Ni-d8L" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="KeF-at-HD6"/>
                 <constraint firstAttribute="trailing" secondItem="K2X-mp-Get" secondAttribute="trailing" id="Q4x-en-eTO"/>
                 <constraint firstItem="K2X-mp-Get" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="VdN-ij-EWH"/>
-                <constraint firstItem="iQ8-Ni-d8L" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="-255" id="cAv-x6-wiv"/>
                 <constraint firstItem="K2X-mp-Get" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="ef6-sw-ZbN"/>
             </constraints>
             <connections>
+                <outlet property="avatarView" destination="VP4-eZ-xoG" id="YOp-by-yAy"/>
                 <outlet property="bgView" destination="K2X-mp-Get" id="Bld-NE-VeW"/>
+                <outlet property="mainButton" destination="9ee-Il-cJD" id="3gt-r3-Jhf"/>
                 <outlet property="panelView" destination="iQ8-Ni-d8L" id="QoS-jo-9ka"/>
-                <outlet property="panelViewLeadingConstraint" destination="cAv-x6-wiv" id="kmA-FJ-mMG"/>
+                <outlet property="panelViewLeadingConstraint" destination="KeF-at-HD6" id="ucX-0M-wvb"/>
             </connections>
+            <point key="canvasLocation" x="25.5" y="51.5"/>
         </view>
     </objects>
+    <resources>
+        <image name="default_avatar" width="260" height="260"/>
+    </resources>
 </document>

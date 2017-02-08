@@ -19,6 +19,7 @@ class Global: NSObject {
     struct ViewControllers {
         static let menuView = "MenuViewController"
         static let topicDetail = "TopicDetailViewController"
+        static let login = "LoginViewController"
     }
     
     // Views
@@ -45,6 +46,11 @@ class Global: NSObject {
     struct Constants {
         static let screenWidth = UIScreen.main.bounds.width
         static let screenHeight = UIScreen.main.bounds.height
+    }
+    
+    // Variable
+    struct Variable {
+        static var isLogin = false
     }
     
     // Config

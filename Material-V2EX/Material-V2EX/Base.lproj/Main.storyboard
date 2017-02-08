@@ -15,7 +15,7 @@
         <scene sceneID="umU-dU-Xc7">
             <objects>
                 <navigationController id="Krz-wJ-J0a" customClass="ScrollingNavigationController" customModule="AMScrollingNavbar" sceneMemberID="viewController">
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="r7d-3Z-bgQ">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="r7d-3Z-bgQ">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <color key="barTintColor" red="0.10588235294117647" green="0.60392156862745094" blue="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -38,6 +38,130 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Cb4-Rz-vnh" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-858" y="45"/>
+        </scene>
+        <!--Login View Controller-->
+        <scene sceneID="RRk-6X-ehm">
+            <objects>
+                <viewController storyboardIdentifier="LoginViewController" id="vR9-N5-HNz" customClass="LoginViewController" customModule="Material_V2EX" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="gg7-hG-leQ"/>
+                        <viewControllerLayoutGuide type="bottom" id="dcb-kU-UMq"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="h49-Ap-Kjl">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Qg7-tD-80O" customClass="FabButton" customModule="Material">
+                                <rect key="frame" x="24" y="35" width="38" height="38"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" secondItem="Qg7-tD-80O" secondAttribute="height" multiplier="1:1" id="LEN-Ga-LRQ"/>
+                                    <constraint firstAttribute="width" constant="38" id="OR5-7B-c2O"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name="GillSans" family="Gill Sans" pointSize="28"/>
+                                <color key="tintColor" red="0.25098039220000001" green="0.25098039220000001" blue="0.25098039220000001" alpha="1" colorSpace="calibratedRGB"/>
+                                <state key="normal">
+                                    <color key="titleColor" red="0.25098039220000001" green="0.25098039220000001" blue="0.25098039220000001" alpha="1" colorSpace="calibratedRGB"/>
+                                </state>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="color" keyPath="pulseColor">
+                                        <color key="value" red="0.8862745098" green="0.8862745098" blue="0.8862745098" alpha="1" colorSpace="calibratedRGB"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="color" keyPath="backgroundColor">
+                                        <color key="value" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="image" keyPath="image" value="close"/>
+                                </userDefinedRuntimeAttributes>
+                            </button>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="rJn-FT-e2j" customClass="TextField" customModule="Material">
+                                <rect key="frame" x="32" y="123" width="311" height="30"/>
+                                <nil key="textColor"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits" returnKeyType="next"/>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="string" keyPath="placeholder" value="用户名"/>
+                                    <userDefinedRuntimeAttribute type="boolean" keyPath="isVisibilityIconButtonEnabled" value="NO"/>
+                                    <userDefinedRuntimeAttribute type="boolean" keyPath="isVisibilityIconButtonAutoHandled" value="NO"/>
+                                </userDefinedRuntimeAttributes>
+                            </textField>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" clearsOnBeginEditing="YES" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="i8v-Gf-aBk" customClass="TextField" customModule="Material">
+                                <rect key="frame" x="32" y="198" width="311" height="30"/>
+                                <nil key="textColor"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits" returnKeyType="go"/>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="string" keyPath="placeholder" value="密码"/>
+                                    <userDefinedRuntimeAttribute type="boolean" keyPath="isVisibilityIconButtonEnabled" value="YES"/>
+                                </userDefinedRuntimeAttributes>
+                            </textField>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="V 2 E X" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="n5z-D7-ZV6">
+                                <rect key="frame" x="145" y="37" width="85" height="34"/>
+                                <fontDescription key="fontDescription" name="PingFangHK-Regular" family="PingFang HK" pointSize="24"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="© 2017 altair21" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rgy-BB-hxw">
+                                <rect key="frame" x="145" y="644" width="86" height="15"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                                <color key="textColor" red="0.66666666666666663" green="0.66666666666666663" blue="0.66666666666666663" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="1sI-og-BVe" customClass="RaisedButton" customModule="Material">
+                                <rect key="frame" x="32" y="273" width="311" height="40"/>
+                                <color key="backgroundColor" red="0.90980392160000001" green="0.28235294119999998" blue="0.33333333329999998" alpha="1" colorSpace="calibratedRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="40" id="hhf-QY-Y9d"/>
+                                </constraints>
+                                <state key="normal" title="登录">
+                                    <color key="titleColor" red="0.98039215690000003" green="0.98039215690000003" blue="0.98039215690000003" alpha="1" colorSpace="calibratedRGB"/>
+                                </state>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="color" keyPath="backgroundColor">
+                                        <color key="value" red="0.90980392160000001" green="0.28235294119999998" blue="0.33333333329999998" alpha="1" colorSpace="calibratedRGB"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="color" keyPath="pulseColor">
+                                        <color key="value" red="0.98039215690000003" green="0.98039215690000003" blue="0.98039215690000003" alpha="1" colorSpace="calibratedRGB"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                        <integer key="value" value="4"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="color" keyPath="shadowColor">
+                                        <color key="value" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="size" keyPath="shadowOffset">
+                                        <size key="value" width="1" height="2"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" red="0.93725490199999995" green="0.93725490199999995" blue="0.95686274510000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <constraints>
+                            <constraint firstItem="1sI-og-BVe" firstAttribute="leading" secondItem="h49-Ap-Kjl" secondAttribute="leading" constant="32" id="32w-es-3xV"/>
+                            <constraint firstAttribute="trailing" secondItem="rJn-FT-e2j" secondAttribute="trailing" constant="32" id="3Aw-Of-SmD"/>
+                            <constraint firstItem="n5z-D7-ZV6" firstAttribute="centerX" secondItem="h49-Ap-Kjl" secondAttribute="centerX" id="4ck-kD-zGt"/>
+                            <constraint firstItem="rgy-BB-hxw" firstAttribute="centerX" secondItem="h49-Ap-Kjl" secondAttribute="centerX" id="9Z5-n8-f7Z"/>
+                            <constraint firstItem="1sI-og-BVe" firstAttribute="top" secondItem="i8v-Gf-aBk" secondAttribute="bottom" constant="45" id="Ahp-97-l6I"/>
+                            <constraint firstAttribute="trailing" secondItem="i8v-Gf-aBk" secondAttribute="trailing" constant="32" id="EXX-NG-j8W"/>
+                            <constraint firstItem="n5z-D7-ZV6" firstAttribute="centerY" secondItem="Qg7-tD-80O" secondAttribute="centerY" id="G65-KJ-EQg"/>
+                            <constraint firstItem="Qg7-tD-80O" firstAttribute="leading" secondItem="h49-Ap-Kjl" secondAttribute="leading" constant="24" id="Gdp-rN-Uqf"/>
+                            <constraint firstItem="dcb-kU-UMq" firstAttribute="top" secondItem="rgy-BB-hxw" secondAttribute="bottom" constant="8" id="JGV-Kz-tuW"/>
+                            <constraint firstItem="rJn-FT-e2j" firstAttribute="leading" secondItem="h49-Ap-Kjl" secondAttribute="leading" constant="32" id="Wjz-X8-iQN"/>
+                            <constraint firstAttribute="trailing" secondItem="1sI-og-BVe" secondAttribute="trailing" constant="32" id="aGq-CS-gdV"/>
+                            <constraint firstItem="i8v-Gf-aBk" firstAttribute="top" secondItem="rJn-FT-e2j" secondAttribute="bottom" constant="45" id="dRV-TL-GPI"/>
+                            <constraint firstItem="Qg7-tD-80O" firstAttribute="top" secondItem="gg7-hG-leQ" secondAttribute="bottom" constant="15" id="mSI-d5-lbM"/>
+                            <constraint firstItem="i8v-Gf-aBk" firstAttribute="leading" secondItem="h49-Ap-Kjl" secondAttribute="leading" constant="32" id="vbc-s8-UAj"/>
+                            <constraint firstItem="rJn-FT-e2j" firstAttribute="top" secondItem="Qg7-tD-80O" secondAttribute="bottom" constant="50" id="ylh-LV-nov"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="closeButton" destination="Qg7-tD-80O" id="z21-Gw-Qc9"/>
+                        <outlet property="loginButton" destination="1sI-og-BVe" id="Gyn-VM-K6L"/>
+                        <outlet property="passwordTextField" destination="i8v-Gf-aBk" id="g2e-c5-xfT"/>
+                        <outlet property="usernameTextField" destination="rJn-FT-e2j" id="d0V-86-SOD"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="NgK-vC-Y7E" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="136.80000000000001" y="-650.82458770614699"/>
         </scene>
         <!--V2EX-->
         <scene sceneID="tne-QT-ifu">
@@ -690,7 +814,7 @@
                                                                 <constraint firstAttribute="height" constant="2" id="341-Cd-M2T"/>
                                                             </constraints>
                                                         </view>
-                                                        <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" scrollEnabled="NO" editable="NO" selectable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Iv7-v0-Ehi">
+                                                        <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" scrollEnabled="NO" editable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Iv7-v0-Ehi">
                                                             <rect key="frame" x="8" y="55" width="343" height="62"/>
                                                             <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                             <string key="text">Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Nam liber te conscient to factor tum poen legum odioque civiuda.</string>
@@ -944,4 +1068,7 @@
             <point key="canvasLocation" x="1000.8" y="44.527736131934034"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="close" width="32" height="32"/>
+    </resources>
 </document>
