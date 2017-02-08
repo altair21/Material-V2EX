@@ -91,7 +91,7 @@ extension TopicDetailViewController: UITableViewDataSource, UITableViewDelegate 
         if let topicModel = self.topicModel {  // 已有数据
             if indexPath.row == 1 { // 有数据时第二行始终是正文
                 let cell = tableView.dequeueReusableCell(withIdentifier: Global.Cells.topicAuthorCell, for: indexPath) as! TopicAuthorTableViewCell
-                cell.setData(overview: overviewData, content: topicModel.content, date: topicModel.dateAndClickCount)
+                cell.setData(overview: overviewData, data: topicModel)
                 return cell
             } else if indexPath.row < topicModel.subtleContent.count + 2 {  // 有数据时始终是追加内容
                 let cell = tableView.dequeueReusableCell(withIdentifier: Global.Cells.topicSubtleCell, for: indexPath) as! TopicSubtleTableViewCell

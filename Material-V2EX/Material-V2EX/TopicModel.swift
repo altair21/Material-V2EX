@@ -14,9 +14,10 @@ class TopicModel: NSObject {
     var nodeTitle = ""
     var title = ""
     var content = ""
+    var renderContent: NSMutableAttributedString? = nil
     var totalReplies = ""                           // 回复数
     var dateAndClickCount = ""                      // 创建时间和点击次数
-    var subtleContent = Array<(content: String, date: String)>()   // 内容, 时间
+    var subtleContent = Array<TopicSubtleModel>()   // 内容, 时间
     var replies = Array<TopicReplyModel>()          // 回复
     var basicHref = ""                              // 不带页码的href
     var page = 1                                    // 当前页码
@@ -40,15 +41,15 @@ class TopicModel: NSObject {
         for subtle in subtles {
             let date = subtle.xPath("span").first?.content ?? "时间获取失败！"
             let content = subtle.xPath("div[@class='topic_content']").first?.rawContent ?? "内容获取失败！"
-            subtleContent.append((content: content, date: date))
+            subtleContent.append(TopicSubtleModel(date: date, content: content))
         }
         
         let repliesNode = data.xPath("div[3]/div[@id]")
         for reply in repliesNode {
             replies.append(TopicReplyModel(data: reply))
         }
-        
-        totalPages = Int(data.xPath("div[3]/div[last()]/a[last()]").first?.content ?? "1")!
-        
+        if let pages = data.xPath("div[3]/div[last()]/a[last()]").first?.content, let pageCount = Int(pages) {
+            totalPages = pageCount
+        }
     }
 }

@@ -189,6 +189,7 @@ extension HomeViewController: UITableViewDelegate, UITableViewDataSource {
             presentBlock()
         }
     }
+
 }
 
 // MARK: ScrollingNavigationControllerDelegate

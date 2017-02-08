@@ -12,6 +12,7 @@ import Ji
 class TopicReplyModel: NSObject {
     var thanks = ""
     var content = ""
+    var renderContent: NSMutableAttributedString? = nil
     var author: MemberModel!
     var date = ""
     

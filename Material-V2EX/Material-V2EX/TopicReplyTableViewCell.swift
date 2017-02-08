@@ -34,7 +34,12 @@ class TopicReplyTableViewCell: UITableViewCell {
         dateLabel.text = data.date
         thanksLabel.text = data.thanks
         
-        contentTextView.attributedText = NSMutableAttributedString.contentFromHTMLString(data.content, fontName: contentTextView.font!.fontName, widthConstraint: Global.Constants.screenWidth - 34)
+        if data.renderContent != nil {
+            contentTextView.attributedText = data.renderContent
+        } else {
+            data.renderContent = NSMutableAttributedString.contentFromHTMLString(data.content, fontName: contentTextView.font!.fontName, widthConstraint: Global.Constants.screenWidth - Global.Config.renderContentMargin)
+            contentTextView.attributedText = data.renderContent
+        }
         contentTextView.layer.shouldRasterize = true
         contentTextView.layer.rasterizationScale = UIScreen.main.scale
     }

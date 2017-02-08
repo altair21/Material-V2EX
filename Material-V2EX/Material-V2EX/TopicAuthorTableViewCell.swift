@@ -24,15 +24,20 @@ class TopicAuthorTableViewCell: UITableViewCell {
         super.awakeFromNib()
     }
     
-    func setData(overview data: TopicOverviewModel, content: String, date: String) {
-        self.data = data
+    func setData(overview overviewData: TopicOverviewModel, data: TopicModel) {
+        self.data = overviewData
         
-        nameLabel.text = data.author.username
-        avatarView.setImageWith(string: (data.author.avatarURL))
-        dateLabel.text = date
-        nodeLabel.text = data.nodeTitle
+        nameLabel.text = overviewData.author.username
+        avatarView.setImageWith(string: (overviewData.author.avatarURL))
+        dateLabel.text = data.dateAndClickCount
+        nodeLabel.text = overviewData.nodeTitle
         
-        contentTextView.attributedText = NSMutableAttributedString.contentFromHTMLString(content, fontName: contentTextView.font!.fontName, widthConstraint: Global.Constants.screenWidth - 34)
+        if data.renderContent != nil {
+            contentTextView.attributedText = data.renderContent
+        } else {
+            data.renderContent = NSMutableAttributedString.contentFromHTMLString(data.content, fontName: contentTextView.font!.fontName, widthConstraint: Global.Constants.screenWidth - Global.Config.renderContentMargin)
+            contentTextView.attributedText = data.renderContent
+        }
         contentTextView.layer.shouldRasterize = true
         contentTextView.layer.rasterizationScale = UIScreen.main.scale
     }

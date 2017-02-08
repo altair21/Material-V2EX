@@ -23,10 +23,15 @@ class TopicSubtleTableViewCell: UITableViewCell {
         // Configure the view for the selected state
     }
     
-    func setData(data: (content: String, date: String)) {
+    func setData(data: TopicSubtleModel) {
         dateLabel.text = data.date
         
-        contentLabel.attributedText = NSMutableAttributedString.contentFromHTMLString(data.content, fontName: contentLabel.font!.fontName, widthConstraint: Global.Constants.screenWidth - 34)
+        if data.renderContent != nil {
+            contentLabel.attributedText = data.renderContent
+        } else {
+            data.renderContent = NSMutableAttributedString.contentFromHTMLString(data.content, fontName: contentLabel.font!.fontName, widthConstraint: Global.Constants.screenWidth - Global.Config.renderContentMargin)
+            contentLabel.attributedText = data.renderContent
+        }
         contentLabel.layer.shouldRasterize = true
         contentLabel.layer.rasterizationScale = UIScreen.main.scale
     }

@@ -49,7 +49,8 @@ class Global: NSObject {
     
     // Config
     struct Config {
-        static let edgePanGestureThreshold: CGFloat = 15
+        static let edgePanGestureThreshold: CGFloat = 15    // 首页左滑右滑手势响应宽度
+        static let renderContentMargin: CGFloat = 34     // 帖子详情内容Margin
         static let requestHeader = ["user-agent": userAgent]
         static let kTodayHottestCode = "k今日热议"
         static let startNode = V2EX.basicCategory[1]   // 初始话题 - 技术

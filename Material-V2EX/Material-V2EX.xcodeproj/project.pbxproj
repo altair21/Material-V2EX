@@ -45,6 +45,7 @@
 		50CBCBDB1E1D0F0C009F6960 /* NodeListTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 50CBCBD91E1D0F0C009F6960 /* NodeListTableViewCell.xib */; };
 		50DE426B1E1DF55400A53BFF /* NodeListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50DE426A1E1DF55400A53BFF /* NodeListView.swift */; };
 		50DE426D1E1DF57B00A53BFF /* NodeListView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 50DE426C1E1DF57B00A53BFF /* NodeListView.xib */; };
+		50E5D3A21E4AF197007B924A /* TopicSubtleModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50E5D3A11E4AF197007B924A /* TopicSubtleModel.swift */; };
 		50E8C0791E0E7A3800FAC85B /* PaddingLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50E8C0781E0E7A3800FAC85B /* PaddingLabel.swift */; };
 		50E8C07B1E0E838C00FAC85B /* UIImageView+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50E8C07A1E0E838C00FAC85B /* UIImageView+Extension.swift */; };
 		50E8C07D1E0E854400FAC85B /* Kingfisher.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 50E8C07C1E0E854400FAC85B /* Kingfisher.framework */; };
@@ -98,6 +99,7 @@
 		50CBCBD91E1D0F0C009F6960 /* NodeListTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = NodeListTableViewCell.xib; sourceTree = "<group>"; };
 		50DE426A1E1DF55400A53BFF /* NodeListView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NodeListView.swift; sourceTree = "<group>"; };
 		50DE426C1E1DF57B00A53BFF /* NodeListView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = NodeListView.xib; sourceTree = "<group>"; };
+		50E5D3A11E4AF197007B924A /* TopicSubtleModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TopicSubtleModel.swift; sourceTree = "<group>"; };
 		50E8C0781E0E7A3800FAC85B /* PaddingLabel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PaddingLabel.swift; sourceTree = "<group>"; };
 		50E8C07A1E0E838C00FAC85B /* UIImageView+Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIImageView+Extension.swift"; sourceTree = "<group>"; };
 		50E8C07C1E0E854400FAC85B /* Kingfisher.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Kingfisher.framework; path = "../../../../../../Library/Developer/Xcode/DerivedData/Material-V2EX-ggvhqkoortazbjhkiqzzdvoaqujd/Build/Products/Debug-iphoneos/Kingfisher/Kingfisher.framework"; sourceTree = "<group>"; };
@@ -182,6 +184,7 @@
 				504667AF1E0D3B2B008B6953 /* NodeModel.swift */,
 				50280C9E1E165C2700996FDA /* TopicReplyModel.swift */,
 				507E079A1E3226790000534A /* TopicModel.swift */,
+				50E5D3A11E4AF197007B924A /* TopicSubtleModel.swift */,
 			);
 			name = Models;
 			sourceTree = "<group>";
@@ -445,6 +448,7 @@
 				504667AA1E0D1014008B6953 /* NetworkManager.swift in Sources */,
 				507E079B1E3226790000534A /* TopicModel.swift in Sources */,
 				50459A9E1E11020A00E4F6DD /* ExpandingCellTransition.swift in Sources */,
+				50E5D3A21E4AF197007B924A /* TopicSubtleModel.swift in Sources */,
 				504667A21E0CC954008B6953 /* TopicOverviewTableViewCell.swift in Sources */,
 				50280C9F1E165C2700996FDA /* TopicReplyModel.swift in Sources */,
 				50360EB91E0B7BE700B082DD /* AnimationUtility.swift in Sources */,
