@@ -346,7 +346,7 @@
 					507F4EE91E0944EA0033A10B = {
 						CreatedOnToolsVersion = 8.2.1;
 						DevelopmentTeam = 7ZB4J6GUHQ;
-						ProvisioningStyle = Automatic;
+						ProvisioningStyle = Manual;
 					};
 				};
 			};
@@ -613,12 +613,15 @@
 			baseConfigurationReference = 29B58BBFCC35172E2E415A05 /* Pods-Material-V2EX.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				DEVELOPMENT_TEAM = 7ZB4J6GUHQ;
 				INFOPLIST_FILE = "Material-V2EX/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.altair21.materialv2ex;
+				PRODUCT_BUNDLE_IDENTIFIER = com.altair21.v2exmaterial;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "65d20f40-f677-4a79-a334-c68798ffecf5";
+				PROVISIONING_PROFILE_SPECIFIER = "v2ex-development";
 				SWIFT_OBJC_BRIDGING_HEADER = "Material-V2EX/Material-V2EX-Bridging-Hedaer.h";
 				SWIFT_VERSION = 3.0;
 			};
@@ -629,12 +632,15 @@
 			baseConfigurationReference = 129AD5DE7B3A87FB58203427 /* Pods-Material-V2EX.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
 				DEVELOPMENT_TEAM = 7ZB4J6GUHQ;
 				INFOPLIST_FILE = "Material-V2EX/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.altair21.materialv2ex;
+				PRODUCT_BUNDLE_IDENTIFIER = com.altair21.v2exmaterial;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "ef09adbc-2f48-4386-8b73-e696d84594b4";
+				PROVISIONING_PROFILE_SPECIFIER = "v2ex-distribution";
 				SWIFT_OBJC_BRIDGING_HEADER = "Material-V2EX/Material-V2EX-Bridging-Hedaer.h";
 				SWIFT_VERSION = 3.0;
 			};

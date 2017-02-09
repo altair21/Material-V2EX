@@ -10,7 +10,7 @@ import UIKit
 
 class TopicSubtleTableViewCell: UITableViewCell {
     @IBOutlet weak var dateLabel: UILabel!
-    @IBOutlet weak var contentLabel: UILabel!
+    @IBOutlet weak var contentTextView: UITextView!
 
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -27,13 +27,13 @@ class TopicSubtleTableViewCell: UITableViewCell {
         dateLabel.text = data.date
         
         if data.renderContent != nil {
-            contentLabel.attributedText = data.renderContent
+            contentTextView.attributedText = data.renderContent
         } else {
-            data.renderContent = NSMutableAttributedString.contentFromHTMLString(data.content, fontName: contentLabel.font!.fontName, widthConstraint: Global.Constants.screenWidth - Global.Config.renderContentMargin)
-            contentLabel.attributedText = data.renderContent
+            data.renderContent = NSMutableAttributedString.contentFromHTMLString(data.content, fontName: contentTextView.font!.fontName, widthConstraint: Global.Constants.screenWidth - Global.Config.renderContentMargin)
+            contentTextView.attributedText = data.renderContent
         }
-        contentLabel.layer.shouldRasterize = true
-        contentLabel.layer.rasterizationScale = UIScreen.main.scale
+        contentTextView.layer.shouldRasterize = true
+        contentTextView.layer.rasterizationScale = UIScreen.main.scale
     }
 
 }

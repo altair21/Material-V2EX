@@ -21,6 +21,7 @@ class NodeListView: UIView {
     static let shared = Bundle.main.loadNibNamed(Global.Views.nodeListView, owner: nil, options: nil)?.first as! NodeListView
     weak var delegate: SelectNodeDelegate? = nil
     var selectedIndexPath = IndexPath(row: V2EX.basicCategory.index {$0 == Global.Config.startNode} ?? 0, section: 0) // 初始选中配置中的初始节点，没有设置则选中第一条
+    var categoryArray = V2EX.basicCategory
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -47,6 +48,12 @@ class NodeListView: UIView {
             footerView.backgroundColor = UIColor.fromHex(string: "#FF9B71")
         }
         
+        NotificationCenter.default.addObserver(self,
+                                               selector: #selector(loginStatusChangedHandler(notification:)),
+                                               name: Global.Notifications.kLoginStatusChanged,
+                                               object: nil)
+        
+        loginStatusChanged()
         setupGesture()
     }
     
@@ -65,17 +72,34 @@ class NodeListView: UIView {
     func handlePanel(sender: UIPanGestureRecognizer) {
         handleNodeList(self, recognizer: sender)
     }
+    
+    func loginStatusChangedHandler(notification: Notification) {
+        loginStatusChanged()
+    }
+    
+    func loginStatusChanged() {
+        if User.shared.isLogin {
+            categoryArray = V2EX.basicCategory + V2EX.personalCategory
+        } else {
+            categoryArray = V2EX.basicCategory
+        }
+        tableView.reloadData()
+    }
 
 }
 
 extension NodeListView: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return V2EX.basicCategory.count
+        return categoryArray.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: Global.Cells.nodeListCell, for: indexPath) as! NodeListTableViewCell
-        cell.nodeButton.title = V2EX.basicCategory[indexPath.row].title
+        if indexPath.row < V2EX.basicCategory.count {
+            cell.nodeButton.title = V2EX.basicCategory[indexPath.row].title
+        } else {
+            cell.nodeButton.title = V2EX.personalCategory[indexPath.row - V2EX.basicCategory.count].title
+        }
         cell.indexPath = indexPath
         cell.tableView = tableView
         if indexPath == selectedIndexPath {
@@ -87,26 +111,16 @@ extension NodeListView: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        delegate?.didSelectNode(title: V2EX.basicCategory[indexPath.row].title, code: V2EX.basicCategory[indexPath.row].code)
+        if indexPath.row < V2EX.basicCategory.count {
+            delegate?.didSelectNode(title: V2EX.basicCategory[indexPath.row].title, code: V2EX.basicCategory[indexPath.row].code)
+        } else {
+            let item = V2EX.personalCategory[indexPath.row - V2EX.basicCategory.count]
+            delegate?.didSelectNode(title: item.title, code: item.code)
+        }
         (tableView.cellForRow(at: selectedIndexPath) as! NodeListTableViewCell).configureState(.unselected)
         (tableView.cellForRow(at: indexPath) as! NodeListTableViewCell).configureState(.selected)
         self.selectedIndexPath = indexPath
         
         hideNodeList(self)
     }
-    
-//    func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
-//        // removing seperator inset
-//        if cell.responds(to: #selector(setter: UITableViewCell.separatorInset)) {
-//            cell.separatorInset = UIEdgeInsets.zero
-//        }
-//        // prevent the cell from inheriting the tableView's margin settings
-//        if cell.responds(to: #selector(setter: UIView.preservesSuperviewLayoutMargins)) {
-//            cell.preservesSuperviewLayoutMargins = false
-//        }
-//        // explicitly setting cell's layout margins
-//        if cell.responds(to: #selector(setter: UITableViewCell.layoutMargins)) {
-//            cell.layoutMargins = UIEdgeInsets.zero
-//        }
-//    }
 }

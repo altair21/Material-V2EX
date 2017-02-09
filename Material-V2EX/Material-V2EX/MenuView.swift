@@ -28,16 +28,13 @@ class MenuView: UIView {
         bgView.frame = panelView.frame
         self.panelView.layer.insertSublayer(bgView.layer, at: 0)
         self.avatarView.layer.borderColor = UIColor.white.cgColor
-        self.usernameLabel.text = User.shared.username
-        if User.shared.avatarURL.characters.count > 0 {
-            self.avatarView.setImageWith(url: User.shared.avatarURL)
-        }
         
         NotificationCenter.default.addObserver(self,
-                                               selector: #selector(loginStatusChanged),
+                                               selector: #selector(loginStatusChangedHandler),
                                                name: Global.Notifications.kLoginStatusChanged,
                                                object: nil)
         
+        loginStatusChanged()
         setupGesture()
     }
     
@@ -80,16 +77,20 @@ class MenuView: UIView {
         
     }
     
-    func loginStatusChanged(notification: Notification) {
-        usernameLabel.text = User.shared.username
+    func loginStatusChangedHandler(notification: Notification) {
+        loginStatusChanged()
+    }
+    
+    func loginStatusChanged() {
+        self.usernameLabel.text = User.shared.username
         
         if User.shared.avatarURL.characters.count > 0 {
-            avatarView.setImageWith(url: User.shared.avatarURL)
+            self.avatarView.setImageWith(url: User.shared.avatarURL)
         } else {
-            avatarView.image = UIImage(named: "default_avatar")
+            self.avatarView.image = UIImage(named: "default_avatar")
         }
         
-        mainButton.titleLabel?.text = User.shared.isLogin ? "登出" : "登录"
+        self.mainButton.title = User.shared.isLogin ? "登出" : "登录"
     }
 }
 

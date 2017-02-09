@@ -25,6 +25,9 @@ class V2EX: NSObject {
                                 ("最热", "hot"),
                                 ("全部", "all"),
                                 ("R2", "r2")]
+    static let personalCategory: Array<(title: String, code: String)> =
+                                [("节点", "nodes"),
+                                 ("关注", "members")]
     
     struct API {
         static let latestTopics = V2EX.APIbasicURL + "/topics/latest.json"
