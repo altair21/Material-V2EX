@@ -23,11 +23,11 @@
                     <rect key="frame" x="0.0" y="0.0" width="255" height="667"/>
                     <subviews>
                         <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="default_avatar" translatesAutoresizingMaskIntoConstraints="NO" id="VP4-eZ-xoG">
-                            <rect key="frame" x="32" y="32" width="90" height="90"/>
+                            <rect key="frame" x="32" y="32" width="70" height="70"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <userDefinedRuntimeAttributes>
                                 <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
-                                    <integer key="value" value="45"/>
+                                    <integer key="value" value="35"/>
                                 </userDefinedRuntimeAttribute>
                                 <userDefinedRuntimeAttribute type="number" keyPath="layer.borderWidth">
                                     <integer key="value" value="1"/>
@@ -36,7 +36,7 @@
                             </userDefinedRuntimeAttributes>
                         </imageView>
                         <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9ee-Il-cJD" customClass="RaisedButton" customModule="Material">
-                            <rect key="frame" x="149" y="58" width="71" height="39"/>
+                            <rect key="frame" x="149" y="52" width="68" height="30"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <color key="backgroundColor" red="1" green="0.60784313729999995" blue="0.4431372549" alpha="1" colorSpace="calibratedRGB"/>
                             <state key="normal" title="登录">
@@ -51,6 +51,13 @@
                                 </userDefinedRuntimeAttribute>
                             </userDefinedRuntimeAttributes>
                         </button>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hoM-eb-K6v">
+                            <rect key="frame" x="12" y="120" width="122" height="21"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                            <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            <nil key="highlightedColor"/>
+                        </label>
                     </subviews>
                     <color key="backgroundColor" red="0.20392156862745098" green="0.6588235294117647" blue="0.32549019607843138" alpha="1" colorSpace="calibratedRGB"/>
                     <constraints>
@@ -85,11 +92,12 @@
                 <outlet property="mainButton" destination="9ee-Il-cJD" id="3gt-r3-Jhf"/>
                 <outlet property="panelView" destination="iQ8-Ni-d8L" id="QoS-jo-9ka"/>
                 <outlet property="panelViewLeadingConstraint" destination="KeF-at-HD6" id="ucX-0M-wvb"/>
+                <outlet property="usernameLabel" destination="hoM-eb-K6v" id="Xx7-eg-CPe"/>
             </connections>
             <point key="canvasLocation" x="25.5" y="51.5"/>
         </view>
     </objects>
     <resources>
-        <image name="default_avatar" width="260" height="260"/>
+        <image name="default_avatar" width="72" height="72"/>
     </resources>
 </document>

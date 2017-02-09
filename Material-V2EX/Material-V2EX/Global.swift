@@ -57,6 +57,7 @@ class Global: NSObject {
     struct Config {
         static let edgePanGestureThreshold: CGFloat = 15    // 首页左滑右滑手势响应宽度
         static let renderContentMargin: CGFloat = 34     // 帖子详情内容Margin
+        static let toastDuration: TimeInterval = 1.2
         static let requestHeader = ["user-agent": userAgent]
         static let kTodayHottestCode = "k今日热议"
         static let startNode = V2EX.basicCategory[1]   // 初始话题 - 技术
@@ -64,6 +65,6 @@ class Global: NSObject {
     
     // Notifications
     struct Notifications {
-        
+        static let kLoginStatusChanged = Notification.Name.init("User login status changed")
     }
 }

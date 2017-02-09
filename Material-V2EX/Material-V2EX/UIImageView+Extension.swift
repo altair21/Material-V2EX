@@ -11,7 +11,7 @@ import Kingfisher
 
 extension UIImageView {
 
-    func setImageWith(string: String) {
+    func setImageWith(url string: String) {
         let url = URL(string: string)
         self.kf.setImage(with: url, options: [.transition(.fade(0.3))])
     }

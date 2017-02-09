@@ -40,7 +40,7 @@ class TopicOverviewTableViewCell: UITableViewCell {
         dateLabel.text = data.last_modified != 0 ? Date(timeIntervalSince1970: data.last_modified).timeAgo : data.last_modifiedText
         nodeLabel.text = data.nodeTitle
         repliesLabel.text = "\(data.replies)"
-        avatarView.setImageWith(string: (data.author.avatarURL))
+        avatarView.setImageWith(url: (data.author.avatarURL))
         titleLabel.text = data.title
         
         animatedUI()

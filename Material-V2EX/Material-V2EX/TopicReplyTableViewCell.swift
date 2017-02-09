@@ -29,7 +29,7 @@ class TopicReplyTableViewCell: UITableViewCell {
     func setData(data: TopicReplyModel) {
         self.data = data
         
-        avatarView.setImageWith(string: (data.author.avatarURL))
+        avatarView.setImageWith(url: (data.author.avatarURL))
         nameLabel.text = data.author.username
         dateLabel.text = data.date
         thanksLabel.text = data.thanks

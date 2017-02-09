@@ -6,7 +6,6 @@
 //  Copyright © 2017年 altair21. All rights reserved.
 //
 
-import UIKit
 import Ji
 
 class TopicModel: NSObject {

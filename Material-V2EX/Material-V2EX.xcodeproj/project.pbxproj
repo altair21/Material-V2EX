@@ -20,6 +20,7 @@
 		50280C9F1E165C2700996FDA /* TopicReplyModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50280C9E1E165C2700996FDA /* TopicReplyModel.swift */; };
 		50360EB91E0B7BE700B082DD /* AnimationUtility.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50360EB81E0B7BE700B082DD /* AnimationUtility.swift */; };
 		504084991E4B1BB600217399 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 504084981E4B1BB600217399 /* LoginViewController.swift */; };
+		5043CCA11E4C3132008BC51E /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5043CCA01E4C3132008BC51E /* User.swift */; };
 		50459A9C1E10F83D00E4F6DD /* TopicDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50459A9B1E10F83D00E4F6DD /* TopicDetailViewController.swift */; };
 		50459A9E1E11020A00E4F6DD /* ExpandingCellTransition.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50459A9D1E11020A00E4F6DD /* ExpandingCellTransition.swift */; };
 		504667A21E0CC954008B6953 /* TopicOverviewTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 504667A11E0CC954008B6953 /* TopicOverviewTableViewCell.swift */; };
@@ -70,6 +71,7 @@
 		50280C9E1E165C2700996FDA /* TopicReplyModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TopicReplyModel.swift; sourceTree = "<group>"; };
 		50360EB81E0B7BE700B082DD /* AnimationUtility.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AnimationUtility.swift; sourceTree = "<group>"; };
 		504084981E4B1BB600217399 /* LoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
+		5043CCA01E4C3132008BC51E /* User.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		50459A9B1E10F83D00E4F6DD /* TopicDetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TopicDetailViewController.swift; sourceTree = "<group>"; };
 		50459A9D1E11020A00E4F6DD /* ExpandingCellTransition.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExpandingCellTransition.swift; sourceTree = "<group>"; };
 		504667A11E0CC954008B6953 /* TopicOverviewTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TopicOverviewTableViewCell.swift; sourceTree = "<group>"; };
@@ -187,6 +189,7 @@
 				50280C9E1E165C2700996FDA /* TopicReplyModel.swift */,
 				507E079A1E3226790000534A /* TopicModel.swift */,
 				50E5D3A11E4AF197007B924A /* TopicSubtleModel.swift */,
+				5043CCA01E4C3132008BC51E /* User.swift */,
 			);
 			name = Models;
 			sourceTree = "<group>";
@@ -461,6 +464,7 @@
 				507F4EF01E0944EA0033A10B /* HomeViewController.swift in Sources */,
 				504667AC1E0D2798008B6953 /* TopicOverviewModel.swift in Sources */,
 				504667B01E0D3B2B008B6953 /* NodeModel.swift in Sources */,
+				5043CCA11E4C3132008BC51E /* User.swift in Sources */,
 				507F4EEE1E0944EA0033A10B /* AppDelegate.swift in Sources */,
 				50B1D86C1E127D1C00BCE4FF /* ARIndicator.swift in Sources */,
 				501370F41E1BA00A0076977B /* TopicBlankTableViewCell.swift in Sources */,

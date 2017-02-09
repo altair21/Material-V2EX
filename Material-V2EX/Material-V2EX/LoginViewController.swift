@@ -8,10 +8,11 @@
 
 import UIKit
 import Material
+import MBProgressHUD
 
 class LoginViewController: UIViewController {
-    @IBOutlet weak var usernameTextField: TextField!
-    @IBOutlet weak var passwordTextField: TextField!
+    @IBOutlet weak var usernameTextField: ErrorTextField!
+    @IBOutlet weak var passwordTextField: ErrorTextField!
     @IBOutlet weak var closeButton: FabButton!
     @IBOutlet weak var loginButton: RaisedButton!
 
@@ -26,6 +27,8 @@ class LoginViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         UIApplication.shared.statusBarStyle = .default
+        
+        
     }
     
     override func viewWillDisappear(_ animated: Bool) {
@@ -49,12 +52,49 @@ class LoginViewController: UIViewController {
     }
     
     func loginTapped(sender: UITapGestureRecognizer) {
+        usernameTextField.resignFirstResponder()
+        passwordTextField.resignFirstResponder()
         
+        if usernameTextField.text?.characters.count == 0 {
+            usernameTextField.isErrorRevealed = true
+        }
+        if passwordTextField.text?.characters.count == 0 {
+            passwordTextField.isErrorRevealed = true
+        }
+        if usernameTextField.text?.characters.count == 0 || passwordTextField.text?.characters.count == 0 {
+            return
+        }
+        
+        let hud = MBProgressHUD.showAdded(to: self.view, animated: true)
+        hud.label.text = "正在登录……"
+        hud.bezelView.color = UIColor.black
+        hud.contentColor = UIColor.white
+//        hud.offset = CGPoint(x: 0.0, y: MBProgressMaxOffset)
+        
+        NetworkManager.shared.loginWith(username: usernameTextField.text!, password: passwordTextField.text!, success: { (username, avatarURL) in
+            hud.hide(animated: true)
+            User.shared.setLogin(username: username, avatarURL: avatarURL)
+            self.dismiss(animated: true, completion: nil)
+        }) { (error) in
+            hud.hide(animated: true)
+            
+            let toast = MBProgressHUD.showAdded(to: self.view, animated: true)
+            toast.mode = MBProgressHUDMode.customView
+            toast.bezelView.color = UIColor.black
+            toast.contentColor = UIColor.white
+            toast.customView = UIImageView(image: UIImage(named: "failure"))
+            toast.label.text = error
+            toast.hide(animated: true, afterDelay: Global.Config.toastDuration)
+        }
+    }
+    
+    @IBAction func textChanged(_ sender: TextField) {
+        (sender as? ErrorTextField)?.isErrorRevealed = false
     }
 }
 
-// MARK: UITextFieldDelegate
-extension LoginViewController: UITextFieldDelegate {
+// MARK: TextFieldDelegate
+extension LoginViewController: TextFieldDelegate {
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         if textField == usernameTextField {
             passwordTextField.becomeFirstResponder()
@@ -66,4 +106,14 @@ extension LoginViewController: UITextFieldDelegate {
             return true
         }
     }
+    
+    func textFieldDidEndEditing(_ textField: UITextField) {
+        (textField as? ErrorTextField)?.isErrorRevealed = false
+    }
+    
+    func textFieldShouldClear(_ textField: UITextField) -> Bool {
+        (textField as? ErrorTextField)?.isErrorRevealed = false
+        return true
+    }
 }
+

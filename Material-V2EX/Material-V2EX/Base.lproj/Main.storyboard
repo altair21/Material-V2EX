@@ -72,7 +72,7 @@
                                     <userDefinedRuntimeAttribute type="image" keyPath="image" value="close"/>
                                 </userDefinedRuntimeAttributes>
                             </button>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="rJn-FT-e2j" customClass="TextField" customModule="Material">
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="rJn-FT-e2j" customClass="ErrorTextField" customModule="Material">
                                 <rect key="frame" x="32" y="123" width="311" height="30"/>
                                 <nil key="textColor"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
@@ -81,9 +81,13 @@
                                     <userDefinedRuntimeAttribute type="string" keyPath="placeholder" value="用户名"/>
                                     <userDefinedRuntimeAttribute type="boolean" keyPath="isVisibilityIconButtonEnabled" value="NO"/>
                                     <userDefinedRuntimeAttribute type="boolean" keyPath="isVisibilityIconButtonAutoHandled" value="NO"/>
+                                    <userDefinedRuntimeAttribute type="string" keyPath="detail" value="用户名不能为空"/>
                                 </userDefinedRuntimeAttributes>
+                                <connections>
+                                    <action selector="textChanged:" destination="vR9-N5-HNz" eventType="editingChanged" id="hTm-HA-vpJ"/>
+                                </connections>
                             </textField>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" clearsOnBeginEditing="YES" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="i8v-Gf-aBk" customClass="TextField" customModule="Material">
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" clearsOnBeginEditing="YES" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="i8v-Gf-aBk" customClass="ErrorTextField" customModule="Material">
                                 <rect key="frame" x="32" y="198" width="311" height="30"/>
                                 <nil key="textColor"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
@@ -91,7 +95,11 @@
                                 <userDefinedRuntimeAttributes>
                                     <userDefinedRuntimeAttribute type="string" keyPath="placeholder" value="密码"/>
                                     <userDefinedRuntimeAttribute type="boolean" keyPath="isVisibilityIconButtonEnabled" value="YES"/>
+                                    <userDefinedRuntimeAttribute type="string" keyPath="detail" value="密码不能为空"/>
                                 </userDefinedRuntimeAttributes>
+                                <connections>
+                                    <action selector="textChanged:" destination="vR9-N5-HNz" eventType="editingChanged" id="cXD-yp-5Bk"/>
+                                </connections>
                             </textField>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="V 2 E X" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="n5z-D7-ZV6">
                                 <rect key="frame" x="145" y="37" width="85" height="34"/>

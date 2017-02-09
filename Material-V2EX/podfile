@@ -7,5 +7,6 @@ pod 'Alamofire'
 pod 'SwiftyJSON'
 pod 'Kingfisher'
 pod 'Ji'
+pod 'MBProgressHUD'
 
 end
