@@ -28,6 +28,10 @@ class MenuView: UIView {
         bgView.frame = panelView.frame
         self.panelView.layer.insertSublayer(bgView.layer, at: 0)
         self.avatarView.layer.borderColor = UIColor.white.cgColor
+        self.usernameLabel.text = User.shared.username
+        if User.shared.avatarURL.characters.count > 0 {
+            self.avatarView.setImageWith(url: User.shared.avatarURL)
+        }
         
         NotificationCenter.default.addObserver(self,
                                                selector: #selector(loginStatusChanged),

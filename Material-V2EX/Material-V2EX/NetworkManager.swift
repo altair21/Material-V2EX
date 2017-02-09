@@ -32,6 +32,7 @@ class NetworkManager: NSObject {
         }
     }
     
+    // MARK: Topic Module
     private func commonGetTopicList(url: String, success: @escaping (Array<TopicOverviewModel>)->Void, failure: @escaping (String)->Void) {
         Alamofire.request(url, headers: Global.Config.requestHeader).responseString { (response) in
             switch response.result {
@@ -174,8 +175,23 @@ class NetworkManager: NSObject {
                 return
             }
         }
-        
-        
+    }
+    
+    /// 验证登录状态
+    ///
+    /// - Parameters:
+    ///   - success: 状态有效回调
+    ///   - failure: 状态无效回调
+    func verifyLoginStatus(success: @escaping ()->(), failure: @escaping ()->()) {
+        Alamofire.request(V2EX.indexURL + "/new", headers: Global.Config.requestHeader).responseString { (response) in
+            if response.request?.url?.absoluteString == response.response?.url?.absoluteString {
+                success()
+            } else {
+                failure()
+            }
+            print(response.request?.url?.absoluteString)
+            print(response.response?.url?.absoluteString)
+        }
     }
 }
 
