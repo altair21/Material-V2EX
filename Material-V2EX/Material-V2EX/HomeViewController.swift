@@ -233,7 +233,7 @@ extension HomeViewController: PullToRefreshDelegate {
         let successBlock: (Array<TopicOverviewModel>) -> Void = { res in
             var newItems = Array<TopicOverviewModel>()
             for item in res {
-                if item.id != self.topicOverviewArray[0].id {
+                if self.topicOverviewArray.isEmpty || item.id != self.topicOverviewArray[0].id {
                     newItems.append(item)
                 } else {
                     break
