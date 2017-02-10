@@ -326,12 +326,12 @@ extension HomeViewController: SelectNodeDelegate {
         topicOverviewArray.removeAll()
         tableView.reloadData()
         indicator.state = .running
+        self.navController.showNavbar(animated: true)
         
         let successBlock: (Array<TopicOverviewModel>) -> Void = { res in
             self.topicOverviewArray = res
             self.indicator.state = .stopping
             self.tableView.isHidden = false
-            self.navController.showNavbar(animated: false)
             self.currentPage = 1
             self.totalPage = self.category.totalPage
             self.tableView.reloadData()
