@@ -8,5 +8,6 @@ pod 'SwiftyJSON'
 pod 'Kingfisher'
 pod 'Ji'
 pod 'MBProgressHUD'
+pod 'Bugtags'
 
 end

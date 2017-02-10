@@ -7,3 +7,4 @@
 //
 
 #import <MBProgressHUD/MBProgressHUD.h>
+#import <Bugtags/Bugtags.h>
