@@ -39,7 +39,7 @@ class HomeViewController: UIViewController {
     var selectedIndexPath: IndexPath?
     var category = Global.Config.startNode {
         didSet {
-            if category.category == .unit { // 可翻页
+            if category.canTurnPage { // 可翻页
                 footerView_label.isHidden = true
                 footerView_indicator.isHidden = false
             } else {    // 不可翻页
@@ -48,8 +48,8 @@ class HomeViewController: UIViewController {
             }
         }
     }
-    let navigationBarMaxShadowRadius: CGFloat = 8.0
-    let cellMarkReadShadowRadius: CGFloat = 0.75
+    var currentPage = 1 // 当前页
+    var totalPage = 1   // 总页数
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -61,8 +61,10 @@ class HomeViewController: UIViewController {
         self.tableView.pullToRefreshDelegate = self
         self.nodeListView.delegate = self
         
-        let fpsLabel = V2FPSLabel(frame: CGRect(x: 0, y: Global.Constants.screenHeight - 40, width: 80, height: 40))
-        UIApplication.shared.keyWindow?.addSubview(fpsLabel)
+        #if DEBUG
+            let fpsLabel = V2FPSLabel(frame: CGRect(x: 0, y: Global.Constants.screenHeight - 40, width: 80, height: 40))
+            UIApplication.shared.keyWindow?.addSubview(fpsLabel)
+        #endif
         tableView.contentInset = UIEdgeInsets(top: 10, left: 0, bottom: 0, right: 0)
         tableView.estimatedRowHeight = 100
         tableView.rowHeight = UITableViewAutomaticDimension
@@ -81,6 +83,8 @@ class HomeViewController: UIViewController {
                 self.topicOverviewArray = res
                 self.indicator.state = .stopping
                 self.tableView.isHidden = false
+                self.currentPage = 1
+                self.totalPage = self.category.totalPage
                 self.tableView.reloadData()
             }, failure: { (error) in
                 self.indicator.state = .stopping
@@ -123,6 +127,13 @@ class HomeViewController: UIViewController {
         footerView_indicator.state = .running
         footerView.addSubview(footerView_indicator)
         view.addSubview(footerView)
+        if self.category.canTurnPage {
+            footerView_indicator.isHidden = false
+            footerView_label.isHidden = true
+        } else {
+            footerView_indicator.isHidden = true
+            footerView_label.isHidden = false
+        }
         
         tableView.tableFooterView = footerView
     }
@@ -192,6 +203,20 @@ extension HomeViewController: UITableViewDelegate, UITableViewDataSource {
         return cell
     }
     
+    func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+        if indexPath.row == topicOverviewArray.count - 1 {  // 滑动到最底部，开始翻页
+            if category.canTurnPage && currentPage < totalPage {
+                category.loadTopics(ofPage: currentPage + 1, success: { (res) in
+                    self.currentPage += 1
+                    self.topicOverviewArray += res
+                    self.tableView.reloadData()
+                }, failure: { (error) in
+                    // TODO: toast
+                })
+            }
+        }
+    }
+    
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         if self.tableView.isRefreshing {
             return
@@ -243,7 +268,7 @@ extension HomeViewController: ScrollingNavigationControllerDelegate {
         tableView.scrollViewDidScroll(scrollView)
         
         // 根据 offset 改变 navigationBar 阴影
-        let newRadius = min(1, max(tableView.contentOffset.y / 80, 0)) * navigationBarMaxShadowRadius
+        let newRadius = min(1, max(tableView.contentOffset.y / 80, 0)) * Global.Config.navigationBarMaxShadowRadius
         navController.navigationBar.layer.shadowRadius = newRadius
     }
     
@@ -307,6 +332,8 @@ extension HomeViewController: SelectNodeDelegate {
             self.indicator.state = .stopping
             self.tableView.isHidden = false
             self.navController.showNavbar(animated: false)
+            self.currentPage = 1
+            self.totalPage = self.category.totalPage
             self.tableView.reloadData()
         }
         let failureBlock: (String) -> Void = { error in

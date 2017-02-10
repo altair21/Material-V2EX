@@ -13,8 +13,33 @@ import Ji
 class NetworkManager: NSObject {
     static let shared = NetworkManager()
     
-    private func commonRequest(api: String, parameters: Dictionary<String, Any> , success: @escaping (Array<TopicOverviewModel>)->Void, failure: @escaping (String)->Void) {
-        Alamofire.request(api, parameters: parameters).responseData { (response) in
+    // MARK: Topic Module
+    /// 根据页面内容解析出TopicOverviewModel数组
+    ///
+    /// - Parameters:
+    ///   - jiDoc: 完整页面的Ji对象
+    ///   - category: 列表类型，`?tab=xxx`和`/go/xxx`的布局略有不同
+    /// - Returns: 返回值是元组：(处理结果, 结果数组)
+    private func commonParseTopicList(jiDoc: Ji, category: TopicOverviewCategory) -> (Bool, Array<TopicOverviewModel>?) {
+        let cellClass = (category == .group) ? "cell item" : "cell"
+        if let topicOverviewNodes = jiDoc.xPath("//body/div[@id='Wrapper']/div[@class='content']/div[@class='box']/div[@class='" + cellClass + "']") {
+            var res = Array<TopicOverviewModel>()
+            for node in topicOverviewNodes {
+                res.append(TopicOverviewModel(data: node, category: category))
+            }
+            return (true, res)
+        } else {
+            return (false, nil)
+        }
+    }
+    
+    /// 获取今日热议话题，唯一用到API的地方
+    ///
+    /// - Parameters:
+    ///   - success: 处理成功回调
+    ///   - failure: 处理失败回调
+    func getHotTopics(success: @escaping (Array<TopicOverviewModel>)->Void, failure: @escaping (String)->Void) {
+        Alamofire.request(V2EX.API.hotTopics, parameters: [:]).responseData { (response) in
             switch response.result {
             case .success:
                 if let data = response.result.value {
@@ -32,18 +57,20 @@ class NetworkManager: NSObject {
         }
     }
     
-    // MARK: Topic Module
-    private func commonGetTopicList(url: String, success: @escaping (Array<TopicOverviewModel>)->Void, failure: @escaping (String)->Void) {
-        Alamofire.request(url, headers: Global.Config.requestHeader).responseString { (response) in
+    /// 获取不可翻页的节点的话题列表
+    ///
+    /// - Parameters:
+    ///   - href: 请求url
+    ///   - success: 处理成功回调
+    ///   - failure: 处理失败回调
+    func getTopicsInGroupNodes(href: String, success: @escaping (Array<TopicOverviewModel>)->Void, failure: @escaping (String)->Void) {
+        Alamofire.request(href, headers: Global.Config.requestHeader).responseString { (response) in
             switch response.result {
             case .success:
                 let jiDoc = Ji(htmlString: response.result.value!)!
-                if let topicOverviewNodes = jiDoc.xPath("//body/div[@id='Wrapper']/div[@class='content']/div[@class='box']/div[@class='cell item']") {
-                    var res = Array<TopicOverviewModel>()
-                    for node in topicOverviewNodes {
-                        res.append(TopicOverviewModel(data: node))
-                    }
-                    success(res)
+                let (resFlag, resArray) = self.commonParseTopicList(jiDoc: jiDoc, category: .group)
+                if resFlag {
+                    success(resArray!)
                 } else {
                     failure("数据解析失败！")
                 }
@@ -53,14 +80,54 @@ class NetworkManager: NSObject {
         }
     }
     
-    func getHotTopics(success: @escaping (Array<TopicOverviewModel>)->Void, failure: @escaping (String)->Void) {
-        commonRequest(api: V2EX.API.hotTopics, parameters: [:], success: success, failure: failure)
+    /// 获取可翻页的节点的话题列表
+    ///
+    /// - Parameters:
+    ///   - href: 请求url
+    ///   - page: 请求页码
+    ///   - success: 处理成功回调
+    ///   - failure: 处理失败回调
+    func getTopicsInUnitNodes(href: String, page: Int, success: @escaping (Array<TopicOverviewModel>, Int)->Void, failure: @escaping (String)->Void) {
+        Alamofire.request(href + "?p=\(page)", headers: Global.Config.requestHeader).responseString { (response) in
+            switch response.result {
+            case .success:
+                let jiDoc = Ji(htmlString: response.result.value!)!
+                var nodeName = ""
+                if let nodeTitle = jiDoc.xPath("//body/div[@id='Wrapper']/div/div/div[1]")?.first?.content {
+                    if let range = nodeTitle.range(of: "›") {
+                        let substrRange = Range(uncheckedBounds: (lower: range.upperBound, upper: nodeTitle.endIndex))
+                        nodeName = nodeTitle.substring(with: substrRange).trimmingCharacters(in: CharacterSet.whitespacesAndNewlines)
+                    }
+                }
+                let (resFlag, resArray) = self.commonParseTopicList(jiDoc: jiDoc, category: .unit)
+                var totalPage = 1
+                if let pageStr = jiDoc.xPath("//body/div[@id='Wrapper']/div/div/div[@class='inner']/table/tr/td[2]/strong")?.first?.content {
+                    if let range = pageStr.range(of: "/") {
+                        let substrRange = Range(uncheckedBounds: (lower: range.upperBound, upper: pageStr.endIndex))
+                        totalPage = Int(pageStr.substring(with: substrRange)) ?? 1
+                    }
+                }
+                if resFlag {
+                    let node = NodeModel(name: nodeName, href: href, category: .unit)
+                    for item in resArray! {
+                        item.node = node
+                    }
+                    success(resArray!, totalPage)
+                } else {
+                    failure("数据解析失败！")
+                }
+            case .failure:
+                failure(response.result.error?.localizedDescription ?? "网络错误")
+            }
+        }
     }
     
-    func getTopicsInGroupNodes(href: String, success: @escaping (Array<TopicOverviewModel>)->Void, failure: @escaping (String)->Void) {
-        commonGetTopicList(url: href, success: success, failure: failure)
-    }
-    
+    /// 获取帖子内容及当前页的评论
+    ///
+    /// - Parameters:
+    ///   - url: 请求url
+    ///   - success: 处理成功回调
+    ///   - failure: 处理失败回调
     func getTopicDetail(url: String, success: @escaping (TopicModel)->Void, failure: @escaping (String)->Void ) {
         Alamofire.request(url, headers: Global.Config.requestHeader).responseString { (response) in
             switch response.result {
@@ -78,6 +145,12 @@ class NetworkManager: NSObject {
         }
     }
     
+    /// 获取相应url的所有评论信息
+    ///
+    /// - Parameters:
+    ///   - url: 请求url，需拼接好页码参数
+    ///   - success: 处理成功回调
+    ///   - failure: 处理失败回调
     func getTopicDetailComments(url: String, success: @escaping (Array<TopicReplyModel>)->Void, failure: @escaping (String)->Void ) {
         Alamofire.request(url, headers: Global.Config.requestHeader).responseString { (response) in
             switch response.result {
@@ -99,6 +172,13 @@ class NetworkManager: NSObject {
     }
     
     // MARK: User Module
+    /// 发送登录请求
+    ///
+    /// - Parameters:
+    ///   - username: 用户名
+    ///   - password: 密码
+    ///   - success: 处理成功回调
+    ///   - failure: 处理失败回调
     func loginWith(username: String, password: String, success: @escaping (String, String)->Void, failure: @escaping (String)->Void ) {
         let loginURL = V2EX.indexURL + "/signin"
         var usernameSHA = ""
@@ -185,8 +265,6 @@ class NetworkManager: NSObject {
             } else {
                 failure()
             }
-            print(response.request?.url?.absoluteString)
-            print(response.response?.url?.absoluteString)
         }
     }
 }

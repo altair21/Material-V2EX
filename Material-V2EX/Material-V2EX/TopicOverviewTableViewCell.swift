@@ -37,8 +37,13 @@ class TopicOverviewTableViewCell: UITableViewCell {
         self.data = data
         
         nicknameLabel.text = data.author.username
-        dateLabel.text = data.last_modified != 0 ? Date(timeIntervalSince1970: data.last_modified).timeAgo : data.last_modifiedText
-        nodeLabel.text = data.nodeTitle
+        dateLabel.text = (data.last_modifiedText.characters.count > 0) ? data.last_modifiedText : Date(timeIntervalSince1970: data.last_modified).timeAgo
+        if let node = data.node {
+            nodeLabel.text = node.name
+            nodeLabel.isHidden = false
+        } else {
+            nodeLabel.isHidden = true
+        }
         repliesLabel.text = "\(data.replies)"
         avatarView.setImageWith(url: (data.author.avatarURL))
         titleLabel.text = data.title

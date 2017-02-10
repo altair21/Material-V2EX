@@ -15,9 +15,14 @@ class NodeModel: NSObject {
     var name: String            // 节点名
     var href: String            // 节点url
     var category: NodeCategory  // 根据category拼装请求url，解析数据
-    var canTurnPage: Bool       // 是否支持翻页
+    var canTurnPage: Bool { // 是否支持翻页
+        get {
+            return category == .unit
+        }
+    }
+    var totalPage: Int = 1      // 节点话题列表总页数
     
-    init(name: String, href: String, category: NodeCategory, canTurnPage: Bool = false) {
+    init(name: String, href: String, category: NodeCategory) {
         self.name = name
         if href == Global.Config.kTodayHottestHref {
             self.href = href
@@ -25,28 +30,23 @@ class NodeModel: NSObject {
             self.href = V2EX.indexURL + href
         }
         self.category = category
-        self.canTurnPage = canTurnPage
         
         super.init()
     }
     
-    func loadTopics(ofPage page: Int = 0, success: @escaping (Array<TopicOverviewModel>)->Void, failure: @escaping (String)->Void ) {
+    func loadTopics(ofPage page: Int = 1, success: @escaping (Array<TopicOverviewModel>)->Void, failure: @escaping (String)->Void ) {
         if href == Global.Config.kTodayHottestHref {
-            NetworkManager.shared.getHotTopics(success: { (res) in
-                success(res)
-            }, failure: { (error) in
-                failure(error)
-            })
+            NetworkManager.shared.getHotTopics(success: success, failure: failure)
             return
         }
         if category == .group {
-            NetworkManager.shared.getTopicsInGroupNodes(href: href, success: { (res) in
-                success(res)
-            }, failure: { (error) in
-                failure(error)
-            })
+            NetworkManager.shared.getTopicsInGroupNodes(href: href, success: success, failure: failure)
         } else {
-            
+            NetworkManager.shared.getTopicsInUnitNodes(href: href, page: page, success: { (resArray, totalPage) in
+                self.totalPage = totalPage
+                print("总页数\(totalPage)")
+                success(resArray)
+            }, failure: failure)
         }
     }
 }

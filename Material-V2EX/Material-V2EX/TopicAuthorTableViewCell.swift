@@ -30,7 +30,7 @@ class TopicAuthorTableViewCell: UITableViewCell {
         nameLabel.text = overviewData.author.username
         avatarView.setImageWith(url: (overviewData.author.avatarURL))
         dateLabel.text = data.dateAndClickCount
-        nodeLabel.text = overviewData.nodeTitle
+        nodeLabel.text = overviewData.node?.name
         
         if data.renderContent != nil {
             contentTextView.attributedText = data.renderContent

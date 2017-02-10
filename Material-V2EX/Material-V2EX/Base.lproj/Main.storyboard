@@ -806,10 +806,10 @@
                                                             <color key="textColor" red="0.66666666666666663" green="0.66666666666666663" blue="0.66666666666666663" alpha="1" colorSpace="calibratedRGB"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
-                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="感谢" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="HFa-D7-dmo">
-                                                            <rect key="frame" x="329" y="14" width="25" height="15"/>
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="♥ 999" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="HFa-D7-dmo">
+                                                            <rect key="frame" x="316" y="14" width="38" height="15"/>
                                                             <constraints>
-                                                                <constraint firstAttribute="width" constant="25" id="5sp-tE-85D"/>
+                                                                <constraint firstAttribute="width" constant="38" id="5sp-tE-85D"/>
                                                                 <constraint firstAttribute="height" constant="15" id="MOu-2S-XsB"/>
                                                             </constraints>
                                                             <fontDescription key="fontDescription" type="system" pointSize="12"/>
