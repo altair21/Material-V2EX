@@ -9,5 +9,6 @@ pod 'Kingfisher'
 pod 'Ji'
 pod 'MBProgressHUD'
 pod 'Bugtags'
+pod 'Watchdog'
 
 end

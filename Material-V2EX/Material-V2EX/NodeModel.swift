@@ -44,7 +44,6 @@ class NodeModel: NSObject {
         } else {
             NetworkManager.shared.getTopicsInUnitNodes(href: href, page: page, success: { (resArray, totalPage) in
                 self.totalPage = totalPage
-                print("总页数\(totalPage)")
                 success(resArray)
             }, failure: failure)
         }

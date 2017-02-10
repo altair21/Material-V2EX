@@ -99,7 +99,8 @@ class NetworkManager: NSObject {
                         nodeName = nodeTitle.substring(with: substrRange).trimmingCharacters(in: CharacterSet.whitespacesAndNewlines)
                     }
                 }
-                let (resFlag, resArray) = self.commonParseTopicList(jiDoc: jiDoc, category: .unit)
+                let category: TopicOverviewCategory = href.hasPrefix("https://www.v2ex.com/recent") ? .group : .unit    // ”最近“节点的解析方式和其它节点不一样
+                let (resFlag, resArray) = self.commonParseTopicList(jiDoc: jiDoc, category: category)
                 var totalPage = 1
                 if let pageStr = jiDoc.xPath("//body/div[@id='Wrapper']/div/div/div[@class='inner']/table/tr/td[2]/strong")?.first?.content {
                     if let range = pageStr.range(of: "/") {
@@ -108,9 +109,11 @@ class NetworkManager: NSObject {
                     }
                 }
                 if resFlag {
-                    let node = NodeModel(name: nodeName, href: href, category: .unit)
-                    for item in resArray! {
-                        item.node = node
+                    if category == .unit {  // 除了”最近“节点的其它节点需要更新节点信息，因为解析数据时得不到
+                        let node = NodeModel(name: nodeName, href: href, category: .unit)
+                        for item in resArray! {
+                            item.node = node
+                        }
                     }
                     success(resArray!, totalPage)
                 } else {

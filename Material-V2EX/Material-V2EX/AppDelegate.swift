@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Watchdog
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -17,6 +18,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         
         Bugtags.start(withAppKey: "f2acfd9f06c25641bc32fdf3b398dd69", invocationEvent: BTGInvocationEventBubble)
+        
+        #if DEBUG
+            let watchdog = Watchdog(threshold: 1.0, strictMode: true)
+        #endif
         
         return true
     }
