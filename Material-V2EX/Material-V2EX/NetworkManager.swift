@@ -57,8 +57,8 @@ class NetworkManager: NSObject {
         commonRequest(api: V2EX.API.hotTopics, parameters: [:], success: success, failure: failure)
     }
     
-    func getTopicsInNodes(code: String, success: @escaping (Array<TopicOverviewModel>)->Void, failure: @escaping (String)->Void) {
-        commonGetTopicList(url: V2EX.categoryBasicURL + code, success: success, failure: failure)
+    func getTopicsInGroupNodes(href: String, success: @escaping (Array<TopicOverviewModel>)->Void, failure: @escaping (String)->Void) {
+        commonGetTopicList(url: href, success: success, failure: failure)
     }
     
     func getTopicDetail(url: String, success: @escaping (TopicModel)->Void, failure: @escaping (String)->Void ) {
@@ -96,10 +96,6 @@ class NetworkManager: NSObject {
                 failure(response.result.error?.localizedDescription ?? "网络错误")
             }
         }
-    }
-    
-    func getTopicReplies(topicId: Int, success: @escaping (JSON)->Void, failure: @escaping (String)->Void) {
-//        commonRequest(api: V2EX.API.topicReplies, parameters: ["topic_id": topicId, "page": "", "page_size": ""], success: success, failure: failure)
     }
     
     // MARK: User Module

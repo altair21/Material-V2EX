@@ -10,24 +10,24 @@ import UIKit
 
 class V2EX: NSObject {
     static let indexURL = "https://www.v2ex.com"
-    static let categoryBasicURL = "https://www.v2ex.com/?tab="
     private static let APIbasicURL = "https://www.v2ex.com/api"
-    static let basicCategory: Array<(title: String, code: String)> =
-                                [("今日热议", Global.Config.kTodayHottestCode),
-                                ("技术", "tech"),
-                                ("创意", "creative"),
-                                ("好玩", "play"),
-                                ("Apple", "apple"),
-                                ("酷工作", "jobs"),
-                                ("交易", "deals"),
-                                ("城市", "city"),
-                                ("问与答", "qna"),
-                                ("最热", "hot"),
-                                ("全部", "all"),
-                                ("R2", "r2")]
-    static let personalCategory: Array<(title: String, code: String)> =
-                                [("节点", "nodes"),
-                                 ("关注", "members")]
+    static let basicCategory: Array<NodeModel> =
+        [NodeModel(name: "今日热议", href: Global.Config.kTodayHottestHref, category: .group),
+         NodeModel(name: "技术", href: "/?tab=tech", category: .group),
+         NodeModel(name: "创意", href: "/?tab=creative", category: .group),
+         NodeModel(name: "好玩", href: "/?tab=play", category: .group),
+         NodeModel(name: "Apple", href: "/?tab=apple", category: .group),
+         NodeModel(name: "酷工作", href: "/?tab=jobs", category: .group),
+         NodeModel(name: "交易", href: "/?tab=deals", category: .group),
+         NodeModel(name: "城市", href: "/?tab=city", category: .group),
+         NodeModel(name: "问与答", href: "/?tab=qna", category: .group),
+         NodeModel(name: "最热", href: "/?tab=hot", category: .group),
+         NodeModel(name: "全部", href: "/?tab=all", category: .group),
+         NodeModel(name: "R2", href: "/?tab=r2", category: .group)]
+    static let personalCategory: Array<NodeModel> =
+        [NodeModel(name: "最近", href: "/recent", category: .unit),
+         NodeModel(name: "节点", href: "/?tab=nodes", category: .group),
+         NodeModel(name: "关注", href: "/?tab=members", category: .group)]
     
     struct API {
         static let latestTopics = V2EX.APIbasicURL + "/topics/latest.json"

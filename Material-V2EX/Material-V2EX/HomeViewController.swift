@@ -22,11 +22,24 @@ class HomeViewController: UIViewController {
     var rightEdgeView: UIView!
     var navController: ScrollingNavigationController!
     let indicator = ARIndicator(firstColor: UIColor.fromHex(string: "#1B9AAA"), secondColor: UIColor.fromHex(string: "#06D6A0"), thirdColor: UIColor.fromHex(string: "#E84855"))
+    var footerView: UIView = UIView()
+    var footerView_label: UILabel = UILabel()
+    var footerView_indicator: ARIndicator = ARIndicator()
     
     // Data
     var topicOverviewArray = Array<TopicOverviewModel>()
     var selectedIndexPath: IndexPath?
-    var category = Global.Config.startNode
+    var category = Global.Config.startNode {
+        didSet {
+            if category.category == .unit { // 可翻页
+                footerView_label.isHidden = true
+                footerView_indicator.isHidden = false
+            } else {    // 不可翻页
+                footerView_label.isHidden = false
+                footerView_indicator.isHidden = true
+            }
+        }
+    }
     let navigationBarMaxShadowRadius: CGFloat = 8.0
     let cellMarkReadShadowRadius: CGFloat = 0.75
     
@@ -56,7 +69,7 @@ class HomeViewController: UIViewController {
         if topicOverviewArray.isEmpty {
             indicator.state = .running
             self.tableView.isHidden = true
-            NetworkManager.shared.getTopicsInNodes(code: self.category.1, success: { (res) in
+            self.category.loadTopics(success: { (res) in
                 self.topicOverviewArray = res
                 self.indicator.state = .stopping
                 self.tableView.isHidden = false
@@ -89,6 +102,21 @@ class HomeViewController: UIViewController {
         moreBtn.image = Icon.cm.moreHorizontal
         indicator.center = CGPoint(x: Global.Constants.screenWidth / 2, y: Global.Constants.screenHeight / 2)
         view.addSubview(indicator)
+        
+        footerView = UIView(frame: CGRect(x: 0, y: 0, width: Global.Constants.screenWidth, height: 50))
+        footerView_label = UILabel(frame: CGRect(x: 0, y: 10, width: Global.Constants.screenWidth, height: 20))
+        footerView_label.font = UIFont.systemFont(ofSize: 12)
+        footerView_label.text = "当前节点不支持翻页"
+        footerView_label.textAlignment = .center
+        footerView_label.textColor = UIColor.fromHex(string: "#777777")
+        footerView.addSubview(footerView_label)
+        footerView_indicator = ARIndicator(firstColor: UIColor.fromHex(string: "#1B9AAA"), secondColor: UIColor.fromHex(string: "#06D6A0"), thirdColor: UIColor.fromHex(string: "#E84855"))
+        footerView_indicator.center = CGPoint(x: Global.Constants.screenWidth / 2, y: 25)
+        footerView_indicator.state = .running
+        footerView.addSubview(footerView_indicator)
+        view.addSubview(footerView)
+        
+        tableView.tableFooterView = footerView
     }
     
     func setupGesture() {
@@ -252,26 +280,14 @@ extension HomeViewController: PullToRefreshDelegate {
             // TODO: failure toast
         }
         
-        if self.category.1 == Global.Config.kTodayHottestCode {
-            NetworkManager.shared.getHotTopics(success: { (res) in
-                successBlock(res)
-            }, failure: { (error) in
-                failureBlock(error)
-            })
-        } else {
-            NetworkManager.shared.getTopicsInNodes(code: self.category.1, success: { (res) in
-                successBlock(res)
-            }, failure: { (error) in
-                failureBlock(error)
-            })
-        }
+        self.category.loadTopics(success: successBlock, failure: failureBlock)
     }
 }
 
 // MARK: SelectNodeDelegate
 extension HomeViewController: SelectNodeDelegate {
-    func didSelectNode(title: String, code: String) {
-        if self.category.0 == title {
+    func didSelectNode(node: NodeModel) {
+        if self.category.name == node.name {
             return
         }
         
@@ -293,22 +309,10 @@ extension HomeViewController: SelectNodeDelegate {
             self.tableView.isHidden = false
             // TODO: failure toast
         }
-        if code == Global.Config.kTodayHottestCode {
-            NetworkManager.shared.getHotTopics(success: { (res) in
-                successBlock(res)
-            }, failure: { (error) in
-                failureBlock(error)
-            })
-        } else {
-            NetworkManager.shared.getTopicsInNodes(code: code, success: { (res) in
-                successBlock(res)
-            }, failure: { (error) in
-                failureBlock(error)
-            })
-        }
+        node.loadTopics(success: successBlock, failure: failureBlock)
         
-        self.title = title
-        self.category = (title, code)
+        self.title = node.name
+        self.category = node
     }
 }
 

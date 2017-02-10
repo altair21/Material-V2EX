@@ -9,7 +9,7 @@
 import UIKit
 
 protocol SelectNodeDelegate: class {
-    func didSelectNode(title: String, code: String)
+    func didSelectNode(node: NodeModel)
 }
 
 class NodeListView: UIView {
@@ -96,9 +96,9 @@ extension NodeListView: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: Global.Cells.nodeListCell, for: indexPath) as! NodeListTableViewCell
         if indexPath.row < V2EX.basicCategory.count {
-            cell.nodeButton.title = V2EX.basicCategory[indexPath.row].title
+            cell.nodeButton.title = V2EX.basicCategory[indexPath.row].name
         } else {
-            cell.nodeButton.title = V2EX.personalCategory[indexPath.row - V2EX.basicCategory.count].title
+            cell.nodeButton.title = V2EX.personalCategory[indexPath.row - V2EX.basicCategory.count].name
         }
         cell.indexPath = indexPath
         cell.tableView = tableView
@@ -112,10 +112,9 @@ extension NodeListView: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         if indexPath.row < V2EX.basicCategory.count {
-            delegate?.didSelectNode(title: V2EX.basicCategory[indexPath.row].title, code: V2EX.basicCategory[indexPath.row].code)
+            delegate?.didSelectNode(node: V2EX.basicCategory[indexPath.row])
         } else {
-            let item = V2EX.personalCategory[indexPath.row - V2EX.basicCategory.count]
-            delegate?.didSelectNode(title: item.title, code: item.code)
+            delegate?.didSelectNode(node: V2EX.personalCategory[indexPath.row - V2EX.basicCategory.count])
         }
         (tableView.cellForRow(at: selectedIndexPath) as! NodeListTableViewCell).configureState(.unselected)
         (tableView.cellForRow(at: indexPath) as! NodeListTableViewCell).configureState(.selected)
