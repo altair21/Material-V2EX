@@ -27,7 +27,15 @@ class HomeViewController: UIViewController {
     var footerView_indicator: ARIndicator = ARIndicator()
     
     // Data
-    var topicOverviewArray = Array<TopicOverviewModel>()
+    var topicOverviewArray = Array<TopicOverviewModel>() {
+        didSet {
+            if topicOverviewArray.count > 0 {
+                footerView.isHidden = false
+            } else {
+                footerView.isHidden = true
+            }
+        }
+    }
     var selectedIndexPath: IndexPath?
     var category = Global.Config.startNode {
         didSet {
@@ -290,19 +298,16 @@ extension HomeViewController: SelectNodeDelegate {
         if self.category.name == node.name {
             return
         }
+        topicOverviewArray.removeAll()
+        tableView.reloadData()
+        indicator.state = .running
         
         let successBlock: (Array<TopicOverviewModel>) -> Void = { res in
             self.topicOverviewArray = res
             self.indicator.state = .stopping
             self.tableView.isHidden = false
             self.navController.showNavbar(animated: false)
-            DispatchQueue.main.async {
-                self.tableView.setContentOffset(CGPoint(x: 0, y: 0 - self.tableView.contentInset.top), animated: false)
-            }
-            delay(seconds: 0.05, completion: {
-                self.tableView.reloadData()
-            })
-            
+            self.tableView.reloadData()
         }
         let failureBlock: (String) -> Void = { error in
             self.indicator.state = .stopping
