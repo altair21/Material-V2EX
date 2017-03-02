@@ -10,7 +10,7 @@ import UIKit
 import Material
 import AMScrollingNavbar
 
-class HomeViewController: UIViewController {
+class HomeViewController: UIViewController, ModalTransitionDelegate {
     // UI
     @IBOutlet weak var postBtn: FabButton!
     @IBOutlet weak var tableView: PullToRefresh!
@@ -25,6 +25,9 @@ class HomeViewController: UIViewController {
     var footerView: UIView = UIView()
     var footerView_label: UILabel = UILabel()
     var footerView_indicator: ARIndicator = ARIndicator()
+    
+    // Delegate
+    var tr_presentTransition: TRViewControllerTransitionDelegate?
     
     // Data
     var topicOverviewArray = Array<TopicOverviewModel>() {
@@ -56,6 +59,7 @@ class HomeViewController: UIViewController {
         
         if let navigationController = navigationController as? ScrollingNavigationController {
             navController = navigationController
+            // TODO: 自己撸一个可滑动导航栏，适配该APP各种动画
             navigationController.followScrollView(tableView, delay: 50.0)
         }
         self.tableView.pullToRefreshDelegate = self

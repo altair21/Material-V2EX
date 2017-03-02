@@ -72,7 +72,9 @@ class MenuView: UIView {
             toast.hide(animated: true, afterDelay: Global.Config.toastDuration)
         } else {
             let loginViewController = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: Global.ViewControllers.login) as! LoginViewController
-            UIApplication.shared.keyWindow?.rootViewController?.present(loginViewController, animated: true, completion: nil)
+            let homeViewController = UIApplication.shared.keyWindow?.rootViewController?.childViewControllers[0] as! HomeViewController
+            loginViewController.modalDelegate = homeViewController
+            homeViewController.tr_presentViewController(loginViewController, method: TRPresentTransitionMethod.twitter)
         }
         
     }

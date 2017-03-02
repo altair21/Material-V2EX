@@ -15,6 +15,8 @@ class LoginViewController: UIViewController {
     @IBOutlet weak var passwordTextField: ErrorTextField!
     @IBOutlet weak var closeButton: FabButton!
     @IBOutlet weak var loginButton: RaisedButton!
+    
+    weak var modalDelegate: ModalViewControllerDelegate?
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -48,7 +50,7 @@ class LoginViewController: UIViewController {
     }
     
     func closeTapped(sender: UITapGestureRecognizer) {
-        self.dismiss(animated: true, completion: nil)
+        modalDelegate?.modalViewControllerDismiss(callbackData: nil)
     }
     
     func loginTapped(sender: UITapGestureRecognizer) {
@@ -74,7 +76,7 @@ class LoginViewController: UIViewController {
         NetworkManager.shared.loginWith(username: usernameTextField.text!, password: passwordTextField.text!, success: { (username, avatarURL) in
             hud.hide(animated: true)
             User.shared.setLogin(username: username, avatarURL: avatarURL)
-            self.dismiss(animated: true, completion: nil)
+            self.modalDelegate?.modalViewControllerDismiss(callbackData: nil)
         }) { (error) in
             hud.hide(animated: true)
             

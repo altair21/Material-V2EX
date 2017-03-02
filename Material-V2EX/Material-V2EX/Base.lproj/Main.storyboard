@@ -366,8 +366,8 @@
                             <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="KLB-0i-hRl" secondAttribute="bottom" constant="20" id="7qg-QX-hOK"/>
                             <constraint firstAttribute="trailing" secondItem="8s4-vu-4Na" secondAttribute="trailing" id="Z3D-ce-qVw"/>
                             <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="8s4-vu-4Na" secondAttribute="bottom" id="b83-UF-6iV"/>
-                            <constraint firstItem="8s4-vu-4Na" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" id="iCt-4z-rWS"/>
                             <constraint firstItem="8s4-vu-4Na" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="kk0-TK-WT4"/>
+                            <constraint firstItem="8s4-vu-4Na" firstAttribute="top" secondItem="8bC-Xf-vdC" secondAttribute="top" constant="64" id="uNm-xf-ggQ"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="V2EX" id="79p-oL-1Un">
