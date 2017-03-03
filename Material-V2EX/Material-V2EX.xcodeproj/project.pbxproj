@@ -64,6 +64,7 @@
 		50A2994D1E681F2800F8ADD5 /* TransitionTreasury.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50A299351E681F2800F8ADD5 /* TransitionTreasury.swift */; };
 		50A2994E1E681F2800F8ADD5 /* TRStatusBarStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50A299361E681F2800F8ADD5 /* TRStatusBarStyle.swift */; };
 		50A2994F1E681F2800F8ADD5 /* TRViewControllerAnimatedTransitioning.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50A299371E681F2800F8ADD5 /* TRViewControllerAnimatedTransitioning.swift */; };
+		50A299511E68401F00F8ADD5 /* ToastManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50A299501E68401F00F8ADD5 /* ToastManager.swift */; };
 		50B1D8641E1270CD00BCE4FF /* NSDate+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50B1D8631E1270CD00BCE4FF /* NSDate+Extension.swift */; };
 		50B1D8661E1273BC00BCE4FF /* NSDateTimeAgo.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 50B1D8651E1273BC00BCE4FF /* NSDateTimeAgo.bundle */; };
 		50B1D86C1E127D1C00BCE4FF /* ARIndicator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50B1D86B1E127D1C00BCE4FF /* ARIndicator.swift */; };
@@ -141,6 +142,7 @@
 		50A299351E681F2800F8ADD5 /* TransitionTreasury.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TransitionTreasury.swift; sourceTree = "<group>"; };
 		50A299361E681F2800F8ADD5 /* TRStatusBarStyle.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TRStatusBarStyle.swift; sourceTree = "<group>"; };
 		50A299371E681F2800F8ADD5 /* TRViewControllerAnimatedTransitioning.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TRViewControllerAnimatedTransitioning.swift; sourceTree = "<group>"; };
+		50A299501E68401F00F8ADD5 /* ToastManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ToastManager.swift; sourceTree = "<group>"; };
 		50B1D8621E126AAD00BCE4FF /* Material-V2EX-Bridging-Hedaer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Material-V2EX-Bridging-Hedaer.h"; sourceTree = "<group>"; };
 		50B1D8631E1270CD00BCE4FF /* NSDate+Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "NSDate+Extension.swift"; sourceTree = "<group>"; };
 		50B1D8651E1273BC00BCE4FF /* NSDateTimeAgo.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = NSDateTimeAgo.bundle; sourceTree = "<group>"; };
@@ -249,6 +251,7 @@
 				50E8C0751E0E797600FAC85B /* Extensions */,
 				5065F6E01E0A88B100B5A9FD /* Global.swift */,
 				504667A31E0CF5F5008B6953 /* fps.swift */,
+				50A299501E68401F00F8ADD5 /* ToastManager.swift */,
 			);
 			name = Helpers;
 			sourceTree = "<group>";
@@ -578,6 +581,7 @@
 				500002FD1E349E58000057F2 /* TopicReplyCountTableViewCell.swift in Sources */,
 				50A299451E681F2800F8ADD5 /* TwitterTransitionAnimation.swift in Sources */,
 				501370F81E1BB12E0076977B /* TopicHeaderTableViewCell.swift in Sources */,
+				50A299511E68401F00F8ADD5 /* ToastManager.swift in Sources */,
 				50A2994D1E681F2800F8ADD5 /* TransitionTreasury.swift in Sources */,
 				507F4EF01E0944EA0033A10B /* HomeViewController.swift in Sources */,
 				504667AC1E0D2798008B6953 /* TopicOverviewModel.swift in Sources */,

@@ -8,7 +8,6 @@
 
 import UIKit
 import Material
-import MBProgressHUD
 
 class LoginViewController: UIViewController {
     @IBOutlet weak var usernameTextField: ErrorTextField!
@@ -67,26 +66,14 @@ class LoginViewController: UIViewController {
             return
         }
         
-        let hud = MBProgressHUD.showAdded(to: self.view, animated: true)
-        hud.label.text = "正在登录……"
-        hud.bezelView.color = UIColor.black
-        hud.contentColor = UIColor.white
-//        hud.offset = CGPoint(x: 0.0, y: MBProgressMaxOffset)
-        
+        let hud = ToastManager.shared.showToast(toView: self.view, text: "正在登录……", mode: .indeterminate)
         NetworkManager.shared.loginWith(username: usernameTextField.text!, password: passwordTextField.text!, success: { (username, avatarURL) in
             hud.hide(animated: true)
             User.shared.setLogin(username: username, avatarURL: avatarURL)
             self.modalDelegate?.modalViewControllerDismiss(callbackData: nil)
         }) { (error) in
             hud.hide(animated: true)
-            
-            let toast = MBProgressHUD.showAdded(to: self.view, animated: true)
-            toast.mode = MBProgressHUDMode.customView
-            toast.bezelView.color = UIColor.black
-            toast.contentColor = UIColor.white
-            toast.customView = UIImageView(image: UIImage(named: "failure"))
-            toast.label.text = error
-            toast.hide(animated: true, afterDelay: Global.Config.toastDuration)
+            let _ = ToastManager.shared.showCustomToast(toView: self.view, text: error, customView: UIImageView(image: UIImage(named: "failure")))
         }
     }
     

@@ -8,7 +8,6 @@
 
 import UIKit
 import Material
-import MBProgressHUD
 
 class MenuView: UIView {
     @IBOutlet weak var panelView: UIView!
@@ -62,14 +61,7 @@ class MenuView: UIView {
         
         if User.shared.isLogin {
             User.shared.logout()
-            
-            let toast = MBProgressHUD.showAdded(to: (UIApplication.shared.keyWindow?.rootViewController?.view)!, animated: true)
-            toast.bezelView.color = UIColor.black
-            toast.contentColor = UIColor.white
-            toast.mode = .text
-            toast.offset = CGPoint(x: 0.0, y: MBProgressMaxOffset)
-            toast.label.text = "账号已注销"
-            toast.hide(animated: true, afterDelay: Global.Config.toastDuration)
+            let _ = ToastManager.shared.showToast(toView: (UIApplication.shared.keyWindow?.rootViewController?.view)!, text: "账号已注销", position: .bottom)
         } else {
             let loginViewController = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: Global.ViewControllers.login) as! LoginViewController
             let homeViewController = UIApplication.shared.keyWindow?.rootViewController?.childViewControllers[0] as! HomeViewController
