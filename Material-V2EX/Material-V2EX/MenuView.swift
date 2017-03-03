@@ -9,6 +9,9 @@
 import UIKit
 import Material
 
+fileprivate let buttonUnSelectBackgroundColor = UIColor.white.withAlphaComponent(0.24)
+fileprivate let buttonSelectBackgroundColor = UIColor.white.withAlphaComponent(0.38)
+
 class MenuView: UIView {
     @IBOutlet weak var panelView: UIView!
     @IBOutlet weak var bgView: UIView!
@@ -16,8 +19,21 @@ class MenuView: UIView {
     @IBOutlet weak var avatarView: UIImageView!
     @IBOutlet weak var mainButton: RaisedButton!
     @IBOutlet weak var usernameLabel: UILabel!
+    @IBOutlet weak var topicListButton: FlatButton!
+    @IBOutlet weak var allNodeButton: FlatButton!
+    @IBOutlet weak var myTopicButton: FlatButton!
+    @IBOutlet weak var aboutButton: FlatButton!
+    @IBOutlet weak var settingButton: FlatButton!
     
     static let shared = Bundle.main.loadNibNamed(Global.Views.menuView, owner: nil, options: nil)?.first as! MenuView
+    var selectedButton: FlatButton! {
+        willSet {
+            if selectedButton != nil {
+                selectedButton.backgroundColor = buttonUnSelectBackgroundColor
+            }
+            newValue.backgroundColor = buttonSelectBackgroundColor
+        }
+    }
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -27,6 +43,7 @@ class MenuView: UIView {
         bgView.frame = panelView.frame
         self.panelView.layer.insertSublayer(bgView.layer, at: 0)
         self.avatarView.layer.borderColor = UIColor.white.cgColor
+        selectedButton = topicListButton
         
         NotificationCenter.default.addObserver(self,
                                                selector: #selector(loginStatusChangedHandler),
@@ -38,14 +55,22 @@ class MenuView: UIView {
     }
     
     func setupGesture() {
-        let tap = UITapGestureRecognizer(target: self, action: #selector(backHome(sender:)))
-        bgView.addGestureRecognizer(tap)
-        
         let swipeLeft = UIPanGestureRecognizer(target: self, action: #selector(handlePanel(sender:)))
         self.addGestureRecognizer(swipeLeft)
-        
+        let tap = UITapGestureRecognizer(target: self, action: #selector(backHome(sender:)))
+        bgView.addGestureRecognizer(tap)
         let tapMainBtn = UITapGestureRecognizer(target: self, action: #selector(mainButtonTapped(sender:)))
         mainButton.addGestureRecognizer(tapMainBtn)
+        let tapTopicList = UITapGestureRecognizer(target: self, action: #selector(topicListTapped(sender:)))
+        topicListButton.addGestureRecognizer(tapTopicList)
+        let tapAllNode = UITapGestureRecognizer(target: self, action: #selector(allNodeTapped(sender:)))
+        allNodeButton.addGestureRecognizer(tapAllNode)
+        let tapMyTopic = UITapGestureRecognizer(target: self, action: #selector(myTopicTapped(sender:)))
+        myTopicButton.addGestureRecognizer(tapMyTopic)
+        let tapAbout = UITapGestureRecognizer(target: self, action: #selector(aboutTapped(sender:)))
+        aboutButton.addGestureRecognizer(tapAbout)
+        let tapSetting = UITapGestureRecognizer(target: self, action: #selector(settingTapped(sender:)))
+        settingButton.addGestureRecognizer(tapSetting)
     }
     
     func backHome(sender: UITapGestureRecognizer) {
@@ -68,7 +93,26 @@ class MenuView: UIView {
             loginViewController.modalDelegate = homeViewController
             homeViewController.tr_presentViewController(loginViewController, method: TRPresentTransitionMethod.twitter)
         }
-        
+    }
+    
+    func topicListTapped(sender: UITapGestureRecognizer) {
+        selectedButton = topicListButton
+    }
+    
+    func allNodeTapped(sender: UITapGestureRecognizer) {
+        selectedButton = allNodeButton
+    }
+    
+    func myTopicTapped(sender: UITapGestureRecognizer) {
+        selectedButton = myTopicButton
+    }
+    
+    func aboutTapped(sender: UITapGestureRecognizer) {
+        selectedButton = aboutButton
+    }
+    
+    func settingTapped(sender: UITapGestureRecognizer) {
+        selectedButton = settingButton
     }
     
     func loginStatusChangedHandler(notification: Notification) {
