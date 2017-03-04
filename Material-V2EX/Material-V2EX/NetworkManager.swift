@@ -74,6 +74,18 @@ class NetworkManager: NSObject {
                 } else {
                     failure("数据解析失败！")
                 }
+                
+                // 默认领取登录奖励
+                DispatchQueue.global(qos: .background).async {
+                    let aNode = jiDoc.xPath("//body/div[@id='Wrapper']/div[@class='content']/div[@class='box']/div[@class='inner']/a")?.first
+                    if aNode?.content == "领取今日的登录奖励" {
+                        self.getDailyRedeem(success: {
+                            let _ = ToastManager.shared.showToast(toView: (UIApplication.shared.keyWindow?.rootViewController?.view)!, text: "已领取每日登录奖励", position: .bottom)
+                        }, failure: { (error) in
+                            print("get daily redeem failure ", error)
+                        })
+                    }
+                }
             case .failure:
                 failure(response.result.error?.localizedDescription ?? "网络错误")
             }
@@ -267,6 +279,43 @@ class NetworkManager: NSObject {
                 success()
             } else {
                 failure()
+            }
+        }
+    }
+    
+    /// 领取每日登录奖励
+    ///
+    /// - Parameters:
+    ///   - success: 成功回调
+    ///   - failure: 失败回调
+    private func getDailyRedeem(success: @escaping ()->(), failure: @escaping (String)->()) {
+        Alamofire.request(V2EX.indexURL + "/mission/daily", headers: Global.Config.requestHeader).responseString { (response) in
+            if response.request?.url?.absoluteString == response.response?.url?.absoluteString {
+                let jiDoc = Ji(htmlString: response.result.value!)!
+                let inputNode = jiDoc.xPath("//body/div[@id='Wrapper']/div[@class='content']/div[@class='box']/div[@class='cell'][2]/input")?.first
+                if let onclickStr = inputNode?.attributes["onclick"],
+                   let firstIndex = onclickStr.range(of: "'") {
+                    let dirtyURL = onclickStr.substring(from: firstIndex.upperBound)
+                    if let secondIndex = dirtyURL.range(of: "'") {
+                        let url = dirtyURL.substring(to: secondIndex.lowerBound)
+                        Alamofire.request(V2EX.indexURL + url, headers: Global.Config.requestHeader).responseString(completionHandler: { (res) in
+                            if let jiDoc = Ji(htmlString: res.result.value!) {
+                                let node = jiDoc.xPath("//body/div[@id='Wrapper']/div/div/div[@class='message']")?.first
+                                if (node?.content == "已成功领取每日登录奖励") {
+                                    success()
+                                }
+                            } else {
+                                failure("领取失败！")
+                            }
+                        })
+                    } else {
+                        failure("解析失败！")
+                    }
+                } else {
+                    failure("解析失败")
+                }
+            } else {
+                failure("没有登录！")
             }
         }
     }
