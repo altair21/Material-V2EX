@@ -12,6 +12,14 @@ import Material
 fileprivate let buttonUnSelectBackgroundColor = UIColor.white.withAlphaComponent(0.24)
 fileprivate let buttonSelectBackgroundColor = UIColor.white.withAlphaComponent(0.38)
 
+enum MenuViewSelectType {
+    case topicList
+    case allNodes
+    case myTopic
+    case about
+    case setting
+}
+
 class MenuView: UIView {
     @IBOutlet weak var panelView: UIView!
     @IBOutlet weak var bgView: UIView!
@@ -97,22 +105,42 @@ class MenuView: UIView {
     
     func topicListTapped(sender: UITapGestureRecognizer) {
         selectedButton = topicListButton
+        NotificationCenter.default.post(name: Global.Notifications.kMenuViewSelectChanged,
+                                        object: nil,
+                                        userInfo: ["type": MenuViewSelectType.topicList])
+        hideMenu(self)
     }
     
     func allNodeTapped(sender: UITapGestureRecognizer) {
         selectedButton = allNodeButton
+        NotificationCenter.default.post(name: Global.Notifications.kMenuViewSelectChanged,
+                                        object: nil,
+                                        userInfo: ["type": MenuViewSelectType.allNodes])
+        hideMenu(self)
     }
     
     func myTopicTapped(sender: UITapGestureRecognizer) {
         selectedButton = myTopicButton
+        NotificationCenter.default.post(name: Global.Notifications.kMenuViewSelectChanged,
+                                        object: nil,
+                                        userInfo: ["type": MenuViewSelectType.myTopic])
+        hideMenu(self)
     }
     
     func aboutTapped(sender: UITapGestureRecognizer) {
         selectedButton = aboutButton
+        NotificationCenter.default.post(name: Global.Notifications.kMenuViewSelectChanged,
+                                        object: nil,
+                                        userInfo: ["type": MenuViewSelectType.about])
+        hideMenu(self)
     }
     
     func settingTapped(sender: UITapGestureRecognizer) {
         selectedButton = settingButton
+        NotificationCenter.default.post(name: Global.Notifications.kMenuViewSelectChanged,
+                                        object: nil,
+                                        userInfo: ["type": MenuViewSelectType.setting])
+        hideMenu(self)
     }
     
     func loginStatusChangedHandler(notification: Notification) {

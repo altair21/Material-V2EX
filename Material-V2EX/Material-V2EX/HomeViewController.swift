@@ -30,6 +30,7 @@ class HomeViewController: UIViewController, ModalTransitionDelegate {
     var tr_presentTransition: TRViewControllerTransitionDelegate?
     
     // Data
+    var selectedChildView: UIView?  // 根据MenuView的选择而显示的view
     var topicOverviewArray = Array<TopicOverviewModel>() {
         didSet {
             if topicOverviewArray.count > 0 {
@@ -72,6 +73,11 @@ class HomeViewController: UIViewController, ModalTransitionDelegate {
         tableView.contentInset = UIEdgeInsets(top: 10, left: 0, bottom: 0, right: 0)
         tableView.estimatedRowHeight = 100
         tableView.rowHeight = UITableViewAutomaticDimension
+        
+        NotificationCenter.default.addObserver(self,
+                                               selector: #selector(menuSelectChangedHandler(notification:)),
+                                               name: Global.Notifications.kMenuViewSelectChanged,
+                                               object: nil)
         
         setupUI()
         setupGesture()
@@ -191,6 +197,41 @@ class HomeViewController: UIViewController, ModalTransitionDelegate {
     
     @IBAction func moreTapped(_ sender: FabButton) {
         showNodeList(nodeListView)
+    }
+    
+    func menuSelectChangedHandler(notification: Notification) {
+        navController.showNavbar(animated: true, duration: 0.3)
+        if let dict = notification.userInfo, let type: MenuViewSelectType = dict["type"] as? MenuViewSelectType {
+            switch type {
+            case .topicList:
+                if let childView = selectedChildView {
+                    childView.removeFromSuperview()
+                }
+                self.tableView.isHidden = false
+            case .allNodes:
+                if let childView = selectedChildView {
+                    childView.removeFromSuperview()
+                }
+                selectedChildView = AllNodesView.shared
+                self.view.insertSubview(selectedChildView!, belowSubview: leftEdgeView)
+                self.tableView.isHidden = true
+            case .myTopic:
+                if let childView = selectedChildView {
+                    childView.removeFromSuperview()
+                }
+                self.tableView.isHidden = true
+            case .about:
+                if let childView = selectedChildView {
+                    childView.removeFromSuperview()
+                }
+                self.tableView.isHidden = true
+            case .setting:
+                if let childView = selectedChildView {
+                    childView.removeFromSuperview()
+                }
+                self.tableView.isHidden = true
+            }
+        }
     }
     
 }

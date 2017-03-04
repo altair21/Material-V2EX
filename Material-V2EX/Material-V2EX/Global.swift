@@ -27,6 +27,7 @@ class Global: NSObject {
         static let menuView = "MenuView"
         static let nodeListView = "NodeListView"
         static let nodeListTableViewCell = "NodeListTableViewCell"
+        static let allNodesView = "AllNodesView"
     }
     
     // Cells
@@ -40,6 +41,7 @@ class Global: NSObject {
         static let topicHeaderCell = "topicHeaderCell"
         static let topicFooterCell = "topicFooterCell"
         static let nodeListCell = "nodeListCell"
+        static let allNodesCell = "allNodesCollectionViewCell"
     }
     
     // Constant
@@ -67,5 +69,6 @@ class Global: NSObject {
     // Notifications
     struct Notifications {
         static let kLoginStatusChanged = Notification.Name.init("User login status changed")
+        static let kMenuViewSelectChanged = Notification.Name.init("MenuView select changed")
     }
 }
