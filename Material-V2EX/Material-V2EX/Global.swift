@@ -42,6 +42,7 @@ class Global: NSObject {
         static let topicFooterCell = "topicFooterCell"
         static let nodeListCell = "nodeListCell"
         static let allNodesCell = "allNodesCollectionViewCell"
+        static let allNodesTitleCell = "allNodesCollectionReusableView"
     }
     
     // Constant
@@ -50,15 +51,17 @@ class Global: NSObject {
         static let screenHeight = UIScreen.main.bounds.height
     }
     
-    // Variable
-    struct Variable {
-        static var isLogin = false
+    // Keys
+    struct Keys {
+        static var kUnitNode = "kUnitNode"
     }
     
     // Config
     struct Config {
         static let edgePanGestureThreshold: CGFloat = 15    // 首页左滑右滑手势响应宽度
         static let renderContentMargin: CGFloat = 34     // 帖子详情内容Margin
+        static let unitNodeCellPadding: CGFloat = 10    // “全部节点”页 cell的padding
+        static let unitNodeCellHeight: CGFloat = 32 // “全部节点”页 cell的高度
         static let toastDuration: TimeInterval = 1.2
         static let navigationBarMaxShadowRadius: CGFloat = 8.0
         static let requestHeader = ["user-agent": userAgent]
@@ -70,5 +73,6 @@ class Global: NSObject {
     struct Notifications {
         static let kLoginStatusChanged = Notification.Name.init("User login status changed")
         static let kMenuViewSelectChanged = Notification.Name.init("MenuView select changed")
+        static let kUnitNodeSelectChanged = Notification.Name.init("Unit node select changed")
     }
 }

@@ -91,7 +91,7 @@
                                         <constraint firstAttribute="height" constant="52" id="XhV-1N-GRl"/>
                                     </constraints>
                                     <fontDescription key="fontDescription" name="PingFangHK-Regular" family="PingFang HK" pointSize="18"/>
-                                    <state key="normal" title="所有节点">
+                                    <state key="normal" title="节点列表">
                                         <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                     </state>
                                     <userDefinedRuntimeAttributes>

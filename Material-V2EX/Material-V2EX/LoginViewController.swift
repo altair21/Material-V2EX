@@ -66,7 +66,7 @@ class LoginViewController: UIViewController {
             return
         }
         
-        let hud = ToastManager.shared.showToast(toView: self.view, text: "正在登录……", mode: .indeterminate)
+        let hud = ToastManager.shared.showToast(toView: self.view, text: "正在登录", mode: .indeterminate)
         NetworkManager.shared.loginWith(username: usernameTextField.text!, password: passwordTextField.text!, success: { (username, avatarURL) in
             hud.hide(animated: true)
             User.shared.setLogin(username: username, avatarURL: avatarURL)

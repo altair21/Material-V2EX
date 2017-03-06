@@ -57,6 +57,10 @@ class MenuView: UIView {
                                                selector: #selector(loginStatusChangedHandler),
                                                name: Global.Notifications.kLoginStatusChanged,
                                                object: nil)
+        NotificationCenter.default.addObserver(self,
+                                               selector: #selector(unitNodeSelectHandler(notification:)),
+                                               name: Global.Notifications.kUnitNodeSelectChanged,
+                                               object: nil)
         
         loginStatusChanged()
         setupGesture()
@@ -145,6 +149,10 @@ class MenuView: UIView {
     
     func loginStatusChangedHandler(notification: Notification) {
         loginStatusChanged()
+    }
+    
+    func unitNodeSelectHandler(notification: Notification) {
+        selectedButton = topicListButton
     }
     
     func loginStatusChanged() {

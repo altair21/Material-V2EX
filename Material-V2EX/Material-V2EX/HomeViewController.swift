@@ -74,13 +74,9 @@ class HomeViewController: UIViewController, ModalTransitionDelegate {
         tableView.estimatedRowHeight = 100
         tableView.rowHeight = UITableViewAutomaticDimension
         
-        NotificationCenter.default.addObserver(self,
-                                               selector: #selector(menuSelectChangedHandler(notification:)),
-                                               name: Global.Notifications.kMenuViewSelectChanged,
-                                               object: nil)
-        
         setupUI()
         setupGesture()
+        setupNotification()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -149,22 +145,33 @@ class HomeViewController: UIViewController, ModalTransitionDelegate {
     }
     
     func setupGesture() {
-        // 添加右滑手势
-        leftEdgeView = UIView(frame: CGRect(x: 0, y: 0, width: Global.Config.edgePanGestureThreshold, height: Global.Constants.screenHeight))
-        view.addSubview(leftEdgeView)
-        let swipeRight = UIPanGestureRecognizer(target: self, action: #selector(handleSwipeRight(sender:)))
-        leftEdgeView.addGestureRecognizer(swipeRight)
-        
         // 添加左滑手势
         rightEdgeView = UIView(frame: CGRect(x: Global.Constants.screenWidth - Global.Config.edgePanGestureThreshold, y: 0, width: Global.Config.edgePanGestureThreshold, height: Global.Constants.screenHeight))
         view.addSubview(rightEdgeView)
         let swipeLeft = UIPanGestureRecognizer(target: self, action: #selector(handleSwipeLeft(sender:)))
         rightEdgeView.addGestureRecognizer(swipeLeft)
         
+        // 添加右滑手势
+        leftEdgeView = UIView(frame: CGRect(x: 0, y: 0, width: Global.Config.edgePanGestureThreshold, height: Global.Constants.screenHeight))
+        view.addSubview(leftEdgeView)
+        let swipeRight = UIPanGestureRecognizer(target: self, action: #selector(handleSwipeRight(sender:)))
+        leftEdgeView.addGestureRecognizer(swipeRight)
+        
         let menuTapped = UITapGestureRecognizer(target: self, action: #selector(menuTapped(_:)))
         menuBtn.addGestureRecognizer(menuTapped)
         let moreTapped = UITapGestureRecognizer(target: self, action: #selector(moreTapped(_:)))
         moreBtn.addGestureRecognizer(moreTapped)
+    }
+    
+    func setupNotification() {
+        NotificationCenter.default.addObserver(self,
+                                               selector: #selector(menuSelectChangedHandler(notification:)),
+                                               name: Global.Notifications.kMenuViewSelectChanged,
+                                               object: nil)
+        NotificationCenter.default.addObserver(self,
+                                               selector: #selector(unitNodeSelectHandler(notification:)),
+                                               name: Global.Notifications.kUnitNodeSelectChanged,
+                                               object: nil)
     }
     
     func handleSwipeRight(sender: UIPanGestureRecognizer) {
@@ -199,38 +206,89 @@ class HomeViewController: UIViewController, ModalTransitionDelegate {
         showNodeList(nodeListView)
     }
     
+    func refreshIn(node: NodeModel) {
+        topicOverviewArray.removeAll()
+        tableView.reloadData()
+        indicator.state = .running
+        self.navController.showNavbar(animated: true)
+        
+        let successBlock: (Array<TopicOverviewModel>) -> Void = { res in
+            self.topicOverviewArray = res
+            self.indicator.state = .stopping
+            self.tableView.isHidden = false
+            self.currentPage = 1
+            self.totalPage = self.category.totalPage
+            self.tableView.reloadData()
+        }
+        let failureBlock: (String) -> Void = { error in
+            self.indicator.state = .stopping
+            self.tableView.isHidden = false
+            // TODO: failure toast
+        }
+        node.loadTopics(success: successBlock, failure: failureBlock)
+        
+        self.title = node.name
+        self.category = node
+
+    }
+    
+    func displayHomepage() {
+        if let childView = selectedChildView {
+            childView.removeFromSuperview()
+        }
+        self.tableView.isHidden = false
+        self.moreBtn.isHidden = false
+        self.title = self.category.name
+    }
+    
     func menuSelectChangedHandler(notification: Notification) {
         navController.showNavbar(animated: true, duration: 0.3)
         if let dict = notification.userInfo, let type: MenuViewSelectType = dict["type"] as? MenuViewSelectType {
             switch type {
             case .topicList:
-                if let childView = selectedChildView {
-                    childView.removeFromSuperview()
-                }
-                self.tableView.isHidden = false
+                displayHomepage()
             case .allNodes:
                 if let childView = selectedChildView {
                     childView.removeFromSuperview()
                 }
                 selectedChildView = AllNodesView.shared
                 self.view.insertSubview(selectedChildView!, belowSubview: leftEdgeView)
+                navController.navigationBar.layer.shadowRadius = Global.Config.navigationBarMaxShadowRadius
                 self.tableView.isHidden = true
+                self.moreBtn.isHidden = true
+                self.title = "节点列表"
             case .myTopic:
                 if let childView = selectedChildView {
                     childView.removeFromSuperview()
                 }
+                navController.navigationBar.layer.shadowRadius = Global.Config.navigationBarMaxShadowRadius
                 self.tableView.isHidden = true
+                self.title = "个人收藏"
             case .about:
                 if let childView = selectedChildView {
                     childView.removeFromSuperview()
                 }
+                navController.navigationBar.layer.shadowRadius = Global.Config.navigationBarMaxShadowRadius
                 self.tableView.isHidden = true
+                self.title = "关于"
             case .setting:
                 if let childView = selectedChildView {
                     childView.removeFromSuperview()
                 }
+                navController.navigationBar.layer.shadowRadius = Global.Config.navigationBarMaxShadowRadius
                 self.tableView.isHidden = true
+                self.title = "设置"
             }
+        }
+    }
+    
+    func unitNodeSelectHandler(notification: Notification) {
+        if let node = notification.userInfo?[Global.Keys.kUnitNode] as? NodeModel {
+            displayHomepage()
+            if self.category.name == node.name {
+                return
+            }
+            refreshIn(node: node)
         }
     }
     
@@ -368,28 +426,7 @@ extension HomeViewController: SelectNodeDelegate {
         if self.category.name == node.name {
             return
         }
-        topicOverviewArray.removeAll()
-        tableView.reloadData()
-        indicator.state = .running
-        self.navController.showNavbar(animated: true)
-        
-        let successBlock: (Array<TopicOverviewModel>) -> Void = { res in
-            self.topicOverviewArray = res
-            self.indicator.state = .stopping
-            self.tableView.isHidden = false
-            self.currentPage = 1
-            self.totalPage = self.category.totalPage
-            self.tableView.reloadData()
-        }
-        let failureBlock: (String) -> Void = { error in
-            self.indicator.state = .stopping
-            self.tableView.isHidden = false
-            // TODO: failure toast
-        }
-        node.loadTopics(success: successBlock, failure: failureBlock)
-        
-        self.title = node.name
-        self.category = node
+        refreshIn(node: node)
     }
 }
 

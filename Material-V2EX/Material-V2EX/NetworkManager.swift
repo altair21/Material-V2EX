@@ -319,6 +319,28 @@ class NetworkManager: NSObject {
             }
         }
     }
+    
+    // MARK: Node Module
+    /// 获取所有节点信息
+    ///
+    /// - Parameters:
+    ///   - success: 成功回调
+    ///   - failure: 失败回调
+    func getAllNodes(success: @escaping (Array<NodeGroupModel>)->Void, failure: @escaping (String)->Void) {
+        Alamofire.request(V2EX.indexURL + "/planes", headers: Global.Config.requestHeader).responseString { (response) in
+            if let jiDoc = Ji(htmlString: response.result.value!),
+                let boxNodes = jiDoc.xPath("//body/div[@id='Wrapper']/div[@class='content']/div[@class='box']") {
+                let handleNodes = boxNodes.dropFirst()
+                var res = [NodeGroupModel]()
+                for boxNode in handleNodes {
+                    res.append(NodeGroupModel(data: boxNode))
+                }
+                success(res)
+            } else {
+                failure(response.result.error?.localizedDescription ?? "解析失败")
+            }
+        }
+    }
 }
 
 
