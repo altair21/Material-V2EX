@@ -33,11 +33,15 @@ class HomeViewController: UIViewController, ModalTransitionDelegate {
     var selectedChildView: UIView?  // 根据MenuView的选择而显示的view
     var topicOverviewArray = Array<TopicOverviewModel>() {
         didSet {
+            footerView.isHidden = true
             if topicOverviewArray.count > 0 {
                 footerView.isHidden = false
-            } else {
-                footerView.isHidden = true
+                footerView.alpha = 0
+                UIView.animate(withDuration: 0.6, animations: {
+                    self.footerView.alpha = 1.0
+                })
             }
+            
         }
     }
     var selectedIndexPath: IndexPath?
@@ -220,6 +224,7 @@ class HomeViewController: UIViewController, ModalTransitionDelegate {
             self.tableView.isHidden = false
             self.currentPage = 1
             self.totalPage = self.category.totalPage
+            self.navController.navigationBar.layer.shadowRadius = 0
             self.tableView.reloadData()
         }
         let failureBlock: (String) -> Void = { error in
