@@ -10,7 +10,7 @@ import UIKit
 import Material
 
 fileprivate let buttonUnSelectBackgroundColor = UIColor.white.withAlphaComponent(0.24)
-fileprivate let buttonSelectBackgroundColor = UIColor.white.withAlphaComponent(0.38)
+fileprivate let buttonSelectBackgroundColor = UIColor.white.withAlphaComponent(0.48)
 
 enum MenuViewSelectType {
     case topicList
@@ -46,11 +46,6 @@ class MenuView: UIView {
     override func awakeFromNib() {
         super.awakeFromNib()
         
-        self.frame = CGRect(x: 0, y: 0, width: Global.Constants.screenWidth, height: Global.Constants.screenHeight)
-        let bgView = UIImageView(image: UIImage(named: "menuview_bg"))
-        bgView.frame = panelView.frame
-        self.panelView.layer.insertSublayer(bgView.layer, at: 0)
-        self.avatarView.layer.borderColor = UIColor.white.cgColor
         selectedButton = topicListButton
         
         NotificationCenter.default.addObserver(self,
@@ -62,8 +57,24 @@ class MenuView: UIView {
                                                name: Global.Notifications.kUnitNodeSelectChanged,
                                                object: nil)
         
-        loginStatusChanged()
+        setupUI()
         setupGesture()
+        loginStatusChanged()
+    }
+    
+    func setupUI() {
+        self.frame = CGRect(x: 0, y: 0, width: Global.Constants.screenWidth, height: Global.Constants.screenHeight)
+        let bgView = UIImageView(image: UIImage(named: "menuview_bg"))
+        bgView.frame = panelView.frame
+        self.panelView.layer.insertSublayer(bgView.layer, at: 0)
+        self.avatarView.layer.borderColor = UIColor.white.cgColor
+        
+        let imageEdgeInsets = UIEdgeInsetsMake(0, 0, 0, 16)
+        topicListButton.imageEdgeInsets = imageEdgeInsets
+        allNodeButton.imageEdgeInsets = imageEdgeInsets
+        myTopicButton.imageEdgeInsets = imageEdgeInsets
+        aboutButton.imageEdgeInsets = imageEdgeInsets
+        settingButton.imageEdgeInsets = imageEdgeInsets
     }
     
     func setupGesture() {

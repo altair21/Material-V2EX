@@ -3,3 +3,4 @@ xcuserdata/
 *.xcscmblueprint
 Pods/
 Builds/*
+Assets/*

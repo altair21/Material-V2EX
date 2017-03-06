@@ -68,14 +68,13 @@
                         <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="qUd-Ev-QK1">
                             <rect key="frame" x="0.0" y="191" width="255" height="476"/>
                             <subviews>
-                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="YCL-AO-FF0" customClass="FlatButton" customModule="Material">
+                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" adjustsImageWhenHighlighted="NO" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="YCL-AO-FF0" customClass="FlatButton" customModule="Material">
                                     <rect key="frame" x="-2" y="0.0" width="259" height="52"/>
                                     <color key="backgroundColor" red="1" green="1" blue="1" alpha="0.23999999999999999" colorSpace="calibratedRGB"/>
                                     <constraints>
                                         <constraint firstAttribute="height" constant="52" id="MOB-6e-9ak"/>
                                     </constraints>
-                                    <fontDescription key="fontDescription" name="PingFangHK-Regular" family="PingFang HK" pointSize="18"/>
-                                    <state key="normal" title="帖子列表">
+                                    <state key="normal" title="帖子列表" image="icon_topiclist">
                                         <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                     </state>
                                     <userDefinedRuntimeAttributes>
@@ -84,14 +83,13 @@
                                         </userDefinedRuntimeAttribute>
                                     </userDefinedRuntimeAttributes>
                                 </button>
-                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9pl-lT-CiQ" customClass="FlatButton" customModule="Material">
-                                    <rect key="frame" x="-2" y="52" width="259" height="52"/>
+                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" adjustsImageWhenHighlighted="NO" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9pl-lT-CiQ" customClass="FlatButton" customModule="Material">
+                                    <rect key="frame" x="-2" y="53" width="259" height="52"/>
                                     <color key="backgroundColor" red="1" green="1" blue="1" alpha="0.23999999999999999" colorSpace="calibratedRGB"/>
                                     <constraints>
                                         <constraint firstAttribute="height" constant="52" id="XhV-1N-GRl"/>
                                     </constraints>
-                                    <fontDescription key="fontDescription" name="PingFangHK-Regular" family="PingFang HK" pointSize="18"/>
-                                    <state key="normal" title="节点列表">
+                                    <state key="normal" title="节点列表" image="icon_nodelist">
                                         <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                     </state>
                                     <userDefinedRuntimeAttributes>
@@ -100,14 +98,13 @@
                                         </userDefinedRuntimeAttribute>
                                     </userDefinedRuntimeAttributes>
                                 </button>
-                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="F3R-LU-BhK" customClass="FlatButton" customModule="Material">
-                                    <rect key="frame" x="-2" y="104" width="259" height="52"/>
+                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" adjustsImageWhenHighlighted="NO" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="F3R-LU-BhK" customClass="FlatButton" customModule="Material">
+                                    <rect key="frame" x="-2" y="106" width="259" height="52"/>
                                     <color key="backgroundColor" red="1" green="1" blue="1" alpha="0.23999999999999999" colorSpace="calibratedRGB"/>
                                     <constraints>
                                         <constraint firstAttribute="height" constant="52" id="i7X-ss-LjG"/>
                                     </constraints>
-                                    <fontDescription key="fontDescription" name="PingFangHK-Regular" family="PingFang HK" pointSize="18"/>
-                                    <state key="normal" title="个人收藏">
+                                    <state key="normal" title="个人收藏" image="icon_collection">
                                         <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                     </state>
                                     <userDefinedRuntimeAttributes>
@@ -116,14 +113,13 @@
                                         </userDefinedRuntimeAttribute>
                                     </userDefinedRuntimeAttributes>
                                 </button>
-                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="xia-9h-r3c" customClass="FlatButton" customModule="Material">
-                                    <rect key="frame" x="-2" y="372" width="259" height="52"/>
+                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" adjustsImageWhenHighlighted="NO" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="xia-9h-r3c" customClass="FlatButton" customModule="Material">
+                                    <rect key="frame" x="-2" y="371" width="259" height="52"/>
                                     <color key="backgroundColor" red="1" green="1" blue="1" alpha="0.23999999999999999" colorSpace="calibratedRGB"/>
                                     <constraints>
                                         <constraint firstAttribute="height" constant="52" id="cM6-1z-xDG"/>
                                     </constraints>
-                                    <fontDescription key="fontDescription" name="PingFangHK-Regular" family="PingFang HK" pointSize="18"/>
-                                    <state key="normal" title="关于">
+                                    <state key="normal" title="关于" image="icon_about">
                                         <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                     </state>
                                     <userDefinedRuntimeAttributes>
@@ -132,14 +128,13 @@
                                         </userDefinedRuntimeAttribute>
                                     </userDefinedRuntimeAttributes>
                                 </button>
-                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3Uf-qZ-tRZ" customClass="FlatButton" customModule="Material">
+                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" adjustsImageWhenHighlighted="NO" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3Uf-qZ-tRZ" customClass="FlatButton" customModule="Material">
                                     <rect key="frame" x="-2" y="424" width="259" height="52"/>
                                     <color key="backgroundColor" red="1" green="1" blue="1" alpha="0.23999999999999999" colorSpace="calibratedRGB"/>
                                     <constraints>
                                         <constraint firstAttribute="height" constant="52" id="qlt-f4-gu1"/>
                                     </constraints>
-                                    <fontDescription key="fontDescription" name="PingFangHK-Regular" family="PingFang HK" pointSize="18"/>
-                                    <state key="normal" title="设置">
+                                    <state key="normal" title="设置" image="icon_setting">
                                         <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                     </state>
                                     <userDefinedRuntimeAttributes>
@@ -158,11 +153,11 @@
                                 <constraint firstItem="3Uf-qZ-tRZ" firstAttribute="leading" secondItem="qUd-Ev-QK1" secondAttribute="leading" constant="-2" id="M5d-jv-ZrS"/>
                                 <constraint firstItem="9pl-lT-CiQ" firstAttribute="leading" secondItem="qUd-Ev-QK1" secondAttribute="leading" constant="-2" id="Qg8-lz-22O"/>
                                 <constraint firstItem="F3R-LU-BhK" firstAttribute="leading" secondItem="qUd-Ev-QK1" secondAttribute="leading" constant="-2" id="Rpp-Bq-7uE"/>
-                                <constraint firstItem="F3R-LU-BhK" firstAttribute="top" secondItem="9pl-lT-CiQ" secondAttribute="bottom" id="T1R-T6-H5p"/>
+                                <constraint firstItem="F3R-LU-BhK" firstAttribute="top" secondItem="9pl-lT-CiQ" secondAttribute="bottom" constant="1" id="T1R-T6-H5p"/>
                                 <constraint firstAttribute="trailing" secondItem="YCL-AO-FF0" secondAttribute="trailing" constant="-2" id="UVo-ap-J7a"/>
                                 <constraint firstAttribute="trailing" secondItem="xia-9h-r3c" secondAttribute="trailing" constant="-2" id="XvN-sT-xsH"/>
-                                <constraint firstItem="9pl-lT-CiQ" firstAttribute="top" secondItem="YCL-AO-FF0" secondAttribute="bottom" id="ct2-sX-Cfs"/>
-                                <constraint firstItem="3Uf-qZ-tRZ" firstAttribute="top" secondItem="xia-9h-r3c" secondAttribute="bottom" id="iXj-58-djL"/>
+                                <constraint firstItem="9pl-lT-CiQ" firstAttribute="top" secondItem="YCL-AO-FF0" secondAttribute="bottom" constant="1" id="ct2-sX-Cfs"/>
+                                <constraint firstItem="3Uf-qZ-tRZ" firstAttribute="top" secondItem="xia-9h-r3c" secondAttribute="bottom" constant="1" id="iXj-58-djL"/>
                                 <constraint firstAttribute="trailing" secondItem="F3R-LU-BhK" secondAttribute="trailing" constant="-2" id="mXV-QJ-Sef"/>
                                 <constraint firstItem="xia-9h-r3c" firstAttribute="leading" secondItem="qUd-Ev-QK1" secondAttribute="leading" constant="-2" id="of3-pW-Dbv"/>
                                 <constraint firstAttribute="trailing" secondItem="3Uf-qZ-tRZ" secondAttribute="trailing" constant="-2" id="sZd-ir-T4v"/>
@@ -222,5 +217,10 @@
     </objects>
     <resources>
         <image name="default_avatar" width="72" height="72"/>
+        <image name="icon_about" width="25" height="25"/>
+        <image name="icon_collection" width="25" height="25"/>
+        <image name="icon_nodelist" width="25" height="25"/>
+        <image name="icon_setting" width="25" height="25"/>
+        <image name="icon_topiclist" width="27" height="25"/>
     </resources>
 </document>
