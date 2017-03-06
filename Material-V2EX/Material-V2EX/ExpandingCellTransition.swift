@@ -133,7 +133,7 @@ class ExpandingCellTransition: NSObject, UIViewControllerAnimatedTransitioning {
         
         targetSnapshot = targetView.snapshotView(afterScreenUpdates: false)
         targetContainer = UIView(frame: targetFrame)
-        targetContainer.backgroundColor = UIColor.white
+        targetContainer.backgroundColor = UIColor.fromHex(string: "#EFEFF4")
         targetContainer.clipsToBounds = true
         targetContainer.addSubview(targetSnapshot)
         

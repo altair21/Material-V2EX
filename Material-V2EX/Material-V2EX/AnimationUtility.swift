@@ -38,6 +38,7 @@ func hideMenu(_ menuView: MenuView) {
 }
 
 var menuViewPanelOriginX: CGFloat = 0
+var menuViewPanelShadowRadius: CGFloat = 1.0
 var menuViewBGOriginAlpha: CGFloat = 0
 var menuViewDisplayed = false
 
@@ -55,11 +56,13 @@ func handleMenu(_ menuView: MenuView, recognizer: UIPanGestureRecognizer) {
     case .began:
         if menuView.superview != nil {
             menuViewPanelOriginX = 0
+            menuViewPanelShadowRadius = Global.Config.panelMaxShadowRadius
             menuViewBGOriginAlpha = 1.0
             menuViewDisplayed = true
             return
         }
         menuViewPanelOriginX = -menuView.panelView.frame.size.width
+        menuViewPanelShadowRadius = 1.0
         menuViewBGOriginAlpha = 0.0
         menuViewDisplayed = false
         let keyWindow = UIApplication.shared.keyWindow
@@ -67,6 +70,7 @@ func handleMenu(_ menuView: MenuView, recognizer: UIPanGestureRecognizer) {
         keyWindow?.addSubview(menuView)
     case .changed:
         menuView.panelView.frame.origin.x = min(max(menuViewPanelOriginX + translationX, -menuView.panelView.frame.size.width), 0)
+        menuView.panelView.layer.shadowRadius = min(max(menuViewPanelShadowRadius + offsetProgress * Global.Config.panelMaxShadowRadius, 1.0), Global.Config.panelMaxShadowRadius)
         menuView.bgView.alpha = min(max(menuViewBGOriginAlpha + offsetProgress, 0.0), 1.0)
     case .cancelled, .ended, .failed:
         if translation.x > 0 && translationX > menuView.panelView.frame.size.width / 2.5 {
@@ -125,6 +129,7 @@ func hideNodeList(_ nodeListView: NodeListView) {
 }
 
 var nodeListViewPanelOriginX: CGFloat = 0
+var nodeListViewPanelShadowRadius: CGFloat = 1.0
 var nodeListViewBGOriginAlpha: CGFloat = 0
 var nodeListViewDisplayed = false
 
@@ -142,11 +147,13 @@ func handleNodeList(_ nodeListView: NodeListView, recognizer: UIPanGestureRecogn
     case .began:
         if nodeListView.superview != nil {
             nodeListViewPanelOriginX = nodeListView.frame.size.width - nodeListView.panelView.frame.size.width
+            nodeListViewPanelShadowRadius = Global.Config.panelMaxShadowRadius
             nodeListViewBGOriginAlpha = 1.0
             nodeListViewDisplayed = true
             return
         }
         nodeListViewPanelOriginX = nodeListView.frame.size.width
+        nodeListViewPanelShadowRadius = 1.0
         nodeListViewBGOriginAlpha = 0.0
         nodeListViewDisplayed = false
         let keyWindow = UIApplication.shared.keyWindow
@@ -154,6 +161,7 @@ func handleNodeList(_ nodeListView: NodeListView, recognizer: UIPanGestureRecogn
         keyWindow?.addSubview(nodeListView)
     case .changed:
         nodeListView.panelView.frame.origin.x = min(max(nodeListViewPanelOriginX + translationX, nodeListView.frame.size.width - nodeListView.panelView.frame.size.width), nodeListView.frame.size.width)
+        nodeListView.panelView.layer.shadowRadius = min(max(nodeListViewPanelShadowRadius + offsetProgress * Global.Config.panelMaxShadowRadius, 1.0), Global.Config.panelMaxShadowRadius)
         nodeListView.bgView.alpha = min(max(nodeListViewBGOriginAlpha + offsetProgress, 0.0), 1.0)
     case .cancelled, .ended, .failed:
         if translation.x > 0 && translationX > nodeListView.panelView.frame.size.width / 2 {

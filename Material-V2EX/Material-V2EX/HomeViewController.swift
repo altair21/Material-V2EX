@@ -44,9 +44,11 @@ class HomeViewController: UIViewController, ModalTransitionDelegate {
     var category = Global.Config.startNode {
         didSet {
             if category.canTurnPage { // 可翻页
+                footerView_label.text = "没有更多了"
                 footerView_label.isHidden = true
                 footerView_indicator.isHidden = false
             } else {    // 不可翻页
+                footerView_label.text = "当前节点不支持翻页"
                 footerView_label.isHidden = false
                 footerView_indicator.isHidden = true
             }
@@ -316,6 +318,9 @@ extension HomeViewController: UITableViewDelegate, UITableViewDataSource {
                 }, failure: { (error) in
                     // TODO: toast
                 })
+            } else {
+                footerView_label.isHidden = false
+                footerView_indicator.isHidden = true
             }
         }
     }

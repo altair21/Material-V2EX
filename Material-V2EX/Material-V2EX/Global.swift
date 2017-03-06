@@ -64,6 +64,7 @@ class Global: NSObject {
         static let unitNodeCellHeight: CGFloat = 32 // “全部节点”页 cell的高度
         static let toastDuration: TimeInterval = 1.2
         static let navigationBarMaxShadowRadius: CGFloat = 8.0
+        static let panelMaxShadowRadius: CGFloat = 4.0
         static let requestHeader = ["user-agent": userAgent]
         static let kTodayHottestHref = "k今日热议"
         static let startNode = V2EX.basicCategory[1]   // 初始话题 - 技术

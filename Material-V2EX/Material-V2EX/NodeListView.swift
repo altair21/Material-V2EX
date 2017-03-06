@@ -52,6 +52,10 @@ class NodeListView: UIView {
                                                selector: #selector(loginStatusChangedHandler(notification:)),
                                                name: Global.Notifications.kLoginStatusChanged,
                                                object: nil)
+        NotificationCenter.default.addObserver(self,
+                                               selector: #selector(unitNodeSelectHandler(notification:)),
+                                               name: Global.Notifications.kUnitNodeSelectChanged,
+                                               object: nil)
         
         loginStatusChanged()
         setupGesture()
@@ -75,6 +79,10 @@ class NodeListView: UIView {
     
     func loginStatusChangedHandler(notification: Notification) {
         loginStatusChanged()
+    }
+    
+    func unitNodeSelectHandler(notification: Notification) {
+        (tableView.cellForRow(at: selectedIndexPath) as! NodeListTableViewCell).configureState(.unselected)
     }
     
     func loginStatusChanged() {
