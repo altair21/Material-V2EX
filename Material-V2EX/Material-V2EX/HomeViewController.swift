@@ -248,6 +248,14 @@ class HomeViewController: UIViewController, ModalTransitionDelegate {
         self.title = self.category.name
     }
     
+    func undisplayHomepage() {
+        if let childView = selectedChildView {
+            childView.removeFromSuperview()
+        }
+        navController.navigationBar.layer.shadowRadius = Global.Config.navigationBarMaxShadowRadius
+        self.tableView.isHidden = true
+    }
+    
     func menuSelectChangedHandler(notification: Notification) {
         navController.showNavbar(animated: true, duration: 0.3)
         if let dict = notification.userInfo, let type: MenuViewSelectType = dict["type"] as? MenuViewSelectType {
@@ -255,35 +263,19 @@ class HomeViewController: UIViewController, ModalTransitionDelegate {
             case .topicList:
                 displayHomepage()
             case .allNodes:
-                if let childView = selectedChildView {
-                    childView.removeFromSuperview()
-                }
+                undisplayHomepage()
                 selectedChildView = AllNodesView.shared
                 self.view.insertSubview(selectedChildView!, belowSubview: leftEdgeView)
-                navController.navigationBar.layer.shadowRadius = Global.Config.navigationBarMaxShadowRadius
-                self.tableView.isHidden = true
                 self.moreBtn.isHidden = true
                 self.title = "节点列表"
             case .myTopic:
-                if let childView = selectedChildView {
-                    childView.removeFromSuperview()
-                }
-                navController.navigationBar.layer.shadowRadius = Global.Config.navigationBarMaxShadowRadius
-                self.tableView.isHidden = true
+                undisplayHomepage()
                 self.title = "个人收藏"
             case .about:
-                if let childView = selectedChildView {
-                    childView.removeFromSuperview()
-                }
-                navController.navigationBar.layer.shadowRadius = Global.Config.navigationBarMaxShadowRadius
-                self.tableView.isHidden = true
+                undisplayHomepage()
                 self.title = "关于"
             case .setting:
-                if let childView = selectedChildView {
-                    childView.removeFromSuperview()
-                }
-                navController.navigationBar.layer.shadowRadius = Global.Config.navigationBarMaxShadowRadius
-                self.tableView.isHidden = true
+                undisplayHomepage()
                 self.title = "设置"
             }
         }

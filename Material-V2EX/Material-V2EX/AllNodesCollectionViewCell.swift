@@ -22,7 +22,6 @@ class AllNodesCollectionViewCell: UICollectionViewCell {
 //        self.layer.borderColor = UIColor.black.cgColor
 //        self.layer.borderWidth = 1.0
 //        self.layer.cornerRadius = 20
-        nameLabel.backgroundColor = UIColor.white
     }
     
     func setData(name: String, width: CGFloat) {

@@ -31,6 +31,9 @@ class TopicOverviewTableViewCell: UITableViewCell {
         
         bgView.layer.shouldRasterize = true
         bgView.layer.rasterizationScale = UIScreen.main.scale
+        
+        let tapAvatar = UITapGestureRecognizer(target: self, action: #selector(avatarTapped(sender:)))
+        avatarView.addGestureRecognizer(tapAvatar)
     }
     
     func setData(data: TopicOverviewModel) {
@@ -84,6 +87,14 @@ class TopicOverviewTableViewCell: UITableViewCell {
             bgView.layer.shadowRadius = 0.75
             repliesLabel.backgroundColor = UIColor.fromHex(string: "#969CB1")
         }
+    }
+    
+    func avatarTapped(sender: UITapGestureRecognizer) {
+        data?.author.getDetail(success: { (res) in
+            
+        }, failure: { (error) in
+            // TODO: add toast
+        })
     }
 
 }

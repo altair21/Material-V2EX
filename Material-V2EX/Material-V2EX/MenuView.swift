@@ -118,44 +118,46 @@ class MenuView: UIView {
         }
     }
     
-    func topicListTapped(sender: UITapGestureRecognizer) {
-        selectedButton = topicListButton
+    func configureSelect(type: MenuViewSelectType) {
+        var button: FlatButton
+        switch type {
+        case .topicList:
+            button = topicListButton
+        case .allNodes:
+            button = allNodeButton
+        case .myTopic:
+            button = myTopicButton
+        case .about:
+            button = aboutButton
+        case .setting:
+            button = settingButton
+        }
+        
+        selectedButton = button
         NotificationCenter.default.post(name: Global.Notifications.kMenuViewSelectChanged,
                                         object: nil,
-                                        userInfo: ["type": MenuViewSelectType.topicList])
+                                        userInfo: ["type": type])
         hideMenu(self)
+    }
+    
+    func topicListTapped(sender: UITapGestureRecognizer) {
+        configureSelect(type: .topicList)
     }
     
     func allNodeTapped(sender: UITapGestureRecognizer) {
-        selectedButton = allNodeButton
-        NotificationCenter.default.post(name: Global.Notifications.kMenuViewSelectChanged,
-                                        object: nil,
-                                        userInfo: ["type": MenuViewSelectType.allNodes])
-        hideMenu(self)
+        configureSelect(type: .allNodes)
     }
     
     func myTopicTapped(sender: UITapGestureRecognizer) {
-        selectedButton = myTopicButton
-        NotificationCenter.default.post(name: Global.Notifications.kMenuViewSelectChanged,
-                                        object: nil,
-                                        userInfo: ["type": MenuViewSelectType.myTopic])
-        hideMenu(self)
+        configureSelect(type: .myTopic)
     }
     
     func aboutTapped(sender: UITapGestureRecognizer) {
-        selectedButton = aboutButton
-        NotificationCenter.default.post(name: Global.Notifications.kMenuViewSelectChanged,
-                                        object: nil,
-                                        userInfo: ["type": MenuViewSelectType.about])
-        hideMenu(self)
+        configureSelect(type: .about)
     }
     
     func settingTapped(sender: UITapGestureRecognizer) {
-        selectedButton = settingButton
-        NotificationCenter.default.post(name: Global.Notifications.kMenuViewSelectChanged,
-                                        object: nil,
-                                        userInfo: ["type": MenuViewSelectType.setting])
-        hideMenu(self)
+        configureSelect(type: .setting)
     }
     
     func loginStatusChangedHandler(notification: Notification) {

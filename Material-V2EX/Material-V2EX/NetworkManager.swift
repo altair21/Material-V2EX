@@ -320,6 +320,28 @@ class NetworkManager: NSObject {
         }
     }
     
+    // MARK: Member Module
+    /// 访问用户主页
+    ///
+    /// - Parameters:
+    ///   - url: 完整url
+    ///   - success: 成功回调
+    ///   - failure: 失败回调
+    func getMember(url: String, success: @escaping (Ji)->Void, failure: @escaping (String)->Void) {
+        Alamofire.request(url, headers: Global.Config.requestHeader).responseString { (response) in
+            switch response.result {
+            case .success:
+                if let jiDoc = Ji(htmlString: response.result.value!) {
+                    success(jiDoc)
+                } else {
+                    failure("解析失败！")
+                }
+            case .failure:
+                failure(response.result.error?.localizedDescription ?? "网络错误")
+            }
+        }
+    }
+    
     // MARK: Node Module
     /// 获取所有节点信息
     ///

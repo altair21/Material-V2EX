@@ -18,6 +18,8 @@
 		501370F41E1BA00A0076977B /* TopicBlankTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 501370F31E1BA00A0076977B /* TopicBlankTableViewCell.swift */; };
 		501370F81E1BB12E0076977B /* TopicHeaderTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 501370F71E1BB12E0076977B /* TopicHeaderTableViewCell.swift */; };
 		501370FA1E1BB1390076977B /* TopicFooterTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 501370F91E1BB1390076977B /* TopicFooterTableViewCell.swift */; };
+		5015F8971E6EADE800CEF25C /* MemberTopicModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5015F8961E6EADE800CEF25C /* MemberTopicModel.swift */; };
+		5015F8991E6EADF300CEF25C /* MemberReplyModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5015F8981E6EADF300CEF25C /* MemberReplyModel.swift */; };
 		5018A7131E361511005FAC81 /* NSMutableAttributedString+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5018A7121E361511005FAC81 /* NSMutableAttributedString+Extension.swift */; };
 		501FB7BA1E13C7FD009B94BA /* UIColor+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 501FB7B91E13C7FD009B94BA /* UIColor+Extension.swift */; };
 		501FB7BF1E13D6E5009B94BA /* PullToRefresh.swift in Sources */ = {isa = PBXBuildFile; fileRef = 501FB7BE1E13D6E5009B94BA /* PullToRefresh.swift */; };
@@ -101,6 +103,8 @@
 		501370F31E1BA00A0076977B /* TopicBlankTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TopicBlankTableViewCell.swift; sourceTree = "<group>"; };
 		501370F71E1BB12E0076977B /* TopicHeaderTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TopicHeaderTableViewCell.swift; sourceTree = "<group>"; };
 		501370F91E1BB1390076977B /* TopicFooterTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TopicFooterTableViewCell.swift; sourceTree = "<group>"; };
+		5015F8961E6EADE800CEF25C /* MemberTopicModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MemberTopicModel.swift; sourceTree = "<group>"; };
+		5015F8981E6EADF300CEF25C /* MemberReplyModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MemberReplyModel.swift; sourceTree = "<group>"; };
 		5018A7121E361511005FAC81 /* NSMutableAttributedString+Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "NSMutableAttributedString+Extension.swift"; sourceTree = "<group>"; };
 		501FB7B91E13C7FD009B94BA /* UIColor+Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIColor+Extension.swift"; sourceTree = "<group>"; };
 		501FB7BE1E13D6E5009B94BA /* PullToRefresh.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PullToRefresh.swift; sourceTree = "<group>"; };
@@ -255,6 +259,8 @@
 			children = (
 				504667AB1E0D2798008B6953 /* TopicOverviewModel.swift */,
 				504667AD1E0D3034008B6953 /* MemberModel.swift */,
+				5015F8961E6EADE800CEF25C /* MemberTopicModel.swift */,
+				5015F8981E6EADF300CEF25C /* MemberReplyModel.swift */,
 				504667AF1E0D3B2B008B6953 /* NodeModel.swift */,
 				5042BD991E6A770A0019AF25 /* NodeGroupModel.swift */,
 				50280C9E1E165C2700996FDA /* TopicReplyModel.swift */,
@@ -617,6 +623,7 @@
 				507F4EEE1E0944EA0033A10B /* AppDelegate.swift in Sources */,
 				50A299491E681F2800F8ADD5 /* UINavigationController+TRPushPop.swift in Sources */,
 				50B1D86C1E127D1C00BCE4FF /* ARIndicator.swift in Sources */,
+				5015F8971E6EADE800CEF25C /* MemberTopicModel.swift in Sources */,
 				5042BD9D1E6AD1420019AF25 /* AllNodesCollectionReusableView.swift in Sources */,
 				501370F41E1BA00A0076977B /* TopicBlankTableViewCell.swift in Sources */,
 				5067E20D1E0AA0D20016F924 /* MenuView.swift in Sources */,
@@ -631,6 +638,7 @@
 				501370F21E1B4F770076977B /* TopicReplyTableViewCell.swift in Sources */,
 				5065F6E11E0A88B100B5A9FD /* Global.swift in Sources */,
 				50A2993D1E681F2800F8ADD5 /* OMNITransitionAnimation.swift in Sources */,
+				5015F8991E6EADF300CEF25C /* MemberReplyModel.swift in Sources */,
 				50A299431E681F2800F8ADD5 /* TransitionAnimationHelper.swift in Sources */,
 				50A299481E681F2800F8ADD5 /* TRNavgationTransitionDelegate.swift in Sources */,
 				50A299471E681F2800F8ADD5 /* UIViewController+TRPresent.swift in Sources */,

@@ -60,8 +60,7 @@ class TopicOverviewModel: NSObject {
     func initGroupCategory(data: JiNode) {
         let timeText = data.xPath("table/tr/td[3]/span[3]").first?.content ?? "未知"
         if let range = timeText.range(of: "  •  ") {    // 不显示最后回复者
-            let substrRange = Range(uncheckedBounds: (lower: timeText.startIndex, upper: range.lowerBound))
-            last_modifiedText = timeText.substring(with: substrRange)
+            last_modifiedText = timeText.substring(to: range.lowerBound)
         } else {
             last_modifiedText = timeText
         }
@@ -96,8 +95,7 @@ class TopicOverviewModel: NSObject {
     
     func carveHref() {  // 优先进入第一页回复
         if let range = href.range(of: "#") {    // 去除"#replay"字符串
-            let substrRange = Range(uncheckedBounds: (lower: href.startIndex, upper: range.lowerBound))
-            href = href.substring(with: substrRange) + "?p=1"
+            href = href.substring(to: range.lowerBound) + "?p=1"
         } else {
             href = href + "?p=1"
         }
