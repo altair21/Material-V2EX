@@ -18,7 +18,8 @@ class TopicAuthorTableViewCell: UITableViewCell {
     @IBOutlet weak var contentTextView: UITextView!
     
     // Data
-    var data: TopicOverviewModel?
+    var data: TopicModel?
+    var indexPath: IndexPath?
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -36,15 +37,26 @@ class TopicAuthorTableViewCell: UITableViewCell {
         nodeLabel.layer.rasterizationScale = scale
         contentTextView.layer.shouldRasterize = true
         contentTextView.layer.rasterizationScale = scale
+        
+        let tapAvatar = UITapGestureRecognizer(target: self, action: #selector(avatarTapped(sender:)))
+        avatarView.addGestureRecognizer(tapAvatar)
     }
     
-    func setData(overview overviewData: TopicOverviewModel, data: TopicModel) {
-        self.data = overviewData
+    func avatarTapped(sender: UITapGestureRecognizer) {
+        if let data = data, let indexPath = indexPath {
+            let topicViewController = viewController(ofView: self) as! TopicDetailViewController
+            topicViewController.openMember(data: data.author, indexPath: indexPath)
+        }
+    }
+    
+    func setData(data: TopicModel, indexPath: IndexPath) {
+        self.data = data
+        self.indexPath = indexPath
         
-        nameLabel.text = overviewData.author.username
-        avatarView.setImageWith(url: (overviewData.author.avatarURL))
+        nameLabel.text = data.author.username
+        avatarView.setImageWith(url: (data.author.avatarURL))
         dateLabel.text = data.dateAndClickCount
-        nodeLabel.text = overviewData.node?.name
+        nodeLabel.text = data.nodeTitle
         
         if data.renderContent != nil {
             contentTextView.attributedText = data.renderContent

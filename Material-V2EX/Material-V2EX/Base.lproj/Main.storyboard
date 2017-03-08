@@ -554,7 +554,7 @@
                                                             <nil key="textColor"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
-                                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="6kh-NF-zkg">
+                                                        <imageView contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="6kh-NF-zkg">
                                                             <rect key="frame" x="8" y="8" width="40" height="40"/>
                                                             <constraints>
                                                                 <constraint firstAttribute="width" constant="40" id="4YQ-PE-DPR"/>
@@ -795,7 +795,7 @@
                                                             <nil key="textColor"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
-                                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="hC2-Y5-vVQ">
+                                                        <imageView contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="hC2-Y5-vVQ">
                                                             <rect key="frame" x="8" y="8" width="40" height="40"/>
                                                             <constraints>
                                                                 <constraint firstAttribute="width" secondItem="hC2-Y5-vVQ" secondAttribute="height" multiplier="1:1" id="2Hk-Sm-BkB"/>
@@ -1543,7 +1543,7 @@
                                                                         <constraint firstAttribute="width" constant="22" id="srs-hp-l5E"/>
                                                                     </constraints>
                                                                 </imageView>
-                                                                <label userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="252" verticalHuggingPriority="251" text="这是标题" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ZE8-5E-krQ">
+                                                                <label contentMode="left" horizontalHuggingPriority="252" verticalHuggingPriority="251" text="这是标题" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ZE8-5E-krQ">
                                                                     <rect key="frame" x="8" y="36" width="343" height="23"/>
                                                                     <color key="backgroundColor" red="0.92941176469999998" green="0.95294117649999999" blue="0.96078431369999995" alpha="1" colorSpace="calibratedRGB"/>
                                                                     <fontDescription key="fontDescription" name="PingFangHK-Regular" family="PingFang HK" pointSize="16"/>
@@ -1748,7 +1748,7 @@
                                 </prototypes>
                                 <connections>
                                     <outlet property="dataSource" destination="Sz4-Ug-ffE" id="bsx-KW-SSD"/>
-                                    <outlet property="delegate" destination="Sz4-Ug-ffE" id="g4D-NG-8ZI"/>
+                                    <outlet property="delegate" destination="Sz4-Ug-ffE" id="HNA-9o-I1j"/>
                                 </connections>
                             </tableView>
                             <navigationBar contentMode="scaleToFill" translucent="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rHt-Od-eMs">
@@ -1829,7 +1829,7 @@
     </scenes>
     <resources>
         <image name="close" width="32" height="32"/>
-        <image name="icon_lock" width="32" height="32"/>
+        <image name="icon_lock" width="50" height="50"/>
         <image name="icon_uparrow" width="22" height="22"/>
     </resources>
 </document>

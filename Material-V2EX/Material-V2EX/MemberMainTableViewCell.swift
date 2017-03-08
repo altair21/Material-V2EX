@@ -18,6 +18,8 @@ class MemberMainTableViewCell: UITableViewCell {
         super.awakeFromNib()
         
         let scale = UIScreen.main.scale
+        self.layer.shouldRasterize = true
+        self.layer.rasterizationScale = scale
         avatarView.layer.shouldRasterize = true
         avatarView.layer.rasterizationScale = scale
         nameLabel.layer.shouldRasterize = true

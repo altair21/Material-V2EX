@@ -15,11 +15,14 @@ class MemberTopicTableViewCell: UITableViewCell {
     @IBOutlet weak var replyCountLabel: UILabel!
     
     var data: MemberTopicModel? = nil
+    var indexPath: IndexPath?
 
     override func awakeFromNib() {
         super.awakeFromNib()
         
         let scale = UIScreen.main.scale
+        self.layer.shouldRasterize = true
+        self.layer.rasterizationScale = scale
         titleLabel.layer.shouldRasterize = true
         titleLabel.layer.rasterizationScale = scale
         dateLabel.layer.shouldRasterize = true
@@ -28,16 +31,21 @@ class MemberTopicTableViewCell: UITableViewCell {
         nodeLabel.layer.rasterizationScale = scale
         replyCountLabel.layer.shouldRasterize = true
         replyCountLabel.layer.rasterizationScale = scale
-    }
-
-    override func setSelected(_ selected: Bool, animated: Bool) {
-        super.setSelected(selected, animated: animated)
-
-        // Configure the view for the selected state
+        
+        let tap = UITapGestureRecognizer(target: self, action: #selector(beTapped(sender:)))
+        self.addGestureRecognizer(tap)
     }
     
-    func setData(data: MemberTopicModel) {
+    func beTapped(sender: UITapGestureRecognizer) {
+        if let data = data, let indexPath = indexPath {
+            let memberViewController = viewController(ofView: self) as! MemberViewController
+            memberViewController.openTopic(url: data.href, title: data.title, indexPath: indexPath)
+        }
+    }
+    
+    func setData(data: MemberTopicModel, indexPath: IndexPath) {
         self.data = data
+        self.indexPath = indexPath
     
         titleLabel.text = data.title
         dateLabel.text = data.lastModifyText

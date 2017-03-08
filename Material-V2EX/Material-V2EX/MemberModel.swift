@@ -69,6 +69,7 @@ class MemberModel: NSObject {
     func getDetail(success: @escaping (MemberModel)->Void, failure: @escaping (String)->Void) {
         if joinNumber.characters.count > 0 {
             success(self)
+            return
         }
         NetworkManager.shared.getMember(url: href, success: { (data) in
             self.handleDetail(data: data)

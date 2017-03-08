@@ -14,8 +14,9 @@ class MemberViewController: UIViewController {
     @IBOutlet weak var tableView: UITableView!
     
     let transition = ExpandingCellTransition()
-    var navigationBarSnapshot: UIView!
+    var navigationBarSnapshot: UIView?
     var navigationBarHeight: CGFloat = 0
+    var selectedIndexPath: IndexPath? = nil
     
     var memberModel: MemberModel? {
         didSet {
@@ -30,14 +31,33 @@ class MemberViewController: UIViewController {
 
         transitioningDelegate = transition
         if navigationBarSnapshot != nil {
-            navigationBarSnapshot.frame.origin.y = -navigationBarHeight
+            navigationBarSnapshot!.frame.origin.y = -navigationBarHeight
         }
         tableView.contentInset.top = 10
         tableView.estimatedRowHeight = 140
         tableView.rowHeight = UITableViewAutomaticDimension
+        tableView.layer.shouldRasterize = true
+        tableView.layer.rasterizationScale = UIScreen.main.scale
         
         let tapClose = UITapGestureRecognizer(target: self, action: #selector(closeTapped(sender:)))
         closeButton.addGestureRecognizer(tapClose)
+    }
+    
+    func openTopic(url: String, title: String, indexPath: IndexPath) {
+        selectedIndexPath = indexPath
+        
+        let topicDetailViewController = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: Global.ViewControllers.topicDetail) as! TopicDetailViewController
+        topicDetailViewController.href = url
+        topicDetailViewController.topicTitle = title
+        
+        NetworkManager.shared.getTopicDetail(url: url, success: { (topicModel) in
+            topicDetailViewController.topicModel = topicModel
+        }, failure: { (error) in
+            print(error)
+            // TODO: failure toast
+        })
+        
+        self.present(topicDetailViewController, animated: true, completion: nil)
     }
     
     func closeTapped(sender: UITapGestureRecognizer) {
@@ -48,9 +68,22 @@ class MemberViewController: UIViewController {
 
 // MARK: ExpandingTransitionPresentedViewController
 extension MemberViewController: ExpandingTransitionPresentedViewController {
-    func expandingTransition(_ transition: ExpandingCellTransition, navigationBarSnapshot: UIView) {
+    func expandingTransition(_ transition: ExpandingCellTransition, navigationBarSnapshot: UIView?) {
         self.navigationBarSnapshot = navigationBarSnapshot
-        self.navigationBarHeight = navigationBarSnapshot.frame.height
+        if let naviBar = navigationBarSnapshot {
+            self.navigationBarHeight = naviBar.frame.height
+        }
+    }
+}
+
+// MARK: ExpandingTransitionPresentingViewController
+extension MemberViewController: ExpandingTransitionPresentingViewController {
+    func expandingTransitionTargetView(forTransition transition: ExpandingCellTransition) -> UIView! {
+        if let indexPath = selectedIndexPath {
+            return tableView.cellForRow(at: indexPath)
+        } else {
+            return nil
+        }
     }
 }
 
@@ -81,7 +114,7 @@ extension MemberViewController: UITableViewDelegate, UITableViewDataSource {
                 return cell
             } else if indexPath.row > 1 && indexPath.row < memberModel.topics.count + 2 {   // 有数据时是创建的话题
                 let cell = tableView.dequeueReusableCell(withIdentifier: Global.Cells.memberTopic, for: indexPath) as! MemberTopicTableViewCell
-                cell.setData(data: memberModel.topics[indexPath.row - 2])
+                cell.setData(data: memberModel.topics[indexPath.row - 2], indexPath: indexPath)
                 return cell
             } else if indexPath.row == firstFooterCellRow {    // FooterCell
                 let cell = tableView.dequeueReusableCell(withIdentifier: Global.Cells.memberFooter, for: indexPath)
@@ -92,7 +125,7 @@ extension MemberViewController: UITableViewDelegate, UITableViewDataSource {
                 return cell
             } else if indexPath.row > firstFooterCellRow + 1 && indexPath.row < memberModel.replies.count + firstFooterCellRow + 2 {    // 有数据时是创建的回复
                 let cell = tableView.dequeueReusableCell(withIdentifier: Global.Cells.memberReply, for: indexPath) as! MemberReplyTableViewCell
-                cell.setData(data: memberModel.replies[indexPath.row - firstFooterCellRow - 2])
+                cell.setData(data: memberModel.replies[indexPath.row - firstFooterCellRow - 2], indexPath: indexPath)
                 return cell
             } else if indexPath.row == memberModel.replies.count + firstFooterCellRow + 2 + replyCountOffset {  // FooterCell
                 let cell = tableView.dequeueReusableCell(withIdentifier: Global.Cells.memberFooter, for: indexPath)
@@ -130,6 +163,7 @@ extension MemberViewController: UITableViewDelegate, UITableViewDataSource {
             }
         }
     }
+    
 }
 
 

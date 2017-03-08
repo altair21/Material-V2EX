@@ -362,7 +362,8 @@ extension HomeViewController: UITableViewDelegate, UITableViewDataSource {
             cell.configureReadState(state: .read)
             
             let topicDetailViewController = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: Global.ViewControllers.topicDetail) as! TopicDetailViewController
-            topicDetailViewController.overviewData = self.topicOverviewArray[indexPath.row]
+            topicDetailViewController.href = self.topicOverviewArray[indexPath.row].href
+            topicDetailViewController.topicTitle = self.topicOverviewArray[indexPath.row].title
             
             NetworkManager.shared.getTopicDetail(url: self.topicOverviewArray[indexPath.row].href, success: { (topicModel) in
                 delay(seconds: 0.4, completion: { 

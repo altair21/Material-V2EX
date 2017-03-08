@@ -12,6 +12,17 @@ func delay(seconds: Double, completion: @escaping ()-> Void) {
     DispatchQueue.main.asyncAfter(deadline: .now() + seconds, execute: completion)
 }
 
+func viewController(ofView view: UIView) -> UIViewController {
+    var responder: UIResponder? = view
+    while !(responder is UIViewController) {
+        responder = responder?.next
+        if nil == responder {
+            break
+        }
+    }
+    return (responder as? UIViewController)!
+}
+
 fileprivate let userAgent = "Mozilla/5.0 (iPhone; CPU iPhone OS 6_0 like Mac OS X) AppleWebKit/536.26 (KHTML, like Gecko) Version/6.0 Mobile/10A5376e Safari/8536.25"
 
 class Global: NSObject {

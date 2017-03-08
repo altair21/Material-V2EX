@@ -20,6 +20,7 @@ class TopicReplyTableViewCell: UITableViewCell {
     
     // Data
     var data: TopicReplyModel?
+    var indexPath: IndexPath?
 
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -37,10 +38,21 @@ class TopicReplyTableViewCell: UITableViewCell {
         dateLabel.layer.rasterizationScale = scale
         thanksLabel.layer.shouldRasterize = true
         thanksLabel.layer.rasterizationScale = scale
+        
+        let tapAvatar = UITapGestureRecognizer(target: self, action: #selector(avatarTapped(sender:)))
+        avatarView.addGestureRecognizer(tapAvatar)
     }
     
-    func setData(data: TopicReplyModel) {
+    func avatarTapped(sender: UITapGestureRecognizer) {
+        if let data = data, let indexPath = indexPath {
+            let topicViewController = viewController(ofView: self) as! TopicDetailViewController
+            topicViewController.openMember(data: data.author, indexPath: indexPath)
+        }
+    }
+    
+    func setData(data: TopicReplyModel, indexPath: IndexPath) {
         self.data = data
+        self.indexPath = indexPath
         
         avatarView.setImageWith(url: (data.author.avatarURL))
         nameLabel.text = data.author.username

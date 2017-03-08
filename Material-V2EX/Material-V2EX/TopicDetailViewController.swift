@@ -13,29 +13,29 @@ class TopicDetailViewController: UIViewController {
     
     let transition = ExpandingCellTransition()
     
-    var navigationBarSnapshot: UIView!
+    var navigationBarSnapshot: UIView?
     var navigationBarHeight: CGFloat = 0
+    var selectedIndexPath: IndexPath? = nil
     
-    // new model
+    // model
     var topicModel: TopicModel? = nil {
         didSet {
             if let model = topicModel {
-                let index = overviewData.href.index(before: overviewData.href.endIndex)
-                model.basicHref = overviewData.href.substring(to: index)
+                let index = href.index(before: href.endIndex)   // 经过Model处理，url一定是 "xxxx?p=1" 的形式
+                model.basicHref = href.substring(to: index)
             }
             self.tableView.reloadData()
         }
     }
-    
-    // old model
-    var overviewData: TopicOverviewModel!
+    var href = ""
+    var topicTitle = ""
     
     override func viewDidLoad() {
         super.viewDidLoad()
 
         transitioningDelegate = transition
         if navigationBarSnapshot != nil {
-            navigationBarSnapshot.frame.origin.y = -navigationBarHeight
+            navigationBarSnapshot!.frame.origin.y = -navigationBarHeight
         }
         tableView.estimatedRowHeight = 120
         tableView.rowHeight = UITableViewAutomaticDimension
@@ -49,6 +49,20 @@ class TopicDetailViewController: UIViewController {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
+    
+    func openMember(data: MemberModel, indexPath: IndexPath) {
+        selectedIndexPath = indexPath
+        
+        let memberViewController = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: Global.ViewControllers.member) as! MemberViewController
+        present(memberViewController, animated: true, completion: nil)
+        
+        data.getDetail(success: { (memberModel) in
+            memberViewController.memberModel = memberModel
+        }, failure: { (error) in
+            print(error)
+            //TODO: add toast
+        })
+    }
 
     @IBAction func closeTapped(_ sender: Any) {
         dismiss(animated: true, completion: nil)
@@ -57,9 +71,22 @@ class TopicDetailViewController: UIViewController {
 
 // MARK: ExpandingTransitionPresentedViewController
 extension TopicDetailViewController: ExpandingTransitionPresentedViewController {
-    func expandingTransition(_ transition: ExpandingCellTransition, navigationBarSnapshot: UIView) {
+    func expandingTransition(_ transition: ExpandingCellTransition, navigationBarSnapshot: UIView?) {
         self.navigationBarSnapshot = navigationBarSnapshot
-        self.navigationBarHeight = navigationBarSnapshot.frame.height
+        if let naviBar = navigationBarSnapshot {
+            self.navigationBarHeight = naviBar.frame.height
+        }
+    }
+}
+
+// MARK: ExpandingTransitionPresentingViewController
+extension TopicDetailViewController: ExpandingTransitionPresentingViewController {
+    func expandingTransitionTargetView(forTransition transition: ExpandingCellTransition) -> UIView! {
+        if let indexPath = selectedIndexPath {
+            return tableView.cellForRow(at: indexPath)
+        } else {
+            return nil
+        }
     }
 }
 
@@ -84,14 +111,14 @@ extension TopicDetailViewController: UITableViewDataSource, UITableViewDelegate 
         
         if indexPath.row == 0 { // 首行始终是标题
             let cell = tableView.dequeueReusableCell(withIdentifier: Global.Cells.topicHeaderCell, for: indexPath) as! TopicHeaderTableViewCell
-            cell.titleLabel.text = overviewData.title
+            cell.titleLabel.text = topicTitle
             return cell
         }
         
         if let topicModel = self.topicModel {  // 已有数据
             if indexPath.row == 1 { // 有数据时第二行始终是正文
                 let cell = tableView.dequeueReusableCell(withIdentifier: Global.Cells.topicAuthorCell, for: indexPath) as! TopicAuthorTableViewCell
-                cell.setData(overview: overviewData, data: topicModel)
+                cell.setData(data: topicModel, indexPath: indexPath)
                 return cell
             } else if indexPath.row < topicModel.subtleContent.count + 2 {  // 有数据时始终是追加内容
                 let cell = tableView.dequeueReusableCell(withIdentifier: Global.Cells.topicSubtleCell, for: indexPath) as! TopicSubtleTableViewCell
@@ -126,7 +153,7 @@ extension TopicDetailViewController: UITableViewDataSource, UITableViewDelegate 
                     return cell
                 } else {    // 回复cell
                     let cell = tableView.dequeueReusableCell(withIdentifier: Global.Cells.topicReplyCell, for: indexPath) as! TopicReplyTableViewCell
-                    cell.setData(data: topicModel.replies[indexPath.row - topicModel.subtleContent.count - 3])
+                    cell.setData(data: topicModel.replies[indexPath.row - topicModel.subtleContent.count - 3], indexPath: indexPath)
                     return cell
                 }
             } else {    // 无回复

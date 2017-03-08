@@ -15,7 +15,7 @@ protocol ExpandingTransitionPresentingViewController {
 }
 
 protocol ExpandingTransitionPresentedViewController {
-    func expandingTransition(_ transition: ExpandingCellTransition, navigationBarSnapshot: UIView)
+    func expandingTransition(_ transition: ExpandingCellTransition, navigationBarSnapshot: UIView?)
 }
 
 class ExpandingCellTransition: NSObject, UIViewControllerAnimatedTransitioning {
@@ -39,7 +39,7 @@ class ExpandingCellTransition: NSObject, UIViewControllerAnimatedTransitioning {
     
     var topRegionSnapshot: UIView!
     var bottomRegionSnapshot: UIView!
-    var navigationBarSnapshot: UIView!
+    var navigationBarSnapshot: UIView? = nil
     
     func transitionDuration(using transitionContext: UIViewControllerContextTransitioning?) -> TimeInterval {
         return animationDuration
@@ -76,14 +76,16 @@ class ExpandingCellTransition: NSObject, UIViewControllerAnimatedTransitioning {
             sliceSnapshotsIn(backgroundViewController: backgroundViewController, targetFrame: targetFrame, targetView: targetView)
             (foregroundViewController as? ExpandingTransitionPresentedViewController)?.expandingTransition(self, navigationBarSnapshot: navigationBarSnapshot)
         } else {
-            navigationBarSnapshot.frame = containerView.convert(navigationBarSnapshot.frame, from: navigationBarSnapshot.superview)
+            navigationBarSnapshot?.frame = containerView.convert((navigationBarSnapshot?.frame)!, from: navigationBarSnapshot?.superview)
         }
         
         targetContainer.addSubview(foregroundViewController.view)
         containerView.addSubview(targetContainer)
         containerView.addSubview(topRegionSnapshot)
         containerView.addSubview(bottomRegionSnapshot)
-        containerView.addSubview(navigationBarSnapshot)
+        if navigationBarSnapshot != nil {
+            containerView.addSubview(navigationBarSnapshot!)
+        }
         
         let width = backgroundViewController.view.bounds.width
         let height = backgroundViewController.view.bounds.height
@@ -104,7 +106,7 @@ class ExpandingCellTransition: NSObject, UIViewControllerAnimatedTransitioning {
                         self.configureViewsTo(state: postTransition, width: width, height: height, targetFrame: targetFrame, fullFrame: foregroundViewController.view.frame, foregroundView: foregroundViewController.view)
                         
                         if self.type == .Presenting {
-                            self.navigationBarSnapshot.frame.size.height = 0
+                            self.navigationBarSnapshot?.frame.size.height = 0
                         }
                         
                         UIApplication.shared.statusBarStyle = (self.type == .Presenting ? .default : .lightContent)
@@ -113,7 +115,7 @@ class ExpandingCellTransition: NSObject, UIViewControllerAnimatedTransitioning {
             self.targetContainer.removeFromSuperview()
             self.topRegionSnapshot.removeFromSuperview()
             self.bottomRegionSnapshot.removeFromSuperview()
-            self.navigationBarSnapshot.removeFromSuperview()
+            self.navigationBarSnapshot?.removeFromSuperview()
             
             foregroundViewController.view.frame.size.height = height
             containerView.addSubview(foregroundViewController.view)
@@ -146,8 +148,8 @@ class ExpandingCellTransition: NSObject, UIViewControllerAnimatedTransitioning {
             UIGraphicsEndImageContext()
             
             navigationBarSnapshot = UIImageView(image: navigationBarImage)
-            navigationBarSnapshot.backgroundColor = navController.navigationBar.barTintColor
-            navigationBarSnapshot.contentMode = .bottom
+            navigationBarSnapshot?.backgroundColor = navController.navigationBar.barTintColor
+            navigationBarSnapshot?.contentMode = .bottom
         }
     }
     
@@ -159,7 +161,7 @@ class ExpandingCellTransition: NSObject, UIViewControllerAnimatedTransitioning {
             targetContainer.frame = targetFrame
             targetSnapshot.alpha = 1
             foregroundView.alpha = 0
-            navigationBarSnapshot.sizeToFit()
+            navigationBarSnapshot?.sizeToFit()
         case .Final:
             topRegionSnapshot.frame = CGRect(x: 0, y: -targetFrame.minY, width: width, height: targetFrame.minY)
             bottomRegionSnapshot.frame = CGRect(x: 0, y: height, width: width, height: height - targetFrame.maxY)
