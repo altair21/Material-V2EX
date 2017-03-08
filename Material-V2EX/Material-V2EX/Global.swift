@@ -20,6 +20,7 @@ class Global: NSObject {
         static let menuView = "MenuViewController"
         static let topicDetail = "TopicDetailViewController"
         static let login = "LoginViewController"
+        static let member = "MemberViewController"
     }
     
     // Views
@@ -43,12 +44,25 @@ class Global: NSObject {
         static let nodeListCell = "nodeListCell"
         static let allNodesCell = "allNodesCollectionViewCell"
         static let allNodesTitleCell = "allNodesCollectionReusableView"
+        static let memberMain = "memberMainCell"
+        static let memberHeader = "memberHeaderCell"
+        static let memberTopic = "memberTopicCell"
+        static let memberFooter = "memberFooterCell"
+        static let memberReply = "memberReplyCell"
+        static let memberBlank = "memberBlankCell"
+        static let memberHideTopic = "memberHideTopicCell"
     }
     
     // Constant
     struct Constants {
         static let screenWidth = UIScreen.main.bounds.width
         static let screenHeight = UIScreen.main.bounds.height
+        
+        struct PlaceHolder {
+            static let noReply = "——   还没有回复   ——"
+            static let noOwnedReply = "——   还没有创建回复   ——"
+            static let noOwnedTopic = "——   还没有创建话题   ——"
+        }
     }
     
     // Keys
@@ -75,5 +89,6 @@ class Global: NSObject {
         static let kLoginStatusChanged = Notification.Name.init("User login status changed")
         static let kMenuViewSelectChanged = Notification.Name.init("MenuView select changed")
         static let kUnitNodeSelectChanged = Notification.Name.init("Unit node select changed")
+        static let kOpenMemberFromHome = Notification.Name.init("Open member page from home viewcontroller")
     }
 }

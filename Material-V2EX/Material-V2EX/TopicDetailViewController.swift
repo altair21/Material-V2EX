@@ -103,7 +103,7 @@ extension TopicDetailViewController: UITableViewDataSource, UITableViewDelegate 
                 if topicModel.totalPages > topicModel.page {
                     cnt += 1
                     if indexPath.row == topicModel.subtleContent.count + topicModel.replies.count + 3 { // BlankCell
-                        let cell = tableView.dequeueReusableCell(withIdentifier: Global.Cells.topicBlankCell, for: indexPath) as! TopicBlankTableViewCell
+                        let cell = tableView.dequeueReusableCell(withIdentifier: Global.Cells.topicBlankCell, for: indexPath) as! BlankTableViewCell
                         cell.state = .refreshing
                         NetworkManager.shared.getTopicDetailComments(url: topicModel.basicHref + "\(topicModel.page + 1)", success: { (res) in
                             topicModel.replies += res
@@ -131,8 +131,9 @@ extension TopicDetailViewController: UITableViewDataSource, UITableViewDelegate 
                 }
             } else {    // 无回复
                 if indexPath.row == topicModel.subtleContent.count + 2 {    // BlankCell
-                    let cell = tableView.dequeueReusableCell(withIdentifier: Global.Cells.topicBlankCell, for: indexPath) as! TopicBlankTableViewCell
+                    let cell = tableView.dequeueReusableCell(withIdentifier: Global.Cells.topicBlankCell, for: indexPath) as! BlankTableViewCell
                     cell.state = .finish
+                    cell.placeholder.text = Global.Constants.PlaceHolder.noReply
                     return cell
                 } else {    // FooterCell
                     let cell = tableView.dequeueReusableCell(withIdentifier: Global.Cells.topicFooterCell, for: indexPath)
@@ -141,7 +142,7 @@ extension TopicDetailViewController: UITableViewDataSource, UITableViewDelegate 
             }
         } else {    // 正在请求数据
             if indexPath.row == 1 { // 第二行是 BlankCell
-                let cell = tableView.dequeueReusableCell(withIdentifier: Global.Cells.topicBlankCell, for: indexPath) as! TopicBlankTableViewCell
+                let cell = tableView.dequeueReusableCell(withIdentifier: Global.Cells.topicBlankCell, for: indexPath) as! BlankTableViewCell
                 cell.state = .refreshing
                 return cell
             } else {    // 最后一行是 FooterCell

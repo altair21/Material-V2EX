@@ -24,6 +24,19 @@ class TopicReplyTableViewCell: UITableViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
         
+        let scale = UIScreen.main.scale
+        contentTextView.layer.shouldRasterize = true
+        contentTextView.layer.rasterizationScale = scale
+        bgView.layer.shouldRasterize = true
+        bgView.layer.rasterizationScale = scale
+        avatarView.layer.shouldRasterize = true
+        avatarView.layer.rasterizationScale = scale
+        nameLabel.layer.shouldRasterize = true
+        nameLabel.layer.rasterizationScale = scale
+        dateLabel.layer.shouldRasterize = true
+        dateLabel.layer.rasterizationScale = scale
+        thanksLabel.layer.shouldRasterize = true
+        thanksLabel.layer.rasterizationScale = scale
     }
     
     func setData(data: TopicReplyModel) {
@@ -40,8 +53,6 @@ class TopicReplyTableViewCell: UITableViewCell {
             data.renderContent = NSMutableAttributedString.contentFromHTMLString(data.content, fontName: contentTextView.font!.fontName, widthConstraint: Global.Constants.screenWidth - Global.Config.renderContentMargin)
             contentTextView.attributedText = data.renderContent
         }
-        contentTextView.layer.shouldRasterize = true
-        contentTextView.layer.rasterizationScale = UIScreen.main.scale
     }
 
 }

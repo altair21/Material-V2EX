@@ -1,5 +1,5 @@
 //
-//  TopicBlankTableViewCell.swift
+//  BlankTableViewCell.swift
 //  Material-V2EX
 //
 //  Created by altair21 on 17/1/3.
@@ -8,7 +8,7 @@
 
 import UIKit
 
-class TopicBlankTableViewCell: UITableViewCell {
+class BlankTableViewCell: UITableViewCell {
     @IBOutlet weak var indicator: ARIndicator!
     @IBOutlet weak var placeholder: UILabel!
     @IBOutlet weak var baseLine: UIView!

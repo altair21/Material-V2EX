@@ -22,6 +22,20 @@ class TopicAuthorTableViewCell: UITableViewCell {
     
     override func awakeFromNib() {
         super.awakeFromNib()
+        
+        let scale = UIScreen.main.scale
+        bgView.layer.shouldRasterize = true
+        bgView.layer.rasterizationScale = scale
+        nameLabel.layer.shouldRasterize = true
+        nameLabel.layer.rasterizationScale = scale
+        avatarView.layer.shouldRasterize = true
+        avatarView.layer.rasterizationScale = scale
+        dateLabel.layer.shouldRasterize = true
+        dateLabel.layer.rasterizationScale = scale
+        nodeLabel.layer.shouldRasterize = true
+        nodeLabel.layer.rasterizationScale = scale
+        contentTextView.layer.shouldRasterize = true
+        contentTextView.layer.rasterizationScale = scale
     }
     
     func setData(overview overviewData: TopicOverviewModel, data: TopicModel) {

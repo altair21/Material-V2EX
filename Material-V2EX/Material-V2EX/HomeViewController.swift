@@ -76,7 +76,7 @@ class HomeViewController: UIViewController, ModalTransitionDelegate {
             let fpsLabel = V2FPSLabel(frame: CGRect(x: 0, y: Global.Constants.screenHeight - 40, width: 80, height: 40))
             UIApplication.shared.keyWindow?.addSubview(fpsLabel)
         #endif
-        tableView.contentInset = UIEdgeInsets(top: 10, left: 0, bottom: 0, right: 0)
+        tableView.contentInset.top = 10
         tableView.estimatedRowHeight = 100
         tableView.rowHeight = UITableViewAutomaticDimension
         
@@ -177,6 +177,10 @@ class HomeViewController: UIViewController, ModalTransitionDelegate {
         NotificationCenter.default.addObserver(self,
                                                selector: #selector(unitNodeSelectHandler(notification:)),
                                                name: Global.Notifications.kUnitNodeSelectChanged,
+                                               object: nil)
+        NotificationCenter.default.addObserver(self,
+                                               selector: #selector(openMemberHandler(notification:)),
+                                               name: Global.Notifications.kOpenMemberFromHome,
                                                object: nil)
     }
     
@@ -291,6 +295,30 @@ class HomeViewController: UIViewController, ModalTransitionDelegate {
         }
     }
     
+    func openMemberHandler(notification: Notification) {
+        if let dict = notification.userInfo, let data = dict["data"] as? MemberModel, let indexPath = dict["indexPath"] as? IndexPath {
+            let presentBlock = {
+                self.selectedIndexPath = indexPath
+                let memberViewController = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: Global.ViewControllers.member) as! MemberViewController
+                
+                data.getDetail(success: { (memberModel) in
+                    memberViewController.memberModel = memberModel
+                }, failure: { (error) in
+                    print(error)
+                    // TODO: add toast
+                })
+                
+                self.present(memberViewController, animated: true, completion: nil)
+            }
+            switch navController.state {
+            case .collapsed:
+                navController.showNavbar(animated: true, duration: 0.3)
+                delay(seconds: 0.3, completion: presentBlock)
+            default:
+                presentBlock()
+            }
+        }
+    }
 }
 
 // MARK: UITableViewDelegate & UITableViewDataSource
@@ -301,7 +329,7 @@ extension HomeViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: Global.Cells.topicOverview, for: indexPath) as! TopicOverviewTableViewCell
-        cell.setData(data: topicOverviewArray[indexPath.row])
+        cell.setData(data: topicOverviewArray[indexPath.row], indexPath: indexPath)
         return cell
     }
     

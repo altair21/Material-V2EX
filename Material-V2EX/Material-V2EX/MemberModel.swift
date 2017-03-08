@@ -17,6 +17,7 @@ class MemberModel: NSObject {
     var joinDate = ""       // 加入V2EX时间
     var topics = [MemberTopicModel]()
     var replies = [MemberReplyModel]()
+    var isHideTopic = false
     
     init(data: JSON) {
         super.init()
@@ -43,6 +44,12 @@ class MemberModel: NSObject {
                     joinNumber = str.substring(to: range.lowerBound)
                     joinDate = str.substring(from: range.upperBound)
                 }
+            }
+        }
+        
+        if let lockNode = data.xPath("//body/div[@id='Wrapper']/div/div[3]/div[@class='inner']/table/tr[2]/td/span")?.first {
+            if (lockNode.content?.range(of: "主题列表被隐藏")) != nil {
+                isHideTopic = true
             }
         }
         

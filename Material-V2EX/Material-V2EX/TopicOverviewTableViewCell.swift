@@ -20,6 +20,7 @@ class TopicOverviewTableViewCell: UITableViewCell {
     
     // Data
     var data: TopicOverviewModel? = nil
+    var indexPath: IndexPath? = nil
     
     enum TopicReadState {
         case read
@@ -29,15 +30,29 @@ class TopicOverviewTableViewCell: UITableViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
         
+        let scale = UIScreen.main.scale
         bgView.layer.shouldRasterize = true
-        bgView.layer.rasterizationScale = UIScreen.main.scale
+        bgView.layer.rasterizationScale = scale
+        nicknameLabel.layer.shouldRasterize = true
+        nicknameLabel.layer.rasterizationScale = scale
+        dateLabel.layer.shouldRasterize = true
+        dateLabel.layer.rasterizationScale = scale
+        nodeLabel.layer.shouldRasterize = true
+        nodeLabel.layer.rasterizationScale = scale
+        repliesLabel.layer.shouldRasterize = true
+        repliesLabel.layer.rasterizationScale = scale
+        avatarView.layer.shouldRasterize = true
+        avatarView.layer.rasterizationScale = scale
+        titleLabel.layer.shouldRasterize = true
+        titleLabel.layer.rasterizationScale = scale
         
         let tapAvatar = UITapGestureRecognizer(target: self, action: #selector(avatarTapped(sender:)))
         avatarView.addGestureRecognizer(tapAvatar)
     }
     
-    func setData(data: TopicOverviewModel) {
+    func setData(data: TopicOverviewModel, indexPath: IndexPath) {
         self.data = data
+        self.indexPath = indexPath
         
         nicknameLabel.text = data.author.username
         dateLabel.text = (data.last_modifiedText.characters.count > 0) ? data.last_modifiedText : Date(timeIntervalSince1970: data.last_modified).timeAgo
@@ -90,11 +105,11 @@ class TopicOverviewTableViewCell: UITableViewCell {
     }
     
     func avatarTapped(sender: UITapGestureRecognizer) {
-        data?.author.getDetail(success: { (res) in
-            
-        }, failure: { (error) in
-            // TODO: add toast
-        })
+        if let data = data, let indexPath = indexPath {
+            NotificationCenter.default.post(name: Global.Notifications.kOpenMemberFromHome,
+                                            object: nil,
+                                            userInfo: ["data": data.author, "indexPath": indexPath])
+        }
     }
 
 }

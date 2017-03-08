@@ -21,6 +21,9 @@ class MemberReplyModel: NSObject {
         
         if let infoNode = data.xPath("table/tr[1]/td/span").first {
             replyInfo = infoNode.content ?? "解析失败！"
+            if let range = replyInfo.range(of: "›") {
+                replyInfo = replyInfo.substring(to: range.lowerBound)
+            }
             if let titleNode = infoNode.xPath("a").first {
                 topicTitle = titleNode.content ?? "标题解析失败！"
                 href = V2EX.indexURL + (titleNode["href"] ?? "")

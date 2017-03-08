@@ -1,14 +1,15 @@
 //
-//  TopicFooterTableViewCell.swift
+//  MemberHeaderTableViewCell.swift
 //  Material-V2EX
 //
-//  Created by altair21 on 17/1/3.
+//  Created by altair21 on 17/3/7.
 //  Copyright © 2017年 altair21. All rights reserved.
 //
 
 import UIKit
 
-class TopicFooterTableViewCell: UITableViewCell {
+class MemberHeaderTableViewCell: UITableViewCell {
+    @IBOutlet weak var headerLabel: UILabel!
 
     override func awakeFromNib() {
         super.awakeFromNib()

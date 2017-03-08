@@ -18,7 +18,6 @@ class MemberTopicModel: NSObject {
     init(data: JiNode) {
         super.init()
         
-        // TODO: 判断用户是否隐藏了主题
         if let nodeNode = data.xPath("table/tr/td[1]/span[1]/a").first {
             nodeTitle = nodeNode.content ?? "节点名解析失败！"
         }
@@ -27,7 +26,7 @@ class MemberTopicModel: NSObject {
             href = V2EX.indexURL + (titleNode["href"] ?? "")
             carveHref()
         }
-        if let infoNode = data.xPath("table/tr/td[1]/span[3]/a").first {
+        if let infoNode = data.xPath("table/tr/td[1]/span[3]").first {
             let timeText = infoNode.content ?? "解析失败！"
             if let range = timeText.range(of: "  •  ") {    // 不显示最后回复者
                 lastModifyText = timeText.substring(to: range.lowerBound)
