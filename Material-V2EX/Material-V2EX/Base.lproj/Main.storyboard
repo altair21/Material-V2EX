@@ -1033,19 +1033,20 @@
                             </tableView>
                             <navigationBar contentMode="scaleToFill" translucent="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bqp-DB-IJo">
                                 <rect key="frame" x="0.0" y="20" width="375" height="44"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <color key="backgroundColor" red="0.25882352941176467" green="0.52156862745098043" blue="0.95686274509803915" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="44" id="CYb-xB-eCB"/>
                                 </constraints>
+                                <color key="barTintColor" red="0.25882352939999997" green="0.52156862749999999" blue="0.95686274510000002" alpha="1" colorSpace="calibratedRGB"/>
                                 <items>
                                     <navigationItem id="xoW-xk-fjO">
                                         <leftBarButtonItems>
                                             <barButtonItem style="plain" id="TE1-Ep-XLQ">
-                                                <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="rxk-Q9-Eh0" customClass="FabButton" customModule="Material">
+                                                <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" adjustsImageWhenHighlighted="NO" lineBreakMode="middleTruncation" id="rxk-Q9-Eh0" customClass="FabButton" customModule="Material">
                                                     <rect key="frame" x="16" y="6" width="32" height="32"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                                                    <state key="normal" image="close"/>
+                                                    <state key="normal" image="icon_close"/>
                                                     <userDefinedRuntimeAttributes>
                                                         <userDefinedRuntimeAttribute type="color" keyPath="pulseColor">
                                                             <color key="value" red="0.93725490570000003" green="0.93725490570000003" blue="0.95686274770000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -1063,7 +1064,7 @@
                                                 <view key="customView" contentMode="scaleToFill" id="3gR-wo-QG5">
                                                     <rect key="frame" x="56" y="5" width="83" height="33"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                    <color key="backgroundColor" red="0.25882352939999997" green="0.52156862749999999" blue="0.95686274510000002" alpha="1" colorSpace="calibratedRGB"/>
                                                 </view>
                                             </barButtonItem>
                                         </leftBarButtonItems>
@@ -1071,16 +1072,19 @@
                                 </items>
                                 <userDefinedRuntimeAttributes>
                                     <userDefinedRuntimeAttribute type="number" keyPath="layer.shadowRadius">
-                                        <real key="value" value="4.5"/>
+                                        <integer key="value" value="0"/>
                                     </userDefinedRuntimeAttribute>
                                     <userDefinedRuntimeAttribute type="number" keyPath="layer.shadowOpacity">
                                         <real key="value" value="5.5"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="size" keyPath="layer.shadowOffset">
+                                        <size key="value" width="0.0" height="-1"/>
                                     </userDefinedRuntimeAttribute>
                                 </userDefinedRuntimeAttributes>
                             </navigationBar>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="PEj-IO-FRa">
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="20"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <color key="backgroundColor" red="0.25882352939999997" green="0.52156862749999999" blue="0.95686274510000002" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="20" id="2YG-E0-puR"/>
                                 </constraints>
@@ -1101,6 +1105,7 @@
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="naviBar" destination="bqp-DB-IJo" id="gD4-xe-JCC"/>
                         <outlet property="tableView" destination="HG6-5E-Pj9" id="B7Q-e2-a6K"/>
                     </connections>
                 </viewController>
@@ -1753,19 +1758,20 @@
                             </tableView>
                             <navigationBar contentMode="scaleToFill" translucent="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rHt-Od-eMs">
                                 <rect key="frame" x="0.0" y="20" width="375" height="44"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <color key="backgroundColor" red="1" green="0.57465312052147643" blue="0.26518004013489932" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="44" id="R3N-z4-KMw"/>
                                 </constraints>
+                                <color key="barTintColor" red="1" green="0.63411201313892607" blue="0.26518004013489932" alpha="1" colorSpace="calibratedRGB"/>
                                 <items>
                                     <navigationItem id="Awu-4I-Ena">
                                         <leftBarButtonItems>
                                             <barButtonItem style="plain" id="JGT-Uu-Xdf">
-                                                <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="fJb-oh-Hbp" customClass="FabButton" customModule="Material">
+                                                <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" adjustsImageWhenHighlighted="NO" lineBreakMode="middleTruncation" id="fJb-oh-Hbp" customClass="FabButton" customModule="Material">
                                                     <rect key="frame" x="16" y="6" width="32" height="32"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                                                    <state key="normal" image="close"/>
+                                                    <state key="normal" image="icon_close"/>
                                                     <userDefinedRuntimeAttributes>
                                                         <userDefinedRuntimeAttribute type="color" keyPath="pulseColor">
                                                             <color key="value" red="0.93725490570000003" green="0.93725490570000003" blue="0.95686274770000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -1780,24 +1786,28 @@
                                                 <view key="customView" contentMode="scaleToFill" id="Jf0-QV-aPZ">
                                                     <rect key="frame" x="56" y="5" width="83" height="33"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                    <color key="backgroundColor" red="1" green="0.63411201309999998" blue="0.26518004010000001" alpha="1" colorSpace="calibratedRGB"/>
                                                 </view>
+                                                <color key="tintColor" red="1" green="0.60784313729999995" blue="0.4431372549" alpha="1" colorSpace="calibratedRGB"/>
                                             </barButtonItem>
                                         </leftBarButtonItems>
                                     </navigationItem>
                                 </items>
                                 <userDefinedRuntimeAttributes>
                                     <userDefinedRuntimeAttribute type="number" keyPath="layer.shadowRadius">
-                                        <real key="value" value="4.5"/>
+                                        <integer key="value" value="0"/>
                                     </userDefinedRuntimeAttribute>
                                     <userDefinedRuntimeAttribute type="number" keyPath="layer.shadowOpacity">
                                         <real key="value" value="5.5"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="size" keyPath="layer.shadowOffset">
+                                        <size key="value" width="0.0" height="-1"/>
                                     </userDefinedRuntimeAttribute>
                                 </userDefinedRuntimeAttributes>
                             </navigationBar>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="W8W-TD-4Ib">
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="20"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <color key="backgroundColor" red="1" green="0.63411201309999998" blue="0.26518004010000001" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="20" id="Rl9-8v-Q6Y"/>
                                 </constraints>
@@ -1819,6 +1829,7 @@
                     </view>
                     <connections>
                         <outlet property="closeButton" destination="fJb-oh-Hbp" id="yY4-on-e7w"/>
+                        <outlet property="naviBar" destination="rHt-Od-eMs" id="gpQ-ue-dtb"/>
                         <outlet property="tableView" destination="5j6-WC-mRG" id="DxT-f0-L22"/>
                     </connections>
                 </viewController>
@@ -1829,6 +1840,7 @@
     </scenes>
     <resources>
         <image name="close" width="32" height="32"/>
+        <image name="icon_close" width="50" height="50"/>
         <image name="icon_lock" width="50" height="50"/>
         <image name="icon_uparrow" width="22" height="22"/>
     </resources>

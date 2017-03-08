@@ -10,6 +10,7 @@ import UIKit
 
 class TopicDetailViewController: UIViewController {
     @IBOutlet weak var tableView: UITableView!
+    @IBOutlet weak var naviBar: UINavigationBar!
     
     let transition = ExpandingCellTransition()
     
@@ -178,5 +179,14 @@ extension TopicDetailViewController: UITableViewDataSource, UITableViewDelegate 
             }
         }
         
+    }
+}
+
+// MARK: UIScrollViewDelegate
+extension TopicDetailViewController: UIScrollViewDelegate {
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        // 根据 offset 改变 navigationBar 阴影
+        let newRadius = min(1, max(tableView.contentOffset.y / 80, 0)) * Global.Config.navigationBarMaxShadowRadius
+        naviBar.layer.shadowRadius = newRadius
     }
 }

@@ -109,7 +109,7 @@ class ExpandingCellTransition: NSObject, UIViewControllerAnimatedTransitioning {
                             self.navigationBarSnapshot?.frame.size.height = 0
                         }
                         
-                        UIApplication.shared.statusBarStyle = (self.type == .Presenting ? .default : .lightContent)
+//                        UIApplication.shared.statusBarStyle = (self.type == .Presenting ? .default : .lightContent)
         }, completion: {
             (finished) in
             self.targetContainer.removeFromSuperview()
