@@ -53,6 +53,11 @@
 		507F4EF51E0944EA0033A10B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 507F4EF41E0944EA0033A10B /* Assets.xcassets */; };
 		507F4EF81E0944EA0033A10B /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 507F4EF61E0944EA0033A10B /* LaunchScreen.storyboard */; };
 		507F4F001E094FDD0033A10B /* Material.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 507F4EFF1E094FDD0033A10B /* Material.framework */; };
+		508C33751E812AFF0016A2A8 /* FDIndexPathHeightCache.swift in Sources */ = {isa = PBXBuildFile; fileRef = 508C33701E812AFF0016A2A8 /* FDIndexPathHeightCache.swift */; };
+		508C33761E812AFF0016A2A8 /* FDKeyedHeightCache.swift in Sources */ = {isa = PBXBuildFile; fileRef = 508C33711E812AFF0016A2A8 /* FDKeyedHeightCache.swift */; };
+		508C33771E812AFF0016A2A8 /* UITableView+FDIndexPathHeightCache.swift in Sources */ = {isa = PBXBuildFile; fileRef = 508C33721E812AFF0016A2A8 /* UITableView+FDIndexPathHeightCache.swift */; };
+		508C33781E812AFF0016A2A8 /* UITableView+FDTemplateLayoutCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 508C33731E812AFF0016A2A8 /* UITableView+FDTemplateLayoutCell.swift */; };
+		508C33791E812AFF0016A2A8 /* UITableView+FDTemplateLayoutCellDebug.swift in Sources */ = {isa = PBXBuildFile; fileRef = 508C33741E812AFF0016A2A8 /* UITableView+FDTemplateLayoutCellDebug.swift */; };
 		50A299381E681F2800F8ADD5 /* BlixtTransitionAnimation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50A2991C1E681F2800F8ADD5 /* BlixtTransitionAnimation.swift */; };
 		50A299391E681F2800F8ADD5 /* DefaultPushTransitionAnimation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50A2991D1E681F2800F8ADD5 /* DefaultPushTransitionAnimation.swift */; };
 		50A2993A1E681F2800F8ADD5 /* ElevateTransitionAnimation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50A2991E1E681F2800F8ADD5 /* ElevateTransitionAnimation.swift */; };
@@ -144,6 +149,11 @@
 		507F4EF71E0944EA0033A10B /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		507F4EF91E0944EA0033A10B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		507F4EFF1E094FDD0033A10B /* Material.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Material.framework; path = "../../../../../../Library/Developer/Xcode/DerivedData/Material-V2EX-ggvhqkoortazbjhkiqzzdvoaqujd/Build/Products/Debug-iphoneos/Material/Material.framework"; sourceTree = "<group>"; };
+		508C33701E812AFF0016A2A8 /* FDIndexPathHeightCache.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FDIndexPathHeightCache.swift; sourceTree = "<group>"; };
+		508C33711E812AFF0016A2A8 /* FDKeyedHeightCache.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FDKeyedHeightCache.swift; sourceTree = "<group>"; };
+		508C33721E812AFF0016A2A8 /* UITableView+FDIndexPathHeightCache.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UITableView+FDIndexPathHeightCache.swift"; sourceTree = "<group>"; };
+		508C33731E812AFF0016A2A8 /* UITableView+FDTemplateLayoutCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UITableView+FDTemplateLayoutCell.swift"; sourceTree = "<group>"; };
+		508C33741E812AFF0016A2A8 /* UITableView+FDTemplateLayoutCellDebug.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UITableView+FDTemplateLayoutCellDebug.swift"; sourceTree = "<group>"; };
 		50A2991C1E681F2800F8ADD5 /* BlixtTransitionAnimation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BlixtTransitionAnimation.swift; sourceTree = "<group>"; };
 		50A2991D1E681F2800F8ADD5 /* DefaultPushTransitionAnimation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DefaultPushTransitionAnimation.swift; sourceTree = "<group>"; };
 		50A2991E1E681F2800F8ADD5 /* ElevateTransitionAnimation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ElevateTransitionAnimation.swift; sourceTree = "<group>"; };
@@ -340,6 +350,18 @@
 			path = "Material-V2EX";
 			sourceTree = "<group>";
 		};
+		508C336F1E812AFF0016A2A8 /* FDTemplateLayoutCell */ = {
+			isa = PBXGroup;
+			children = (
+				508C33701E812AFF0016A2A8 /* FDIndexPathHeightCache.swift */,
+				508C33711E812AFF0016A2A8 /* FDKeyedHeightCache.swift */,
+				508C33721E812AFF0016A2A8 /* UITableView+FDIndexPathHeightCache.swift */,
+				508C33731E812AFF0016A2A8 /* UITableView+FDTemplateLayoutCell.swift */,
+				508C33741E812AFF0016A2A8 /* UITableView+FDTemplateLayoutCellDebug.swift */,
+			);
+			path = FDTemplateLayoutCell;
+			sourceTree = "<group>";
+		};
 		50A2991B1E681F2800F8ADD5 /* TransitionAnimation */ = {
 			isa = PBXGroup;
 			children = (
@@ -405,6 +427,7 @@
 		50B1D8691E12788500BCE4FF /* Libraries */ = {
 			isa = PBXGroup;
 			children = (
+				508C336F1E812AFF0016A2A8 /* FDTemplateLayoutCell */,
 				50A2991B1E681F2800F8ADD5 /* TransitionAnimation */,
 				50A2992A1E681F2800F8ADD5 /* TransitionTreasury */,
 				501FB7B81E13A701009B94BA /* PaddingLabel */,
@@ -619,9 +642,11 @@
 				50459A9E1E11020A00E4F6DD /* ExpandingCellTransition.swift in Sources */,
 				50E5D3A21E4AF197007B924A /* TopicSubtleModel.swift in Sources */,
 				504667A21E0CC954008B6953 /* TopicOverviewTableViewCell.swift in Sources */,
+				508C33781E812AFF0016A2A8 /* UITableView+FDTemplateLayoutCell.swift in Sources */,
 				50280C9F1E165C2700996FDA /* TopicReplyModel.swift in Sources */,
 				500495381E697A58006AF070 /* AllNodesCollectionViewCell.swift in Sources */,
 				50360EB91E0B7BE700B082DD /* AnimationUtility.swift in Sources */,
+				508C33751E812AFF0016A2A8 /* FDIndexPathHeightCache.swift in Sources */,
 				500002FD1E349E58000057F2 /* TopicReplyCountTableViewCell.swift in Sources */,
 				5042BD9A1E6A770A0019AF25 /* NodeGroupModel.swift in Sources */,
 				50A299451E681F2800F8ADD5 /* TwitterTransitionAnimation.swift in Sources */,
@@ -630,11 +655,13 @@
 				50A2994D1E681F2800F8ADD5 /* TransitionTreasury.swift in Sources */,
 				5015F89F1E6ECEFA00CEF25C /* MemberHeaderTableViewCell.swift in Sources */,
 				507F4EF01E0944EA0033A10B /* HomeViewController.swift in Sources */,
+				508C33771E812AFF0016A2A8 /* UITableView+FDIndexPathHeightCache.swift in Sources */,
 				504667AC1E0D2798008B6953 /* TopicOverviewModel.swift in Sources */,
 				504667B01E0D3B2B008B6953 /* NodeModel.swift in Sources */,
 				50A299421E681F2800F8ADD5 /* TaaskyFlipTransitionAnimation.swift in Sources */,
 				5043CCA11E4C3132008BC51E /* User.swift in Sources */,
 				507F4EEE1E0944EA0033A10B /* AppDelegate.swift in Sources */,
+				508C33761E812AFF0016A2A8 /* FDKeyedHeightCache.swift in Sources */,
 				50A299491E681F2800F8ADD5 /* UINavigationController+TRPushPop.swift in Sources */,
 				50B1D86C1E127D1C00BCE4FF /* ARIndicator.swift in Sources */,
 				5015F89D1E6ECDDE00CEF25C /* MemberMainTableViewCell.swift in Sources */,
@@ -653,6 +680,7 @@
 				501370F21E1B4F770076977B /* TopicReplyTableViewCell.swift in Sources */,
 				5065F6E11E0A88B100B5A9FD /* Global.swift in Sources */,
 				50A2993D1E681F2800F8ADD5 /* OMNITransitionAnimation.swift in Sources */,
+				508C33791E812AFF0016A2A8 /* UITableView+FDTemplateLayoutCellDebug.swift in Sources */,
 				5015F8991E6EADF300CEF25C /* MemberReplyModel.swift in Sources */,
 				50A299431E681F2800F8ADD5 /* TransitionAnimationHelper.swift in Sources */,
 				50A299481E681F2800F8ADD5 /* TRNavgationTransitionDelegate.swift in Sources */,

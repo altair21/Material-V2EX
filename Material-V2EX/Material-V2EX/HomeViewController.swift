@@ -77,8 +77,7 @@ class HomeViewController: UIViewController, ModalTransitionDelegate {
             UIApplication.shared.keyWindow?.addSubview(fpsLabel)
         #endif
         tableView.contentInset.top = 10
-        tableView.estimatedRowHeight = 100
-        tableView.rowHeight = UITableViewAutomaticDimension
+        tableView.register(TopicOverviewTableViewCell.self, forCellReuseIdentifier: Global.Cells.topicOverview)
         
         setupUI()
         setupGesture()
@@ -325,6 +324,13 @@ class HomeViewController: UIViewController, ModalTransitionDelegate {
 extension HomeViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return topicOverviewArray.count
+    }
+    
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return tableView.fd_heightForCell(with: Global.Cells.topicOverview, cacheByKey: topicOverviewArray[indexPath.row].title, configuration: { (cell) in
+            cell.fd_usingFrameLayout = true
+            (cell as! TopicOverviewTableViewCell).setData(data: self.topicOverviewArray[indexPath.row], indexPath: indexPath)
+        })
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
