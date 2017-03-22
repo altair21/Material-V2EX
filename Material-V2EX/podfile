@@ -10,6 +10,5 @@ pod 'Ji'
 pod 'MBProgressHUD'
 pod 'Bugtags'
 pod 'Watchdog'
-pod 'SnapKit'
 
 end
