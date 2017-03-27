@@ -133,7 +133,19 @@ class ExpandingCellTransition: NSObject, UIViewControllerAnimatedTransitioning {
         
         bottomRegionSnapshot = view.resizableSnapshotView(from: CGRect(x: 0, y: targetFrame.maxY, width: width, height: height - targetFrame.maxY), afterScreenUpdates: false, withCapInsets: UIEdgeInsets.zero)
         
-        targetSnapshot = targetView.snapshotView(afterScreenUpdates: false)
+        func renderUIViewToImage(viewToBeRendered: UIView) -> UIImage
+        {
+            UIGraphicsBeginImageContextWithOptions(viewToBeRendered.bounds.size, true, 0.0)
+            viewToBeRendered.drawHierarchy(in: viewToBeRendered.bounds, afterScreenUpdates: true)
+            viewToBeRendered.layer.render(in: UIGraphicsGetCurrentContext()!)
+            
+            let finalImage = UIGraphicsGetImageFromCurrentImageContext()
+            UIGraphicsEndImageContext()
+            
+            return finalImage ?? UIImage()
+        }
+        
+        targetSnapshot = targetView.snapshotView(afterScreenUpdates: false) ?? UIImageView(image: renderUIViewToImage(viewToBeRendered: targetView))
         targetContainer = UIView(frame: targetFrame)
         targetContainer.backgroundColor = UIColor.fromHex(string: "#EFEFF4")
         targetContainer.clipsToBounds = true
