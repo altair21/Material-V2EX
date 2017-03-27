@@ -14,6 +14,6 @@ class TopicSubtleModel: NSObject {
     init(date: String, content: String) {
         super.init()
         self.date = date
-        self.content = content
+        self.content = Global.Config.webDocumentPreset + content
     }
 }

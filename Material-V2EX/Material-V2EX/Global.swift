@@ -87,10 +87,16 @@ class Global: NSObject {
         static let renderContentMargin: CGFloat = 34     // 帖子详情内容Margin
         static let unitNodeCellPadding: CGFloat = 10    // “全部节点”页 cell的padding
         static let unitNodeCellHeight: CGFloat = 32 // “全部节点”页 cell的高度
+        static let regularFontName = "PingFangSC-Regular"
+        static let infoTextColor = UIColor.fromHex(string: "#AAAAAA")
+        static let nodeTextColor = UIColor.fromHex(string: "#777777")
+        static let backgroundColor = UIColor.fromHex(string: "#EFEFF4")
+        static let nodeTextBackgroundColor = UIColor.fromHex(string: "#E2E2E2")
         static let toastDuration: TimeInterval = 1.2
         static let navigationBarMaxShadowRadius: CGFloat = 8.0
         static let panelMaxShadowRadius: CGFloat = 4.0
         static let requestHeader = ["user-agent": userAgent]
+        static let webDocumentPreset = "<style type='text/css'> * { -webkit-touch-callout: none;-webkit-user-select: none;font-family: PingFangSC-Regular; word-wrap: break-word;} img { max-width: 100%; } </style><meta name='viewport' content='initial-scale=1.0' />"
         static let kTodayHottestHref = "k今日热议"
         static let startNode = V2EX.basicCategory[1]   // 初始话题 - 技术
     }

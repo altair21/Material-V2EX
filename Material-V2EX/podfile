@@ -10,5 +10,7 @@ pod 'Ji'
 pod 'MBProgressHUD'
 pod 'Bugtags'
 pod 'Watchdog'
+pod 'SnapKit'
+pod 'UITableView+FDTemplateLayoutCell'
 
 end

@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import UITableView_FDTemplateLayoutCell
 
 class TopicDetailViewController: UIViewController {
     @IBOutlet weak var tableView: UITableView!
@@ -17,6 +18,7 @@ class TopicDetailViewController: UIViewController {
     var navigationBarSnapshot: UIView?
     var navigationBarHeight: CGFloat = 0
     var selectedIndexPath: IndexPath? = nil
+    var cellHeightDic = [IndexPath: CGFloat]()
     
     // model
     var topicModel: TopicModel? = nil {
@@ -38,6 +40,7 @@ class TopicDetailViewController: UIViewController {
         if navigationBarSnapshot != nil {
             navigationBarSnapshot!.frame.origin.y = -navigationBarHeight
         }
+        tableView.register(TopicAuthorTableViewCell.self, forCellReuseIdentifier: Global.Cells.topicAuthorCell)
         tableView.estimatedRowHeight = 120
         tableView.rowHeight = UITableViewAutomaticDimension
     }
@@ -108,6 +111,55 @@ extension TopicDetailViewController: UITableViewDataSource, UITableViewDelegate 
         return 3    // 标题、转菊、底部空白
     }
     
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        if indexPath.row == 0 { // 首行始终是标题
+            return tableView.fd_heightForCell(withIdentifier: Global.Cells.topicHeaderCell, cacheBy: indexPath, configuration: { (cell) in
+                (cell as! TopicHeaderTableViewCell).titleLabel.text = self.topicTitle
+            })
+        }
+        
+        if let topicModel = self.topicModel {  // 已有数据
+            if indexPath.row == 1 { // 有数据时第二行始终是正文
+                return cellHeightDic[indexPath] ?? 68
+            } else if indexPath.row < topicModel.subtleContent.count + 2 {  // 有数据时始终是追加内容
+                return tableView.fd_heightForCell(withIdentifier: Global.Cells.topicSubtleCell, cacheBy: indexPath, configuration: { (cell) in
+                    (cell as! TopicSubtleTableViewCell).setData(data: topicModel.subtleContent[indexPath.row - 2])
+                })
+            }
+            if topicModel.replies.count > 0 {   // 有回复
+                var cnt = 3 // 标题、正文、回复数cell
+                if topicModel.totalPages > topicModel.page {
+                    cnt += 1
+                    if indexPath.row == topicModel.subtleContent.count + topicModel.replies.count + 3 { // BlankCell
+                        return 70
+                    }
+                }
+                if indexPath.row == topicModel.subtleContent.count + topicModel.replies.count + cnt {  // FooterCell
+                    return 15
+                } else if indexPath.row == topicModel.subtleContent.count + 2 { // 回复数cell
+                    return 20
+                } else {    // 回复cell
+                    return tableView.fd_heightForCell(withIdentifier: Global.Cells.topicReplyCell, cacheBy: indexPath, configuration: { (cell) in
+                        (cell as! TopicReplyTableViewCell).setData(data: topicModel.replies[indexPath.row - topicModel.subtleContent.count - 3], indexPath: indexPath)
+                    })
+                }
+            } else {    // 无回复
+                if indexPath.row == topicModel.subtleContent.count + 2 {    // BlankCell
+                    return 70
+                } else {    // FooterCell
+                    return 15
+                }
+            }
+        } else {    // 正在请求数据
+            if indexPath.row == 1 { // 第二行是 BlankCell
+                return 70
+            } else {    // 最后一行是 FooterCell
+                return 15
+            }
+        }
+        
+    }
+    
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         if indexPath.row == 0 { // 首行始终是标题
@@ -120,6 +172,19 @@ extension TopicDetailViewController: UITableViewDataSource, UITableViewDelegate 
             if indexPath.row == 1 { // 有数据时第二行始终是正文
                 let cell = tableView.dequeueReusableCell(withIdentifier: Global.Cells.topicAuthorCell, for: indexPath) as! TopicAuthorTableViewCell
                 cell.setData(data: topicModel, indexPath: indexPath)
+                if cell.contentHeightChanged == nil {
+                    weak var weakSelf = self
+                    cell.contentHeightChanged = { (height) in
+                        if let weakSelf = weakSelf,
+                            let visibleRows = weakSelf.tableView.indexPathsForVisibleRows {
+                            if visibleRows.contains(indexPath) {
+                                weakSelf.cellHeightDic[indexPath] = height
+                                weakSelf.tableView.beginUpdates()
+                                weakSelf.tableView.endUpdates()
+                            }
+                        }
+                    }
+                }
                 return cell
             } else if indexPath.row < topicModel.subtleContent.count + 2 {  // 有数据时始终是追加内容
                 let cell = tableView.dequeueReusableCell(withIdentifier: Global.Cells.topicSubtleCell, for: indexPath) as! TopicSubtleTableViewCell
@@ -188,5 +253,11 @@ extension TopicDetailViewController: UIScrollViewDelegate {
         // 根据 offset 改变 navigationBar 阴影
         let newRadius = min(1, max(tableView.contentOffset.y / 80, 0)) * Global.Config.navigationBarMaxShadowRadius
         naviBar.layer.shadowRadius = newRadius
+        
+        tableView.visibleCells.forEach { (cell) in
+            if let cell: TopicAuthorTableViewCell = cell as? TopicAuthorTableViewCell {
+                cell.webView.setNeedsLayout()
+            }
+        }
     }
 }
