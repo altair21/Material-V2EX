@@ -12,7 +12,7 @@ import WebKit
 
 fileprivate let scaleValue = UIScreen.main.scale
 
-class TopicSubtleTableViewCell: UITableViewCell, WKUIDelegate {
+class TopicSubtleTableViewCell: BaseWKWebViewTableViewCell, WKUIDelegate {
     lazy var bgView: UIView = {
         let bgView = UIView()
         bgView.backgroundColor = UIColor.white
@@ -38,16 +38,6 @@ class TopicSubtleTableViewCell: UITableViewCell, WKUIDelegate {
         return dateLabel
     }()
     
-    lazy var webView: WKWebView = {
-        let webView = WKWebView(frame: .zero, configuration: WKWebViewConfiguration())
-        webView.uiDelegate = self
-        webView.scrollView.delegate = self
-        webView.scrollView.isScrollEnabled = false
-        webView.backgroundColor = UIColor.white
-        webView.isOpaque = true
-        return webView
-    }()
-    
     lazy var separatorLine: UIView = {
         let separatorLine = UIView()
         separatorLine.backgroundColor = Global.Config.nodeTextBackgroundColor
@@ -69,7 +59,6 @@ class TopicSubtleTableViewCell: UITableViewCell, WKUIDelegate {
         return whiteView2
     }()
 
-    var indexPath: IndexPath?
     var contentHeight: CGFloat = 0
     var contentHeightChanged: ((CGFloat, IndexPath?) -> Void)?  // IndexPath的作用和TopicReplyTableViewCell中一样
     
@@ -82,6 +71,8 @@ class TopicSubtleTableViewCell: UITableViewCell, WKUIDelegate {
         contentView.layer.shouldRasterize = true
         contentView.layer.rasterizationScale = scaleValue
         contentView.backgroundColor = Global.Config.backgroundColor
+        webView.uiDelegate = self
+        
         contentView.addSubview(bgView)
         contentView.addSubview(dateLabel)
         contentView.addSubview(webView)
@@ -161,10 +152,4 @@ class TopicSubtleTableViewCell: UITableViewCell, WKUIDelegate {
         webView.loadHTMLString(data.content, baseURL: nil)
     }
 
-}
-
-extension TopicSubtleTableViewCell: UIScrollViewDelegate {
-    func viewForZooming(in scrollView: UIScrollView) -> UIView? {
-        return nil
-    }
 }

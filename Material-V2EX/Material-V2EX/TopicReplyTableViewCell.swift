@@ -12,7 +12,7 @@ import WebKit
 
 fileprivate let scaleValue: CGFloat = UIScreen.main.scale
 
-class TopicReplyTableViewCell: UITableViewCell, WKUIDelegate {
+class TopicReplyTableViewCell: BaseWKWebViewTableViewCell, WKUIDelegate {
     // UI
     lazy var bgView: UIView = {
         let bgView = UIView()
@@ -88,16 +88,6 @@ class TopicReplyTableViewCell: UITableViewCell, WKUIDelegate {
         return thanksCountLabel
     }()
     
-    lazy var webView: WKWebView = {
-        let webView = WKWebView(frame: .zero, configuration: WKWebViewConfiguration())
-        webView.uiDelegate = self
-        webView.scrollView.delegate = self
-        webView.scrollView.isScrollEnabled = false
-        webView.backgroundColor = UIColor.white
-        webView.isOpaque = true
-        return webView
-    }()
-    
     lazy var separatorLine: UIView = {
         let separatorLine = UIView()
         separatorLine.backgroundColor = Global.Config.nodeTextBackgroundColor
@@ -121,7 +111,6 @@ class TopicReplyTableViewCell: UITableViewCell, WKUIDelegate {
     
     // Data
     var data: TopicReplyModel?
-    var indexPath: IndexPath?
     var contentHeight: CGFloat = 0
     var contentHeightChanged: ((CGFloat, IndexPath?) -> Void)?  // 这里还需要加一个indexPath作为判断依据，因为cell的复用特性，有可能导致这个cell被复用了才触发上一批数据的回调，导致高度显示错误
     
@@ -134,6 +123,8 @@ class TopicReplyTableViewCell: UITableViewCell, WKUIDelegate {
         contentView.layer.shouldRasterize = true
         contentView.layer.rasterizationScale = scaleValue
         contentView.backgroundColor = Global.Config.backgroundColor
+        self.webView.uiDelegate = self
+        
         contentView.addSubview(bgView)
         contentView.addSubview(avatarView)
         contentView.addSubview(nameLabel)
@@ -258,12 +249,5 @@ class TopicReplyTableViewCell: UITableViewCell, WKUIDelegate {
         thanksCountLabel.text = data.thanks
         
         webView.loadHTMLString(data.content, baseURL: nil)
-    }
-
-}
-
-extension TopicReplyTableViewCell: UIScrollViewDelegate {
-    func viewForZooming(in scrollView: UIScrollView) -> UIView? {
-        return nil
     }
 }

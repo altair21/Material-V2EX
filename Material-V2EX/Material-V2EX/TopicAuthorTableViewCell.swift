@@ -12,7 +12,7 @@ import WebKit
 
 fileprivate let scaleValue = UIScreen.main.scale
 
-class TopicAuthorTableViewCell: UITableViewCell, WKUIDelegate {
+class TopicAuthorTableViewCell: BaseWKWebViewTableViewCell, WKUIDelegate {
     // UI
     lazy var bgView: UIView = {
         let bgView = UIView()
@@ -73,16 +73,6 @@ class TopicAuthorTableViewCell: UITableViewCell, WKUIDelegate {
         return nodeLabel
     }()
     
-    lazy var webView: WKWebView = {
-        let webView = WKWebView(frame: .zero, configuration: WKWebViewConfiguration())
-        webView.uiDelegate = self
-        webView.scrollView.delegate = self
-        webView.scrollView.isScrollEnabled = false
-        webView.backgroundColor = UIColor.white
-        webView.isOpaque = true
-        return webView
-    }()
-    
     lazy var whiteView: UIView = {
         let whiteView = UIView()
         whiteView.backgroundColor = UIColor.white
@@ -92,7 +82,6 @@ class TopicAuthorTableViewCell: UITableViewCell, WKUIDelegate {
     
     // Data
     var data: TopicModel?
-    var indexPath: IndexPath?
     var contentHeight: CGFloat = 0
     var contentHeightChanged: ((CGFloat) -> Void)?
     
@@ -105,6 +94,8 @@ class TopicAuthorTableViewCell: UITableViewCell, WKUIDelegate {
         contentView.layer.shouldRasterize = true
         contentView.layer.rasterizationScale = scaleValue
         contentView.backgroundColor = Global.Config.backgroundColor
+        webView.uiDelegate = self
+        
         contentView.addSubview(bgView)
         contentView.addSubview(nodeLabel)
         contentView.addSubview(nameLabel)
@@ -204,10 +195,3 @@ class TopicAuthorTableViewCell: UITableViewCell, WKUIDelegate {
         webView.loadHTMLString(data.content, baseURL: nil)
     }
 }
-
-extension TopicAuthorTableViewCell: UIScrollViewDelegate {
-    func viewForZooming(in scrollView: UIScrollView) -> UIView? {
-        return nil
-    }
-}
-

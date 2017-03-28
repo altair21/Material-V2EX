@@ -53,6 +53,7 @@
 		507F4EF51E0944EA0033A10B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 507F4EF41E0944EA0033A10B /* Assets.xcassets */; };
 		507F4EF81E0944EA0033A10B /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 507F4EF61E0944EA0033A10B /* LaunchScreen.storyboard */; };
 		507F4F001E094FDD0033A10B /* Material.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 507F4EFF1E094FDD0033A10B /* Material.framework */; };
+		50922C7A1E8A7E0E006EC300 /* BaseWKWebViewTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50922C791E8A7E0E006EC300 /* BaseWKWebViewTableViewCell.swift */; };
 		50A299381E681F2800F8ADD5 /* BlixtTransitionAnimation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50A2991C1E681F2800F8ADD5 /* BlixtTransitionAnimation.swift */; };
 		50A299391E681F2800F8ADD5 /* DefaultPushTransitionAnimation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50A2991D1E681F2800F8ADD5 /* DefaultPushTransitionAnimation.swift */; };
 		50A2993A1E681F2800F8ADD5 /* ElevateTransitionAnimation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50A2991E1E681F2800F8ADD5 /* ElevateTransitionAnimation.swift */; };
@@ -144,6 +145,7 @@
 		507F4EF71E0944EA0033A10B /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		507F4EF91E0944EA0033A10B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		507F4EFF1E094FDD0033A10B /* Material.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Material.framework; path = "../../../../../../Library/Developer/Xcode/DerivedData/Material-V2EX-ggvhqkoortazbjhkiqzzdvoaqujd/Build/Products/Debug-iphoneos/Material/Material.framework"; sourceTree = "<group>"; };
+		50922C791E8A7E0E006EC300 /* BaseWKWebViewTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseWKWebViewTableViewCell.swift; sourceTree = "<group>"; };
 		50A2991C1E681F2800F8ADD5 /* BlixtTransitionAnimation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BlixtTransitionAnimation.swift; sourceTree = "<group>"; };
 		50A2991D1E681F2800F8ADD5 /* DefaultPushTransitionAnimation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DefaultPushTransitionAnimation.swift; sourceTree = "<group>"; };
 		50A2991E1E681F2800F8ADD5 /* ElevateTransitionAnimation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ElevateTransitionAnimation.swift; sourceTree = "<group>"; };
@@ -235,6 +237,7 @@
 		50360EBB1E0BAF9F00B082DD /* Cells */ = {
 			isa = PBXGroup;
 			children = (
+				50922C791E8A7E0E006EC300 /* BaseWKWebViewTableViewCell.swift */,
 				504667A11E0CC954008B6953 /* TopicOverviewTableViewCell.swift */,
 				501370EF1E1B4F6B0076977B /* TopicAuthorTableViewCell.swift */,
 				501370F11E1B4F770076977B /* TopicReplyTableViewCell.swift */,
@@ -668,6 +671,7 @@
 				50A2993F1E681F2800F8ADD5 /* PopTipTransitionAnimation.swift in Sources */,
 				501370F01E1B4F6B0076977B /* TopicAuthorTableViewCell.swift in Sources */,
 				50B1D8641E1270CD00BCE4FF /* NSDate+Extension.swift in Sources */,
+				50922C7A1E8A7E0E006EC300 /* BaseWKWebViewTableViewCell.swift in Sources */,
 				50A299381E681F2800F8ADD5 /* BlixtTransitionAnimation.swift in Sources */,
 				50CBCBDA1E1D0F0C009F6960 /* NodeListTableViewCell.swift in Sources */,
 				500002FB1E349A76000057F2 /* TopicSubtleTableViewCell.swift in Sources */,
