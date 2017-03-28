@@ -15,7 +15,7 @@
         <scene sceneID="umU-dU-Xc7">
             <objects>
                 <navigationController id="Krz-wJ-J0a" customClass="ScrollingNavigationController" customModule="AMScrollingNavbar" sceneMemberID="viewController">
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="r7d-3Z-bgQ">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="r7d-3Z-bgQ">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <color key="barTintColor" red="0.10588235294117647" green="0.60392156862745094" blue="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -648,7 +648,7 @@
                                             <outlet property="nodeLabel" destination="2cv-ZU-L0e" id="8d4-2p-ww3"/>
                                         </connections>
                                     </tableViewCell>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="topicSubtleCell" rowHeight="120" id="aa7-BE-qki" customClass="TopicSubtleTableViewCell" customModule="Material_V2EX" customModuleProvider="target">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="120" id="aa7-BE-qki" customClass="TopicSubtleTableViewCell" customModule="Material_V2EX" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="223" width="375" height="120"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="aa7-BE-qki" id="I1P-iV-tgc">
@@ -775,7 +775,7 @@
                                             <outlet property="replyCountLabel" destination="scK-9W-sr9" id="nAt-0e-vIb"/>
                                         </connections>
                                     </tableViewCell>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="topicReplyCell" rowHeight="124" id="cF9-XA-ePd" customClass="TopicReplyTableViewCell" customModule="Material_V2EX" customModuleProvider="target">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="124" id="cF9-XA-ePd" customClass="TopicReplyTableViewCell" customModule="Material_V2EX" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="363" width="375" height="124"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="cF9-XA-ePd" id="Ovv-Xg-vp0">

@@ -41,8 +41,8 @@ class TopicDetailViewController: UIViewController {
             navigationBarSnapshot!.frame.origin.y = -navigationBarHeight
         }
         tableView.register(TopicAuthorTableViewCell.self, forCellReuseIdentifier: Global.Cells.topicAuthorCell)
-        tableView.estimatedRowHeight = 120
-        tableView.rowHeight = UITableViewAutomaticDimension
+        tableView.register(TopicReplyTableViewCell.self, forCellReuseIdentifier: Global.Cells.topicReplyCell)
+        tableView.register(TopicSubtleTableViewCell.self, forCellReuseIdentifier: Global.Cells.topicSubtleCell)
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -122,9 +122,7 @@ extension TopicDetailViewController: UITableViewDataSource, UITableViewDelegate 
             if indexPath.row == 1 { // 有数据时第二行始终是正文
                 return cellHeightDic[indexPath] ?? 68
             } else if indexPath.row < topicModel.subtleContent.count + 2 {  // 有数据时始终是追加内容
-                return tableView.fd_heightForCell(withIdentifier: Global.Cells.topicSubtleCell, cacheBy: indexPath, configuration: { (cell) in
-                    (cell as! TopicSubtleTableViewCell).setData(data: topicModel.subtleContent[indexPath.row - 2])
-                })
+                return cellHeightDic[indexPath] ?? 39
             }
             if topicModel.replies.count > 0 {   // 有回复
                 var cnt = 3 // 标题、正文、回复数cell
@@ -139,9 +137,7 @@ extension TopicDetailViewController: UITableViewDataSource, UITableViewDelegate 
                 } else if indexPath.row == topicModel.subtleContent.count + 2 { // 回复数cell
                     return 20
                 } else {    // 回复cell
-                    return tableView.fd_heightForCell(withIdentifier: Global.Cells.topicReplyCell, cacheBy: indexPath, configuration: { (cell) in
-                        (cell as! TopicReplyTableViewCell).setData(data: topicModel.replies[indexPath.row - topicModel.subtleContent.count - 3], indexPath: indexPath)
-                    })
+                    return cellHeightDic[indexPath] ?? 68
                 }
             } else {    // 无回复
                 if indexPath.row == topicModel.subtleContent.count + 2 {    // BlankCell
@@ -179,8 +175,10 @@ extension TopicDetailViewController: UITableViewDataSource, UITableViewDelegate 
                             let visibleRows = weakSelf.tableView.indexPathsForVisibleRows {
                             if visibleRows.contains(indexPath) {
                                 weakSelf.cellHeightDic[indexPath] = height
-                                weakSelf.tableView.beginUpdates()
-                                weakSelf.tableView.endUpdates()
+                                DispatchQueue.main.async {
+                                    weakSelf.tableView.beginUpdates()
+                                    weakSelf.tableView.endUpdates()
+                                }
                             }
                         }
                     }
@@ -188,7 +186,29 @@ extension TopicDetailViewController: UITableViewDataSource, UITableViewDelegate 
                 return cell
             } else if indexPath.row < topicModel.subtleContent.count + 2 {  // 有数据时始终是追加内容
                 let cell = tableView.dequeueReusableCell(withIdentifier: Global.Cells.topicSubtleCell, for: indexPath) as! TopicSubtleTableViewCell
-                cell.setData(data: topicModel.subtleContent[indexPath.row - 2])
+                cell.setData(data: topicModel.subtleContent[indexPath.row - 2], indexPath: indexPath)
+                if cell.contentHeightChanged == nil {
+                    weak var weakSelf = self
+                    cell.contentHeightChanged = { (height, cb_indexPath) in
+                        if (cb_indexPath != indexPath) {
+                            return
+                        }
+                        if let weakSelf = weakSelf,
+                            let visibleRows = weakSelf.tableView.indexPathsForVisibleRows {
+                            if visibleRows.contains(indexPath) {
+                                if weakSelf.cellHeightDic[indexPath] != nil
+                                    && height <= weakSelf.cellHeightDic[indexPath]! {
+                                    return
+                                }
+                                weakSelf.cellHeightDic[indexPath] = height
+                                DispatchQueue.main.async {
+                                    weakSelf.tableView.beginUpdates()
+                                    weakSelf.tableView.endUpdates()
+                                }
+                            }
+                        }
+                    }
+                }
                 return cell
             }
             if topicModel.replies.count > 0 {   // 有回复
@@ -220,6 +240,28 @@ extension TopicDetailViewController: UITableViewDataSource, UITableViewDelegate 
                 } else {    // 回复cell
                     let cell = tableView.dequeueReusableCell(withIdentifier: Global.Cells.topicReplyCell, for: indexPath) as! TopicReplyTableViewCell
                     cell.setData(data: topicModel.replies[indexPath.row - topicModel.subtleContent.count - 3], indexPath: indexPath)
+                    if cell.contentHeightChanged == nil {
+                        weak var weakSelf = self
+                        cell.contentHeightChanged = { (height, cb_indexPath) in
+                            if (cb_indexPath != indexPath) {
+                                return
+                            }
+                            if let weakSelf = weakSelf,
+                                let visibleRows = weakSelf.tableView.indexPathsForVisibleRows {
+                                if visibleRows.contains(indexPath) {
+                                    if weakSelf.cellHeightDic[indexPath] != nil
+                                        && height <= weakSelf.cellHeightDic[indexPath]! {
+                                        return
+                                    }
+                                    weakSelf.cellHeightDic[indexPath] = height
+                                    DispatchQueue.main.async {
+                                        weakSelf.tableView.beginUpdates()
+                                        weakSelf.tableView.endUpdates()
+                                    }
+                                }
+                            }
+                        }
+                    }
                     return cell
                 }
             } else {    // 无回复
@@ -254,9 +296,14 @@ extension TopicDetailViewController: UIScrollViewDelegate {
         let newRadius = min(1, max(tableView.contentOffset.y / 80, 0)) * Global.Config.navigationBarMaxShadowRadius
         naviBar.layer.shadowRadius = newRadius
         
+        // FIXME: 不加这段会导致WKWebView屏幕外的内容无法渲染，当iOS10修复了这个bug就可以把这些代码删了
         tableView.visibleCells.forEach { (cell) in
-            if let cell: TopicAuthorTableViewCell = cell as? TopicAuthorTableViewCell {
-                cell.webView.setNeedsLayout()
+            if cell is TopicAuthorTableViewCell {
+                (cell as! TopicAuthorTableViewCell).webView.setNeedsLayout()
+            } else if cell is TopicReplyTableViewCell {
+                (cell as! TopicReplyTableViewCell).webView.setNeedsLayout()
+            } else if cell is TopicSubtleTableViewCell {
+                (cell as! TopicSubtleTableViewCell).webView.setNeedsLayout()
             }
         }
     }
