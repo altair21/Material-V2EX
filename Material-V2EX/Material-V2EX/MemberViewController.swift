@@ -42,6 +42,8 @@ class MemberViewController: UIViewController {
         
         let tapClose = UITapGestureRecognizer(target: self, action: #selector(closeTapped(sender:)))
         closeButton.addGestureRecognizer(tapClose)
+        
+        naviBar.setValue(true, forKey: "hidesShadow")
     }
     
     func openTopic(url: String, title: String, indexPath: IndexPath) {
@@ -171,7 +173,7 @@ extension MemberViewController: UITableViewDelegate, UITableViewDataSource {
 extension MemberViewController: UIScrollViewDelegate {
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
         // 根据 offset 改变 navigationBar 阴影
-        let newRadius = min(1, max(tableView.contentOffset.y / 80, 0)) * Global.Config.navigationBarMaxShadowRadius
+        let newRadius = min(1, max(tableView.contentOffset.y / 180, 0)) * Global.Config.navigationBarMaxShadowRadius
         naviBar.layer.shadowRadius = newRadius
     }
 }

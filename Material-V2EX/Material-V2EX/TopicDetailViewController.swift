@@ -43,6 +43,8 @@ class TopicDetailViewController: UIViewController {
         tableView.register(TopicAuthorTableViewCell.self, forCellReuseIdentifier: Global.Cells.topicAuthorCell)
         tableView.register(TopicReplyTableViewCell.self, forCellReuseIdentifier: Global.Cells.topicReplyCell)
         tableView.register(TopicSubtleTableViewCell.self, forCellReuseIdentifier: Global.Cells.topicSubtleCell)
+        
+        naviBar.setValue(true, forKey: "hidesShadow")
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -293,7 +295,7 @@ extension TopicDetailViewController: UITableViewDataSource, UITableViewDelegate 
 extension TopicDetailViewController: UIScrollViewDelegate {
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
         // 根据 offset 改变 navigationBar 阴影
-        let newRadius = min(1, max(tableView.contentOffset.y / 80, 0)) * Global.Config.navigationBarMaxShadowRadius
+        let newRadius = min(1, max(tableView.contentOffset.y / 180, 0)) * Global.Config.navigationBarMaxShadowRadius
         naviBar.layer.shadowRadius = newRadius
         
         // FIXME: 不加这段会导致WKWebView屏幕外的内容无法渲染，当iOS10修复了这个bug就可以把这些代码删了
