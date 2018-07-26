@@ -12,15 +12,15 @@ extension NSMutableAttributedString {
     
     static func contentFromHTMLString(_ content: String, fontName: String, widthConstraint: CGFloat) -> NSMutableAttributedString? {
         let htmlData = content.data(using: .unicode, allowLossyConversion: true)!
-        let attributedString = try? NSMutableAttributedString(data: htmlData, options: [NSDocumentTypeDocumentAttribute: NSHTMLTextDocumentType], documentAttributes: nil)
+        let attributedString = try? NSMutableAttributedString(data: htmlData, options: [NSAttributedString.DocumentReadingOptionKey.documentType: NSAttributedString.DocumentType.html], documentAttributes: nil)
         let totalRange = NSRange(location: 0, length: (attributedString?.length)!)
         
-        attributedString?.enumerateAttribute(NSFontAttributeName, in: totalRange, options: .longestEffectiveRangeNotRequired, using: { (value, range, _) in // 调整字号
+        attributedString?.enumerateAttribute(NSAttributedStringKey.font, in: totalRange, options: .longestEffectiveRangeNotRequired, using: { (value, range, _) in // 调整字号
             let font = value as! UIFont
             let newFont = UIFont(name: fontName, size: font.pointSize + 2)!
-            attributedString?.addAttributes([NSFontAttributeName: newFont], range: range)
+            attributedString?.addAttributes([NSAttributedStringKey.font: newFont], range: range)
         })
-        attributedString?.enumerateAttribute(NSAttachmentAttributeName, in: totalRange, options: .init(rawValue: 0), using: { (value, range, _) in  // 调整图片尺寸、压缩图片
+        attributedString?.enumerateAttribute(NSAttributedStringKey.attachment, in: totalRange, options: .init(rawValue: 0), using: { (value, range, _) in  // 调整图片尺寸、压缩图片
             if let attachment = value as? NSTextAttachment, let image = attachment.image(forBounds: attachment.bounds, textContainer: NSTextContainer(), characterIndex: range.location) {
                 var newImage: UIImage? = nil
                 if let imageData = UIImageJPEGRepresentation(image, 0.5) {
@@ -32,7 +32,7 @@ extension NSMutableAttributedString {
                 if let resultImage = newImage {
                     let newAttribute = NSTextAttachment()
                     newAttribute.image = resultImage
-                    attributedString?.addAttribute(NSAttachmentAttributeName, value: newAttribute, range: range)
+                    attributedString?.addAttribute(NSAttributedStringKey.attachment, value: newAttribute, range: range)
                 }
             }
         })

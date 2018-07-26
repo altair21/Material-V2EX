@@ -36,7 +36,7 @@ class MemberReplyTableViewCell: UITableViewCell {
         titleLabel.addGestureRecognizer(tapTitle)
     }
     
-    func titleTapped(sender: UITapGestureRecognizer) {
+    @objc func titleTapped(sender: UITapGestureRecognizer) {
         if let data = data, let indexPath = indexPath {
             let memberViewController = viewController(ofView: self) as! MemberViewController
             memberViewController.openTopic(url: data.href, title: data.topicTitle, indexPath: indexPath)

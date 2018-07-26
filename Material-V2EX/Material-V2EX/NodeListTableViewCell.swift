@@ -38,7 +38,7 @@ class NodeListTableViewCell: UITableViewCell {
         // Configure the view for the selected state
     }
     
-    func nodeButtonTapped() {
+    @objc func nodeButtonTapped() {
         if let tableView = self.tableView, let indexPath = self.indexPath {
             tableView.delegate?.tableView!(tableView, didSelectRowAt: indexPath)
         }

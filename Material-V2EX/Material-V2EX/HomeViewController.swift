@@ -12,10 +12,10 @@ import AMScrollingNavbar
 
 class HomeViewController: UIViewController, ModalTransitionDelegate {
     // UI
-    @IBOutlet weak var postBtn: FabButton!
+    @IBOutlet weak var postBtn: FABButton!
     @IBOutlet weak var tableView: PullToRefresh!
-    @IBOutlet weak var menuBtn: FabButton!
-    @IBOutlet weak var moreBtn: FabButton!
+    @IBOutlet weak var menuBtn: FABButton!
+    @IBOutlet weak var moreBtn: FABButton!
     var menuView: MenuView = MenuView.shared
     var nodeListView: NodeListView = NodeListView.shared
     var leftEdgeView: UIView!
@@ -184,7 +184,7 @@ class HomeViewController: UIViewController, ModalTransitionDelegate {
                                                object: nil)
     }
     
-    func handleSwipeRight(sender: UIPanGestureRecognizer) {
+    @objc func handleSwipeRight(sender: UIPanGestureRecognizer) {
         switch sender.state {
         case .began:
             leftEdgeView.frame.size.width = Global.Constants.screenWidth
@@ -196,7 +196,7 @@ class HomeViewController: UIViewController, ModalTransitionDelegate {
         handleMenu(menuView, recognizer: sender)
     }
     
-    func handleSwipeLeft(sender: UIPanGestureRecognizer) {
+    @objc func handleSwipeLeft(sender: UIPanGestureRecognizer) {
         switch sender.state {
         case .began:
             rightEdgeView.frame.size.width = Global.Constants.screenWidth
@@ -208,11 +208,11 @@ class HomeViewController: UIViewController, ModalTransitionDelegate {
         handleNodeList(nodeListView, recognizer: sender)
     }
     
-    @IBAction func menuTapped(_ sender: FabButton) {
+    @IBAction func menuTapped(_ sender: FABButton) {
         showMenu(menuView)
     }
     
-    @IBAction func moreTapped(_ sender: FabButton) {
+    @IBAction func moreTapped(_ sender: FABButton) {
         showNodeList(nodeListView)
     }
     
@@ -260,7 +260,7 @@ class HomeViewController: UIViewController, ModalTransitionDelegate {
         self.tableView.isHidden = true
     }
     
-    func menuSelectChangedHandler(notification: Notification) {
+    @objc func menuSelectChangedHandler(notification: Notification) {
         navController.showNavbar(animated: true, duration: 0.3)
         if let dict = notification.userInfo, let type: MenuViewSelectType = dict["type"] as? MenuViewSelectType {
             switch type {
@@ -285,7 +285,7 @@ class HomeViewController: UIViewController, ModalTransitionDelegate {
         }
     }
     
-    func unitNodeSelectHandler(notification: Notification) {
+    @objc func unitNodeSelectHandler(notification: Notification) {
         if let node = notification.userInfo?[Global.Keys.kUnitNode] as? NodeModel {
             displayHomepage()
             if self.category.name == node.name {
@@ -295,7 +295,7 @@ class HomeViewController: UIViewController, ModalTransitionDelegate {
         }
     }
     
-    func openMemberHandler(notification: Notification) {
+    @objc func openMemberHandler(notification: Notification) {
         if let dict = notification.userInfo, let data = dict["data"] as? MemberModel, let indexPath = dict["indexPath"] as? IndexPath {
             let presentBlock = {
                 self.selectedIndexPath = indexPath

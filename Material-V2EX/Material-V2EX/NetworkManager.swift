@@ -44,8 +44,12 @@ class NetworkManager: NSObject {
             case .success:
                 if let data = response.result.value {
                     var res = Array<TopicOverviewModel>()
-                    for (_, item) in JSON(data: data) {
-                        res.append(TopicOverviewModel(data: item))
+                    do {
+                        for (_, item) in try JSON(data: data) {
+                            res.append(TopicOverviewModel(data: item))
+                        }
+                    } catch let error as NSError {
+                        failure(error.description)
                     }
                     success(res)
                 } else {

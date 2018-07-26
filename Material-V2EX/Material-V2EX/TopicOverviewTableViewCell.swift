@@ -104,7 +104,7 @@ class TopicOverviewTableViewCell: UITableViewCell {
         }
     }
     
-    func avatarTapped(sender: UITapGestureRecognizer) {
+    @objc func avatarTapped(sender: UITapGestureRecognizer) {
         if let data = data, let indexPath = indexPath {
             NotificationCenter.default.post(name: Global.Notifications.kOpenMemberFromHome,
                                             object: nil,

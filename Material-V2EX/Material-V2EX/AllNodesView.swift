@@ -50,7 +50,7 @@ class AllNodesView: UIView {
                 for node in group.list {
                     let rect = (node.name as NSString).boundingRect(with: CGSize(width: 400, height: Global.Config.unitNodeCellHeight),
                                                           options: .usesLineFragmentOrigin,
-                                                          attributes: [NSFontAttributeName: UIFont(name: "PingFang HK", size: 16) ?? UIFont.systemFont(ofSize: 16)],
+                                                          attributes: [NSAttributedStringKey.font: UIFont(name: "PingFang HK", size: 16) ?? UIFont.systemFont(ofSize: 16)],
                                                           context: nil)
                     arr.append(rect.width)
                 }

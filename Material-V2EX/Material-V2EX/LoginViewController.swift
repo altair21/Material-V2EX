@@ -12,7 +12,7 @@ import Material
 class LoginViewController: UIViewController {
     @IBOutlet weak var usernameTextField: ErrorTextField!
     @IBOutlet weak var passwordTextField: ErrorTextField!
-    @IBOutlet weak var closeButton: FabButton!
+    @IBOutlet weak var closeButton: FABButton!
     @IBOutlet weak var loginButton: RaisedButton!
     
     weak var modalDelegate: ModalViewControllerDelegate?
@@ -48,11 +48,11 @@ class LoginViewController: UIViewController {
         loginButton.addGestureRecognizer(tapLogin)
     }
     
-    func closeTapped(sender: UITapGestureRecognizer) {
+    @objc func closeTapped(sender: UITapGestureRecognizer) {
         modalDelegate?.modalViewControllerDismiss(callbackData: nil)
     }
     
-    func loginTapped(sender: UITapGestureRecognizer) {
+    @objc func loginTapped(sender: UITapGestureRecognizer) {
         usernameTextField.resignFirstResponder()
         passwordTextField.resignFirstResponder()
         

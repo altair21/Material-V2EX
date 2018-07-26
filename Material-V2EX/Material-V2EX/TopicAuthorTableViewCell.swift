@@ -69,7 +69,7 @@ class TopicAuthorTableViewCell: BaseWKWebViewTableViewCell, WKUIDelegate {
         nodeLabel.isOpaque = true
         nodeLabel.layer.shouldRasterize = true
         nodeLabel.layer.rasterizationScale = scaleValue
-        nodeLabel.setContentHuggingPriority(UILayoutPriorityDefaultHigh + 1, for: .horizontal)
+        nodeLabel.setContentHuggingPriority(UILayoutPriority.defaultHigh + 1, for: .horizontal)
         return nodeLabel
     }()
     
@@ -176,7 +176,7 @@ class TopicAuthorTableViewCell: BaseWKWebViewTableViewCell, WKUIDelegate {
         }
     }
     
-    func avatarTapped(sender: UITapGestureRecognizer) {
+    @objc func avatarTapped(sender: UITapGestureRecognizer) {
         if let data = data, let indexPath = indexPath {
             let topicViewController = viewController(ofView: self) as! TopicDetailViewController
             topicViewController.openMember(data: data.author, indexPath: indexPath)

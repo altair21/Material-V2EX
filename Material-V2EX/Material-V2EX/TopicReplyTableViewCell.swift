@@ -72,7 +72,7 @@ class TopicReplyTableViewCell: BaseWKWebViewTableViewCell, WKUIDelegate {
         thanksIconLabel.layer.rasterizationScale = scaleValue
         thanksIconLabel.text = "♥"
         thanksIconLabel.textAlignment = .right
-        thanksIconLabel.setContentHuggingPriority(UILayoutPriorityDefaultHigh + 1, for: .horizontal)
+        thanksIconLabel.setContentHuggingPriority(UILayoutPriority.defaultHigh + 1, for: .horizontal)
         return thanksIconLabel
     }()
     
@@ -225,7 +225,7 @@ class TopicReplyTableViewCell: BaseWKWebViewTableViewCell, WKUIDelegate {
         }
     }
     
-    func avatarTapped(sender: UITapGestureRecognizer) {
+    @objc func avatarTapped(sender: UITapGestureRecognizer) {
         if let data = data, let indexPath = indexPath {
             let topicViewController = viewController(ofView: self) as! TopicDetailViewController
             topicViewController.openMember(data: data.author, indexPath: indexPath)

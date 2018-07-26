@@ -96,15 +96,15 @@ class MenuView: UIView {
         settingButton.addGestureRecognizer(tapSetting)
     }
     
-    func backHome(sender: UITapGestureRecognizer) {
+    @objc func backHome(sender: UITapGestureRecognizer) {
         hideMenu(self)
     }
     
-    func handlePanel(sender: UIPanGestureRecognizer) {
+    @objc func handlePanel(sender: UIPanGestureRecognizer) {
         handleMenu(self, recognizer: sender)
     }
     
-    func mainButtonTapped(sender: UITapGestureRecognizer) {
+    @objc func mainButtonTapped(sender: UITapGestureRecognizer) {
         hideMenu(self)
         
         if User.shared.isLogin {
@@ -140,31 +140,31 @@ class MenuView: UIView {
         hideMenu(self)
     }
     
-    func topicListTapped(sender: UITapGestureRecognizer) {
+    @objc func topicListTapped(sender: UITapGestureRecognizer) {
         configureSelect(type: .topicList)
     }
     
-    func allNodeTapped(sender: UITapGestureRecognizer) {
+    @objc func allNodeTapped(sender: UITapGestureRecognizer) {
         configureSelect(type: .allNodes)
     }
     
-    func myTopicTapped(sender: UITapGestureRecognizer) {
+    @objc func myTopicTapped(sender: UITapGestureRecognizer) {
         configureSelect(type: .myTopic)
     }
     
-    func aboutTapped(sender: UITapGestureRecognizer) {
+    @objc func aboutTapped(sender: UITapGestureRecognizer) {
         configureSelect(type: .about)
     }
     
-    func settingTapped(sender: UITapGestureRecognizer) {
+    @objc func settingTapped(sender: UITapGestureRecognizer) {
         configureSelect(type: .setting)
     }
     
-    func loginStatusChangedHandler(notification: Notification) {
+    @objc func loginStatusChangedHandler(notification: Notification) {
         loginStatusChanged()
     }
     
-    func unitNodeSelectHandler(notification: Notification) {
+    @objc func unitNodeSelectHandler(notification: Notification) {
         selectedButton = topicListButton
     }
     

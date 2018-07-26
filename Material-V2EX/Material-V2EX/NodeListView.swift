@@ -69,19 +69,19 @@ class NodeListView: UIView {
         self.addGestureRecognizer(swipeRight)
     }
     
-    func backHome(sender: UITapGestureRecognizer) {
+    @objc func backHome(sender: UITapGestureRecognizer) {
         hideNodeList(self)
     }
     
-    func handlePanel(sender: UIPanGestureRecognizer) {
+    @objc func handlePanel(sender: UIPanGestureRecognizer) {
         handleNodeList(self, recognizer: sender)
     }
     
-    func loginStatusChangedHandler(notification: Notification) {
+    @objc func loginStatusChangedHandler(notification: Notification) {
         loginStatusChanged()
     }
     
-    func unitNodeSelectHandler(notification: Notification) {
+    @objc func unitNodeSelectHandler(notification: Notification) {
         (tableView.cellForRow(at: selectedIndexPath) as! NodeListTableViewCell).configureState(.unselected)
     }
     

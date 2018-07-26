@@ -10,7 +10,7 @@ import UIKit
 import Material
 
 class MemberViewController: UIViewController {
-    @IBOutlet weak var closeButton: FabButton!
+    @IBOutlet weak var closeButton: FABButton!
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var naviBar: UINavigationBar!
     
@@ -63,7 +63,7 @@ class MemberViewController: UIViewController {
         self.present(topicDetailViewController, animated: true, completion: nil)
     }
     
-    func closeTapped(sender: UITapGestureRecognizer) {
+    @objc func closeTapped(sender: UITapGestureRecognizer) {
         dismiss(animated: true, completion: nil)
     }
 
