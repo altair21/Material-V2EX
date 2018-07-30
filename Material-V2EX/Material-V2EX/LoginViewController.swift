@@ -12,15 +12,27 @@ import Material
 class LoginViewController: UIViewController {
     @IBOutlet weak var usernameTextField: ErrorTextField!
     @IBOutlet weak var passwordTextField: ErrorTextField!
+    @IBOutlet weak var authTextField: ErrorTextField!
+    @IBOutlet weak var authImageView: UIImageView!
     @IBOutlet weak var closeButton: FABButton!
     @IBOutlet weak var loginButton: RaisedButton!
+    @IBOutlet weak var authIndicator: UIActivityIndicatorView!
     
     weak var modalDelegate: ModalViewControllerDelegate?
+    
+    var once = ""
+    var userSHA = ""
+    var pwdSHA = ""
+    var authSHA = ""
 
     override func viewDidLoad() {
         super.viewDidLoad()
         usernameTextField.delegate = self
         passwordTextField.delegate = self
+        authTextField.delegate = self
+        
+        let tapAuthImg = UITapGestureRecognizer(target: self, action: #selector(authImgTapped(sender:)))
+        authImageView.addGestureRecognizer(tapAuthImg)
         
         setupGesture()
     }
@@ -29,7 +41,7 @@ class LoginViewController: UIViewController {
         super.viewWillAppear(animated)
         UIApplication.shared.statusBarStyle = .default
         
-        
+        self.requestAuthImage()
     }
     
     override func viewWillDisappear(_ animated: Bool) {
@@ -38,6 +50,22 @@ class LoginViewController: UIViewController {
         
         usernameTextField.resignFirstResponder()
         passwordTextField.resignFirstResponder()
+    }
+    
+    func requestAuthImage() {
+        NetworkManager.shared.prepareForLogin(success: {(once, userSHA, pwdSHA, authSHA, imageData) in
+            self.once = once
+            self.userSHA = userSHA
+            self.pwdSHA = pwdSHA
+            self.authSHA = authSHA
+            self.authImageView.image = UIImage(data: imageData)
+            
+            self.authImageView.alpha = 1
+            self.authImageView.isUserInteractionEnabled = true
+            self.authIndicator.isHidden = true
+        }, failure: {(error) in
+            let _ = ToastManager.shared.showCustomToast(toView: self.view, text: error, customView: UIImageView(image: UIImage(named: "failure")))
+        })
     }
     
     func setupGesture() {
@@ -55,19 +83,23 @@ class LoginViewController: UIViewController {
     @objc func loginTapped(sender: UITapGestureRecognizer) {
         usernameTextField.resignFirstResponder()
         passwordTextField.resignFirstResponder()
+        authTextField.resignFirstResponder()
         
-        if usernameTextField.text?.characters.count == 0 {
+        if usernameTextField.text?.count == 0 {
             usernameTextField.isErrorRevealed = true
         }
-        if passwordTextField.text?.characters.count == 0 {
+        if passwordTextField.text?.count == 0 {
             passwordTextField.isErrorRevealed = true
         }
-        if usernameTextField.text?.characters.count == 0 || passwordTextField.text?.characters.count == 0 {
+        if authTextField.text?.count == 0 {
+            authTextField.isErrorRevealed = true
+        }
+        if usernameTextField.text?.count == 0 || passwordTextField.text?.count == 0 || authTextField.text?.count == 0 {
             return
         }
         
         let hud = ToastManager.shared.showToast(toView: self.view, text: "正在登录", mode: .indeterminate)
-        NetworkManager.shared.loginWith(username: usernameTextField.text!, password: passwordTextField.text!, success: { (username, avatarURL) in
+        NetworkManager.shared.loginWith(once: once, userSHA: userSHA, pwdSHA: pwdSHA, authSHA: authSHA, username: usernameTextField.text!, password: passwordTextField.text!, auth: authTextField.text!, success: { (username, avatarURL) in
             hud.hide(animated: true)
             User.shared.setLogin(username: username, avatarURL: avatarURL)
             self.modalDelegate?.modalViewControllerDismiss(callbackData: nil)
@@ -80,15 +112,26 @@ class LoginViewController: UIViewController {
     @IBAction func textChanged(_ sender: TextField) {
         (sender as? ErrorTextField)?.isErrorRevealed = false
     }
+    
+    @objc func authImgTapped(sender: UITapGestureRecognizer) {
+        authImageView.alpha = 0.6
+        authImageView.isUserInteractionEnabled = false
+        print("tap test")
+        authIndicator.isHidden = false
+        self.requestAuthImage()
+    }
 }
 
 // MARK: TextFieldDelegate
 extension LoginViewController: TextFieldDelegate {
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         if textField == usernameTextField {
-            passwordTextField.becomeFirstResponder()
+            let _ = passwordTextField.becomeFirstResponder()
             return false
         } else if textField == passwordTextField {
+            let _ = authTextField.becomeFirstResponder()
+            return false
+        } else if textField == authTextField {
             loginTapped(sender: UITapGestureRecognizer())
             return false
         } else {

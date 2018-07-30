@@ -74,10 +74,10 @@
                                 </userDefinedRuntimeAttributes>
                             </button>
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="rJn-FT-e2j" customClass="ErrorTextField" customModule="Material">
-                                <rect key="frame" x="32" y="123" width="311" height="30"/>
+                                <rect key="frame" x="32" y="109" width="311" height="30"/>
                                 <nil key="textColor"/>
                                 <fontDescription key="fontDescription" name="PingFangHK-Regular" family="PingFang HK" pointSize="14"/>
-                                <textInputTraits key="textInputTraits" returnKeyType="next"/>
+                                <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" returnKeyType="next" smartDashesType="no"/>
                                 <userDefinedRuntimeAttributes>
                                     <userDefinedRuntimeAttribute type="string" keyPath="placeholder" value="用户名"/>
                                     <userDefinedRuntimeAttribute type="boolean" keyPath="isVisibilityIconButtonEnabled" value="NO"/>
@@ -89,10 +89,10 @@
                                 </connections>
                             </textField>
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" clearsOnBeginEditing="YES" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="i8v-Gf-aBk" customClass="ErrorTextField" customModule="Material">
-                                <rect key="frame" x="32" y="198" width="311" height="30"/>
+                                <rect key="frame" x="32" y="189" width="311" height="30"/>
                                 <nil key="textColor"/>
                                 <fontDescription key="fontDescription" name="PingFangHK-Regular" family="PingFang HK" pointSize="14"/>
-                                <textInputTraits key="textInputTraits" returnKeyType="go"/>
+                                <textInputTraits key="textInputTraits" returnKeyType="next" secureTextEntry="YES"/>
                                 <userDefinedRuntimeAttributes>
                                     <userDefinedRuntimeAttribute type="string" keyPath="placeholder" value="密码"/>
                                     <userDefinedRuntimeAttribute type="boolean" keyPath="isVisibilityIconButtonEnabled" value="YES"/>
@@ -115,7 +115,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="1sI-og-BVe" customClass="RaisedButton" customModule="Material">
-                                <rect key="frame" x="32" y="273" width="311" height="40"/>
+                                <rect key="frame" x="32" y="450" width="311" height="40"/>
                                 <color key="backgroundColor" red="0.90980392160000001" green="0.28235294119999998" blue="0.33333333329999998" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="40" id="hhf-QY-Y9d"/>
@@ -142,27 +142,62 @@
                                     </userDefinedRuntimeAttribute>
                                 </userDefinedRuntimeAttributes>
                             </button>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="r3x-9j-PbR">
+                                <rect key="frame" x="32" y="337" width="311" height="78"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" secondItem="r3x-9j-PbR" secondAttribute="height" multiplier="4:1" id="WrE-Fr-5hY"/>
+                                </constraints>
+                            </imageView>
+                            <activityIndicatorView opaque="NO" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" animating="YES" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="rVA-V5-UsK">
+                                <rect key="frame" x="178" y="366" width="20" height="20"/>
+                            </activityIndicatorView>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" clearsOnBeginEditing="YES" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="ntS-Xt-kfT" customClass="ErrorTextField" customModule="Material">
+                                <rect key="frame" x="32" y="269" width="311" height="30"/>
+                                <nil key="textColor"/>
+                                <fontDescription key="fontDescription" name="PingFangHK-Regular" family="PingFang HK" pointSize="14"/>
+                                <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" keyboardType="alphabet" returnKeyType="go" smartDashesType="no"/>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="string" keyPath="placeholder" value="验证码"/>
+                                    <userDefinedRuntimeAttribute type="boolean" keyPath="isVisibilityIconButtonEnabled" value="NO"/>
+                                    <userDefinedRuntimeAttribute type="string" keyPath="detail" value="验证码不能为空"/>
+                                </userDefinedRuntimeAttributes>
+                                <connections>
+                                    <action selector="textChanged:" destination="vR9-N5-HNz" eventType="editingChanged" id="Pk6-Ci-DkI"/>
+                                </connections>
+                            </textField>
                         </subviews>
                         <color key="backgroundColor" red="0.93725490199999995" green="0.93725490199999995" blue="0.95686274510000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
+                            <constraint firstItem="1sI-og-BVe" firstAttribute="top" secondItem="r3x-9j-PbR" secondAttribute="bottom" constant="35" id="2RV-lu-Bge"/>
                             <constraint firstItem="1sI-og-BVe" firstAttribute="leading" secondItem="h49-Ap-Kjl" secondAttribute="leading" constant="32" id="32w-es-3xV"/>
                             <constraint firstAttribute="trailing" secondItem="rJn-FT-e2j" secondAttribute="trailing" constant="32" id="3Aw-Of-SmD"/>
                             <constraint firstItem="n5z-D7-ZV6" firstAttribute="centerX" secondItem="h49-Ap-Kjl" secondAttribute="centerX" id="4ck-kD-zGt"/>
+                            <constraint firstItem="rVA-V5-UsK" firstAttribute="centerY" secondItem="r3x-9j-PbR" secondAttribute="centerY" id="5ED-ic-1K4"/>
                             <constraint firstItem="rgy-BB-hxw" firstAttribute="centerX" secondItem="h49-Ap-Kjl" secondAttribute="centerX" id="9Z5-n8-f7Z"/>
-                            <constraint firstItem="1sI-og-BVe" firstAttribute="top" secondItem="i8v-Gf-aBk" secondAttribute="bottom" constant="45" id="Ahp-97-l6I"/>
                             <constraint firstAttribute="trailing" secondItem="i8v-Gf-aBk" secondAttribute="trailing" constant="32" id="EXX-NG-j8W"/>
+                            <constraint firstAttribute="trailing" secondItem="r3x-9j-PbR" secondAttribute="trailing" constant="32" id="FCc-Ak-cMV"/>
                             <constraint firstItem="n5z-D7-ZV6" firstAttribute="centerY" secondItem="Qg7-tD-80O" secondAttribute="centerY" id="G65-KJ-EQg"/>
                             <constraint firstItem="Qg7-tD-80O" firstAttribute="leading" secondItem="h49-Ap-Kjl" secondAttribute="leading" constant="24" id="Gdp-rN-Uqf"/>
                             <constraint firstItem="dcb-kU-UMq" firstAttribute="top" secondItem="rgy-BB-hxw" secondAttribute="bottom" constant="8" id="JGV-Kz-tuW"/>
+                            <constraint firstAttribute="trailing" secondItem="ntS-Xt-kfT" secondAttribute="trailing" constant="32" id="PAf-uk-nbe"/>
+                            <constraint firstItem="r3x-9j-PbR" firstAttribute="leading" secondItem="h49-Ap-Kjl" secondAttribute="leading" constant="32" id="WFT-yd-zJo"/>
                             <constraint firstItem="rJn-FT-e2j" firstAttribute="leading" secondItem="h49-Ap-Kjl" secondAttribute="leading" constant="32" id="Wjz-X8-iQN"/>
                             <constraint firstAttribute="trailing" secondItem="1sI-og-BVe" secondAttribute="trailing" constant="32" id="aGq-CS-gdV"/>
-                            <constraint firstItem="i8v-Gf-aBk" firstAttribute="top" secondItem="rJn-FT-e2j" secondAttribute="bottom" constant="45" id="dRV-TL-GPI"/>
+                            <constraint firstItem="ntS-Xt-kfT" firstAttribute="leading" secondItem="h49-Ap-Kjl" secondAttribute="leading" constant="32" id="aJx-bL-8eJ"/>
+                            <constraint firstItem="r3x-9j-PbR" firstAttribute="centerX" secondItem="h49-Ap-Kjl" secondAttribute="centerX" id="bsc-rp-3yG"/>
+                            <constraint firstItem="i8v-Gf-aBk" firstAttribute="top" secondItem="rJn-FT-e2j" secondAttribute="bottom" constant="50" id="dRV-TL-GPI"/>
+                            <constraint firstItem="ntS-Xt-kfT" firstAttribute="top" secondItem="i8v-Gf-aBk" secondAttribute="bottom" constant="50" id="iPS-mT-ICg"/>
                             <constraint firstItem="Qg7-tD-80O" firstAttribute="top" secondItem="gg7-hG-leQ" secondAttribute="bottom" constant="15" id="mSI-d5-lbM"/>
+                            <constraint firstItem="rVA-V5-UsK" firstAttribute="centerX" secondItem="r3x-9j-PbR" secondAttribute="centerX" id="mzz-pb-Niv"/>
                             <constraint firstItem="i8v-Gf-aBk" firstAttribute="leading" secondItem="h49-Ap-Kjl" secondAttribute="leading" constant="32" id="vbc-s8-UAj"/>
-                            <constraint firstItem="rJn-FT-e2j" firstAttribute="top" secondItem="Qg7-tD-80O" secondAttribute="bottom" constant="50" id="ylh-LV-nov"/>
+                            <constraint firstItem="rJn-FT-e2j" firstAttribute="top" secondItem="Qg7-tD-80O" secondAttribute="bottom" constant="36" id="ylh-LV-nov"/>
+                            <constraint firstItem="r3x-9j-PbR" firstAttribute="top" secondItem="ntS-Xt-kfT" secondAttribute="bottom" constant="38" id="zrW-i1-E0E"/>
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="authImageView" destination="r3x-9j-PbR" id="kdQ-h9-yeb"/>
+                        <outlet property="authIndicator" destination="rVA-V5-UsK" id="Ewa-KE-adc"/>
+                        <outlet property="authTextField" destination="ntS-Xt-kfT" id="1gO-gp-aNl"/>
                         <outlet property="closeButton" destination="Qg7-tD-80O" id="z21-Gw-Qc9"/>
                         <outlet property="loginButton" destination="1sI-og-BVe" id="Gyn-VM-K6L"/>
                         <outlet property="passwordTextField" destination="i8v-Gf-aBk" id="g2e-c5-xfT"/>

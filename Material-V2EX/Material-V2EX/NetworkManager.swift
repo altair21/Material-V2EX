@@ -191,56 +191,13 @@ class NetworkManager: NSObject {
     }
     
     // MARK: User Module
-    /// 发送登录请求
+    /// 登录前获取验证码图片
     ///
     /// - Parameters:
-    ///   - username: 用户名
-    ///   - password: 密码
     ///   - success: 处理成功回调
     ///   - failure: 处理失败回调
-    func loginWith(username: String, password: String, success: @escaping (String, String)->Void, failure: @escaping (String)->Void ) {
+    func prepareForLogin(success: @escaping (String, String, String, String, Data) -> Void, failure: @escaping (String) -> Void) {
         let loginURL = V2EX.indexURL + "/signin"
-        var usernameSHA = ""
-        var passwordSHA = ""
-        var once = ""
-        
-        // 发送登录请求
-        let loginRequest = {
-            let parameters = [
-                "next": "/",
-                "once": once,
-                usernameSHA: username,
-                passwordSHA: password
-            ]
-            var headers = Global.Config.requestHeader
-            headers["referer"] = loginURL
-            
-            Alamofire.request(loginURL, method: .post, parameters: parameters, headers: headers).responseString { (response) in
-                switch response.result {
-                case .success:
-                    let jiDoc = Ji(htmlString: response.result.value!)!
-                    if let problem = jiDoc.xPath("//div[@class='problem']/ul/li")?.first?.content { // 登录失败
-                        failure(problem)
-                        return
-                    }
-                    if let avatarNode = jiDoc.xPath("//body/div[@id='Top']/div/div/table/tr/td[3]/a[1]")?.first {   // 有用户头像，说明登录成功
-                        if let href = avatarNode["href"], let imageURL = avatarNode.xPath("img[1]").first?["src"] {
-                            let largeImageURL = imageURL.replacingOccurrences(of: "normal", with: "large")
-                            if href.hasPrefix("/member/") {
-                                let username = href.replacingOccurrences(of: "/member/", with: "")
-                                success(username, "https:" + largeImageURL)
-                            } else {
-                                // 已知情况下不会进入这里
-                            }
-                        }
-                    } else {
-                        failure("登录失败，未知原因")
-                    }
-                case .failure:
-                    failure(response.result.error?.localizedDescription ?? "登录时网络错误")
-                }
-            }
-        }
         
         // 进入登录页 获取哈希值
         Alamofire.request(loginURL, headers: Global.Config.requestHeader).responseString { (response) in
@@ -250,24 +207,76 @@ class NetworkManager: NSObject {
                 if let form = jiDoc.xPath("//body/div[@id='Wrapper']/div[1]/div[1]/div[2]/form/table")?.first {
                     if let t_once = form.xPath("tr[2]/td[2]/input[@name='once']").first?["value"],
                         let t_usernameSHA = form.xPath("tr[1]/td[2]/input").first?["name"],
-                        let t_passwordSHA = form.xPath("tr[2]/td[2]/input[@class='sl']").first?["name"] {
-                        
-                        once = t_once
-                        usernameSHA = t_usernameSHA
-                        passwordSHA = t_passwordSHA
-                        
-                        loginRequest()
+                        let t_passwordSHA = form.xPath("tr[2]/td[2]/input[@class='sl']").first?["name"],
+                        let t_authSHA = form.xPath("tr[4]/td[2]/input[@class='sl']").first?["name"] {
+                        let authImageURL = V2EX.indexURL + "/_captcha?once=\(t_once)"
+                        Alamofire.request(authImageURL).responseData(completionHandler: { (dataResp) in
+                            if let data = dataResp.data {
+                                success(t_once, t_usernameSHA, t_passwordSHA, t_authSHA, data)
+                            } else {
+                                failure("验证码解析失败")
+                            }
+                        })
                     } else {
-                        failure("解析错误")
+                        failure("验证码解析失败")
                         return
                     }
                 } else {
-                    failure("解析错误")
+                    failure("获取验证码失败")
                     return
                 }
             case .failure:
                 failure(response.result.error?.localizedDescription ?? "网络错误")
                 return
+            }
+        }
+    }
+    
+    /// 发送登录请求
+    ///
+    /// - Parameters:
+    ///   - username: 用户名
+    ///   - password: 密码
+    ///   - success: 处理成功回调
+    ///   - failure: 处理失败回调
+    func loginWith(once: String, userSHA: String, pwdSHA: String, authSHA: String, username: String, password: String, auth: String, success: @escaping (String, String)->Void, failure: @escaping (String)->Void ) {
+        let loginURL = V2EX.indexURL + "/signin"
+        
+        print(once, userSHA, pwdSHA, authSHA, username, password, auth)
+        // 发送登录请求
+        let parameters = [
+            "next": "/",
+            "once": once,
+            userSHA: username,
+            pwdSHA: password,
+            authSHA: auth,
+        ]
+        var headers = Global.Config.requestHeader
+        headers["referer"] = loginURL
+        
+        Alamofire.request(loginURL, method: .post, parameters: parameters, headers: headers).responseString { (response) in
+            switch response.result {
+            case .success:
+                let jiDoc = Ji(htmlString: response.result.value!)!
+                if let problem = jiDoc.xPath("//div[@class='problem']/ul/li")?.first?.content { // 登录失败
+                    failure(problem)
+                    return
+                }
+                if let avatarNode = jiDoc.xPath("//body/div[@id='Top']/div/div/table/tr/td[3]/a[1]")?.first {   // 有用户头像，说明登录成功
+                    if let href = avatarNode["href"], let imageURL = avatarNode.xPath("img[1]").first?["src"] {
+                        let largeImageURL = imageURL.replacingOccurrences(of: "normal", with: "large")
+                        if href.hasPrefix("/member/") {
+                            let username = href.replacingOccurrences(of: "/member/", with: "")
+                            success(username, "https:" + largeImageURL)
+                        } else {
+                            // 已知情况下不会进入这里
+                        }
+                    }
+                } else {
+                    failure("登录失败，未知原因")
+                }
+            case .failure:
+                failure(response.result.error?.localizedDescription ?? "登录时网络错误")
             }
         }
     }
